@@ -7,3 +7,5 @@
 /dataSources/
 /dataSources.local.xml
 docker-compose.yml
+/app/MVC/.gitignore
+/app/MVC/README.md
