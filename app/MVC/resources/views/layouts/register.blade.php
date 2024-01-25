@@ -4,39 +4,39 @@
     <form>
         @csrf
 
-        <div class="form-group mb-1">
+        <div class="form-group mb-1 w-25">
             <label for="emailInput">Correo electrónico</label>
             <input required type="email" class="form-control" name="email">
         </div>
-        <div class="form-group mb-1">
+        <div class="form-group mb-1 w-25">
             <label for="nameInput">Nombre</label>
             <input required type="text" class="form-control" name="nom">
         </div>
-        <div class="form-group mb-1">
+        <div class="form-group mb-1 w-25">
             <label for="surnameInput">Apellido</label>
             <input required type="text" class="form-control" name="cognom">
         </div>
-        <div class="form-group mb-1">
+        <div class="form-group mb-1 w-25">
             <label for="secondSurnameInput">Segundo Apellido</label>
             <input type="text" class="form-control" name="cognom2">
         </div>
-        <div class="form-group mb-1">
+        <div class="form-group mb-1 w-25">
             <label for="passwordInput">Contraseña</label>
             <input required type="password" class="form-control" name="contrasenya">
         </div>
-        <div class="form-group mb-1">
+        <div class="form-group mb-1 w-25">
             <label for="addressInput">Dirección</label>
             <input required type="text" class="form-control" name="direccio">
         </div>
-        <div class="form-group mb-1">
+        <div class="form-group mb-1 w-25">
             <label for="phoneInput">Teléfono</label>
             <input required type="number" class="form-control" name="telefon">
         </div>
-        <div class="form-group mb-1">
+        <div class="form-group mb-1 w-25">
             <label for="cityInput">Ciudad</label>
             <input required type="text" class="form-control" name="ciutat">
         </div>
-        <div class="form-group mb-2">
+        <div class="form-group mb-2 w-25">
             <label for="provinceSelect">Provincia</label>
             <select required name="province" class="form-control">
                 <option value="">Elige Provincia</option>

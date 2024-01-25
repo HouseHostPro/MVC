@@ -15,13 +15,11 @@
 <body>
 
 <div class="header">
-    header
 </div>
 <div class="container-fluid">
     @yield('content')
 </div>
 <div class="footer">
-    footer
 </div>
 
 </body>
