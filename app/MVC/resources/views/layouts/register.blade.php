@@ -10,31 +10,31 @@
         </div>
         <div class="form-group mb-1">
             <label for="nameInput">Nombre</label>
-            <input required type="text" class="form-control" name="name">
+            <input required type="text" class="form-control" name="nom">
         </div>
         <div class="form-group mb-1">
             <label for="surnameInput">Apellido</label>
-            <input required type="text" class="form-control" name="surname">
+            <input required type="text" class="form-control" name="cognom">
         </div>
         <div class="form-group mb-1">
             <label for="secondSurnameInput">Segundo Apellido</label>
-            <input type="text" class="form-control" name="surname2">
+            <input type="text" class="form-control" name="cognom2">
         </div>
         <div class="form-group mb-1">
             <label for="passwordInput">Contraseña</label>
-            <input required type="password" class="form-control" name="password">
+            <input required type="password" class="form-control" name="contrasenya">
         </div>
         <div class="form-group mb-1">
             <label for="addressInput">Dirección</label>
-            <input required type="text" class="form-control" name="address">
+            <input required type="text" class="form-control" name="direccio">
         </div>
         <div class="form-group mb-1">
             <label for="phoneInput">Teléfono</label>
-            <input required type="number" class="form-control" name="phone">
+            <input required type="number" class="form-control" name="telefon">
         </div>
         <div class="form-group mb-1">
             <label for="cityInput">Ciudad</label>
-            <input required type="text" class="form-control" name="city">
+            <input required type="text" class="form-control" name="ciutat">
         </div>
         <div class="form-group mb-2">
             <label for="provinceSelect">Provincia</label>
