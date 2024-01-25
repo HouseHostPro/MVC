@@ -5,4 +5,4 @@ Proyecto Laravel
     - composer create-proyect laravel/laravel (Nombre del proyecto) \
 3- cambiar al directorio creado con el composer y lanzar el comando: \
     - php artisan serve \
-    (Para docker hay que poner php artisan serve --host=0.0.0.0 --port=800)
+    (Para docker hay que poner: php artisan serve --host=0.0.0.0 --port=8000)
