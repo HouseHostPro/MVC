@@ -30,7 +30,7 @@
         </div>
         <div class="form-group mb-1 w-25">
             <label for="phoneInput">Teléfono</label>
-            <input required type="number" class="form-control" name="telefon">
+            <input required type="tel" class="form-control" name="telefon">
         </div>
         <div class="form-group mb-1 w-25">
             <label for="cityInput">Ciudad</label>
