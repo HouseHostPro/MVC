@@ -277,7 +277,7 @@
         </div>
 
         <div class="form-check">
-            <input required class="form-check-input" type="checkbox" value="" name="">
+            <input required class="form-check-input" type="checkbox" value="" name="privacyPolicyCheckbox">
             <label class="form-check-label" for="privacyPolicyCheckbox">
                 Acepto la política de privacidad y seguridad
             </label>
