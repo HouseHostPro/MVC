@@ -10,3 +10,7 @@ docker-compose.yml
 /app/MVC/.gitignore
 /app/MVC/README.md
 /app/MVC/package-lock.json
+/app/MVC/node_modules/
+/app/MVC/vendor/
+/app/MVC/.env
+/.idea/

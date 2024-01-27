@@ -1,0 +1,12 @@
+{
+  "resources/js/custom.js": {
+    "file": "assets/custom2.js",
+    "isEntry": true,
+    "src": "resources/js/custom.js"
+  },
+  "resources/scss/custom.scss": {
+    "file": "assets/custom.css",
+    "isEntry": true,
+    "src": "resources/scss/custom.scss"
+  }
+}
