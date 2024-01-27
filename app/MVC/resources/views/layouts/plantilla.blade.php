@@ -12,6 +12,5 @@
     @yield('content');
 
     <script src="{{asset('build/assets/custom2.js')}}"></script>
-
 </body>
 </html>

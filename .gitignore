@@ -13,3 +13,4 @@ docker-compose.yml
 /app/MVC/node_modules/
 /app/MVC/vendor/
 /app/MVC/.env
+/.idea/
