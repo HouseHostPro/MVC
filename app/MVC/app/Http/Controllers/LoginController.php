@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller{
@@ -19,12 +20,17 @@ class LoginController extends Controller{
         $email = $request->email;
         $password = $request->password;
 
-        if ($email === 'admin@admin.com' && $password === '1234') {
+        $user = User::where('email',$email)->first();
+        $request->session()->put('username',$user->nom);
 
-            return redirect('/');
-        } else {
-            return back();
+        if($user){
+            if ($password === $user->contrasenya) {
+                return redirect('/');
+            } else {
+                return back();
+            }
         }
+
 
     }
 

@@ -23,7 +23,7 @@
                         <div class="d-flex justify-content-center mt-5 mb-3">
                             <button type="submit" class="btn btn-primary btn-lg">Iniciar Sesión</button>
                         </div>
-                        <p class="mt-5 mb-4">No tienes cuenta? <a href="#" class="link-underline-light">Registrarse</a></p>
+                        <p class="mt-5 mb-4">No tienes cuenta? <a href="{{ route('user.register') }}" class="link-underline-light">Registrarse</a></p>
                     </form>
                 </div>
             </div>
