@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ciutat;
+use App\Models\Pais;
 use App\Models\User;
 use http\Client\Request;
 

@@ -35,11 +35,15 @@
                 <input required type="tel" class="form-control" name="telefon">
             </div>
             <div class="form-group mb-1 w-25">
-                <label for="cityInput">Ciudad</label>
-                <input required type="text" class="form-control" name="ciutat">
+                <label for="city">Ciudad</label>
+                <select required name="city" class="form-control">
+                    @foreach($ciutats as $ciutat)
+                        <option value="{{ $ciutat->id }}">{{$ciutat->nom}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group mb-2 w-25">
-                <label for="paisSelect">Pais</label>
+                <label for="pais">Pais</label>
                 <select required name="pais" class="form-control">
                     @foreach($paises as $pais)
                         <option value="{{ $pais->id }}">{{$pais->nom}}</option>

@@ -13,7 +13,7 @@ class Pais extends Model
 
     ];
 
-    public function users()
+    public function ciutat()
     {
         return $this->hasMany(Ciutat::class);
     }
