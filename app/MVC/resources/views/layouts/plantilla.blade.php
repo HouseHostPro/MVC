@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="{{asset('build/assets/custom.css')}}">
 
+
 </head>
 <body style="height: 98vh;">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top" >
@@ -69,7 +70,6 @@
 </div>
 
     @yield('content')
-<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
     <script src="{{asset('build/assets/custom2.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </body>

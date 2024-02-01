@@ -1,48 +1,35 @@
 @extends('layouts.plantilla')
 
 @section('content')
-<main class="container overflow-hidden">
-    <section class="bg-light py-3 py-md-5">
-        <div class="container overflow-hidden">
-            <div class="row gy-3 gy-md-2 bsb-project-1-grid">
-                <div class="col-12 col-md-6 col-lg-6 bsb-project-1-item">
-                    <figure class="rounded rounded-4 overflow-hidden bsb-overlay-hover">
-                        <a href="#!">
-                            <img class="img-fluid bsb-scale-up bsb-hover-scale" src="img/frontCasa.webp" alt="Photography">
-                        </a>
-                    </figure>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 bsb-project-1-item">
-                    <figure class="rounded rounded-4 overflow-hidden bsb-overlay-hover">
-                        <a href="#!">
-                            <img class="img-fluid bsb-scale bsb-hover-scale-up" src="img/dormitori1.webp" alt="Inspiration">
-                        </a>
-                    </figure>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 bsb-project-1-item">
-                    <figure class="rounded rounded-4 overflow-hidden bsb-overlay-hover">
-                        <a href="#!">
-                            <img class="img-fluid bsb-scale-up bsb-hover-scale" src="img/bany1.webp" alt="Nature">
-                        </a>
-                    </figure>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 bsb-project-1-item">
-                    <figure class="rounded rounded-4 overflow-hidden bsb-overlay-hover">
-                        <a href="#!">
-                            <img class="img-fluid bsb-scale-up bsb-hover-scale" src="img/bany1.webp" alt="Fashion">
-                        </a>
-                    </figure>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 bsb-project-1-item">
-                    <figure class="rounded rounded-4 overflow-hidden bsb-overlay-hover">
-                        <a href="#!">
-                            <img class="img-fluid bsb-scale-up bsb-hover-scale" src="img/piscina.webp" alt="Fashion">
-                        </a>
-                    </figure>
-                </div>
+
+        <div>
+            <h1 class="text-center mt-3">Cas Concos</h1>
+        </div>
+        <div class="d-flex justify-content-end col-11 ">
+            <a href="{{ route('fichaCasa') }}" class="text-decoration-none text-black">
+            <button type="button" class="btn bg-info bg-opacity-25">Ficha Casa</button>
+            </a>
+        </div>
+    <main class="container">
+        <section class="mt-4 d-flex text-center ms-5">
+            <a href="{{ route('fichaCasa') }}">
+                <img class="img-fluid bsb-scale-up bsb-hover-scale rounded shadow" src="img/frontCasa.webp" alt="entrada" style="width: 70%">
+            </a>
+        </section>
+        <div class="col-12 mt-5">
+            <h2 class="fs-4">Descipció</h2>
+            <div>
+                <p>
+                    Bienvenido a esta casa de alquiler en el campo, donde la modernidad se fusiona con la serenidad.
+                    Ubicada en un entorno natural, la propiedad ofrece una experiencia única de escape.
+                    Con un diseño contemporáneo y luminoso, la casa cuenta con amplios ventanales que permiten la entrada de luz natural,
+                    creando un ambiente acogedor. La cocina completamente equipada invita a preparar deliciosas comidas mientras se disfruta de las vistas al jardín y la piscina.
+                    Las habitaciones, elegantemente decoradas, ofrecen un refugio tranquilo para descansar. En el exterior,
+                    una impresionante piscina y amplias áreas de descanso al aire libre permiten disfrutar de la naturaleza.
+                    Con numerosas oportunidades para la exploración y la aventura en los alrededores, esta casa es el lugar perfecto para una escapada inolvidable en medio del campo.
+                </p>
             </div>
         </div>
-    </section>
-</main>
+    </main>
 @endsection
 
