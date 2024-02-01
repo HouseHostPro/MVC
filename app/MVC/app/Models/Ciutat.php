@@ -16,4 +16,13 @@ class Ciutat extends Model
     protected $hidden = [
         'pais_id'
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+    public function pais()
+    {
+        return $this->belongdTo(Pais::class);
+    }
 }

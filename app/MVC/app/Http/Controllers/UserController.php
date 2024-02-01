@@ -15,11 +15,38 @@ class UserController extends Controller
 
     public function register()
     {
-        return view('layouts.register');
+        return view('register');
+    }
+
+    public function create(Request $request)
+    {
+        $request->validate([
+            'email'=>'required'
+        ]);
+        return redirect()->view('register');
+
     }
 
     public function store(Request $request) {
         User::create($request->all());
-//        return redirect()     TODO: redirect to login
+        return redirect()->route('login')->with('success','created successfully');
+    }
+
+    public function update(Request $request,$id)
+    {
+        $request->validated();
+        $user = User::find($id);
+        $user->update($request->all());
+
+        return redirect()->route('login')->with('success','Usuario actualizado');
+
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('login')->with('success','Usuario eliminado');
     }
 }
