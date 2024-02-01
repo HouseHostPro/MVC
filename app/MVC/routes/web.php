@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/','welcome');
+Route::view('/','principal')->name('principal');
 
 //Login
-Route::view('/login','login');
+Route::view('/login','login')->name('login');
 Route::post('/login/check',[UserController::class,'checkLogin'])->name('login.check');
 
 //Register
