@@ -10,6 +10,6 @@ class PaisController extends Controller
     public function paises()
     {
         $paises = Pais::all();
-        return view('register',compact('paises'));
+        return $paises;
     }
 }

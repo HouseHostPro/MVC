@@ -17,7 +17,9 @@ class UserController extends Controller
 
     public function register()
     {
-        return view('register');
+        $paises = Pais::all();
+        $ciutats = Ciutat::all();
+        return view('register',compact('ciutats','paises'));
     }
 
     public function create(Request $request)

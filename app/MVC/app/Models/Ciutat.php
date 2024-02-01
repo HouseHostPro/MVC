@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ciutat extends Model
 {
-    //protected $table = "ciutat";
+    protected $table = "ciutat";
 
     use HasFactory;
 
@@ -25,6 +25,6 @@ class Ciutat extends Model
     }
     public function pais()
     {
-        return $this->belongdTo(Pais::class);
+        return $this->belongsTo(Pais::class);
     }
 }

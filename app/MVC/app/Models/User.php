@@ -42,7 +42,7 @@ class User extends Authenticatable
     ];
 
     public function ciutatUser(){
-        return $this->belongdTo(Ciutat::class);
+        return $this->belongsTo(Ciutat::class);
     }
 
 }

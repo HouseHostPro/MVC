@@ -10,6 +10,6 @@ class CiutatController extends Controller
     public function ciutats()
     {
         $ciutats = Ciutat::all();
-        return view('register',compact('ciutats'));
+        return $ciutats;
     }
 }
