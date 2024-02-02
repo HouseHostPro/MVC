@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 @section('content')
     <div class="container">
-        <form class="d-flex flex-column justify-content-center">
+        <form class="d-flex flex-column justify-content-center" method="POST" action="{{ route('user.store') }}">
             @csrf
             <div class="d-flex justify-content-center">
                 <h1>Creacion de usuario</h1>
@@ -16,7 +16,7 @@
             </div>
             <div class="form-group mb-1 w-25">
                 <label for="surnameInput">Apellido</label>
-                <input required type="text" class="form-control" name="cognom">
+                <input required type="text" class="form-control" name="cognom1">
             </div>
             <div class="form-group mb-1 w-25">
                 <label for="secondSurnameInput">Segundo Apellido</label>
@@ -35,8 +35,8 @@
                 <input required type="tel" class="form-control" name="telefon">
             </div>
             <div class="form-group mb-1 w-25">
-                <label for="city">Ciudad</label>
-                <select required name="city" class="form-control">
+                <label for="ciutat">Ciudad</label>
+                <select required name="ciutat" class="form-control">
                     @foreach($ciutats as $ciutat)
                         <option value="{{ $ciutat->id }}">{{$ciutat->nom}}</option>
                     @endforeach

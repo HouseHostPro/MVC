@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Ciutat;
 use App\Models\Pais;
 use App\Models\User;
-use http\Client\Request;
+use Illuminate\http\Request;
 
 class UserController extends Controller
 {
@@ -32,17 +33,29 @@ class UserController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate([
+            'nom' => 'required',
+            'cognom1' => 'required',
+            'email' => 'required',
+            'contrasenya' => 'required',
+            'telefon' => 'required'
+        ]);
         User::create($request->all());
-        return redirect()->route('login')->with('success','created successfully');
+        return redirect()->route('welcome')->with('success','created successfully');
     }
 
+    public function userId($id)
+    {
+        $usuari = User::find($id);
+        return view('edit',compact('usuari'));
+    }
     public function update(Request $request,$id)
     {
         $request->validated();
         $user = User::find($id);
         $user->update($request->all());
 
-        return redirect()->route('login')->with('success','Usuario actualizado');
+        return redirect()->view('login')->with('success','Usuario actualizado');
 
     }
 
@@ -51,6 +64,6 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return redirect()->route('login')->with('success','Usuario eliminado');
+        return redirect()->view('login')->with('success','Usuario eliminado');
     }
 }

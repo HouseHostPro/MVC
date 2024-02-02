@@ -10,6 +10,10 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    protected $table = "usuari";
+
+    public $timestamps = false;
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -40,6 +44,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $guarded = ['id'];
 
     public function ciutatUser(){
         return $this->belongsTo(Ciutat::class);
