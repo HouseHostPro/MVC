@@ -69,45 +69,42 @@
                     </div>
                     <div>
                         <h3 class="fs-5 mt-3">Habitaciones</h3>
-                        <div id="carouselExampleDark" class="carousel carousel-dark slide border-bottom border-dark" data-bs-ride="carousel">
-                            <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            </div>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="false">
-                                    <img src="img/cama-individual.jpg" class="d-block w-100" alt="...">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Dormitorio 1</h5>
-                                        <p>2 camas individuales</p>
+                        <div id="owl-example1" class="owl-carousel">
+                            <div class="item">
+                                <div class="carousel-item active rounded border border-black shadow p-4" data-bs-interval="false">
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <img src="img/cama-individual2.png" class="d-block w-50" alt="camas-individuales">
                                     </div>
-                                </div>
-                                <div class="carousel-item" data-bs-interval="false">
-                                    <img src="img/cama-individual.jpg" class="d-block w-100" alt="...">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Dormitorio 2</h5>
-                                        <p>1 cama individual</p>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="img/cama-doble.jpg" class="d-block w-100" alt="...">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Dormitorio 3</h5>
-                                        <p>1 cama de matrimo</p>
+                                    <div class="d-none d-md-block col-12">
+                                        <h5 class="text-dark">Dormitorio 1</h5>
+                                        <p class="text-dark">2 camas individuales</p>
                                     </div>
                                 </div>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
+                            <div class="item">
+                                <div class="carousel-item active rounded border border-black shadow p-4" data-bs-interval="false">
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <img src="img/cama-individual.png" class="d-block w-50" alt="cama-individual">
+                                    </div>
+                                    <div class="d-none d-md-block col-12">
+                                        <h5 class="text-dark">Dormitorio 2</h5>
+                                        <p class="text-dark">1 cama individual</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="carousel-item active rounded border border-black shadow p-4">
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <img src="img/cama-doble.png" class="d-block w-50" alt="cama-doble">
+                                    </div>
+                                    <div class="d-none d-md-block col-12">
+                                        <h5 class="text-dark">Dormitorio 3</h5>
+                                        <p class="text-dark">1 cama de matrimo</p>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
                     <div class="mt-3 border-bottom border-dark">
                         <h3 class="fs-5 ">¿Que hay en el alojamiento?</h3>
                         <ul class="list-group list-group-flush">
@@ -121,11 +118,10 @@
                             </div>
                         </ul>
                     </div>
-                    <div id="quarter-year-view" class="md-quarter-year-view-cont"></div>
+                    </div>
                 </div>
             </div>
             <div class="col-4 border border-dark rounded shadow"  style="height: 400px">
-
                 <div class="mt-2">
                     <p><span class="fs-5 text">150€</span> noche</p>
                 </div>
@@ -147,11 +143,20 @@
                 <button type="button" class="col-6 btn bg-primary bg-opacity-25 border border-dark my-3">Reservar</button>
                 </div>
             </div>
-
         </div>
     </main>
 <script>
+    $(document).ready(function() {
+        $("#owl-example1").owlCarousel({
+            margin:10,
+            items:2,
+            /*autoplay:true,
+            autoplayTimeout:10000,
 
+             */
+        });
+    });
+    console.log("fa coses")
 </script>
 @endsection
 

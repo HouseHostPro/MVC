@@ -2,14 +2,16 @@
 
 @section('content')
 
-        <div>
-            <h1 class="text-center mt-3">Cas Concos</h1>
+    <div class="row d-flex justify-content-between">
+        <div class="col-7 justify-content-end">
+            <h1 class="text-end mt-3">Cas Concos</h1>
         </div>
-        <div class="d-flex justify-content-end col-11 ">
+        <div class="d-flex justify-content-start mt-4 col-2 ">
             <a href="{{ route('fichaCasa') }}" class="text-decoration-none text-black">
             <button type="button" class="btn bg-info bg-opacity-25">Ficha Casa</button>
             </a>
         </div>
+    </div>
     <main class="container">
         <section class="mt-4 d-flex text-center ms-5">
             <a href="{{ route('fichaCasa') }}">
