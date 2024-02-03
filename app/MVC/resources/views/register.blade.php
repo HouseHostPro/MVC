@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 @section('content')
     <div class="container">
-        <form class="d-flex flex-column justify-content-center" method="POST" action="{{ route('user.store') }}">
+        <form class="d-flex flex-column justify-content-center" method="POST">
             @csrf
             <div class="d-flex justify-content-center">
                 <h1>Creacion de usuario</h1>
@@ -36,7 +36,7 @@
             </div>
             <div class="form-group mb-1 w-25">
                 <label for="ciutat">Ciudad</label>
-                <select required name="ciutat" class="form-control">
+                <select required name="ciutat_id" class="form-control">
                     @foreach($ciutats as $ciutat)
                         <option value="{{ $ciutat->id }}">{{$ciutat->nom}}</option>
                     @endforeach
@@ -44,7 +44,7 @@
             </div>
             <div class="form-group mb-2 w-25">
                 <label for="pais">Pais</label>
-                <select required name="pais" class="form-control">
+                <select required name="pais_id" class="form-control">
                     @foreach($paises as $pais)
                         <option value="{{ $pais->id }}">{{$pais->nom}}</option>
                     @endforeach
