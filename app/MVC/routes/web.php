@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/','principal')->name('principal');
 Route::view('/fichaCasa','fichaCasa')->name('fichaCasa');
+Route::view('/proba','proba')->name('proba');
 
 //Login
 Route::view('/login','login')->name('login');
