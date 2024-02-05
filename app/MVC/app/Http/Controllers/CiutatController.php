@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ciutat;
 use Illuminate\Http\Request;
 
-class CiutatController extends Controller
-{
-    //
+class CiutatController extends Controller {
+
+    public function findAll() {
+        $ciutats = Ciutat::all();
+        return $ciutats;
+    }
 }
