@@ -15,4 +15,7 @@ class Propietat extends Model {
         'ciutat_id',
         'usuari_id'
     ];
+
+    public $timestamps = false;
+    protected $table = "propietat";
 }

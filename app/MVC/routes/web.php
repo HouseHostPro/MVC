@@ -34,5 +34,7 @@ Route::get('/propertyForm', [PropietatController::class, '']);
 
 Route::view('/propertyView', 'property.property') -> name('property.view');
 Route::view('/propertyForm', 'property/propertyForm');
+Route::view('/espaiForm', 'property/espaiForm') -> name('espai.form');
 
+Route::get('/propertyForm', [PropietatController::class, 'loadForm']) ->name('property.loadForm');
 Route::post('/propertyForm', [PropietatController::class, 'store']) ->name('property.createProperty');

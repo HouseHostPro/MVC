@@ -1,14 +1,15 @@
 @extends('layouts.plantilla')
 
 @section('content')
-    @csrf
         <form class="container-fluid d-flex flex-column px-0 align-items-center" method="post">
+            @csrf
             <h1 class="py-5 px-2">Añadir propiedad</h1>
 
-            <div class="container d-flex flex-wrap bg-body-secondary border-2 col-7 py-4 px-4">
+            <div class="container d-flex flex-wrap bg-body-secondary border-2 col-7 py-4 px-4
+            shadow-lg p-3 mb-5 bg-white rounded">
                 <div class="form-group mb-1 w-50 p-2">
                     <label for="nombre">Nombre de la propiedad</label>
-                    <input id="nombre" required type="email" class="form-control" name="nombre_propiedad">
+                    <input id="nombre" required type="text" class="form-control" name="nombre_propiedad">
                 </div>
                 <div class="form-group mb-1 w-50 p-2">
                     <label for="cancelacion">Límite de días para cancelar sin recargo</label>
@@ -34,12 +35,14 @@
                     <input id="m2" required type="text" class="form-control" name="m2">
                 </div>
 
-                <select class="form-select" multiple aria-label="multiple select example">
-                    <option selected>Ciudad o municipio</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
+                <div class="form-group mb-1 w-50 p-2">
+                    <label for="ciudad">Ciudad o municipio</label>
+                    <select id="ciudad" class="form-select" name="ciudad">
+                        @foreach($ciutats as $ciutat)
+                            <option value="{{$ciutat -> id}}">{{$ciutat -> nom}}</option>
+                        @endforeach
+                    </select>
+                </div>
 
 
                 <div class="form-group mb-1 w-50 p2 py-3">
@@ -70,7 +73,7 @@
                 </div>
 
                 <div class="container-fluid d-flex justify-content-center">
-                    <button type="button" class="btn btn-info">AÑADIR PROPIEDAD</button>
+                    <button type="submit" class="btn btn-info">AÑADIR PROPIEDAD</button>
                 </div>
 
             </div>

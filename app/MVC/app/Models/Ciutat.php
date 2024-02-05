@@ -16,4 +16,6 @@ class Ciutat extends Model
     protected $hidden = [
         'pais_id'
     ];
+
+    protected $table = "ciutat";
 }
