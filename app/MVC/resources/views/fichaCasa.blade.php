@@ -2,7 +2,7 @@
 
 @section('content')
     <main class="container-fluid d-flex justify-content-center">
-        <div class="container-fluid" style="width: 85%">
+        <div class="container-sm" >
             <h1 class="h2 mt-3">Cas Concos</h1>
             <div class="container-fluid bg-light rounded row">
                 <div class="col-6 pt-1 px-0 my-2 me-2">
@@ -39,7 +39,7 @@
             </div>
             <div class="col-12 mt-5 justify-content-between row">
                 <div class="col-6">
-                    <h2 class="fs-4">Casa Rural en Calvia Malloca</h2>
+                    <h2 class="fs-4">Casa Rural en Calvia Mallorca</h2>
                     <div>
                         <p>
                             5 personas - 3 dormitorios - 4 camas - 1 baño
@@ -79,7 +79,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item">
+                                <div class="item me-1">
                                     <div class="carousel-item active rounded border border-black shadow p-4">
                                         <div class="col-12 d-flex justify-content-center">
                                             <img src="img/cama-doble.png" class="d-block w-25" alt="cama-doble">
@@ -108,11 +108,11 @@
                         </div>
                     </div>
                 </div>
-                <form class="col-4 border border-dark rounded shadow"  style="height: 500px">
+                <form class="col-4 border border-dark rounded shadow"  style="height: 35%">
                     <div class="mt-2">
-                        <p><span class="fs-5 text">150€</span> noche</p>
+                        <p><span id="preu" class="fs-5 text">150€</span> noche</p>
                     </div>
-                    <div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-center ">
                         <div class="col-12 row ">
                             <label class="custom-input col-12 col-xl-6" for="from">
                                 <input class="border-1" type="text" id="from" name="from"></br>
@@ -123,41 +123,53 @@
                                 <span class="ph">Salida:</span>
                             </label>
                         </div>
-                        <div class="col-12 row justify-content-center">
-                            <label class="custom-input col-12 col-xl-6" for="personas">
-                                <input class="border-1" type="text" id="personas" name="personas" disabled>
-                                <span class="ph">Huéspedes:</span>
-                            </label>
-                            <div class="custom-input col-12 col-xl-6 row justify-content-center">
-                                <button id="menos" type="button" class="rounded-circle col-3 border-0 bg-white" disabled>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-                                    </svg>
-                                </button>
-                                <button id="mas" type="button" class="rounded-circle col-3 border-0 bg-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                                    </svg>
-                                </button>
+                        <div class="col-12 row justify-content-start my-3">
+                            <div class="col-5 col-xl-4">
+                                <p class=" m-0" style="font-size: 18px">Huéspedes:</p>
                             </div>
+                            <button id="menos" type="button" class="col-2 col-xl-1  p-0 border-0 bg-white" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                                </svg>
+                            </button>
+                            <div class="col-2  ">
+                                <p id="personas" class="fs-5 text-center m-0 p-0"></p>
+                            </div>
+                            <button id="mas" type="button" class="col-2 col-xl-1 p-0 border-0 bg-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle " viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                </svg>
+                            </button>
                         </div>
-                        <div class="form-check col-12">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Mascotas
-                            </label>
+                        <div class="col-12 justify-content-start ms-3 my-xl-3 ">
+                            <div class="form-check form-switch ps-5">
+                                <input class="form-check-input" type="checkbox" value="" id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 18px">Mascotas</label>
+                            </div>
                         </div>
                         <!-- Inputs con los formatos de hora del formato de la bbdd -->
                         <input type="text" id="entrada" hidden>
                         <input type="text" id="sortida" hidden>
                     </div>
-
                     <div class="d-flex justify-content-center">
-                    <button type="button" class="col-6 btn bg-primary bg-opacity-25 border border-dark my-3">Reservar</button>
+                    <button type="button" class="col-6 btn bg-primary bg-opacity-25 border border-dark mt-3 mb-4">Reservar</button>
+                    </div>
+                    <div id="divpxn" class="row mx-2" hidden>
+                        <p id="pxn" class="col-8"></p>
+                        <p id="pxnt" class="col-4 text-end"></p>
+                    </div>
+                    <div id="divlimpiza" class="row mx-2" hidden>
+                        <p id="limpieza" class="col-8"></p>
+                        <p id="limpiezat" class="col-4 text-end"></p>
+                    </div>
+                    <div class="row mx-2 border-top ">
+                        <p class="h5 col-8 my-3">Total</p>
+                        <p id="ptotal" class="h5 col-4 text-end my-3">0€</p>
                     </div>
                 </form>
+                <div id="inline-picker"></div>
             </div>
         </div>
     </main>
@@ -167,6 +179,10 @@
     $(document).ready(function() {
 
         let huespedes = 0;
+        let diffDays;
+        let preuTotal;
+        const oneDay = 24*60*60*1000;
+
         $("#owl-example1").owlCarousel({
             margin:10,
             items:2,
@@ -183,8 +199,12 @@
                 dateFormat: "dd/mm/yy",
                 altField:'#entrada',
                 altFormat:'yy-mm-dd',
-                minDate: 0
-
+                minDate: 0,
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+                dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
             });
         });
 
@@ -193,8 +213,12 @@
             datepicker({
                 dateFormat: "dd/mm/yy",
                 altField:'#sortida',
-                altFormat:'yy-mm-dd'
-
+                altFormat:'yy-mm-dd',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+                dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
             });
         });
 
@@ -203,7 +227,6 @@
             datepicker('getDate');
             $("#to").
             datepicker("option", "minDate", startDate);
-            console.log($('#entrada').val());
         })
 
         $('#to').change(function() {
@@ -211,7 +234,12 @@
             datepicker('getDate');
             $("#from").
             datepicker("option", "maxDate", endDate);
-            console.log($('#sortida').val());
+            diffDays = Math.abs((parseInt($('#entrada').val().replaceAll("-","")) - parseInt($('#sortida').val().replaceAll("-",""))));
+            $('#divpxn').prop("hidden",false);
+            preuTotal = 167*diffDays;
+            $('#pxn').text($('#preu').text() + " x " + diffDays + " noches");
+            $('#pxnt').text(preuTotal + "€");
+            $('#ptotal').text(preuTotal + "€");
 
         })
 
@@ -219,21 +247,49 @@
 
             if(huespedes === 1){
 
-                $('#personas').val("");
+                $('#personas').text("");
                 $('#menos').prop("disabled",true);
             }else {
                 huespedes--;
-                $('#personas').val(huespedes--);
+                $('#personas').text(huespedes);
             }
         })
         $('#mas').on('click',function (){
 
             huespedes++;
-            $('#personas').val(huespedes);
+            $('#personas').text(huespedes);
             $('#menos').prop("disabled",false);
-            console.log("entra");
-
         })
+
+        //Calendar
+
+        var eventDates = {};
+        eventDates[ new Date( '02/10/2024' )] = new Date( '02/12/2024' );
+        eventDates[ new Date( '02/11/2024' )] = new Date( '02/05/2024' );
+
+        $('#inline-picker').datepicker({
+            controls: ['calendar'],
+            display: 'inline',
+            touchUi: true,
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+            minDate: 0,
+            beforeShowDay: function( date ) {
+                var highlight = eventDates[date];
+                if( highlight ) {
+                    return [true, "event", 'Tooltip text'];
+                } else {
+                    return [true, '', ''];
+                }
+            }
+        });
+
+
+
+
     });
 
 

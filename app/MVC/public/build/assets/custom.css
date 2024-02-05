@@ -47,5 +47,13 @@
 .ui-widget-content{
     background: white !important;
 }
+.ui-state-highlight, .ui-state-hover, .ui-state-focus, .ui-state-active{
+    background: #b3d7ff !important;
+    border: black !important;
+}
 
+.event a {
+    background: #5FBA7D !important;
+    color: #ffffff !important;
+}
 
