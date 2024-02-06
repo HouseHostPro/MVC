@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="col-12 mt-5 justify-content-between row">
-                <div class="col-6">
+                <div class="col-7">
                     <h2 class="fs-4">Casa Rural en Calvia Mallorca</h2>
                     <div>
                         <p>
@@ -169,7 +169,68 @@
                         <p id="ptotal" class="h5 col-4 text-end my-3">0€</p>
                     </div>
                 </form>
-                <div id="inline-picker"></div>
+                <div id="calendari" class="col-7 ">
+                    <div id="inline-picker" class="col-12 my-3"></div>
+                </div>
+                <div class="col-12 row border-top border-dark d-flex justify-content-between">
+                        <div class="col-12 col-xl-6 row mt-4">
+                            <div class="col-2 text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                </svg>
+                            </div>
+                            <div class="col-9 ps-0">
+                                <h5>Mónica</h5>
+                                <p style="font-size: 12px">Cataluña,España</p>
+                            </div>
+                            <div class="col-12 rating-container" data-rating="">
+                                <div class="rating" >
+                                    <span class="star" data-rating="1">&#9733;</span>
+                                    <span class="star" data-rating="2">&#9733;</span>
+                                    <span class="star" data-rating="3">&#9733;</span>
+                                    <span class="star" data-rating="4">&#9733;</span>
+                                    <span class="star" data-rating="5">&#9733;</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <p>
+                                    La casita una monada, súper cómoda y acogedora.
+                                    Los alrededores preciosos.
+                                    Carlos es un anfitrión maravilloso, atento y nos facilitó todo mucho. Disfrutamos muchísimo.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-xl-6 row mt-4">
+                            <div class="col-2 text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                </svg>
+                            </div>
+                            <div class="col-9 ps-0">
+                                <h5>Mónica</h5>
+                                <p style="font-size: 12px">Cataluña,España</p>
+                            </div>
+                            <div class="col-12 rating-container" data-rating="">
+                                <div class="rating" >
+                                    <span class="star" data-rating="1">&#9733;</span>
+                                    <span class="star" data-rating="2">&#9733;</span>
+                                    <span class="star" data-rating="3">&#9733;</span>
+                                    <span class="star" data-rating="4">&#9733;</span>
+                                    <span class="star" data-rating="5">&#9733;</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <p>
+                                    La casita una monada, súper cómoda y acogedora.
+                                    Los alrededores preciosos.
+                                    Carlos es un anfitrión maravilloso, atento y nos facilitó todo mucho. Disfrutamos muchísimo.
+                                </p>
+                            </div>
+                        </div>
+
+                </div>
             </div>
         </div>
     </main>
@@ -181,6 +242,7 @@
         let huespedes = 0;
         let diffDays;
         let preuTotal;
+        let totalRating;
         const oneDay = 24*60*60*1000;
 
         $("#owl-example1").owlCarousel({
@@ -200,6 +262,7 @@
                 altField:'#entrada',
                 altFormat:'yy-mm-dd',
                 minDate: 0,
+                firstDay:1,
                 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
                 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
@@ -214,6 +277,7 @@
                 dateFormat: "dd/mm/yy",
                 altField:'#sortida',
                 altFormat:'yy-mm-dd',
+                firstDay:1,
                 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
                 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
@@ -263,6 +327,15 @@
 
         //Calendar
 
+        function adjustNumberOfMonths() {
+            if ($(window).width() < 1140) {
+                $('#inline-picker').datepicker('option', 'numberOfMonths', 1);
+            } else {
+                $('#inline-picker').datepicker('option', 'numberOfMonths', 2);
+            }
+        }
+
+
         var eventDates = {};
         eventDates[ new Date( '02/10/2024' )] = new Date( '02/12/2024' );
         eventDates[ new Date( '02/11/2024' )] = new Date( '02/05/2024' );
@@ -277,6 +350,8 @@
             dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
             dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
             minDate: 0,
+            numberOfMonths: 2,
+            firstDay:1,
             beforeShowDay: function( date ) {
                 var highlight = eventDates[date];
                 if( highlight ) {
@@ -287,12 +362,33 @@
             }
         });
 
+        $(window).resize(function() {
+            adjustNumberOfMonths();
+        });
 
+        adjustNumberOfMonths();
 
+        //Rating
+
+        var ratings = [3, 4]; // Valores de estrellas para cada contenedor
+
+        $('.rating-container').each(function(index) {
+            var $container = $(this);
+            var ratingValue = ratings[index]; // Obtener el valor del array
+
+            activateStars($container, ratingValue);
+        });
+
+        function activateStars($container, ratingValue) {
+            $container.find('.star').removeClass('active');
+            $container.find('.star').each(function() {
+                if ($(this).attr('data-rating') <= ratingValue) {
+                    $(this).addClass('active');
+                }
+            });
+        }
 
     });
-
-
 
 
 </script>
