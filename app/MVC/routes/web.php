@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\CasaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -16,9 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/','principal')->name('principal');
-Route::view('/fichaCasa','fichaCasa')->name('fichaCasa');
-Route::view('/proba','proba')->name('proba');
+
+//Ficha Casa
+Route::view('/','fichaCasa')->name('principal');
+Route::post('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
 
 //Login
 Route::view('/login','login')->name('login');
@@ -28,3 +30,5 @@ Route::post('/login/check',[UserController::class,'checkLogin'])->name('login.ch
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/register', [UserController::class,'register'])->name('user.register');
 Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
+
+

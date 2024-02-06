@@ -39,7 +39,7 @@
             </div>
             <div class="col-12 mt-5 justify-content-between row">
                 <div class="col-7">
-                    <h2 class="fs-4">Casa Rural en Calvia Mallorca</h2>
+                    <h2 class="fs-4">Casa Rural en Binissalem Mallorca</h2>
                     <div>
                         <p>
                             5 personas - 3 dormitorios - 4 camas - 1 baño
@@ -108,24 +108,25 @@
                         </div>
                     </div>
                 </div>
-                <form class="col-4 border border-dark rounded shadow"  style="height: 35%">
+                <form method="POST" action="{{ route('confirmacionReserva') }}" class="col-4 border border-dark rounded shadow" style="height: 35%">
+                    @csrf
                     <div class="mt-2">
                         <p><span id="preu" class="fs-5 text">150€</span> noche</p>
                     </div>
                     <div class="row d-flex justify-content-center ">
                         <div class="col-12 row ">
                             <label class="custom-input col-12 col-xl-6" for="from">
-                                <input class="border-1" type="text" id="from" name="from"></br>
+                                <input class="border-1 form-control" type="text" id="from" name="from"></br>
                                 <span class="ph">Llegada:</span>
                             </label>
                             <label class="custom-input col-12 col-xl-6" for="to">
-                                <input class="border-1" type="text" id="to" name="to">
+                                <input class="border-1 form-control" type="text" id="to" name="to">
                                 <span class="ph">Salida:</span>
                             </label>
                         </div>
                         <div class="col-12 row justify-content-start my-3">
                             <div class="col-5 col-xl-4">
-                                <p class=" m-0" style="font-size: 18px">Huéspedes:</p>
+                                <label for="personas" class=" m-0" style="font-size: 18px">Huéspedes:</label>
                             </div>
                             <button id="menos" type="button" class="col-2 col-xl-1  p-0 border-0 bg-white" disabled>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
@@ -133,8 +134,8 @@
                                     <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
                                 </svg>
                             </button>
-                            <div class="col-2  ">
-                                <p id="personas" class="fs-5 text-center m-0 p-0"></p>
+                            <div class="col-2">
+                                <input id="personas" name="personas" class="form-control border-0 fs-5 text-center m-0 p-0">
                             </div>
                             <button id="mas" type="button" class="col-2 col-xl-1 p-0 border-0 bg-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle " viewBox="0 0 16 16">
@@ -154,7 +155,7 @@
                         <input type="text" id="sortida" hidden>
                     </div>
                     <div class="d-flex justify-content-center">
-                    <button type="button" class="col-6 btn bg-primary bg-opacity-25 border border-dark mt-3 mb-4">Reservar</button>
+                    <button type="submit" class="col-6 btn bg-primary bg-opacity-25 border border-dark mt-3 mb-4">Reservar</button>
                     </div>
                     <div id="divpxn" class="row mx-2" hidden>
                         <p id="pxn" class="col-8"></p>
@@ -172,71 +173,103 @@
                 <div id="calendari" class="col-7 ">
                     <div id="inline-picker" class="col-12 my-3"></div>
                 </div>
-                <div class="col-12 row border-top border-dark d-flex justify-content-between">
-                        <div class="col-12 col-xl-6 row mt-4">
-                            <div class="col-2 text-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                                </svg>
-                            </div>
-                            <div class="col-9 ps-0">
-                                <h5>Mónica</h5>
-                                <p style="font-size: 12px">Cataluña,España</p>
-                            </div>
-                            <div class="col-12 rating-container" data-rating="">
-                                <div class="rating" >
-                                    <span class="star" data-rating="1">&#9733;</span>
-                                    <span class="star" data-rating="2">&#9733;</span>
-                                    <span class="star" data-rating="3">&#9733;</span>
-                                    <span class="star" data-rating="4">&#9733;</span>
-                                    <span class="star" data-rating="5">&#9733;</span>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <p>
-                                    La casita una monada, súper cómoda y acogedora.
-                                    Los alrededores preciosos.
-                                    Carlos es un anfitrión maravilloso, atento y nos facilitó todo mucho. Disfrutamos muchísimo.
-                                </p>
+                <div class="col-12 row border-top border-bottom border-dark d-flex justify-content-between">
+                    <div class="col-12 col-xl-6 row mt-4">
+                        <div class="col-2 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                            </svg>
+                        </div>
+                        <div class="col-9 ps-0">
+                            <h5>Mónica</h5>
+                            <p style="font-size: 12px">Cataluña,España</p>
+                        </div>
+                        <div class="col-12 rating-container" data-rating="">
+                            <div class="rating" >
+                                <span class="star" data-rating="1">&#9733;</span>
+                                <span class="star" data-rating="2">&#9733;</span>
+                                <span class="star" data-rating="3">&#9733;</span>
+                                <span class="star" data-rating="4">&#9733;</span>
+                                <span class="star" data-rating="5">&#9733;</span>
                             </div>
                         </div>
-                        <div class="col-12 col-xl-6 row mt-4">
-                            <div class="col-2 text-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                                </svg>
-                            </div>
-                            <div class="col-9 ps-0">
-                                <h5>Mónica</h5>
-                                <p style="font-size: 12px">Cataluña,España</p>
-                            </div>
-                            <div class="col-12 rating-container" data-rating="">
-                                <div class="rating" >
-                                    <span class="star" data-rating="1">&#9733;</span>
-                                    <span class="star" data-rating="2">&#9733;</span>
-                                    <span class="star" data-rating="3">&#9733;</span>
-                                    <span class="star" data-rating="4">&#9733;</span>
-                                    <span class="star" data-rating="5">&#9733;</span>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <p>
-                                    La casita una monada, súper cómoda y acogedora.
-                                    Los alrededores preciosos.
-                                    Carlos es un anfitrión maravilloso, atento y nos facilitó todo mucho. Disfrutamos muchísimo.
-                                </p>
+                        <div class="col-12">
+                            <p>
+                                La casita una monada, súper cómoda y acogedora.
+                                Los alrededores preciosos.
+                                Carlos es un anfitrión maravilloso, atento y nos facilitó todo mucho. Disfrutamos muchísimo.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 row mt-4">
+                        <div class="col-2 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                            </svg>
+                        </div>
+                        <div class="col-9 ps-0">
+                            <h5>Mónica</h5>
+                            <p style="font-size: 12px">Cataluña,España</p>
+                        </div>
+                        <div class="col-12 rating-container" data-rating="">
+                            <div class="rating" >
+                                <span class="star" data-rating="1">&#9733;</span>
+                                <span class="star" data-rating="2">&#9733;</span>
+                                <span class="star" data-rating="3">&#9733;</span>
+                                <span class="star" data-rating="4">&#9733;</span>
+                                <span class="star" data-rating="5">&#9733;</span>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <p>
+                                La casita una monada, súper cómoda y acogedora.
+                                Los alrededores preciosos.
+                                Carlos es un anfitrión maravilloso, atento y nos facilitó todo mucho. Disfrutamos muchísimo.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn bg-white border border-dark my-3">Mostrar más</button>
+                    </div>
+                </div>
+                <div class="col-12 row my-5 border-bottom border-dark">
+                    <div class="col-12">
+                        <h4>¿Dónde me voy a quedar?</h4>
+                    </div>
+                    <div id="containerMap" class="mt-4">
+                        <div id="map" class="container-sm"></div>
+                    </div>
+                    <div class="col-12 my-4">
+                        <h5>Binissalem Mallorca</h5>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-6 row mt-4">
+                    <div class="col-2 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                        </svg>
+                    </div>
+                    <div class="col-9 ps-0">
+                        <h5>Anfitrión: Lucas</h5>
+                    </div>
 
+                    <div class="col-12">
+                        <p>
+                            La casita una monada, súper cómoda y acogedora.
+                            Los alrededores preciosos.
+                            Carlos es un anfitrión maravilloso, atento y nos facilitó todo mucho. Disfrutamos muchísimo.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 <script>
 
-    //Carousel
+
     $(document).ready(function() {
 
         let huespedes = 0;
@@ -245,6 +278,7 @@
         let totalRating;
         const oneDay = 24*60*60*1000;
 
+        //Carousel
         $("#owl-example1").owlCarousel({
             margin:10,
             items:2,
@@ -263,6 +297,7 @@
                 altFormat:'yy-mm-dd',
                 minDate: 0,
                 firstDay:1,
+                changeMonth:true,
                 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
                 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
@@ -278,6 +313,7 @@
                 altField:'#sortida',
                 altFormat:'yy-mm-dd',
                 firstDay:1,
+                changeMonth:true,
                 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
                 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
@@ -311,8 +347,8 @@
 
             if(huespedes === 1){
 
-                $('#personas').text("");
-                $('#menos').prop("disabled",true);
+                $('#personas').val("");
+                $('#menos').val("disabled",true);
             }else {
                 huespedes--;
                 $('#personas').text(huespedes);
@@ -321,7 +357,7 @@
         $('#mas').on('click',function (){
 
             huespedes++;
-            $('#personas').text(huespedes);
+            $('#personas').val(huespedes);
             $('#menos').prop("disabled",false);
         })
 
@@ -345,13 +381,14 @@
             display: 'inline',
             touchUi: true,
             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+            monthNamesShort: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
             dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
             dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
             minDate: 0,
             numberOfMonths: 2,
             firstDay:1,
+            changeMonth:true,
             beforeShowDay: function( date ) {
                 var highlight = eventDates[date];
                 if( highlight ) {
@@ -388,8 +425,29 @@
             });
         }
 
-    });
+        //Map
+        function adjustMap() {
+            if ($(window).width() < 1140) {
+                $('#map').datepicker('option', 'numberOfMonths', 1);
+            } else {
+                $('#map').datepicker('option', 'numberOfMonths', 2);
+            }
+        }
 
+        var map = L.map('map').setView([39.68793, 2.84433], 13);
+        var marker = L.marker([39.68793, 2.84433]).addTo(map);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        var circle = L.circle([39.68793, 2.84433], {
+            color: 'blue',
+            fillColor: '#ADD8E6',
+            fillOpacity: 0.5,
+            radius: 50
+        }).addTo(map);
+
+    });
 
 </script>
 @endsection
