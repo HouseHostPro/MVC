@@ -110,8 +110,13 @@
                 </div>
                 <form method="POST" action="{{ route('confirmacionReserva') }}" class="col-4 border border-dark rounded shadow" style="height: 35%">
                     @csrf
-                    <div class="mt-2">
-                        <p><span id="preu" class="fs-5 text">150€</span> noche</p>
+                    <div class="mt-2 col-12 row">
+                        <div class="col-3 px-0">
+                            <input class="border-0 form-control p-0 text-end fs-5 bold" value="150" type="text" id="pd" name="pd" readonly>
+                        </div>
+                        <div class="col-8 px-0">
+                            <p><span class="fs-5 bold">€</span> noche</p>
+                        </div>
                     </div>
                     <div class="row d-flex justify-content-center ">
                         <div class="col-12 row ">
@@ -128,14 +133,14 @@
                             <div class="col-5 col-xl-4">
                                 <label for="personas" class=" m-0" style="font-size: 18px">Huéspedes:</label>
                             </div>
-                            <button id="menos" type="button" class="col-2 col-xl-1  p-0 border-0 bg-white" disabled>
+                            <button id="menos" type="button" class="col-2 col-xl-1  p-0 border-0 bg-white" readonly="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                                     <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
                                 </svg>
                             </button>
                             <div class="col-2">
-                                <input id="personas" name="personas" class="form-control border-0 fs-5 text-center m-0 p-0">
+                                <input id="personas" name="personas" class="form-control bg-white border-0 fs-5 text-center m-0 p-0" readonly>
                             </div>
                             <button id="mas" type="button" class="col-2 col-xl-1 p-0 border-0 bg-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle " viewBox="0 0 16 16">
@@ -146,11 +151,12 @@
                         </div>
                         <div class="col-12 justify-content-start ms-3 my-xl-3 ">
                             <div class="form-check form-switch ps-5">
-                                <input class="form-check-input" type="checkbox" value="" name="mascotas" id="flexSwitchCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="true" name="mascotas" id="flexSwitchCheckDefault">
                                 <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 18px">Mascotas</label>
                             </div>
                         </div>
                         <!-- Inputs con los formatos de hora del formato de la bbdd -->
+                        <input type="text" id="days" name="days" hidden>
                         <input type="text" id="entrada" name="frombd" hidden>
                         <input type="text" id="sortida" name="tobd" hidden>
                     </div>
@@ -158,24 +164,24 @@
                     <button type="submit" class="col-6 btn bg-primary bg-opacity-25 border border-dark mt-3 mb-4">Reservar</button>
                     </div>
                     <div id="divpxn" class="col-12 row mx-2" hidden>
-                        <div class="col-6">
-                            <label id="pxn" for="pxnt" class="col-8"></label>
+                        <div class="col-8">
+                            <label id="pxn" for="pxnt" class="col-12 pt-1"></label>
                         </div>
-                        <div class="col-6">
-                            <input id="pxnt" name="pxn" class="border-0 form-control col-4 text-end">
+                        <div class="col-4">
+                            <input id="pxnt" name="pxn" class="bg-white border-0 form-control col-12 text-end" readonly>
                         </div>
                     </div>
                     <div id="divlimpiza" class="col-12 row mx-2" hidden>
-                        <div class="col-6">
-                            <label id="limpieza" for="limpiezat" class="col-8"></label>
+                        <div class="col-4">
+                            <label id="limpieza" for="limpiezat" class="col-12 pt-1"></label>
                         </div>
                         <div class="col-6">
-                            <input id="limpiezat" name="limpieza" class="border-0 form-control col-4 text-end">
+                            <input id="limpiezat" name="limpieza" class="bg-white border-0 form-control col-12 text-end" readonly>
                         </div>
                     </div>
                     <div class="row mx-2 border-top">
                         <label for="ptotal" class="h5 col-8 my-3">Total</label>
-                        <input id="ptotal" name="ptotal" class="border-0 h5 col-4 text-end my-3">
+                        <input id="ptotal" name="ptotal" class="bg-white border-0 h5 col-4 text-end my-3" readonly>
                     </div>
                 </form>
                 <div id="calendari" class="col-7 ">
@@ -332,6 +338,11 @@
             datepicker('getDate');
             $("#to").
             datepicker("option", "minDate", startDate);
+            if($('#to').val() !== ""){
+
+                pintarprecioReserva();
+            }
+
         })
 
         //Cuando se ponga la fecha de salida se
@@ -340,17 +351,29 @@
             datepicker('getDate');
             $("#from").
             datepicker("option", "maxDate", endDate);
-            let diffDays = Math.abs((parseInt($('#entrada').val().replaceAll("-","")) - parseInt($('#sortida').val().replaceAll("-",""))));
-            pintarprecioReserva(diffDays)
+            if($('#from').val() !== ""){
+
+                pintarprecioReserva();
+            }
+
         })
-        function pintarprecioReserva(days){
+        20240215
+        function pintarprecioReserva(){
 
-            $('#divpxn').prop("hidden",false);
-            let preuTotal = 167*days;
-            $('#pxn').text($('#preu').text() + " x " + days + " noches");
-            $('#pxnt').val(preuTotal + "€");
-            $('#ptotal').val(preuTotal + "€");
+            //Calcular días de diferencia entre fecha entrada y salida
+            let entrada = new Date($('#entrada').val());
+            let salida = new Date($('#sortida').val());
+            let diffMs = Math.abs(salida - entrada);
+            let diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
 
+            if(diffDays > 0){
+                $('#divpxn').prop("hidden",false);
+                let preuTotal = $('#pd').val()*diffDays;
+                $('#pxn').text($('#pd').val() + " x " + diffDays + " noches");
+                $('#pxnt').val(preuTotal + "€");
+                $('#ptotal').val(preuTotal + "€");
+                $('#days').val(diffDays);
+            }
         }
 
         $('#menos').on('click',function (){

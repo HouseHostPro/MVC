@@ -91,5 +91,22 @@
 
     @yield('content')
 
+<footer class="bg-dark text-light py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; <?php echo date('Y'); ?> Mi Sitio Web. Todos los derechos reservados.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Inicio</a></li>
+                    <li class="list-inline-item"><a href="#">Acerca de</a></li>
+                    <li class="list-inline-item"><a href="#">Servicios</a></li>
+                    <li class="list-inline-item"><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
