@@ -146,28 +146,36 @@
                         </div>
                         <div class="col-12 justify-content-start ms-3 my-xl-3 ">
                             <div class="form-check form-switch ps-5">
-                                <input class="form-check-input" type="checkbox" value="" id="flexSwitchCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="" name="mascotas" id="flexSwitchCheckDefault">
                                 <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 18px">Mascotas</label>
                             </div>
                         </div>
                         <!-- Inputs con los formatos de hora del formato de la bbdd -->
-                        <input type="text" id="entrada" hidden>
-                        <input type="text" id="sortida" hidden>
+                        <input type="text" id="entrada" name="frombd" hidden>
+                        <input type="text" id="sortida" name="tobd" hidden>
                     </div>
                     <div class="d-flex justify-content-center">
                     <button type="submit" class="col-6 btn bg-primary bg-opacity-25 border border-dark mt-3 mb-4">Reservar</button>
                     </div>
-                    <div id="divpxn" class="row mx-2" hidden>
-                        <p id="pxn" class="col-8"></p>
-                        <p id="pxnt" class="col-4 text-end"></p>
+                    <div id="divpxn" class="col-12 row mx-2" hidden>
+                        <div class="col-6">
+                            <label id="pxn" for="pxnt" class="col-8"></label>
+                        </div>
+                        <div class="col-6">
+                            <input id="pxnt" name="pxn" class="border-0 form-control col-4 text-end">
+                        </div>
                     </div>
-                    <div id="divlimpiza" class="row mx-2" hidden>
-                        <p id="limpieza" class="col-8"></p>
-                        <p id="limpiezat" class="col-4 text-end"></p>
+                    <div id="divlimpiza" class="col-12 row mx-2" hidden>
+                        <div class="col-6">
+                            <label id="limpieza" for="limpiezat" class="col-8"></label>
+                        </div>
+                        <div class="col-6">
+                            <input id="limpiezat" name="limpieza" class="border-0 form-control col-4 text-end">
+                        </div>
                     </div>
-                    <div class="row mx-2 border-top ">
-                        <p class="h5 col-8 my-3">Total</p>
-                        <p id="ptotal" class="h5 col-4 text-end my-3">0€</p>
+                    <div class="row mx-2 border-top">
+                        <label for="ptotal" class="h5 col-8 my-3">Total</label>
+                        <input id="ptotal" name="ptotal" class="border-0 h5 col-4 text-end my-3">
                     </div>
                 </form>
                 <div id="calendari" class="col-7 ">
@@ -273,10 +281,7 @@
     $(document).ready(function() {
 
         let huespedes = 0;
-        let diffDays;
-        let preuTotal;
         let totalRating;
-        const oneDay = 24*60*60*1000;
 
         //Carousel
         $("#owl-example1").owlCarousel({
@@ -329,29 +334,35 @@
             datepicker("option", "minDate", startDate);
         })
 
+        //Cuando se ponga la fecha de salida se
         $('#to').change(function() {
             endDate = $(this).
             datepicker('getDate');
             $("#from").
             datepicker("option", "maxDate", endDate);
-            diffDays = Math.abs((parseInt($('#entrada').val().replaceAll("-","")) - parseInt($('#sortida').val().replaceAll("-",""))));
-            $('#divpxn').prop("hidden",false);
-            preuTotal = 167*diffDays;
-            $('#pxn').text($('#preu').text() + " x " + diffDays + " noches");
-            $('#pxnt').text(preuTotal + "€");
-            $('#ptotal').text(preuTotal + "€");
-
+            let diffDays = Math.abs((parseInt($('#entrada').val().replaceAll("-","")) - parseInt($('#sortida').val().replaceAll("-",""))));
+            pintarprecioReserva(diffDays)
         })
+        function pintarprecioReserva(days){
+
+            $('#divpxn').prop("hidden",false);
+            let preuTotal = 167*days;
+            $('#pxn').text($('#preu').text() + " x " + days + " noches");
+            $('#pxnt').val(preuTotal + "€");
+            $('#ptotal').val(preuTotal + "€");
+
+        }
 
         $('#menos').on('click',function (){
 
             if(huespedes === 1){
 
+                huespedes--;
                 $('#personas').val("");
-                $('#menos').val("disabled",true);
+                $('#menos').prop("disabled",true);
             }else {
                 huespedes--;
-                $('#personas').text(huespedes);
+                $('#personas').val(huespedes);
             }
         })
         $('#mas').on('click',function (){
@@ -407,11 +418,12 @@
 
         //Rating
 
-        var ratings = [3, 4]; // Valores de estrellas para cada contenedor
+        // Valores de estrellas para cada contenedor
+        var ratings = [3, 4];
 
         $('.rating-container').each(function(index) {
             var $container = $(this);
-            var ratingValue = ratings[index]; // Obtener el valor del array
+            var ratingValue = ratings[index];
 
             activateStars($container, ratingValue);
         });
