@@ -4,6 +4,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PropietatController;
+use \App\Http\Controllers\EspaiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +35,15 @@ Route::get('/propertyForm', [PropietatController::class, '']);
 
 Route::view('/propertyView', 'property.property') -> name('property.view');
 Route::view('/propertyForm', 'property/propertyForm');
-Route::view('/espaiForm', 'property/espaiForm') -> name('espai.form');
 
 Route::get('/propertyForm', [PropietatController::class, 'loadForm']) ->name('property.loadForm');
 Route::post('/propertyForm', [PropietatController::class, 'store']) ->name('property.createProperty');
+
+//Espai
+Route::get('/espaiForm', [EspaiController::class, 'loadForm']) -> name('espai.loadForm');
+Route::post('/espaiForm', [EspaiController::class, 'create']) -> name('espai.create');
+Route::view('/espaiForm', 'property/espaiForm') -> name('espai.form');
+
+
+//Servei
+Route::get('/serveis', [ServeiController::class, 'findAll']) ->name('servei.all');

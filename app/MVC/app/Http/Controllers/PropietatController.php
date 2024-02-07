@@ -25,16 +25,12 @@ class PropietatController extends Controller {
 
         $property -> save();
         $success = "Tu propiedad está casi lista! Ahora, añade algunos espacios";
-        return redirect() -> route('espai.form') -> with('success', $success);
+        return redirect() -> route('espai.loadForm') -> with('success', $success);
     }
 
     public function loadForm() {
         $ciutats = $this -> findAllCiutats();
         return view("property/propertyForm", compact("ciutats"));
-    }
-
-    public function loadEspaiForm() {
-        return redirect() -> route('espai.form');
     }
 
     public function findAllCiutats() {
