@@ -26,10 +26,12 @@ class CasaController extends Controller{
 
         $reserva->preu_total = $request->input('ptotal');
         $reserva->estat = 'PAGADA';
-        $reserva->usuari_id = 'PAGADA';
-        $reserva->propietat_id = 'PAGADA';
+        $reserva->usuari_id = '1';
+        $reserva->propietat_id = '1';
 
+        $reserva -> save();
 
+        return redirect('principal');
 
 
     }

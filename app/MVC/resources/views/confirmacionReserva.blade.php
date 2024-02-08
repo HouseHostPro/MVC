@@ -9,7 +9,7 @@
             <div class="col-12 my-4">
                 <h4>Tu reserva</h4>
             </div>
-            <form>
+            <form method="post" action="{{route('reserva.store')}}">
                 @csrf
                 <label for="entrada">Fecha entrada</label>
                 <input id="entrada" name="entrada" class="form-control " value="{{$datosReserva['from']}}" readonly>

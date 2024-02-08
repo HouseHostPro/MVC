@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 //Ficha Casa
 Route::view('/','fichaCasa')->name('principal');
 Route::post('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
+Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
 
 //Login
 Route::view('/login','login')->name('login');
