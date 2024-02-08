@@ -1,5 +1,8 @@
 @extends('layouts.plantillaFormularios');
 
+@section('url')
+    {{route('principal')}}
+@endsection
 @section('title','Confirmación de reserva')
 
 @section('content')
@@ -28,6 +31,7 @@
                 <input id="total" name="total" class="form-control" value="{{$datosReserva['ptotal']}}" readonly>
 
                 <!-- Datos que se tiene que enviar a la bd pero no se tienen que ver -->
+                <input type="text" name="titol" value="{{$datosReserva['titol']}}" hidden>
                 <input type="text" name="mascotas" value="{{$datosReserva['mascotas']}}" hidden>
                 <input type="text" name="days" value="{{$datosReserva['days']}}" hidden>
                 <input type="text" name="frombd" value="{{$datosReserva['frombd']}}" hidden>
