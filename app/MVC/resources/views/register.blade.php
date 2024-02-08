@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 @section('content')
     <div class="container">
-        <form class="d-flex flex-column justify-content-center" method="POST">
+        <form class="d-flex flex-column justify-content-center" method="POST" action="{{route('user.store')}}">
             @csrf
             <div class="d-flex justify-content-center">
                 <h1>Creacion de usuario</h1>

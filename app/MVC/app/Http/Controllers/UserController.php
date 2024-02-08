@@ -35,7 +35,7 @@ class UserController extends Controller
     public function store(Request $request) {
 
         User::create($request->all());
-        return view('CreateSuccess')->with('success','Usuario creado');
+        return view('login');
     }
 
     public function userId($id)
@@ -48,7 +48,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->update($request->all());
 
-        return view('UpdateSuccess')->with('success','Usuario actualizado');
+        return redirect()->route('user.userId',['id'=>$id]);
 
     }
 

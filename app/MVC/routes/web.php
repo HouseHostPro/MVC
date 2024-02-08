@@ -20,7 +20,7 @@ use App\Http\Controllers\CiutatController;
 Route::view('/','welcome');
 
 //Login
-Route::view('/login','login');
+Route::view('/login','login')->name('user.login');
 Route::post('/login/check',[LoginController::class,'checkLogin'])->name('login.check');
 
 //Register
