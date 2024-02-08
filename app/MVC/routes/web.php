@@ -3,8 +3,6 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PaisController;
-use App\Http\Controllers\CiutatController;
 
 /*
 |--------------------------------------------------------------------------
