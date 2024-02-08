@@ -9,6 +9,6 @@ class Reserva extends Model{
 
     use HasFactory;
     protected $table = 'reserva';
-
+    public $timestamps = false;
 
 }

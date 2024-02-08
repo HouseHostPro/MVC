@@ -42,7 +42,7 @@ Route::get('/propertyForm', [PropietatController::class, '']);
 
 Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.properties');
 Route::get('/property/edit/{id}', [PropietatController::class, 'getPropietat']) -> name('property.edit');
-Route::get('/property/update/{id}', [PropietatController::class, 'store']) -> name('property.store');
+//Route::post('/property/update/{id}', [PropietatController::class, 'store']) -> name('property.store');
 
 Route::view('/propertyView', 'property.property') -> name('property.view');
 Route::view('/propertyForm', 'property/propertyForm');
