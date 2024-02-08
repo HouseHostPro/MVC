@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ciutat extends Model
 {
+    protected $table = "ciutat";
+
     use HasFactory;
 
     protected $fillable = [
@@ -17,5 +19,12 @@ class Ciutat extends Model
         'pais_id'
     ];
 
-    protected $table = "ciutat";
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+    public function pais()
+    {
+        return $this->belongsTo(Pais::class);
+    }
 }

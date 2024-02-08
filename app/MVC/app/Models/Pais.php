@@ -12,4 +12,9 @@ class Pais extends Model
     protected $fillable = [
 
     ];
+
+    public function ciutat()
+    {
+        return $this->hasMany(Ciutat::class);
+    }
 }

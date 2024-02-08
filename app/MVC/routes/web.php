@@ -31,7 +31,9 @@ Route::post('/login/check',[UserController::class,'checkLogin'])->name('login.ch
 //Register
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/register', [UserController::class,'register'])->name('user.register');
-Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
+Route::post('/user/register', [UserController::class, 'store'])->name('user.store');
+Route::get('/user/update/{id}', [UserController::class, 'userId'])->name('user.userId');
+Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
 
 //Property
 //Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.findAllByUser');
