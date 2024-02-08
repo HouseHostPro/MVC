@@ -16,3 +16,4 @@ docker-compose.yml
 /.idea/
 /app/MVC/public/build/
 /app/MVC/public/img/
+/Cosas
