@@ -30,7 +30,7 @@
 
 </head>
 <body style="height: 98vh;">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top" >
+<nav class="navbar navbar-expand navbar-dark bg-primary sticky-top" >
     <div class="container-fluid" >
         <a class="navbar-brand" href="{{ route('principal') }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill mb-2" viewBox="0 0 16 16">
@@ -38,7 +38,7 @@
             </svg>
             HouseHostPro
         </a>
-        <form class="d-flex me-4" >
+        <div class="d-flex " >
             <div class="collapse navbar-collapse" id="navbarNavDropdown" >
                 <ul class="navbar-nav" >
                     <li class="nav-item me-3" >
@@ -59,7 +59,7 @@
                     </li>
                 </ul>
             </div>
-        </form>
+        </div>
     </div>
 </nav>
 <!-- Modal -->

@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\CasaController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ServeiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PropietatController;
 use \App\Http\Controllers\EspaiController;
@@ -21,8 +22,13 @@ use Illuminate\Support\Facades\Route;
 
 
 //Ficha Casa
+
+Route::middleware('auth')->group(function (){
+    Route::post('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
+    Route::get('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
+});
+
 Route::view('/','fichaCasa')->name('principal');
-Route::post('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
 
 //Login
 Route::view('/login','login')->name('login');
