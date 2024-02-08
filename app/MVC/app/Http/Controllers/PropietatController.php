@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Redirect;
 class PropietatController extends Controller {
     public function findAllByUser() {
         $propietats = DB::table('propietat') -> where('usuari_id', '=' , 1) -> get();
-        return view("property/property", compact("propietats"));
+        return view("property/properties", compact("propietats"));
+    }
+
+    public function getPropietat($id) {
+        $propietat = Propietat::find($id);
+        return view("property/propertyInfo", compact("propietat"));
     }
 
     public function store(Request $request) {

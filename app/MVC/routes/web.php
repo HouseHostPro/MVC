@@ -30,8 +30,12 @@ Route::get('/user/register', [UserController::class,'register'])->name('user.reg
 Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
 
 //Property
-Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.findAllByUser');
+//Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.findAllByUser');
 Route::get('/propertyForm', [PropietatController::class, '']);
+
+Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.properties');
+Route::get('/property/edit/{id}', [PropietatController::class, 'getPropietat']) -> name('property.edit');
+Route::get('/property/update/{id}', [PropietatController::class, 'store']) -> name('property.store');
 
 Route::view('/propertyView', 'property.property') -> name('property.view');
 Route::view('/propertyForm', 'property/propertyForm');
