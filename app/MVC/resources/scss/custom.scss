@@ -45,8 +45,12 @@
     background: white !important;
 }
 .ui-state-highlight, .ui-state-hover, .ui-state-focus, .ui-state-active{
-    background: #b3d7ff !important;
+    background: #f6f6f6 !important;
     border: black !important;
+}
+.ui-widget-content a{
+    color: black !important;
+    border: 1px solid #cccccc !important;
 }
 
 .event a {

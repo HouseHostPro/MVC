@@ -13,6 +13,7 @@
     </div>
     <form class="d-flex flex-column gap-3">
         @csrf
+        {{$datosReserva['from']}}
         <div class="row justify-content-center">
             <div class="col-5">
                 <label for="entrada">Fecha entrada</label>

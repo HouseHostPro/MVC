@@ -76,12 +76,15 @@ class UserController extends Controller
 
         $user = User::where('email', $email)->first();
 
+        if ($email == $user->email /* || !Hash::check($password,$user->contrasenya)*/) {
 
-        if (!$user/* || !Hash::check($password,$user->password)*/) {
-
-            return back();
+            if($password == $user->contrasenya){
+                Auth::login($user);
+                return redirect()->route('principal');
+            }
+            return redirect()->route('login');
+        }else{
+            return redirect()->route('login');
         }
-        Auth::login($user);
-        return redirect()->route('principal');
     }
 }
