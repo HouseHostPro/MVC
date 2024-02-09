@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function (){
     Route::post('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
     Route::get('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
+    Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
 });
 
 Route::view('/','fichaCasa')->name('principal');
@@ -47,7 +48,7 @@ Route::get('/propertyForm', [PropietatController::class, '']);
 
 Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.properties');
 Route::get('/property/edit/{id}', [PropietatController::class, 'getPropietat']) -> name('property.edit');
-Route::get('/property/update/{id}', [PropietatController::class, 'store']) -> name('property.store');
+//Route::post('/property/update/{id}', [PropietatController::class, 'store']) -> name('property.store');
 
 Route::view('/propertyView', 'property.property') -> name('property.view');
 Route::view('/propertyForm', 'property/propertyForm');
@@ -56,9 +57,9 @@ Route::get('/propertyForm', [PropietatController::class, 'loadForm']) ->name('pr
 Route::post('/propertyForm', [PropietatController::class, 'store']) ->name('property.createProperty');
 
 //Espai
-Route::get('/espaiForm', [EspaiController::class, 'loadForm']) -> name('espai.loadForm');
-Route::post('/espaiForm', [EspaiController::class, 'create']) -> name('espai.create');
-Route::view('/espaiForm', 'property/espaiForm') -> name('espai.form');
+Route::get('/property/edit/{id}/espais', [EspaiController::class, 'loadForm']) -> name('espai.espais');
+//Route::post('/espaiForm', [EspaiController::class, 'create']) -> name('espai.create');
+//Route::get('/espaiForm', 'property/espaiForm') -> name('espai.form');
 
 
 //Servei

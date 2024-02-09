@@ -17,7 +17,8 @@ class PropietatController extends Controller {
 
     public function getPropietat($id) {
         $propietat = Propietat::find($id);
-        return view("property/propertyInfo", compact("propietat"));
+        $ciutats = $this->findAllCiutats();
+        return view("property/propertyInfo", compact("propietat", "ciutats"));
     }
 
     public function store(Request $request) {
