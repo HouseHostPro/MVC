@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -31,6 +32,13 @@ class User extends Authenticatable
 
     public function ciutatUser(){
         return $this->belongsTo(Ciutat::class);
+    }
+
+    public static function hashPassword()
+    {
+        static::creating(function ($user) {
+            $user->contrasenya = Hash::make($user->contrasenya);
+        });
     }
 
 }

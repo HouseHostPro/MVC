@@ -24,15 +24,6 @@ class UserController extends Controller
         $ciutats = Ciutat::all();
         return view('register',compact('ciutats','paises'));
     }
-
-    public function create(Request $request)
-    {
-        $request->validate([
-            'email'=>'required'
-        ]);
-        return redirect()->view('register');
-
-    }
     public function allUsers(){
 
         $users = User::all();
@@ -41,7 +32,16 @@ class UserController extends Controller
 
     public function store(Request $request) {
 
+        $request->validate([
+            'nom' => 'required|string',
+            'email' => 'required|string',
+            'contrasenya' => 'required|string|min:8',
+        ]);
+
+        User::hashPassword();
+
         User::create($request->all());
+
         return view('login');
     }
 
