@@ -51,9 +51,9 @@ Route::get('/propertyForm', [PropietatController::class, 'loadForm']) ->name('pr
 Route::post('/propertyForm', [PropietatController::class, 'store']) ->name('property.createProperty');
 
 //Espai
-Route::get('/espaiForm', [EspaiController::class, 'loadForm']) -> name('espai.loadForm');
-Route::post('/espaiForm', [EspaiController::class, 'create']) -> name('espai.create');
-Route::view('/espaiForm', 'property/espaiForm') -> name('espai.form');
+Route::get('/property/edit/{id}/espais', [EspaiController::class, 'loadForm']) -> name('espai.espais');
+//Route::post('/espaiForm', [EspaiController::class, 'create']) -> name('espai.create');
+//Route::get('/espaiForm', 'property/espaiForm') -> name('espai.form');
 
 
 //Servei
