@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DataLloguer;
 use App\Models\Reserva;
 use Illuminate\Http\Request;
 
@@ -18,18 +17,19 @@ class CasaController extends Controller{
 
 
         $reserva = new Reserva();
-        $dataLloguer = new DataLloguer();
 
-        $dataLloguer->data_inici = $request->input('frombd');
-        $dataLloguer->data_fi = $request->input('tobd');
+        $total = str_replace('€', '', $request -> input('total'));
 
-
-        $reserva->preu_total = $request->input('ptotal');
+        $reserva->preu_total = $total;
         $reserva->estat = 'PAGADA';
-        $reserva->usuari_id = 'PAGADA';
-        $reserva->propietat_id = 'PAGADA';
+        $reserva->usuari_id = '1';
+        $reserva->propietat_id = '1';
+        $reserva->data_inici = $request -> input('frombd');
+        $reserva->data_fi = $request -> input('tobd');
 
+        $reserva -> save();
 
+        return redirect() -> route('principal');
 
 
     }

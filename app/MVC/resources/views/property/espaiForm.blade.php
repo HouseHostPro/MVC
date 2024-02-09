@@ -1,6 +1,9 @@
 @php use Illuminate\Support\Facades\Session; @endphp
-@extends('layouts/plantilla')
+@extends('layouts/plantillaFormularios')
 
+@section('url')
+    {{route()}}
+@endsection
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 @section('content')

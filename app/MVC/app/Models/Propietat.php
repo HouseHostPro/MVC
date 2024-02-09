@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Propietat extends Model {
     use HasFactory;
@@ -18,4 +19,8 @@ class Propietat extends Model {
 
     public $timestamps = false;
     protected $table = "propietat";
+
+    public function reserves(): HasMany {
+        return $this->hasMany(Reserva::class);
+    }
 }

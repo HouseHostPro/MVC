@@ -5,15 +5,15 @@
             <div class="mask d-flex align-items-center h-100">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-12">
+                        <div class="col-10">
                             <div class="table-responsive bg-white">
                                 <table class="table mb-0">
                                     <thead>
                                     <tr>
-                                        <th scope="col">Nombre propiedad</th>
-                                        <th scope="col">Imagen</th>
-                                        <th scope="col">Ubicación</th>
-                                        <th scope="col">Acciones</th>
+                                        <th class="bg-body-secondary" scope="col">Nombre propiedad</th>
+                                        <th class="bg-body-secondary" scope="col">Imagen</th>
+                                        <th class="bg-body-secondary" scope="col">Ubicación</th>
+                                        <th class="bg-body-secondary" scope="col">Acciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>

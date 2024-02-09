@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Espai;
 
 class EspaiController extends Controller {
@@ -13,7 +14,7 @@ class EspaiController extends Controller {
     public function loadForm($propietatId) {
         $espais = $this -> findAllByPropietat($propietatId);
         //$tipus = $this-> findAllTipus();
-        return redirect() -> route('espai.form', [$espais/*, $tipus*/]);
+        return redirect() -> route('espai.espais', [$espais/*, $tipus*/]);
     }
 
     public function create() {
