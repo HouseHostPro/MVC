@@ -121,11 +121,11 @@
                     <div class="row d-flex justify-content-center ">
                         <div class="col-12 row ">
                             <label class="custom-input col-12 col-xl-6" for="from">
-                                <input class="border-1 form-control" type="text" id="from" name="from"></br>
+                                <input class="border-1 form-control" type="text" id="from" name="from" autocomplete="off"></br>
                                 <span class="ph">Llegada:</span>
                             </label>
                             <label class="custom-input col-12 col-xl-6" for="to">
-                                <input class="border-1 form-control" type="text" id="to" name="to">
+                                <input class="border-1 form-control" type="text" id="to" name="to" autocomplete="off">
                                 <span class="ph">Salida:</span>
                             </label>
                         </div>
