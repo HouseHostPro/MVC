@@ -6,19 +6,13 @@
 @section('title','Confirmación de reserva')
 
 @section('content')
-            <div class="col-12 my-4">
+    <form method="post" action="{{route('reserva.store')}}" class="d-flex flex-column gap-3">
+        @csrf
+        <div class="row justify-content-center">
+            <div class="col-10 mt-4 mb-3">
                 <h4>Tu reserva</h4>
             </div>
-            <form method="post" action="{{route('reserva.store')}}" class="d-flex flex-column gap-3">
-                @csrf
-                <div class="row justify-content-center">
-                    <div class="col-10 mt-4 mb-3">
-                        <h4>Tu reserva</h4>
-                    </div>
-                </div>
-    <form class="d-flex flex-column gap-3">
-        @csrf
-        {{$datosReserva['from']}}
+        </div>
         <div class="row justify-content-center">
             <div class="col-5">
                 <label for="entrada">Fecha entrada</label>

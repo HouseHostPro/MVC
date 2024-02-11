@@ -57,7 +57,7 @@
                         <div>
                             <h3 class="fs-5 mt-3">Habitaciones</h3>
                             <div id="owl-example1" class="owl-carousel">
-                                <div class="item">
+                                <div class="item mb-1">
                                     <div class="carousel-item active rounded border border-black shadow p-4" data-bs-interval="false">
                                         <div class="col-12 d-flex justify-content-center">
                                             <img src="img/cama-individual2.png" class="d-block w-25" alt="camas-individuales">
@@ -92,19 +92,26 @@
                                 </div>
 
                             </div>
-                        <div class="mt-3 border-bottom border-dark">
-                            <h3 class="fs-5 ">¿Que hay en el alojamiento?</h3>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Piscina</li>
-                                <li class="list-group-item">Cocina</li>
-                                <li class="list-group-item">Aparcamiento gratuito</li>
-                                <li class="list-group-item">Cafetera</li>
-                                <li class="list-group-item ">Televisor</li>
-                                <div class="col-4">
-                                    <button type="button" class="btn bg-white border border-dark my-3">Mostrar más servicios</button>
-                                </div>
-                            </ul>
-                        </div>
+                            <div class="mt-3 border-bottom border-dark">
+                                <h3 class="fs-5 ">¿Que hay en el alojamiento?</h3>
+                                <ul class="list-group list-group-flush">
+                                    @php
+                                    $count = 0;
+                                    @endphp
+                                    @foreach($servicios as $servicio)
+                                        @if($count >= 5)
+                                            @break
+                                        @endif
+                                        <li class="list-group-item">{{$servicio->Cservicios->nom}}</li>
+                                            @php
+                                                $count++;
+                                            @endphp
+                                    @endforeach
+                                    <div class="col-4">
+                                        <button type="button" class="btn bg-white border border-dark my-3" data-bs-toggle="modal" data-bs-target="#servicios">Mostrar más</button>
+                                    </div>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -121,11 +128,11 @@
                     <div class="row d-flex justify-content-center ">
                         <div class="col-12 row ">
                             <label class="custom-input col-12 col-xl-6" for="from">
-                                <input class="border-1 form-control" type="text" id="from" name="from" autocomplete="off"></br>
+                                <input class="border-1 form-control" type="text" id="from" name="from" autocomplete="off" required></br>
                                 <span class="ph">Llegada:</span>
                             </label>
                             <label class="custom-input col-12 col-xl-6" for="to">
-                                <input class="border-1 form-control" type="text" id="to" name="to" autocomplete="off">
+                                <input class="border-1 form-control" type="text" id="to" name="to" autocomplete="off" required>
                                 <span class="ph">Salida:</span>
                             </label>
                         </div>
@@ -140,7 +147,7 @@
                                 </svg>
                             </button>
                             <div class="col-2">
-                                <input id="personas" name="personas" class="form-control bg-white border-0 fs-5 text-center m-0 p-0" readonly>
+                                <input id="personas" name="personas" class="form-control bg-white border-0 fs-5 text-center m-0 p-0" readonly required>
                             </div>
                             <button id="mas" type="button" class="col-2 col-xl-1 p-0 border-0 bg-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle " viewBox="0 0 16 16">
@@ -189,67 +196,44 @@
                     <div id="inline-picker" class="col-12 my-3"></div>
                 </div>
                 <div class="col-12 row border-top border-bottom border-dark d-flex justify-content-between">
-                    <div class="col-12 col-xl-6 row mt-4">
-                        <div class="col-2 text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                            </svg>
-                        </div>
-                        <div class="col-9 ps-0">
-                            <h5>Mónica</h5>
-                            <p style="font-size: 12px">Cataluña,España</p>
-                        </div>
-                        <div class="col-12 rating-container" data-rating="">
-                            <div class="rating" >
-                                <span class="star" data-rating="1">&#9733;</span>
-                                <span class="star" data-rating="2">&#9733;</span>
-                                <span class="star" data-rating="3">&#9733;</span>
-                                <span class="star" data-rating="4">&#9733;</span>
-                                <span class="star" data-rating="5">&#9733;</span>
+                    <div class="col-12 text-end my-3">
+                        <button type="button" class="btn bg-white btn-white border-0 text-black text-decoration-underline" data-bs-toggle="modal" data-bs-target="#crearComenatrio">Añadir comentario</button>
+                    </div>
+                    @foreach($comentarios as $comentario)
+                        <div class="modal-body row col-12">
+                            <div class="col-12 col-xl-6 row mt-4">
+                                <div class="col-2 text-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                    </svg>
+                                </div>
+                                <div class="col-9 ps-0">
+                                    <h5>{{$comentario->user->nom}}</h5>
+                                    <p style="font-size: 12px">{{$comentario->user->ciutat->nom}}, {{$comentario->user->ciutat->pais->nom}}</p>
+                                </div>
+                                <div class="col-12 rating-container" data-rating="{{$comentario->puntuacio}}">
+                                    <div class="rating" >
+                                        <span class="star" data-rating="1">&#9733;</span>
+                                        <span class="star" data-rating="2">&#9733;</span>
+                                        <span class="star" data-rating="3">&#9733;</span>
+                                        <span class="star" data-rating="4">&#9733;</span>
+                                        <span class="star" data-rating="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <p>
+                                        {{$comentario->comentari}}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <p>
-                                La casita una monada, súper cómoda y acogedora.
-                                Los alrededores preciosos.
-                                Carlos es un anfitrión maravilloso, atento y nos facilitó todo mucho. Disfrutamos muchísimo.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-xl-6 row mt-4">
-                        <div class="col-2 text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                            </svg>
-                        </div>
-                        <div class="col-9 ps-0">
-                            <h5>Mónica</h5>
-                            <p style="font-size: 12px">Cataluña,España</p>
-                        </div>
-                        <div class="col-12 rating-container" data-rating="">
-                            <div class="rating" >
-                                <span class="star" data-rating="1">&#9733;</span>
-                                <span class="star" data-rating="2">&#9733;</span>
-                                <span class="star" data-rating="3">&#9733;</span>
-                                <span class="star" data-rating="4">&#9733;</span>
-                                <span class="star" data-rating="5">&#9733;</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <p>
-                                La casita una monada, súper cómoda y acogedora.
-                                Los alrededores preciosos.
-                                Carlos es un anfitrión maravilloso, atento y nos facilitó todo mucho. Disfrutamos muchísimo.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <button type="button" class="btn bg-white border border-dark my-3">Mostrar más</button>
+                    @endforeach
+                    <div class="col-4 ">
+                        <button type="button" class="btn bg-white border border-dark my-3" data-bs-toggle="modal" data-bs-target="#comenarios">Mostrar más</button>
                     </div>
                 </div>
-                <div class="col-12 row my-5 border-bottom border-dark">
+                <div class="col-12 row mt-5 mb-4 border-bottom border-dark" >
                     <div class="col-12">
                         <h4>¿Dónde me voy a quedar?</h4>
                     </div>
@@ -260,18 +244,18 @@
                         <h5>Binissalem Mallorca</h5>
                     </div>
                 </div>
-                <div class="col-12 col-xl-6 row mt-4">
-                    <div class="col-2 text-center">
+                <div class="col-12 col-xl-6 row">
+                    <div class="col-xl-2 col-1 me-2 me-xl-0 text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                         </svg>
                     </div>
-                    <div class="col-9 ps-0">
+                    <div class="col-9 ps-0 d-flex align-self-center">
                         <h5>Anfitrión: Lucas</h5>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 mt-3">
                         <p>
                             La casita una monada, súper cómoda y acogedora.
                             Los alrededores preciosos.
@@ -282,8 +266,105 @@
             </div>
         </div>
     </main>
-<script>
+    <!-- Modals -->
+    <!-- Ver Comentarios -->
+    <div class="modal fade" id="comenarios" tabindex="-1" aria-labelledby="comment" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="comment">Comentarios</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                @foreach($comentarios as $comentario)
+                <div class="modal-body row col-12">
+                    <div class="col-12 col-xl-6 row mt-4">
+                        <div class="col-2 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                            </svg>
+                        </div>
+                        <div class="col-9 ps-0">
+                            <h5>{{$comentario->user->nom}}</h5>
+                            <p style="font-size: 12px">{{$comentario->user->ciutat->nom}}, {{$comentario->user->ciutat->pais->nom}}</p>
+                        </div>
+                        <div class="col-12 rating-container" data-rating="{{$comentario->puntuacio}}">
+                            <div class="rating" >
+                                <span class="star" data-rating="1">&#9733;</span>
+                                <span class="star" data-rating="2">&#9733;</span>
+                                <span class="star" data-rating="3">&#9733;</span>
+                                <span class="star" data-rating="4">&#9733;</span>
+                                <span class="star" data-rating="5">&#9733;</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <p>
+                                {{$comentario->comentari}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
 
+    <!-- Crear Comentarios -->
+    <div class="modal fade" id="crearComenatrio" tabindex="-1" aria-labelledby="cComenatrio" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cComenatrio">Añadir cometario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                   <form method="post" action="{{route('comentario.store')}}" class="d-flex flex-column gap-3">
+                       @csrf
+                       <div class="col-12 rating-container" data-rating="">
+                           <div class="rating" >
+                               <span class="starE" data-rating="1">&#9733;</span>
+                               <span class="starE" data-rating="2">&#9733;</span>
+                               <span class="starE" data-rating="3">&#9733;</span>
+                               <span class="starE" data-rating="4">&#9733;</span>
+                               <span class="starE" data-rating="5">&#9733;</span>
+                           </div>
+                       </div>
+                       <div class="form-group">
+                           <label for="descripcion">Descripción:</label>
+                           <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
+                       </div>
+                       <input type="text" id="rating" name="rating" hidden>
+                       <div class="col-12 row justify-content-end">
+                           <button type="submit" class="col-2 btn bg-primary bg-opacity-25 border border-dark">Añadir</button>
+                       </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ver todos los servicios -->
+    <div class="modal fade" id="servicios" tabindex="-1" aria-labelledby="tServicios" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tServicios">Servicios</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mt-3">
+                        <ul class="list-group list-group-flush">
+                            @foreach($servicios as $servicio)
+                                <li class="list-group-item">{{$servicio->Cservicios->nom}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
 
     $(document).ready(function() {
 
@@ -435,8 +516,6 @@
             }
         });
 
-
-
         $(window).resize(function() {
             adjustNumberOfMonths();
         });
@@ -445,14 +524,11 @@
 
         //Rating
 
-        // Valores de estrellas para cada contenedor
-        var ratings = [3, 4];
-
+        //Mostrar estrellas asignadas de cada usuario
         $('.rating-container').each(function(index) {
             var $container = $(this);
-            var ratingValue = ratings[index];
-
-            activateStars($container, ratingValue);
+            var ratingValue = $container.attr('data-rating');
+            activateStars($container,ratingValue);
         });
 
         function activateStars($container, ratingValue) {
@@ -463,6 +539,18 @@
                 }
             });
         }
+        //Asignar estrellas para añadir un comentario
+        $('.starE').click(function() {
+            var rating = $(this).attr('data-rating');
+            $('.starE').removeClass('active');
+            $('.starE').each(function() {
+                if ($(this).attr('data-rating') <= rating) {
+                    $(this).addClass('active');
+                }
+            });
+            totalRating = $('.starE.active').length;
+            $('#rating').val(totalRating);
+        });
 
         //Map
         function adjustMap() {

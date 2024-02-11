@@ -15,6 +15,6 @@ class Pais extends Model
 
     public function ciutat()
     {
-        return $this->hasMany(Ciutat::class);
+        return $this->hasMany(Ciutat::class,'pais_id','id');
     }
 }

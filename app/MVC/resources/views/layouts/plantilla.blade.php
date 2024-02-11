@@ -54,7 +54,6 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar sesion</a></li>
-
                         </ul>
                     </li>
                 </ul>

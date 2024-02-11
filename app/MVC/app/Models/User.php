@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -30,8 +31,12 @@ class User extends Authenticatable
 
     protected $guarded = ['id'];
 
-    public function ciutatUser(){
-        return $this->belongsTo(Ciutat::class);
+    public function ciutat(){
+        return $this->belongsTo(Ciutat::class,'ciutat_id','id');
+    }
+
+    public function comentarios():HasMany{
+        return $this->hasMany(Comentari::class,'usuari_id','id');
     }
 
     public static function hashPassword()

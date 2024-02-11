@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\CasaController;
+use App\Http\Controllers\ComentariController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServeiController;
 use App\Http\Controllers\UserController;
@@ -26,10 +27,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function (){
     Route::post('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
     Route::get('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
+    Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
     Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
 });
 
-Route::view('/','fichaCasa')->name('principal');
+//Route::view('/','fichaCasa')->name('principal');
+Route::get('/',[CasaController::class,'datosFichaCasa'])->name('principal');
 
 //Login
 Route::view('/login','login')->name('login');

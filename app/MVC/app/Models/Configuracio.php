@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Servei extends Model{
+class Configuracio extends Model{
     use HasFactory;
 
-    protected $table = 'servei';
+    protected $table = 'configuracio';
     public $timestamps = false;
     protected $fillable = [
     ];
-
-    public function configuracion()
+    public function servicios()
     {
-        return $this->hasMany(Configuracio_Servei::class,'servei_id','id');
+        return $this->hasMany(Configuracio_Servei::class,'configuracio_id','id');
     }
 
 }

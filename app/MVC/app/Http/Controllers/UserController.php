@@ -67,12 +67,12 @@ class UserController extends Controller
         return redirect()->view('login')->with('success','Usuario eliminado');
     }
 
-    public function checkLogin(Request $request)
-    {
+    public function checkLogin(Request $request){
 
 
         $email = $request->email;
         $password = $request->password;
+        $idPropiedad = 1;
 
         $user = User::where('email', $email)->first();
 
@@ -80,6 +80,8 @@ class UserController extends Controller
 
             if($password == $user->contrasenya){
                 Auth::login($user);
+                $request->session()->put('idPropiedad',$idPropiedad);
+
                 return redirect()->route('principal');
             }
             return redirect()->route('login');

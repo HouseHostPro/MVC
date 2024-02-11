@@ -21,10 +21,10 @@ class Ciutat extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class,'ciutat_id','id');
     }
     public function pais()
     {
-        return $this->belongsTo(Pais::class);
+        return $this->belongsTo(Pais::class,'pais_id','id');
     }
 }

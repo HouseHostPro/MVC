@@ -6,4 +6,6 @@ use Illuminate\Http\Request;
 
 class ServeiController extends Controller {
 
+
+
 }
