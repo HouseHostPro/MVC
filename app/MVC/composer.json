@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "*",
+        "mongodb/laravel-mongodb": "^4.1",
         "php-http/client-common": "^2.7"
     },
     "require-dev": {

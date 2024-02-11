@@ -63,6 +63,24 @@ return [
             ]) : [],
         ],
 
+        /*'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('MONGO_DB_HOST'),
+            'port'     => env('MONGO_DB_PORT'),
+            'username' => env('MONGO_DB_USERNAME'),
+            'password' => env('MONGO_DB_PASSWORD'),
+            'database' => env('MONGO_DB_DATABASE'),
+            'options' => [
+                'database' => env('MONGO_DB_DATABASE')
+            ]
+        ],*/
+
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'dsn' => env('MONGO_DSN'),
+            'database' => env('DB_DATABASE', 'househostpro'),
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
