@@ -29,15 +29,17 @@ Route::middleware('auth')->group(function (){
     Route::get('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
     Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
     Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
+    Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
+
 });
 
-//Route::view('/','fichaCasa')->name('principal');
+
 Route::get('/',[CasaController::class,'datosFichaCasa'])->name('principal');
-Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
 
 //Login
 Route::view('/login','login')->name('login');
 Route::post('/login/check',[UserController::class,'checkLogin'])->name('login.check');
+Route::post('/logout',[UserController::class,'logout'])->name('logout');
 
 //Register
 Route::get('/user', [UserController::class, 'index'])->name('user.index');

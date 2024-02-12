@@ -29,7 +29,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
-<body style="height: 98vh;">
+<body style="height: 98vh; ">
 <nav class="navbar navbar-expand navbar-dark bg-primary sticky-top" >
     <div class="container-fluid" >
         <a class="navbar-brand" href="{{ route('principal') }}">
@@ -54,9 +54,17 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
                             @guest
-                            <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar sesion</a></li>
+                                <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar sesion</a></li>
                             @endguest
-                            <li><a class="dropdown-item" href="{{ route('login') }}">Cuenta</a></li>
+                            <li><a class="dropdown-item" href="{{ route('cuenta') }}">Cuenta</a></li>
+                            @auth
+                                <li>
+                                    <form method="post" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-link text-black text-decoration-none ps-3">Cerrar Sesión</button>
+                                    </form>
+                                </li>
+                            @endauth
                         </ul>
                     </li>
                 </ul>
@@ -90,8 +98,12 @@
         </div>
     </div>
 </div>
+<main class="container-fluid d-flex justify-content-center">
+    <div class="container-sm" >
 
     @yield('content')
+    </div>
+</main>
 <footer class="bg-dark text-light">
     <div class="container py-4">
         <div class="row">

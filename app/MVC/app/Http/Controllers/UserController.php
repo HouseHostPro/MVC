@@ -22,7 +22,16 @@ class UserController extends Controller
     {
         $paises = Pais::all();
         $ciutats = Ciutat::all();
-        return view('register',compact('ciutats','paises'));
+        if(Auth::check()){
+
+            $email = Auth::user()->email;
+            $user = User::where('email', $email)->first();
+
+            return view('register',compact('ciutats','paises','user'));
+        }else{
+
+            return view('register',compact('ciutats','paises'));
+        }
     }
     public function allUsers(){
 
@@ -89,7 +98,16 @@ class UserController extends Controller
             return redirect()->route('login');
         }
     }
+    public function logout(Request $request){
+
+        Auth::logout();
+        $request->session()->invalidate();
+
+        return redirect()->route('principal');
+
+    }
     public function cuenta(){
 
+        return view('cuenta');
     }
 }

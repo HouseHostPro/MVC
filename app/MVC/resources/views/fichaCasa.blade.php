@@ -1,43 +1,42 @@
 @extends('layouts.plantilla')
 
 @section('content')
-    <main class="container-fluid d-flex justify-content-center">
-        <div class="container-sm" >
-            <h1 class="h2 mt-3">Cas Concos</h1>
-            <div class="container-fluid bg-light rounded row">
-                <div class="col-6 pt-1 px-0 my-2 me-2">
+
+    <h1 class="mt-3">Cas Concos</h1>
+    <div class="container-fluid bg-light rounded row">
+        <div class="col-6 pt-1 px-0 my-2 me-2">
+            <a href="#!">
+                <img  class="object-fit-fill shadow size-img rounded-start" src="img/frontCasa.webp" alt="dormitorio">
+            </a>
+        </div>
+        <div class="col-6 row px-0 my-2">
+            <div class="col-6 p-1">
+                <div class="col-12 padd-img ms-2">
                     <a href="#!">
-                        <img  class="object-fit-fill shadow size-img rounded-start" src="img/frontCasa.webp" alt="dormitorio">
+                        <img class="object-fit-fill shadow size-img " src="img/dormitori1.webp" alt="dormitorio">
                     </a>
                 </div>
-                <div class="col-6 row px-0 my-2">
-                    <div class="col-6 p-1">
-                        <div class="col-12 padd-img ms-2">
-                            <a href="#!">
-                                <img class="object-fit-fill shadow size-img " src="img/dormitori1.webp" alt="dormitorio">
-                            </a>
-                        </div>
-                        <div class="col-12 ms-2">
-                            <a href="#!">
-                                <img class="object-fit-fill shadow size-img " src="img/bany1.webp" alt="dormitorio">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-6 p-1" >
-                        <div class="col-12 padd-img ms-2">
-                            <a href="#!">
-                                <img id="radius-tr" class="object-fit-fill shadow size-img " src="img/bany1.webp" alt="dormitorio">
-                            </a>
-                        </div>
-                        <div class="col-12 ms-2">
-                            <a href="#!">
-                                <img id="radius-br" class="object-fit-fill shadow size-img" src="img/piscina.webp" alt="dormitorio">
-                            </a>
-                        </div>
-                    </div>
+                <div class="col-12 ms-2">
+                    <a href="#!">
+                        <img class="object-fit-fill shadow size-img " src="img/bany1.webp" alt="dormitorio">
+                    </a>
                 </div>
             </div>
-            <div class="col-12 mt-5 justify-content-between row">
+            <div class="col-6 p-1" >
+                <div class="col-12 padd-img ms-2">
+                    <a href="#!">
+                        <img id="radius-tr" class="object-fit-fill shadow size-img " src="img/bany1.webp" alt="dormitorio">
+                    </a>
+                </div>
+                <div class="col-12 ms-2">
+                    <a href="#!">
+                        <img id="radius-br" class="object-fit-fill shadow size-img" src="img/piscina.webp" alt="dormitorio">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-5 justify-content-between row">
                 <div class="col-7">
                     <h2 class="fs-4">Casa Rural en Binissalem Mallorca</h2>
                     <div>
@@ -199,10 +198,10 @@
                     <div class="col-12 text-end my-3">
                         <button type="button" class="btn bg-white btn-white border-0 text-black text-decoration-underline" data-bs-toggle="modal" data-bs-target="#crearComenatrio">Añadir comentario</button>
                     </div>
-                    @foreach($comentarios as $comentario)
-                        <div class="modal-body row col-12">
-                            <div class="col-12 col-xl-6 row mt-4">
-                                <div class="col-2 text-center">
+                        <div class="modal-body row col-12 justify-content-center">
+                            @foreach($comentarios as $comentario)
+                            <div class="col-6 row mt-4">
+                                <div class="col-2 me-md-2 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
@@ -222,13 +221,13 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <p>
+                                    <p class="text-truncate">
                                         {{$comentario->comentari}}
                                     </p>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
-                    @endforeach
                     <div class="col-4 ">
                         <button type="button" class="btn bg-white border border-dark my-3" data-bs-toggle="modal" data-bs-target="#comenarios">Mostrar más</button>
                     </div>
@@ -264,8 +263,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+
     <!-- Modals -->
     <!-- Ver Comentarios -->
     <div class="modal fade" id="comenarios" tabindex="-1" aria-labelledby="comment" aria-hidden="true">

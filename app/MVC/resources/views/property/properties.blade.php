@@ -1,8 +1,18 @@
-@extends('layouts/plantilla')
+@extends('layouts.plantillaFormularios');
 
+@section('url')
+    {{route('cuenta')}}
+@endsection
+@section('title','Propiedades')
 @section('content')
-        <div class="gradient-custom-1 h-100">
-            <div class="mask d-flex align-items-center h-100">
+    <nav class="mt-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Propiedades</li>
+        </ol>
+    </nav>
+        <div class="gradient-custom-1 ">
+            <div class="mask d-flex align-items-center ">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-10">
@@ -39,6 +49,12 @@
                 </div>
             </div>
         </div>
+
+    @auth
+        <script>
+            $('#atras').remove();
+        </script>
+    @endauth
 
 @endsection
 

@@ -56,6 +56,7 @@
                             @guest
                                 <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar sesion</a></li>
                             @endguest
+                            <li><a class="dropdown-item" href="{{ route('cuenta') }}">Cuenta</a></li>
                         </ul>
                     </li>
                 </ul>
