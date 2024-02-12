@@ -53,7 +53,10 @@
                             </svg>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
+                            @guest
                             <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar sesion</a></li>
+                            @endguest
+                            <li><a class="dropdown-item" href="{{ route('login') }}">Cuenta</a></li>
                         </ul>
                     </li>
                 </ul>

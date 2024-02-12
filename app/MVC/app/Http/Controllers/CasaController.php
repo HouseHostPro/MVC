@@ -43,6 +43,12 @@ class CasaController extends Controller{
 
         $reserva -> save();
 
+
+        $request->request->remove('frombd');
+        $request->request->remove('from');
+        $request->request->remove('to');
+        $request->request->remove('tobd');
+
         return redirect() -> route('principal');
 
     }

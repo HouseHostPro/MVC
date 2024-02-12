@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function (){
 
 //Route::view('/','fichaCasa')->name('principal');
 Route::get('/',[CasaController::class,'datosFichaCasa'])->name('principal');
+Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
 
 //Login
 Route::view('/login','login')->name('login');
