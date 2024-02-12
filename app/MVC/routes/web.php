@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\CasaController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RedsysController;
 use App\Http\Controllers\ServeiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PropietatController;
@@ -54,7 +55,7 @@ Route::post('/property/edit/{id}', [PropietatController::class, 'update']) -> na
 //Route::post('/property/update/{id}', [PropietatController::class, 'store']) -> name('property.store');
 
 Route::view('/propertyView', 'property.property') -> name('property.view');
-Route::view('/propertyForm', 'property/propertyForm');
+Route::view('/propertyForm', 'property.propertyForm');
 
 Route::get('/propertyForm', [PropietatController::class, 'loadForm']) ->name('property.loadForm');
 Route::post('/propertyForm', [PropietatController::class, 'store']) ->name('property.createProperty');
@@ -67,3 +68,15 @@ Route::get('/property/edit/{id}/espais', [EspaiController::class, 'loadForm']) -
 
 //Servei
 Route::get('/serveis', [ServeiController::class, 'findAll']) ->name('servei.all');
+
+
+
+
+//Redsys
+Route::controller(RedsysController::class)->prefix('redsys')
+    ->group(function () {
+        Route::get('/', 'index');
+        Route::get('/ok', 'ok');
+        Route::get('/ko', 'ko');
+        Route::get('/notification', 'notification');
+    });

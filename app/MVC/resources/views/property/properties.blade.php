@@ -1,12 +1,21 @@
 @extends('layouts/plantilla')
 
 @section('content')
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <div class="gradient-custom-1 h-100">
             <div class="mask d-flex align-items-center h-100">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-10">
                             <div class="table-responsive bg-white">
+                                <div class="col-md-3">
+                                    <div class="btn btn-light border-3 d-flex align-items-center col-md-10">
+                                        <span class="material-symbols-outlined">add</span>
+                                        <form method="get" action="{{ route('property.loadForm') }}">
+                                            <button class="btn">Añadir propiedad</button>
+                                        </form>
+                                    </div>
+                                </div>
                                 <table class="table mb-0">
                                     <thead>
                                     <tr>

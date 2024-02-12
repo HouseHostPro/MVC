@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "*",
         "mongodb/laravel-mongodb": "^4.1",
-        "php-http/client-common": "^2.7"
+        "php-http/client-common": "^2.7",
+        "ssheduardo/redsys-laravel": "^1.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
