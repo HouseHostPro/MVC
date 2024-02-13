@@ -116,8 +116,8 @@
                 </div>
                 <form method="POST" action="{{ route('confirmacionReserva') }}" class="col-4 border border-dark rounded shadow" style="height: 35%">
                     @csrf
-                    <div class="mt-2 col-12 row">
-                        <div class="col-3 px-0">
+                    <div class="mt-2 col-12 row mx-3">
+                        <div class="col-2 px-0">
                             <input class="border-0 form-control p-0 text-end fs-5 bold" value="150" type="text" id="pd" name="pd" readonly>
                         </div>
                         <div class="col-8 px-0">
@@ -394,6 +394,13 @@
                 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
                 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
                 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+                beforeShowDay: function( date) {
+
+                    var selectable = true;
+                    var title = '150€';
+                    return [selectable, "", title];
+
+                }
             });
         });
 
@@ -410,6 +417,14 @@
                 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
                 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
                 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+                beforeShowDay: function( date) {
+
+                var selectable = true;
+                var title = '150€';
+
+                return [selectable, "", title];
+
+            }
             });
         });
 
@@ -484,11 +499,11 @@
                 $('#inline-picker').datepicker('option', 'numberOfMonths', 2);
             }
         }
-
-
+        //Array para señalar los dias que no estan disponibles
         var eventDates = {};
-        eventDates[ new Date( '02/10/2024' )] = new Date( '02/12/2024' );
-        eventDates[ new Date( '02/11/2024' )] = new Date( '02/05/2024' );
+        eventDates[ new Date( '02/20/2024' )] = new Date( '02/22/2024' );
+        eventDates[ new Date( '02/23/2024' )] = new Date( '02/28/2024' );
+        console.log(eventDates);
 
         $('#inline-picker').datepicker({
             controls: ['calendar'],
@@ -502,14 +517,18 @@
             minDate: 0,
             numberOfMonths: 2,
             firstDay:1,
-            changeMonth:true,
             disabled:true,
-            beforeShowDay: function( date ) {
+            beforeShowDay: function( date) {
+
+                console.log(eventDates[date]);
+                var selectable = true;
+                var classname = "";
+                var title = '150€';
                 var highlight = eventDates[date];
                 if( highlight ) {
-                    return [true, "event", 'Tooltip text'];
+                    return [selectable, "event", title];
                 } else {
-                    return [true, '', ''];
+                    return [selectable, "", title];
                 }
             }
         });

@@ -38,6 +38,9 @@ class User extends Authenticatable
     public function comentarios():HasMany{
         return $this->hasMany(Comentari::class,'usuari_id','id');
     }
+    public function rol(){
+        return $this->hasMany(Rol_User::class,'usuari_id','id');
+    }
 
     public static function hashPassword()
     {

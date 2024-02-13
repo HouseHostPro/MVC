@@ -91,7 +91,7 @@ class UserController extends Controller
                 Auth::login($user);
                 $request->session()->put('idPropiedad',$idPropiedad);
 
-                return redirect()->route('principal');
+                return redirect()->route($request->session()->has('ruta') ? $request->session()->get('ruta'): 'principal');
             }
             return redirect()->route('login');
         }else{

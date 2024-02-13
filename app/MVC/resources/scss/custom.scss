@@ -58,9 +58,28 @@
     color: #ffffff !important;
     height: 60px;
 }
+
+.ui-datepicker td[title]::after {
+    content: attr(title);
+    display: block;
+    position: relative;
+    font-size: .8em;
+    height: 1.25em;
+    margin-top: -1.25em;
+    text-align: right;
+    padding-right: .25em;
+    color: grey;
+}
+
+.ui-datepicker td>a,
+.ui-datepicker td>span{
+    height: 42px !important;
+    padding: 1em;
+
+}
 #inline-picker>.ui-datepicker td>a,
 #inline-picker>.ui-datepicker td>span{
-    height: 55px !important;
+    height: 50px !important;
 }
 #inline-picker>.ui-datepicker table{
     height: 300px !important;

@@ -13,9 +13,12 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
+
+
     protected function redirectTo($request)
     {
         if (!Auth::check()) {
+            $request->session()->put('ruta',$request->path());
             return route('login');
         }
     }

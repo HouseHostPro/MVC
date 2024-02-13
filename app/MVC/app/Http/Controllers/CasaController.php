@@ -43,6 +43,7 @@ class CasaController extends Controller{
 
         $reserva -> save();
 
+        $request->offsetUnset($request);
 
         $request->request->remove('frombd');
         $request->request->remove('from');
