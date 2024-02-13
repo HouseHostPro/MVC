@@ -53,7 +53,7 @@
                     <hr>
                 </div>
             </div>
-            <form method="post" action="{{ route('property.update', ['id' => $propietat -> id]) }}">
+            <form method="post" action="{{ route('property.update', ['id' => $propietat -> id]) }}" class="col-md-10">
                 @csrf
                 <div class="col py-3">
                     <div class="container rounded bg-white mt-5 mb-5">
@@ -107,21 +107,10 @@
         </div>
     </div>
 
-
-@endsection
-    @if(session() -> has('success'))
-        <script>
-            window.addEventListener('DOMContentLoaded',function () {
-        const message = document.createElement('div');
-        message.id = "message";
-        message.innerHTML = "{{ Session::get('success') }}";
-        document.querySelector("#contenedor").append(message);
-
-        function fadeMessage() {
-            document.querySelector("#message");
-        }
-
-        fadeMessage();
-            });
-        </script>
+    @if (\Session::has('success'))
+        <div id="successMessage" class="alert alert-success col-md-2 d-flex justify-content-between align-items-center">
+            <p class="mb-0">{!! \Session::get('success') !!}</p>
+            <span class="material-symbols-outlined">cancel</span>
+        </div>
     @endif
+@endsection
