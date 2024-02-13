@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     @foreach($traduccioNom as $nom)
         @if($nom -> lang === "es")
             <?php $nomTraduit = $nom ?>
@@ -14,7 +13,8 @@
                 <?php $descTraduit = $desc ?>
         @endif
     @endforeach
-    <div class="container-fluid">
+
+    <div class="container-fluid" id="contenedor">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
@@ -53,7 +53,8 @@
                     <hr>
                 </div>
             </div>
-            <form method="post">
+            <form method="post" action="{{ route('property.update', ['id' => $propietat -> id]) }}">
+                @csrf
                 <div class="col py-3">
                     <div class="container rounded bg-white mt-5 mb-5">
                         <div class="row">
@@ -91,8 +92,12 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="nameCode" value="{{}}" />
-                                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Guardar cambios</button></div>
+                                    <input type="hidden" name="nameCode" value="{{ $propietat -> nom }}" />
+                                    <input type="hidden" name="descCode" value="{{ $propietat -> descripcio }}" />
+                                    <input type="hidden" name="id" value="{{ $propietat -> id }}" />
+                                    <div class="mt-5 text-center">
+                                        <button class="btn btn-primary profile-button" type="submit">Guardar cambios</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -104,3 +109,19 @@
 
 
 @endsection
+    @if(session() -> has('success'))
+        <script>
+            window.addEventListener('DOMContentLoaded',function () {
+        const message = document.createElement('div');
+        message.id = "message";
+        message.innerHTML = "{{ Session::get('success') }}";
+        document.querySelector("#contenedor").append(message);
+
+        function fadeMessage() {
+            document.querySelector("#message");
+        }
+
+        fadeMessage();
+            });
+        </script>
+    @endif

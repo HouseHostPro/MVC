@@ -31,15 +31,21 @@ class PropertyFormController extends Controller {
 
     private function findTraduccions($descCode, $titleCode) {
         $traduccioNom = Traduccio::where('code', $titleCode) -> get();
-        $traduccioDesc = Traduccio::where('code', $descCode)  -> get();
+        $traduccioDesc = Traduccio::where('code', $descCode) -> get();
 
         return [$traduccioNom, $traduccioDesc];
     }
 
-    private function updatePropietat(Request $request) {
-        $nom = $request -> nombre;
-        $desc = $request -> descripcion;
+    public function updatePropietat(Request $request) {
+        $traduccioNom = Traduccio::where('code', $request -> nameCode) -> where('lang', "es") -> first();
+        $traduccioDesc = Traduccio::where('code', $request -> descCode) -> where('lang', "es") -> first();
 
-        //Traduccio::where('code')
+        $traduccioNom -> value = $request -> nombre;
+        $traduccioDesc -> value = $request -> descripcion;
+
+        $traduccioNom -> save();
+        $traduccioDesc -> save();
+
+        return redirect(route('property.edit', ['id' => $request -> id])) -> with('success', 'Actualizado');
     }
 }

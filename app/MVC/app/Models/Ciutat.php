@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ciutat extends Model
 {
     protected $table = "ciutat";
+    protected $connection = "mysql";
 
     use HasFactory;
 
