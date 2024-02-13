@@ -19,8 +19,11 @@ class PropietatController extends Controller {
     public function getPropietat($id) {
         $propietat = Propietat::find($id);
         $ciutats = $this->findAllCiutats();
-        $traduccions = $this -> findTraduccions(intval($id));
-        return view("property/propertyInfo", compact("propietat", "ciutats", "traduccions"));
+        $traduccions = $this -> findTraduccions($propietat -> descripcio, $propietat -> nom);
+        $traduccioNom = $traduccions[0];
+        $traduccioDesc = $traduccions[1];
+        return view("property/propertyInfo", compact("propietat",
+            "ciutats", "traduccioNom", "traduccioDesc"));
     }
 
     public function store(Request $request) {
@@ -46,7 +49,11 @@ class PropietatController extends Controller {
         return $ciutats;
     }
 
-    private function findTraduccions($casa_id) {
-        return Traduccio::where('casa_id', $casa_id) -> first();
+    private function findTraduccions($descCode, $titleCode) {
+        //return Traduccio::where('casa_id', $casa_id) -> first();
+        $traduccioNom = Traduccio::where('code', $titleCode) -> get();
+        $traduccioDesc = Traduccio::where('code', $descCode)  -> get();
+
+        return [$traduccioNom, $traduccioDesc];
     }
 }

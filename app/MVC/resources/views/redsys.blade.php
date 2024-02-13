@@ -16,15 +16,27 @@
     <div class="h-auto w-80 bg-white p-3 rounded-lg">
         <p class="text-xl font-semibold">Detalles del pago</p>
         <div class="input_text mt-6 relative">
-            <span class="absolute left-0 text-sm -top-4 text-blue-600">Cliente</span>
-            <p>{{ $name }}</p>
+            <span class="absolute left-0 text-sm -top-4 text-blue-600">Desde</span>
+            <p>{{ $from }}</p>
         </div>
         <div class="input_text mt-8 relative">
-            <span class="absolute left-0 text-sm -top-4 text-blue-600">Descripción</span>
-            <p>{{ $description }}</p>
+            <span class="absolute left-0 text-sm -top-4 text-blue-600">Hasta</span>
+            <p>{{ $to }}</p>
+        </div>
+        <div class="input_text mt-8 relative">
+            <span class="absolute left-0 text-sm -top-4 text-blue-600">Personas</span>
+            <p>{{ $personas }}</p>
+        </div>
+        <div class="input_text mt-8 relative">
+            <span class="absolute left-0 text-sm -top-4 text-blue-600">Coste limpieza</span>
+            <p>{{ $limpieza }}</p>
+        </div>
+        <div class="input_text mt-8 relative">
+            <span class="absolute left-0 text-sm -top-4 text-blue-600">Mascotas</span>
+            <p>{{ $mascotas }}</p>
         </div>
 
-        <p class="text-lg text-left mt-4 text-gray-600 font-semibold">Total a pagar: {{ $total }}€</p>
+        <p class="text-lg text-left mt-4 text-gray-600 font-semibold">Total a pagar: {{ $precioTotal }}</p>
         <div class="flex justify-center mt-4">
             <button id="pay"
                     class="outline-none pay h-12 bg-orange-600 text-white mb-3 hover:bg-orange-700 rounded-lg w-1/2 cursor-pointer transition-all">Pagar</button>

@@ -1,6 +1,19 @@
 @extends('layouts/plantilla')
 
 @section('content')
+
+
+    @foreach($traduccioNom as $nom)
+        @if($nom -> lang === "es")
+            <?php $nomTraduit = $nom ?>
+        @endif
+    @endforeach
+
+    @foreach($traduccioDesc as $desc)
+        @if($desc -> lang === "es")
+                <?php $descTraduit = $desc ?>
+        @endif
+    @endforeach
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -53,15 +66,15 @@
                             <div class="col-md-6 border-right">
                                 <div class="p-3 py-5">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="text-right">{{$propietat -> nom}}</h4>
+                                        <h4 class="text-right">{{ $nomTraduit -> value }}</h4>
                                     </div>
                                     <div class="row mt-2">
-                                        <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" value="{{$propietat -> nom}}"></div>
+                                        <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" value="{{ $nomTraduit -> value }}"></div>
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
                                             <label class="language-">Descripción</label>
-                                            <textarea class="form-control" name="descripcion">{{$traduccions -> descripcio['en']}}</textarea>
+                                            <textarea class="form-control" name="descripcion">{{ $descTraduit -> value }}</textarea>
                                         </div>
                                     </div>
                                     <div class="row mt-3">

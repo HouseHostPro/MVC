@@ -8,12 +8,20 @@ use Ssheduardo\Redsys\Facades\Redsys;
 
 class RedsysController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
             $key = config('redsys.key');
             $code = config('redsys.merchantcode');
-            $name = "t4st";
+            $from = $request -> from;
+            $to = $request -> to;
+            $personas = $request -> personas;
+            $limpieza = 0;
+            if (isset($request -> limpieza)) {
+                $limpieza = $request -> limpieza;
+            }
+            $mascotas = $request -> mascotas;
+            $precioTotal = $request -> ptotal;
             $total = "278";
             $description = "blablabla";
 
@@ -30,7 +38,7 @@ class RedsysController extends Controller
             Redsys::setVersion('HMAC_SHA256_V1');
             Redsys::setTradeName('Tienda S.L');
             Redsys::setTitular('Pedro Risco');
-            Redsys::setProductDescription('Compras varias');
+            Redsys::setProductDescription('Reserva en ');
             Redsys::setEnviroment('test'); //Entorno test
             Redsys::setAttributesSubmit('btn_submit', 'btn_id', '', 'display:none');
 
@@ -41,6 +49,8 @@ class RedsysController extends Controller
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-        return view('redsys', compact('form', 'name', 'total', 'description'));
+        return view('redsys', compact(
+            'form',
+            'from', 'to', 'personas', 'limpieza', 'mascotas', 'precioTotal'));
     }
 }

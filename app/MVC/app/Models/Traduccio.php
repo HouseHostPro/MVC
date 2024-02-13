@@ -8,5 +8,6 @@ use MongoDB\Laravel\Eloquent\Model;
 class Traduccio extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'traduccions';
+    //protected $collection = 'traduccions';
+    protected $collection = 't2';
 }
