@@ -12,27 +12,44 @@
                     <p>Tus datos personales</p>
                 </div>
             </a>
-            <a class="col-5 text-decoration-none text-black" href="" >
-                <div class="shadow rounded p-3 h-100">
-                    <h5>Notificaciones</h5>
-                    <p>Reservas y comentarios</p>
-                </div>
-            </a>
-        </div>
-        <div class="row col-12 justify-content-around mt-4">
             <a class="col-5 text-decoration-none text-black" href="{{route('property.properties')}}" >
                 <div class="shadow rounded p-3 h-100">
                     <h5>Propiedades</h5>
                     <p>Todas tus propiedades</p>
                 </div>
             </a>
+        </div>
+        <div class="row col-12 justify-content-around mt-4">
             <a class="col-5 text-decoration-none text-black" href="" >
                 <div class="shadow rounded p-3 h-100">
-                    <h5>Historial de reservas</h5>
-                    <p> Todas tus reservas</p>
+                    <h5>Reservas</h5>
+                    <p>Todas tus reservas</p>
+                </div>
+            </a>
+            <a class="col-5 text-decoration-none text-black" href="" >
+                <div class="shadow rounded p-3 h-100">
+                    <h5>Comentarios</h5>
+                    <p> Todos tus comentarios</p>
                 </div>
             </a>
         </div>
+        <!--
+        @auth
+            {{$user}}
+            @foreach(Auth::user()->rol->Rrol->nom as $rol)
+                @if($rol === 'ADMINISTRADOR')
+                    <div class="row col-12 justify-content-start ms-4 mt-4">
+                        <a class="col-5 text-decoration-none text-black" href="" >
+                            <div class="shadow rounded p-3 h-100">
+                                <h5>Historial de reservas</h5>
+                                <p> Todas tus reservas</p>
+                            </div>
+                        </a>
+                    </div>
+                @endif
+            @endforeach
+        @endauth
+        -->
     </div>
 
 @endsection

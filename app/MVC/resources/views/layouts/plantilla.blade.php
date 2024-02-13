@@ -57,7 +57,12 @@
                                 @guest
                                     <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar sesion</a></li>
                                 @endguest
-                                <li><a class="dropdown-item" href="{{ route('cuenta') }}">Cuenta</a></li>
+                                    <li>
+                                        <form method="post" action="{{ route('cuenta') }}">
+                                            @csrf
+                                            <button type="submit" class="btn btn-link text-black text-decoration-none ps-3">Cuenta</button>
+                                        </form>
+                                    </li>
                                 @auth
                                     <li>
                                         <form method="post" action="{{ route('logout') }}">

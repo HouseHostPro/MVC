@@ -3,7 +3,6 @@
 
 use App\Http\Controllers\CasaController;
 use App\Http\Controllers\ComentariController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServeiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PropietatController;
@@ -29,7 +28,8 @@ Route::middleware('auth')->group(function (){
     Route::get('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
     Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
     Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
-    Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
+    Route::post('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
+    Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
 
 });
 

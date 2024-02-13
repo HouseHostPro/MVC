@@ -10,7 +10,7 @@ class Comentari extends Model{
     use HasFactory;
 
     protected $table = 'comentari';
-
+    //protected $primaryKey = ['propietat_id', 'usuari_id'];
     public $timestamps = false;
     protected $fillable = [
 

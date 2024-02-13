@@ -106,8 +106,10 @@ class UserController extends Controller
         return redirect()->route('principal');
 
     }
-    public function cuenta(){
+    public function cuenta(Request $request){
 
-        return view('cuenta');
+        $user = User::where('email',Auth::user()->email)->first();
+
+        return redirect()->route('cuenta',compact('user'));
     }
 }
