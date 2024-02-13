@@ -10,6 +10,7 @@ use App\Http\Controllers\PropietatController;
 use \App\Http\Controllers\EspaiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TraduccioController;
+use App\Http\Controllers\PropertyFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,8 +51,8 @@ Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.
 Route::get('/propertyForm', [PropietatController::class, '']);
 
 Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.properties');
-Route::get('/property/edit/{id}', [PropietatController::class, 'getPropietat']) -> name('property.edit');
-Route::post('/property/edit/{id}', [PropietatController::class, 'update']) -> name('property.update');
+Route::get('/property/edit/{id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
+Route::post('/property/edit/{id}', [PropertyFormController::class, 'update']) -> name('property.update');
 //Route::post('/property/update/{id}', [PropietatController::class, 'store']) -> name('property.store');
 
 Route::view('/propertyView', 'property.property') -> name('property.view');

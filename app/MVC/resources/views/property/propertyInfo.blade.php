@@ -69,7 +69,10 @@
                                         <h4 class="text-right">{{ $nomTraduit -> value }}</h4>
                                     </div>
                                     <div class="row mt-2">
-                                        <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" value="{{ $nomTraduit -> value }}"></div>
+                                        <div class="col-md-6">
+                                            <label class="labels">Name</label>
+                                            <input type="text" name="nombre" class="form-control" value="{{ $nomTraduit -> value }}">
+                                        </div>
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
@@ -88,6 +91,7 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="nameCode" value="{{}}" />
                                     <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Guardar cambios</button></div>
                                 </div>
                             </div>
