@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function (){
     Route::post('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
-    Route::get('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
+    Route::get('/confirmacionReserva',[CasaController::class,'sinAcceso'])->name('confirmacionReserva');
     Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
     Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
     Route::post('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
@@ -42,11 +42,9 @@ Route::post('/login/check',[UserController::class,'checkLogin'])->name('login.ch
 Route::post('/logout',[UserController::class,'logout'])->name('logout');
 
 //Register
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/register', [UserController::class,'register'])->name('user.register');
 Route::post('/user/register', [UserController::class, 'store'])->name('user.store');
-Route::get('/user/update/{id}', [UserController::class, 'userId'])->name('user.userId');
-Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+
 
 //Property
 //Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.findAllByUser');

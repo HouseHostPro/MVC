@@ -33,23 +33,22 @@
                 </div>
             </a>
         </div>
-        <!--
         @auth
-            {{$user}}
-            @foreach(Auth::user()->rol->Rrol->nom as $rol)
-                @if($rol === 'ADMINISTRADOR')
-                    <div class="row col-12 justify-content-start ms-4 mt-4">
-                        <a class="col-5 text-decoration-none text-black" href="" >
-                            <div class="shadow rounded p-3 h-100">
-                                <h5>Historial de reservas</h5>
-                                <p> Todas tus reservas</p>
-                            </div>
-                        </a>
+            @foreach($user->rol as $rol)
+                @if($rol->Rrol->nom === 'PROPIETARI' || $rol->Rrol->nom === 'ADMINISTADOR')
+                    <div class="row col-12 justify-content-start ms-2 mt-4">
+                        <div class="col-10 row ms-4">
+                            <a class="col-6 text-decoration-none text-black pe-0" href="" >
+                                <div class="shadow rounded p-3 h-100">
+                                    <h5>Historial de reservas</h5>
+                                    <p> Todas tus reservas</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 @endif
             @endforeach
         @endauth
-        -->
     </div>
 
 @endsection

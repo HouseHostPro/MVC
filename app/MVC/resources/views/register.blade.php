@@ -73,14 +73,16 @@
                 </div>
                 <div class="form-group mb-1 col-3">
                     <label for="ciutat">Ciudad</label>
-                    <select required name="ciutat_id" class="form-control">
+                    <select id="city" required name="ciutat_id" class="form-control">
                         @foreach($ciutats as $ciutat)
                             @auth
                                 @if($user->ciutat->nom == $ciutat->nom)
                                     <option value="{{ $ciutat->id }}" selected>{{$ciutat->nom}}</option>
+                                    <input id="city{{ $ciutat->id }}" type="text" value="{{ $ciutat->pais_id }}" hidden>
+                                @else
+                                    <option value="{{ $ciutat->id }}">{{$ciutat->nom}}</option>
                                 @endif
                             @endauth
-                            <option value="{{ $ciutat->id }}">{{$ciutat->nom}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -91,9 +93,10 @@
                             @auth
                                 @if($user->ciutat->pais->nom == $pais->nom)
                                     <option value="{{ $pais->id }}" selected>{{$pais->nom}}</option>
+                                @else
+                                    <option value="{{ $pais->id }}">{{$pais->nom}}</option>
                                 @endif
                             @endauth
-                            <option value="{{ $pais->id }}">{{$pais->nom}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -129,6 +132,8 @@
             $(this).prop('hidden', true);
             $('#noVer').prop('hidden', false);
         })
+
+
     </script>
 @endauth
 @endsection

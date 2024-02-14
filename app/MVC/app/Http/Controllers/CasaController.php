@@ -28,6 +28,15 @@ class CasaController extends Controller{
         return view('confirmacionReserva',compact('datosReserva'));
     }
 
+    public function confirmacionGet(Request $request){
+
+        $comentarios = Comentari::where('propietat_id',1)->get();
+        $servicios = Configuracio_Servei::where('configuracio_id',1)->get();
+
+
+        return view('principal',compact('comentarios','servicios'));
+    }
+
     public function newReserva(Request $request){
 
         $reserva = new Reserva();
@@ -51,7 +60,11 @@ class CasaController extends Controller{
         $request->request->remove('tobd');
 
         return redirect() -> route('principal');
+    }
 
+    public function sinAcceso(){
+
+        return view('forbidden');
     }
 
 }

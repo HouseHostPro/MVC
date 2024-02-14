@@ -4,19 +4,15 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Ciutat;
+use App\Models\Comentari;
+use App\Models\Configuracio_Servei;
 use App\Models\Pais;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
-{
-
-    public function index()
-    {
-        return view('index');
-    }
+class UserController extends Controller{
 
     public function register()
     {
@@ -41,17 +37,16 @@ class UserController extends Controller
 
     public function store(Request $request) {
 
-        $request->validate([
-            'nom' => 'required|string',
-            'email' => 'required|string',
-            'contrasenya' => 'required|string|min:8',
-        ]);
-
         User::hashPassword();
+        var_dump($request);
 
-        User::create($request->all());
-
-        return view('login');
+        if(Auth::check()){
+            $user = User::find(Auth::user()->id);
+            $user->update($request->all());
+        }else{
+            User::create($request->all());
+        }
+        return view('fichaCasa');
     }
 
     public function userId($id)
@@ -90,6 +85,7 @@ class UserController extends Controller
             if($password == $user->contrasenya){
                 Auth::login($user);
                 $request->session()->put('idPropiedad',$idPropiedad);
+                $request->session()->put('user',$user);
 
                 return redirect()->route($request->session()->has('ruta') ? $request->session()->get('ruta'): 'principal');
             }
@@ -102,14 +98,15 @@ class UserController extends Controller
 
         Auth::logout();
         $request->session()->invalidate();
+        $comentarios = Comentari::where('propietat_id',1)->get();
+        $servicios = Configuracio_Servei::where('configuracio_id',1)->get();
 
-        return redirect()->route('principal');
-
+        return redirect()->route('principal',compact('comentarios','servicios'));
     }
     public function cuenta(Request $request){
 
-        $user = User::where('email',Auth::user()->email)->first();
+        $user = $request->session()->get('user');
 
-        return redirect()->route('cuenta',compact('user'));
+        return view('cuenta',compact('user'));
     }
 }

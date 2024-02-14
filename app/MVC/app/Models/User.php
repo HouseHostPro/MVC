@@ -41,10 +41,10 @@ class User extends Authenticatable
         return $this->hasMany(Rol_User::class,'usuari_id','id');
     }
 
-    public static function hashPassword()
-    {
+    public static function hashPassword(){
         static::creating(function ($user) {
             $user->contrasenya = Hash::make($user->contrasenya);
+
         });
     }
 
