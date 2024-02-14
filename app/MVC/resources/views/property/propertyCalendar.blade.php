@@ -6,9 +6,20 @@
 @section('content')
     <input type="text" id="datePicker" name="datePicker" value=""/>
 
+
     <script>
 
-        const dates = ["20/02/2024", "21/02/2024", "22/02/2024", "25/02/2024"];
+        const dates = [];
+        const propietatId = $(location).attr('href').split('/')[5];
+
+        $.ajax({
+            method: 'GET',
+            url: `http://localhost:8100/property/edit/${propietatId}/reserves/dates`
+        }).done(function (reserves) {
+            reserves.forEach(reserva => reserva.forEach(data => dates.push(data)));
+        });
+
+        // calendari
 
         $("#datePicker").datepicker({
             dateFormat: "dd/mm/yy",
@@ -21,6 +32,7 @@
             showAnim: "show",
             beforeShowDay: function (date) {
                 const string = jQuery.datepicker.formatDate('dd/mm/yy', date);
+                console.log(date);
                 return [dates.indexOf(string) == -1];
             },
 
@@ -47,64 +59,5 @@
                 $(this).data().datepicker.inline = false;
             }
         });
-
-
-        /*$('#datePicker').datepicker({
-            changeMonth: true,
-            changeYear: true,
-            minDate: 0,
-            //The calendar is recreated OnSelect for inline calendar
-            onSelect: function (date, dp) {
-                updateDatePickerCells();
-            },
-            onChangeMonthYear: function(month, year, dp) {
-                updateDatePickerCells();
-            },
-            beforeShow: function(elem, dp) { //This is for non-inline datepicker
-                updateDatePickerCells();
-            }
-        });
-
-
-        updateDatePickerCells();
-        function updateDatePickerCells(dp) {
-            /* Wait until current callstack is finished so the datepicker
-               is fully rendered before attempting to modify contents */
-            /*setTimeout(function () {
-                //Fill this with the data you want to insert (I use and AJAX request).  Key is day of month
-                //NOTE* watch out for CSS special characters in the value
-                var cellContents = {1: '20', 15: '60', 28: '$99.99'};
-
-                //Select disabled days (span) for proper indexing but // apply the rule only to enabled days(a)
-                $('.ui-datepicker td > *').each(function (idx, elem) {
-                    var value = cellContents[idx + 1] || 0;
-
-                    // dynamically create a css rule to add the contents //with the :after
-                    //             selector so we don't break the datepicker //functionality
-                    var className = 'datepicker-content-' + value;
-
-                    if(value == 0)
-                        addCSSRule('.ui-datepicker td a.' + className + ':after {content: "\\a0";}'); //&nbsp;
-                    else
-                        addCSSRule('.ui-datepicker td a.' + className + ':after {content: "' + value + '";}');
-
-                    $(this).addClass(className);
-                });
-            }, 0);
-        }
-        var dynamicCSSRules = [];
-        function addCSSRule(rule) {
-            if ($.inArray(rule, dynamicCSSRules) == -1) {
-                $('head').append('<style>' + rule + '</style>');
-                dynamicCSSRules.push(rule);
-            }
-        }*/
     </script>
 @endsection
-
-
-
-
-
-
-

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ciutat;
+use App\Models\Reserva;
 use Illuminate\Http\Request;
 use App\Models\Traduccio;
 use App\Models\Propietat;
@@ -50,10 +51,36 @@ class PropertyFormController extends Controller {
     }
 
     public function loadCalendar(Request $request) {
-        return view('property/propertyCalendar', ['id' => $request -> id]);
+        $dates = $this->findAllDatesReservades($request);
+        return view('property/propertyCalendar', ['id' => $request -> id], compact('dates'));
     }
 
-    private function findAllDatesReservades() {
+    public function findAllDatesReservades(Request $request) {
+        $reserves = Reserva::where('propietat_id', $request -> id) -> get();
+        $datesReservades = [];
 
+        foreach ($reserves as $reserva) {
+            $dataF = $reserva->data_fi;
+            $dataI = $reserva->data_inici;
+
+            $datesReservades[] = $this -> date_range($dataI, $dataF);
+        }
+
+        return $datesReservades;
+    }
+
+    private function date_range($first, $last, $step = '+1 day', $output_format = 'd/m/Y' ) {
+
+        $dates = array();
+        $current = strtotime($first);
+        $last = strtotime($last);
+
+        while( $current <= $last ) {
+
+            $dates[] = date($output_format, $current);
+            $current = strtotime($step, $current);
+        }
+
+        return $dates;
     }
 }
