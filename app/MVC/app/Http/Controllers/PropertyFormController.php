@@ -48,4 +48,8 @@ class PropertyFormController extends Controller {
 
         return redirect(route('property.edit', ['id' => $request -> id])) -> with('success', 'Actualizado');
     }
+
+    public function loadCalendar(Request $request) {
+        return view('property/propertyCalendar', ['id' => $request -> id]);
+    }
 }

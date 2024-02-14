@@ -53,6 +53,7 @@ Route::get('/propertyForm', [PropietatController::class, '']);
 Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.properties');
 Route::get('/property/edit/{id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
 Route::post('/property/edit/{id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
+Route::get('/property/edit/{id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
 //Route::post('/property/update/{id}', [PropietatController::class, 'store']) -> name('property.store');
 
 Route::view('/propertyView', 'property.property') -> name('property.view');

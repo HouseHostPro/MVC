@@ -46,7 +46,7 @@
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-people"></i>
-                                <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Disponibilidad y precios</a>
+                                <a href="{{route('property.calendar', ['id' => $propietat->id])}}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Disponibilidad y precios</a>
                             </a>
                         </li>
                     </ul>
@@ -110,7 +110,11 @@
     @if (\Session::has('success'))
         <div id="successMessage" class="alert alert-success col-md-2 d-flex justify-content-between align-items-center">
             <p class="mb-0">{!! \Session::get('success') !!}</p>
-            <span class="material-symbols-outlined">cancel</span>
+            <span id="cancelMessage" class="material-symbols-outlined">cancel</span>
         </div>
     @endif
 @endsection
+
+<script>
+    $(document).click("#cancelMessage")
+</script>
