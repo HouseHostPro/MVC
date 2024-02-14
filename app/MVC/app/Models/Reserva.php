@@ -11,4 +11,10 @@ class Reserva extends Model{
     protected $table = 'reserva';
     public $timestamps = false;
 
+    public function propiedad(){
+        return $this->belongsTo(Propietat::class,'propietat_id','id');
+    }public function uuarios(){
+        return $this->belongsTo(User::class,'usuari_id','id');
+    }
+
 }

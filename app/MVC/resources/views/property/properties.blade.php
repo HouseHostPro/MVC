@@ -17,26 +17,26 @@
                     <div class="row justify-content-center">
                         <div class="col-10">
                             <div class="table-responsive bg-white">
-                                <table class="table mb-0">
+                                <table class="table mb-0 bg-white border-bottom border-dark">
                                     <thead>
                                     <tr>
-                                        <th class="bg-body-secondary" scope="col">Nombre propiedad</th>
-                                        <th class="bg-body-secondary" scope="col">Imagen</th>
-                                        <th class="bg-body-secondary" scope="col">Ubicación</th>
-                                        <th class="bg-body-secondary" scope="col">Acciones</th>
+                                        <th>Nombre propiedad</th>
+                                        <th>Imagen</th>
+                                        <th>Ubicación</th>
+                                        <th>Acciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($propietats as $propietat)
                                         <tr>
-                                            <th scope="row">{{$propietat -> nom}}</th>
+                                            <td>{{$propietat -> nom}}</td>
                                             <td>
-                                                <img style="height: 200px; width: 200px" src="https://images.adsttc.com/media/images/5d34/e507/284d/d109/5600/0240/large_jpg/_FI.jpg?1563747560">
+                                                <img style="height: 150px; width: 150px" src="https://images.adsttc.com/media/images/5d34/e507/284d/d109/5600/0240/large_jpg/_FI.jpg?1563747560">
                                             </td>
                                             <td>{{$propietat -> localitzacio}}</td>
                                             <td>
                                                 <form method="get" action="{{ route('property.edit', ['id' => $propietat->id]) }}">
-                                                    <button type="submit">Editar</button>
+                                                    <button type="submit" class="btn bg-success bg-opacity-50">Editar</button>
                                                 </form>
                                             </td>
                                         </tr>

@@ -36,4 +36,14 @@ class ComentariController extends Controller{
         return redirect() -> route('principal');
     }
 
+    public function allComentarios(Request $request){
+
+        $id = Auth::user()->id;
+
+        $comentarios = Comentari::where('usuari_id',$id)->get();
+
+        return view('comentarios',compact('comentarios'));
+
+    }
+
 }

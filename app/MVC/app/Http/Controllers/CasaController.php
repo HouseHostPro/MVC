@@ -45,6 +45,7 @@ class CasaController extends Controller{
 
         $reserva->preu_total = $total;
         $reserva->estat = 'PAGADA';
+        $reserva->persones = $request->input('personas');
         $reserva->usuari_id = Auth::user()->id;
         $reserva->propietat_id = $request->session()->get('idPropiedad');
         $reserva->data_inici = $request -> input('frombd');
@@ -60,6 +61,15 @@ class CasaController extends Controller{
         $request->request->remove('tobd');
 
         return redirect() -> route('principal');
+    }
+
+    public function allReservas(){
+
+        $id = Auth::user()->id;
+        $reservas = Reserva::where('usuari_id',$id)->get();
+
+        return view('reservas',compact('reservas'));
+
     }
 
     public function sinAcceso(){

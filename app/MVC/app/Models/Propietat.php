@@ -20,7 +20,10 @@ class Propietat extends Model {
     public $timestamps = false;
     protected $table = "propietat";
 
-    public function reserves(): HasMany {
-        return $this->hasMany(Reserva::class);
+    public function reservas(): HasMany {
+        return $this->hasMany(Reserva::class,'propietat_id','id');
+    }
+    public function propietari(){
+        return $this->belongsTo(User::class,'usuari_id','id');
     }
 }

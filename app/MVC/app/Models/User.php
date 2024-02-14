@@ -40,6 +40,12 @@ class User extends Authenticatable
     public function rol(){
         return $this->hasMany(Rol_User::class,'usuari_id','id');
     }
+    public function propiedad(){
+        return $this->hasMany(Propietat::class,'usuari_id','id');
+    }
+    public function reservas(){
+        return $this->hasMany(Reserva::class,'usuari_id','id');
+    }
 
     public static function hashPassword(){
         static::creating(function ($user) {

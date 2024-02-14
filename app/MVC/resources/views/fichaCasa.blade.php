@@ -534,7 +534,7 @@
             disabled:true,
             beforeShowDay: function( date) {
 
-                console.log(eventDates[date]);
+                console.log(date);
                 var selectable = true;
                 var classname = "";
                 var title = '150€';

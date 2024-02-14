@@ -29,7 +29,10 @@ Route::middleware('auth')->group(function (){
     Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
     Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
     Route::post('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
-    Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
+    Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
+    Route::get('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
+    Route::get('/comentarios',[ComentariController::class,'allComentarios'])->name('comentarios');
+    Route::get('/reservas',[CasaController::class,'allReservas'])->name('reservas');
 
 });
 
