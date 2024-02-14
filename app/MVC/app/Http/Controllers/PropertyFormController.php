@@ -52,4 +52,8 @@ class PropertyFormController extends Controller {
     public function loadCalendar(Request $request) {
         return view('property/propertyCalendar', ['id' => $request -> id]);
     }
+
+    private function findAllDatesReservades() {
+
+    }
 }

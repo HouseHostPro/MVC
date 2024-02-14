@@ -112,3 +112,15 @@
     background-color: green !important;
     border-radius: 20px;
 }
+
+
+
+.ui-datepicker td a:after
+{
+    content: "";
+    display: block;
+    text-align: center;
+    color: Blue;
+    font-size: small;
+    font-weight: bold;
+}
