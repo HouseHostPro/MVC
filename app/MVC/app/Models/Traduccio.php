@@ -9,6 +9,6 @@ class Traduccio extends Model
 {
     use HasFactory;
     protected $connection = 'mongodb';
-    //protected $collection = 'traduccions';
-    protected $collection = 't2';
+    protected $collection = 'traduccions';
+
 }

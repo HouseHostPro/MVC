@@ -4,7 +4,7 @@
 
     @foreach($traduccioNom as $nom)
         @if($nom -> lang === "es")
-            <?php $nomTraduit = $nom ?>
+            <?php $nomTraduit = $nom?>
         @endif
     @endforeach
 

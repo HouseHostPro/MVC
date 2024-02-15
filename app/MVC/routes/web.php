@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
     Route::post('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
     Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
-    Route::get('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
+    Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
     Route::get('/comentarios',[ComentariController::class,'allComentarios'])->name('comentarios');
     Route::get('/reservas',[CasaController::class,'allReservas'])->name('reservas');
 
@@ -55,9 +55,9 @@ Route::post('/user/register', [UserController::class, 'store'])->name('user.stor
 
 
 //Property
-Route::get('/propertyForm', [PropietatController::class, '']);
+Route::get('/propertyForm', [PropertyFormController::class, '']);
 
-Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.properties');
+Route::get('/property', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
 Route::get('/property/edit/{id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
 Route::post('/property/edit/{id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
 Route::get('/property/edit/{id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
@@ -65,8 +65,8 @@ Route::get('/property/edit/{id}/calendar', [PropertyFormController::class, 'load
 Route::view('/propertyView', 'property.property') -> name('property.view');
 Route::view('/propertyForm', 'property.propertyForm');
 
-Route::get('/propertyForm', [PropietatController::class, 'loadForm']) ->name('property.loadForm');
-Route::post('/propertyForm', [PropietatController::class, 'store']) ->name('property.createProperty');
+Route::get('/propertyForm', [PropertyFormController::class, 'loadForm']) ->name('property.loadForm');
+Route::post('/propertyForm', [PropertyFormController::class, 'store']) ->name('property.createProperty');
 
 
 Route::controller(PropertyFormController::class) -> prefix('property/edit/{id}')

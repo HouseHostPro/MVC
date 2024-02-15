@@ -5,30 +5,30 @@
 @endsection
 @section('title','Propiedades')
 @section('content')
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-        <div class="gradient-custom-1 h-100">
-            <div class="mask d-flex align-items-center h-100">
-    <nav class="mt-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Propiedades</li>
-        </ol>
-    </nav>
+
+    <div class="row col-12 justify-content-between">
+        <nav class="mt-3 col-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Propiedades</li>
+            </ol>
+        </nav>
+        <div class="col-3 mt-3 text-end">
+            <form method="get" action="{{ route('property.loadForm') }}">
+                <button type="submit" class="btn bg-primary bg-opacity-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus pb-1" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                    </svg>Añadir propiedad
+                </button>
+            </form>
+        </div>
+    </div>
         <div class="gradient-custom-1 ">
             <div class="mask d-flex align-items-center ">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-10">
                             <div class="table-responsive bg-white">
-                                <div class="col-md-3">
-                                    <div class="btn btn-light border-3 d-flex align-items-center col-md-10">
-                                        <span class="material-symbols-outlined">add</span>
-                                        <form method="get" action="{{ route('property.loadForm') }}">
-                                            <button class="btn">Añadir propiedad</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <table class="table mb-0">
                                 <table class="table mb-0 bg-white border-bottom border-dark">
                                     <thead>
                                     <tr>

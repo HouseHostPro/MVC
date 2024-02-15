@@ -7,10 +7,16 @@ use App\Models\Reserva;
 use Illuminate\Http\Request;
 use App\Models\Traduccio;
 use App\Models\Propietat;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PropertyFormController extends Controller {
 
+
+    public function findAllByUser() {
+        $propietats = Propietat::where('usuari_id',Auth::user()->id) -> get();
+        return view("property/properties", compact("propietats"));
+    }
     public function getPropietat($id) {
         $propietat = Propietat::find($id);
         $ciutats = $this->findAllCiutats();
@@ -28,6 +34,19 @@ class PropertyFormController extends Controller {
     public function findAllCiutats() {
         $ciutats = Ciutat::all();
         return $ciutats;
+    }
+
+    public function store(Request $request) {
+        $property = new Propietat();
+        $property -> nom = $request -> nombre_propiedad;
+        $property -> localitzacio = $request -> ubicacion;
+        $property -> m2 = $request -> m2;
+        $property -> ciutat_id = $request -> ciudad;
+        $property -> usuari_id = 1;
+
+        $property -> save();
+        $success = "Tu propiedad está casi lista! Ahora, añade algunos espacios";
+        return redirect() -> route('espai.loadForm') -> with('success', $success);
     }
 
     private function findTraduccions($descCode, $titleCode) {

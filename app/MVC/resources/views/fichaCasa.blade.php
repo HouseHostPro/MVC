@@ -5,31 +5,31 @@
     <h1 class="mt-3">Cas Concos</h1>
     <div class="container-fluid bg-light rounded row">
         <div class="col-6 pt-1 px-0 my-2 me-2">
-            <a href="#!">
+            <a href="" data-bs-toggle="modal" data-bs-target="#fotos">
                 <img  class="object-fit-fill shadow size-img rounded-start" src="img/frontCasa.webp" alt="dormitorio">
             </a>
         </div>
         <div class="col-6 row px-0 my-2">
             <div class="col-6 p-1">
                 <div class="col-12 padd-img ms-2">
-                    <a href="#!">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#fotos">
                         <img class="object-fit-fill shadow size-img " src="img/dormitori1.webp" alt="dormitorio">
                     </a>
                 </div>
                 <div class="col-12 ms-2">
-                    <a href="#!">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#fotos">
                         <img class="object-fit-fill shadow size-img " src="img/bany1.webp" alt="dormitorio">
                     </a>
                 </div>
             </div>
             <div class="col-6 p-1" >
                 <div class="col-12 padd-img ms-2">
-                    <a href="#!">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#fotos">
                         <img id="radius-tr" class="object-fit-fill shadow size-img " src="img/bany1.webp" alt="dormitorio">
                     </a>
                 </div>
                 <div class="col-12 ms-2">
-                    <a href="#!">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#fotos">
                         <img id="radius-br" class="object-fit-fill shadow size-img" src="img/piscina.webp" alt="dormitorio">
                     </a>
                 </div>
@@ -267,8 +267,14 @@
                     <div class="col-9 ps-0 d-flex align-self-center">
                         <h5>Anfitrión: Lucas</h5>
                     </div>
+                    <div class="col-12">
+                        <p class="mb-0"><span class="star text-dark fs-3">&#9733;</span> {{count($comentarios)}} reseñas</p>
+                    </div>
+                    <div class="col-12">
+                        <p>Idioma: Español</p>
+                    </div>
 
-                    <div class="col-12 mt-3">
+                    <div class="col-12">
                         <p>
                             La casita una monada, súper cómoda y acogedora.
                             Los alrededores preciosos.
@@ -376,6 +382,40 @@
         </div>
     </div>
 
+    <!-- Ver todos las fotos -->
+    <div class="modal fade" id="fotos" tabindex="-1" aria-labelledby="vFotos" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="vFotos">Fotos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row col-12">
+                        <div class="col-6 mb-2 pe-1 ">
+                            <img class="object-fit-fill shadow size-img rounded-start" src="img/dormitori1.webp" alt="dormitorio">
+                        </div>
+                        <div class="col-6 mb-2 ps-1 ">
+                            <img class="object-fit-fill shadow size-img rounded-end" src="img/bany1.webp" alt="dormitorio">
+                        </div>
+                        <div class="col-6 mb-2 pe-1 ">
+                            <img class="object-fit-fill shadow size-img rounded-start" src="img/dormitori1.webp" alt="dormitorio">
+                        </div>
+                        <div class="col-6 mb-2 ps-1 ">
+                            <img class="object-fit-fill shadow size-img rounded-end" src="img/bany1.webp" alt="dormitorio">
+                        </div>
+                        <div class="col-6 mb-2 pe-1 ">
+                            <img class="object-fit-fill shadow size-img rounded-start" src="img/dormitori1.webp" alt="dormitorio">
+                        </div>
+                        <div class="col-6 mb-2 ps-1 ">
+                            <img class="object-fit-fill shadow size-img rounded-end" src="img/bany1.webp" alt="dormitorio">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <script>
 
     $(document).ready(function() {
@@ -412,6 +452,7 @@
 
                     var selectable = true;
                     var title = '150€';
+                    //$('.ui-widget-content').addClass('exemple');
                     return [selectable, "", title];
 
                 }

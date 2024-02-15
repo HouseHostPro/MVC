@@ -121,7 +121,7 @@
                 <h3>Información de Contacto</h3>
                 <p>Dirección: Dirección de tu empresa</p>
                 <p>Teléfono: +123456789</p>
-                <p>Correo Electrónico: info@tudominio.com</p>
+                <p>Correo Electrónico: info@househostpro.com</p>
             </div>
             <div class="col-md-4">
                 <h3>Enlaces Rápidos</h3>
