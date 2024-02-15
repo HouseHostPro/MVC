@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ciutat;
 use App\Models\Propietat;
+use App\Models\Traduccio;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,11 @@ class PropietatController extends Controller {
     public function getPropietat($id) {
         $propietat = Propietat::find($id);
         $ciutats = $this->findAllCiutats();
-        return view("property/propertyInfo", compact("propietat", "ciutats"));
+        $traduccions = $this -> findTraduccions($propietat -> descripcio, $propietat -> nom);
+        $traduccioNom = $traduccions[0];
+        $traduccioDesc = $traduccions[1];
+        return view("property/propertyInfo", compact("propietat",
+            "ciutats", "traduccioNom", "traduccioDesc"));
     }
 
     public function store(Request $request) {
@@ -42,5 +47,13 @@ class PropietatController extends Controller {
     public function findAllCiutats() {
         $ciutats = Ciutat::all();
         return $ciutats;
+    }
+
+    private function findTraduccions($descCode, $titleCode) {
+        //return Traduccio::where('casa_id', $casa_id) -> first();
+        $traduccioNom = Traduccio::where('code', $titleCode) -> get();
+        $traduccioDesc = Traduccio::where('code', $descCode)  -> get();
+
+        return [$traduccioNom, $traduccioDesc];
     }
 }

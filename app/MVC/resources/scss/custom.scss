@@ -122,6 +122,20 @@
     color: #ffcc00;
 }
 
+#successMessage {
+    position: sticky;
+    bottom: 15px;
+    left: 50%;
+}
 
+.ui-datepicker td a:after
+{
+    content: "";
+    display: block;
+    text-align: center;
+    color: Blue;
+    font-size: small;
+    font-weight: bold;
+}
 
 

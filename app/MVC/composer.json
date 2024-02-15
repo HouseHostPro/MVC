@@ -12,7 +12,9 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "*",
-        "php-http/client-common": "^2.7"
+        "mongodb/laravel-mongodb": "^4.1",
+        "php-http/client-common": "^2.7",
+        "ssheduardo/redsys-laravel": "^1.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

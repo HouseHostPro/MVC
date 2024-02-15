@@ -2,12 +2,16 @@
 
 
 use App\Http\Controllers\CasaController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RedsysController;
 use App\Http\Controllers\ComentariController;
 use App\Http\Controllers\ServeiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PropietatController;
 use \App\Http\Controllers\EspaiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TraduccioController;
+use App\Http\Controllers\PropertyFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +23,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/traduccio', [TraduccioController::class, 'show']);
+Route::get('/phpinfo', function () {phpinfo();});
 
 //Ficha Casa
 
@@ -50,24 +55,39 @@ Route::post('/user/register', [UserController::class, 'store'])->name('user.stor
 
 
 //Property
-//Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.findAllByUser');
 Route::get('/propertyForm', [PropietatController::class, '']);
 
 Route::get('/property', [PropietatController::class, 'findAllByUser']) -> name('property.properties');
-Route::get('/property/edit/{id}', [PropietatController::class, 'getPropietat']) -> name('property.edit');
-//Route::post('/property/update/{id}', [PropietatController::class, 'store']) -> name('property.store');
+Route::get('/property/edit/{id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
+Route::post('/property/edit/{id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
+Route::get('/property/edit/{id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
 
 Route::view('/propertyView', 'property.property') -> name('property.view');
-Route::view('/propertyForm', 'property/propertyForm');
+Route::view('/propertyForm', 'property.propertyForm');
 
 Route::get('/propertyForm', [PropietatController::class, 'loadForm']) ->name('property.loadForm');
 Route::post('/propertyForm', [PropietatController::class, 'store']) ->name('property.createProperty');
 
+
+Route::controller(PropertyFormController::class) -> prefix('property/edit/{id}')
+    -> group(function () {
+        Route::get('/reserves/dates', 'findAllDatesReservades') -> name('findAllDatesReservades');
+    });
+
 //Espai
 Route::get('/property/edit/{id}/espais', [EspaiController::class, 'loadForm']) -> name('espai.espais');
-//Route::post('/espaiForm', [EspaiController::class, 'create']) -> name('espai.create');
-//Route::get('/espaiForm', 'property/espaiForm') -> name('espai.form');
 
 
 //Servei
 Route::get('/serveis', [ServeiController::class, 'findAll']) ->name('servei.all');
+
+
+
+//Redsys
+Route::controller(RedsysController::class)->prefix('redsys')
+    ->group(function () {
+        Route::post('/', 'index') -> name('redsys');
+        Route::get('/ok', 'ok');
+        Route::get('/ko', 'ko');
+        Route::get('/notification', 'notification');
+    });
