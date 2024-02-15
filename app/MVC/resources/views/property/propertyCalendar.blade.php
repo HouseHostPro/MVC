@@ -32,7 +32,6 @@
             showAnim: "show",
             beforeShowDay: function (date) {
                 const string = jQuery.datepicker.formatDate('dd/mm/yy', date);
-                console.log(date);
                 return [dates.indexOf(string) == -1];
             },
 
