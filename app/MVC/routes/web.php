@@ -35,13 +35,16 @@ Route::middleware('auth')->group(function (){
     Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
     Route::post('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
     Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
+    Route::get('/deleteComentario/{id}',[ComentariController::class,'delete'])->name('comentario.delete.get');
     Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
     Route::get('/comentarios',[ComentariController::class,'allComentarios'])->name('comentarios');
+    Route::get('/comentariosUserAjax',[ComentariController::class,'allComent'])->name('comentariosAU');
+    Route::get('/comentariosPropertiesAjax',[ComentariController::class,'allCommentsForProperties'])->name('comentariosAP');
     Route::get('/reservas',[CasaController::class,'allReservas'])->name('reservas');
 
 });
 
-
+Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
 Route::get('/',[CasaController::class,'datosFichaCasa'])->name('principal');
 
 //Login

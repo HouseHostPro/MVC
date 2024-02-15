@@ -5,19 +5,31 @@
 @endsection
 @section('title','Comentarios')
 @section('content')
-    <nav class="mt-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Comentarios</li>
-        </ol>
-    </nav>
-    <div class="gradient-custom-1 ">
+    <div class="row col-12 justify-content-between">
+        <nav class="mt-3 col-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
+                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Comentarios</li>
+            </ol>
+        </nav>
+        <div class="col-2 mt-3">
+            <label>Buscar casa:</label>
+            <input id="cercador" class="form-control" type="text">
+        </div>
+    </div>
+
+
+    <div class="col-12 row justify-content-center mt-3 mb-4">
+        <h2 class="text-center">Mis comentarios</h2>
+    </div>
+    <div class="gradient-custom-1">
         <div class="mask d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-10">
                         <div class="table-responsive bg-white">
-                            <table class="table mb-0 bg-white border-bottom border-dark">
+                            <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                 <thead>
                                 <tr class="text-center">
                                     <th>Nombre propiedad</th>
@@ -26,30 +38,36 @@
                                     <th>Acciones</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                @for($i = 0; $i < count($comentarios);$i++)
-                                    <tr class="text-center">
-                                        <td>{{$comentarios[$i]->user->propiedad[$i]->nom}}</td>
-                                        <td class="text-start">{{$comentarios[$i]->comentari}}</td>
-                                        <td>
-                                            <div class="col-12 rating-container" data-rating="{{$comentarios[$i]->puntuacio}}">
-                                                <div class="rating" >
-                                                    <span class="star" data-rating="1">&#9733;</span>
-                                                    <span class="star" data-rating="2">&#9733;</span>
-                                                    <span class="star" data-rating="3">&#9733;</span>
-                                                    <span class="star" data-rating="4">&#9733;</span>
-                                                    <span class="star" data-rating="5">&#9733;</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <form method="get" action="{{route('comentario.delete')}}">
-                                                @csrf
-                                                <button type="submit" class="btn bg-danger bg-opacity-50">Eliminar</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endfor
+                                <tbody id="tabla">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 row justify-content-center mt-5 pt-5 mb-4">
+        <h2 class="text-center">Comentarios de mis propiedades</h2>
+    </div>
+    <div class="gradient-custom-1 ">
+        <div class="mask d-flex align-items-center ">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-10">
+                        <div class="table-responsive bg-white">
+                            <table class="table table-hover mb-0 bg-white border-bottom border-dark">
+                                <thead>
+                                <tr class="text-center">
+                                    <th>Nombre propiedad</th>
+                                    <th >Descripción</th>
+                                    <th>Puntuación</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tablaAll">
+
                                 </tbody>
                             </table>
                         </div>
@@ -61,14 +79,91 @@
 
     @auth
         <script>
+
+            $(document).ready(function (){
+
+                $.ajax({
+                    method: 'GET',
+                    url: `http://localhost:8100/comentariosUserAjax`
+                }).done(function (comentarios) {
+                    console.log(comentarios);
+                    printCommnets(comentarios,1)
+                });
+
+                $.ajax({
+                    method: 'GET',
+                    url: `http://localhost:8100/comentariosPropertiesAjax`
+                }).done(function (comentarios) {
+                    console.log(comentarios);
+                    printCommnets(comentarios,2)
+                });
+
+            })
+
+            function printCommnets(comentario, num){
+
+
+                comentario.forEach( function (value){
+
+                    let fila = $('<tr>');
+                    fila.append($('<td>').text(value.nomPropietat));
+                    fila.append($('<td>').text(value.comentari).addClass('w-50'));
+
+                    //Crear el rating per els comentaris
+                    let contenedor = $('<div>').addClass('col-12 rating-container').attr('data-rating', value.puntuacio);
+                    let rating = $('<div>').addClass('rating');
+
+                    for (let i = 1; i <= 5; i++) {
+                        let estrella = $('<span>').addClass('star').attr('data-rating', i).html('&#9733;');
+                        rating.append(estrella);
+                    }
+
+                    let TD = $('<td>');
+                    contenedor.append(rating);
+                    TD.append(contenedor);
+                    fila.append(TD);
+
+
+                    //Creamos el botón, el formulario, la columna del botón y el formulario
+                    let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
+                    let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text('Eliminar');
+                    form.append(botonEliminar);
+                    let celdaFormulario = $('<td>').append(form);
+                    fila.append(celdaFormulario);
+
+                    if(num === 1){
+                        $('#tabla').append(fila);
+                    }else {
+                        $('#tablaAll').append(fila);
+                    }
+
+                    //Mostrar estrellas asignadas de cada usuario
+                    $('.rating-container').each(function(index) {
+                        var $container = $(this);
+                        var ratingValue = $container.attr('data-rating');
+                        activateStars($container,ratingValue);
+                    });
+                })
+            }
+
+            $('#cercador').on("input",function (){
+
+                const caracters = $(this).val().toUpperCase();
+                const tabla = $('#tabla');
+
+                tabla.find('tr').each(function () {
+                    const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
+                    if (nombrePropiedad.includes(caracters)) {
+                        $(this).show(); // Mostrar fila si coincide con la búsqueda
+                    } else {
+                        $(this).hide(); // Ocultar fila si no coincide con la búsqueda
+
+                    }
+                });
+            });
             $('#atras').remove();
 
-            //Mostrar estrellas asignadas de cada usuario
-            $('.rating-container').each(function(index) {
-                var $container = $(this);
-                var ratingValue = $container.attr('data-rating');
-                activateStars($container,ratingValue);
-            });
+
 
             function activateStars($container, ratingValue) {
                 $container.find('.star').removeClass('active');

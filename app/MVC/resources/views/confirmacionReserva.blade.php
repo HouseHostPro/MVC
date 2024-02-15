@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
             <div class="col-5">
                 <label for="entrada">Fecha entrada</label>
-                <input id="entrada" name="entrada" class="form-control " value="{{$datosReserva['from']}}" readonly>
+                <input id="entrada" name="entrada" class="form-control" value="{{$datosReserva['from']}}" readonly>
             </div>
             <div class="col-5">
                 <label for="salida">Fecha salida</label>

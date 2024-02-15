@@ -17,6 +17,14 @@ class PropertyFormController extends Controller {
         $propietats = Propietat::where('usuari_id',Auth::user()->id) -> get();
         return view("property/properties", compact("propietats"));
     }
+    public function AllProperties() {
+        $propietats = Propietat::select('propietat.id','propietat.nom','ciutat.nom as nomCiutat')
+            -> where('propietat.usuari_id',Auth::user()->id)
+            -> join('ciutat','propietat.ciutat_id', '=', 'ciutat.id')
+            ->get();
+
+        return $propietats;
+    }
     public function getPropietat($id) {
         $propietat = Propietat::find($id);
         $ciutats = $this->findAllCiutats();

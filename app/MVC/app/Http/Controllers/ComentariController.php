@@ -29,11 +29,17 @@ class ComentariController extends Controller{
     public function delete(Request $request){
 
         $idU = Auth::user()->id;
-        $idP = $request->session()->get('idPropiedad');
+        if(!$request->isMethod('post')){
+            $idP = $request->id;
+            Comentari::where('propietat_id',$idP)->where('usuari_id',$idU)->delete();
 
-        Comentari::where('propietat_id',$idP)->where('usuari_id',$idU)->delete();
+            return redirect() -> route('comentarios');
+        }else{
+            $idP = $request->session()->get('idPropiedad');
+            Comentari::where('propietat_id',$idP)->where('usuari_id',$idU)->delete();
 
-        return redirect() -> route('principal');
+            return redirect() -> route('principal');
+        }
     }
 
     public function allComentarios(Request $request){
@@ -44,6 +50,28 @@ class ComentariController extends Controller{
 
         return view('comentarios',compact('comentarios'));
 
+    }
+
+    public function allCommentsForProperties(Request $request){
+
+        $id = $request->session()->get('idPropiedad');
+        $comentarios = Comentari::select('comentari.*', 'propietat.nom as nomPropietat')
+            ->where('propietat.id', $id)
+            ->join('propietat', 'comentari.propietat_id', '=', 'propietat.id')
+            ->get();
+
+        return $comentarios;
+
+    }
+
+    public function allComent() {
+
+        $comentarios = Comentari::select('comentari.*', 'propietat.nom as nomPropietat')
+            ->where('comentari.usuari_id', Auth::user()->id)
+            ->join('propietat', 'comentari.propietat_id', '=', 'propietat.id')
+            ->get();
+
+        return $comentarios;
     }
 
 }

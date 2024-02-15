@@ -9,7 +9,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
             <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Reservas</li>
+            <li class="breadcrumb-item active" aria-current="page">Historial de Reservas</li>
         </ol>
     </nav>
     <div class="gradient-custom-1 ">
@@ -18,7 +18,7 @@
                 <div class="row justify-content-center">
                     <div class="col-10">
                         <div class="table-responsive bg-white">
-                            <table class="table table-hover mb-0 bg-white border-bottom border-dark">
+                            <table class="table mb-0 bg-white border-bottom border-dark">
                                 <thead>
                                 <tr class="text-center">
                                     <th>Nombre propiedad</th>
@@ -60,3 +60,4 @@
     @endauth
 
 @endsection
+

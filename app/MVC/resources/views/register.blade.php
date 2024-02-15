@@ -10,6 +10,7 @@
     @auth
     <nav class="mt-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
             <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
             <li class="breadcrumb-item active" aria-current="page">Información Personal</li>
         </ol>
