@@ -450,10 +450,16 @@
                 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
                 beforeShowDay: function( date) {
 
+                    const string = jQuery.datepicker.formatDate('dd/mm/yy', date);
+                    //console.log([dates.indexOf(string) === -1]);
                     var selectable = true;
                     var title = '150€';
-                    //$('.ui-widget-content').addClass('exemple');
-                    return [selectable, "", title];
+                    var highlight = [dates.indexOf(string) === -1];
+                    if( highlight ) {
+                        return [selectable, "event", title];
+                    } else {
+                        return [selectable, "", title];
+                    }
 
                 }
             });
@@ -555,10 +561,7 @@
             }
         }
         //Array para señalar los dias que no estan disponibles
-        var eventDates = {};
-        eventDates[ new Date( '02/20/2024' )] = new Date( '02/22/2024' );
-        eventDates[ new Date( '02/23/2024' )] = new Date( '02/28/2024' );
-        console.log(eventDates);
+        const dates = ['02/20/2024','02/21/2024','02/22/2024','02/23/2024'];
 
         $('#inline-picker').datepicker({
             controls: ['calendar'],
@@ -575,16 +578,11 @@
             disabled:true,
             beforeShowDay: function( date) {
 
-                console.log(date);
-                var selectable = true;
-                var classname = "";
-                var title = '150€';
-                var highlight = eventDates[date];
-                if( highlight ) {
-                    return [selectable, "event", title];
-                } else {
-                    return [selectable, "", title];
-                }
+                const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
+                return jQuery.inArray(string, dates) == -1
+                    ? [true, '', '150€']
+                    : [true, 'event', '150€'];
+
             }
         });
 

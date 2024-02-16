@@ -52,12 +52,12 @@
     color: black !important;
     border: 1px solid #cccccc !important;
 }
-
 .event a {
     background: #5FBA7D !important;
     color: #ffffff !important;
     height: 60px;
 }
+
 
 .ui-datepicker td[title]::after {
     content: attr(title);
