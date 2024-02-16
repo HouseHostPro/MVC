@@ -7,6 +7,7 @@ use App\Models\Reserva;
 use Illuminate\Http\Request;
 use App\Models\Traduccio;
 use App\Models\Propietat;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PropertyFormController extends Controller {
@@ -82,5 +83,14 @@ class PropertyFormController extends Controller {
         }
 
         return $dates;
+    }
+
+    public function AllProperties() {
+        $propietats = Propietat::select('propietat.id','propietat.nom','ciutat.nom as nomCiutat')
+            -> where('propietat.usuari_id',Auth::user()->id)
+            -> join('ciutat','propietat.ciutat_id', '=', 'ciutat.id')
+            ->get();
+
+        return $propietats;
     }
 }

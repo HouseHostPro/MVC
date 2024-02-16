@@ -62,6 +62,8 @@ Route::get('/property/edit/{id}', [PropertyFormController::class, 'getPropietat'
 Route::post('/property/edit/{id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
 Route::get('/property/edit/{id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
 
+Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
+
 Route::view('/propertyView', 'property.property') -> name('property.view');
 Route::view('/propertyForm', 'property.propertyForm');
 
@@ -91,3 +93,6 @@ Route::controller(RedsysController::class)->prefix('redsys')
         Route::get('/ko', 'ko');
         Route::get('/notification', 'notification');
     });
+
+//PDF
+Route::get('/factures/pdf',[RedsysController::class, 'exportPdf']) -> name('facturaPdf');

@@ -11,6 +11,10 @@ class Reserva extends Model{
     protected $table = 'reserva';
     public $timestamps = false;
 
+    public function factura() {
+        return $this -> hasOne(Factura::class);
+    }
+
     public function propiedad(){
         return $this->belongsTo(Propietat::class,'propietat_id','id');
     }public function uuarios(){

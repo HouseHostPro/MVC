@@ -1,5 +1,9 @@
-@extends('layouts/plantilla')
+@extends('layouts/plantillaFormularios')
 
+@section('url')
+    {{ route('cuenta') }}
+@endsection
+@section('title','Propiedades','Editar propiedad')
 @section('content')
 
     @foreach($traduccioNom as $nom)
@@ -13,6 +17,16 @@
                 <?php $descTraduit = $desc ?>
         @endif
     @endforeach
+    <div class="row col-12 justify-content-between">
+        <nav class="mt-3 col-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
+                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
+                <li class="breadcrumb-item"><a href="{{route('property.properties')}}">Propiedades</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Editar propiedad</li>
+            </ol>
+        </nav>
+    </div>
 
     <div class="container-fluid" id="contenedor">
         <div class="row flex-nowrap">

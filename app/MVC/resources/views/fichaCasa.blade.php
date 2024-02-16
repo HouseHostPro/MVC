@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="POST" action="{{ /*route('confirmacionReserva')*/ route('redsys') }}" class="col-4 border border-dark rounded shadow" style="height: 35%">
+                <form method="POST" action="{{ route('redsys') }}" class="col-4 border border-dark rounded shadow" style="height: 35%">
                     @csrf
                     <div class="mt-2 col-12 row mx-3">
                         <div class="col-2 px-0">
@@ -166,6 +166,7 @@
                         <input type="text" id="days" name="days" hidden>
                         <input type="text" id="entrada" name="frombd" hidden>
                         <input type="text" id="sortida" name="tobd" hidden>
+                        <input type="text" id="usuari" name="usuari" hidden>
                     </div>
                     <div class="d-flex justify-content-center">
                     <button type="submit" class="col-6 btn bg-primary bg-opacity-25 border border-dark mt-3 mb-4">Reservar</button>
@@ -479,8 +480,8 @@
                 $('#divpxn').prop("hidden",false);
                 let preuTotal = $('#pd').val()*diffDays;
                 $('#pxn').text($('#pd').val() + " x " + diffDays + " noches");
-                $('#pxnt').val(preuTotal + "€");
-                $('#ptotal').val(preuTotal + "€");
+                $('#pxnt').val(preuTotal);
+                $('#ptotal').val(preuTotal);
                 $('#days').val(diffDays);
             }
         }

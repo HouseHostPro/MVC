@@ -1,10 +1,16 @@
 @extends('layouts/plantillaFormularios')
 
+@section('title')
+    <h2>Calendario de reservas</h2>
+@endsection
 @section('url')
     {{ url() -> previous() }}
 @endsection
 @section('content')
-    <input type="text" id="datePicker" name="datePicker" value=""/>
+
+    <div class="container-fluid pt-4" id="contenedor">
+        <input type="text" id="datePicker" name="datePicker" value=""/>
+    </div>
 
 
     <script>
@@ -31,6 +37,7 @@
             numberOfMonths: 1,
             showAnim: "show",
             beforeShowDay: function (date) {
+                $(".ui-datepicker-calendar").addClass("cellSize");
                 const string = jQuery.datepicker.formatDate('dd/mm/yy', date);
                 return [dates.indexOf(string) == -1];
             },
@@ -58,5 +65,12 @@
                 $(this).data().datepicker.inline = false;
             }
         });
+
+        $( document ).ready(function() {
+            $('#ui-datepicker-div').addClass('calendari');
+            $('#datePicker').datepicker( "show" );
+        });
+
     </script>
+
 @endsection
