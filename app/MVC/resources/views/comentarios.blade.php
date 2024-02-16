@@ -150,8 +150,18 @@
 
                 const caracters = $(this).val().toUpperCase();
                 const tabla = $('#tabla');
+                const tablaAll = $('#tablaAll');
 
                 tabla.find('tr').each(function () {
+                    const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
+                    if (nombrePropiedad.includes(caracters)) {
+                        $(this).show(); // Mostrar fila si coincide con la búsqueda
+                    } else {
+                        $(this).hide(); // Ocultar fila si no coincide con la búsqueda
+
+                    }
+                });
+                tablaAll.find('tr').each(function () {
                     const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
                     if (nombrePropiedad.includes(caracters)) {
                         $(this).show(); // Mostrar fila si coincide con la búsqueda

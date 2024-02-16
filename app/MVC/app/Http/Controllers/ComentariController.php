@@ -42,22 +42,17 @@ class ComentariController extends Controller{
         }
     }
 
-    public function allComentarios(Request $request){
+    public function comentarios(Request $request){
 
-        $id = Auth::user()->id;
-
-        $comentarios = Comentari::where('usuari_id',$id)->get();
-
-        return view('comentarios',compact('comentarios'));
+        return view('comentarios');
 
     }
 
     public function allCommentsForProperties(Request $request){
 
-        $id = $request->session()->get('idPropiedad');
         $comentarios = Comentari::select('comentari.*', 'propietat.nom as nomPropietat')
-            ->where('propietat.id', $id)
             ->join('propietat', 'comentari.propietat_id', '=', 'propietat.id')
+            ->where('propietat.usuari_id', Auth::user()->id)
             ->get();
 
         return $comentarios;

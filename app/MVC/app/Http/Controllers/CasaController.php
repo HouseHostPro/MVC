@@ -63,14 +63,37 @@ class CasaController extends Controller{
         return redirect() -> route('principal');
     }
 
-    public function allReservas(){
+    public function reservas(){
 
-        $id = Auth::user()->id;
-        $reservas = Reserva::where('usuari_id',$id)->get();
-
-        return view('reservas',compact('reservas'));
+        return view('reservas');
 
     }
+    public function historialReservas(){
+
+        return view('historialReservas');
+
+    }
+    public function allReservasAjax(){
+
+
+        $reservas = Reserva::select('reserva.*','propietat.nom as nomPropietat')
+        ->where('reserva.usuari_id',Auth::user()->id)
+        ->join('propietat', 'reserva.propietat_id', '=', 'propietat.id')
+        ->get();
+
+        return $reservas;
+    }
+    public function allReservasPropertiesAjax(){
+
+        $reservas = Reserva::select('reserva.*', 'propietat.nom as nomPropietat')
+            ->join('propietat', 'reserva.propietat_id', '=', 'propietat.id')
+            ->where('propietat.usuari_id', Auth::user()->id)
+            ->get();
+
+        return $reservas;
+    }
+
+
 
     public function sinAcceso(){
 

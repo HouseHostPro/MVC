@@ -37,7 +37,7 @@
             @foreach($user->rol as $rol)
                 @if($rol->Rrol->nom === 'PROPIETARI' || $rol->Rrol->nom === 'ADMINISTADOR')
                     <div class="row col-12 justify-content-around mt-4">
-                        <a class="col-5 text-decoration-none text-black" href="" >
+                        <a class="col-5 text-decoration-none text-black" href="{{route('historialReservas')}}" >
                             <div class="shadow rounded p-3 h-100">
                                 <h5>Historial de reservas</h5>
                                 <p> Todas tus reservas</p>

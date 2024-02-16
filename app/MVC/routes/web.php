@@ -9,6 +9,7 @@ use App\Http\Controllers\ServeiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PropietatController;
 use \App\Http\Controllers\EspaiController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TraduccioController;
 use App\Http\Controllers\PropertyFormController;
@@ -26,6 +27,8 @@ use App\Http\Controllers\PropertyFormController;
 Route::get('/traduccio', [TraduccioController::class, 'show']);
 Route::get('/phpinfo', function () {phpinfo();});
 
+//Mailgun
+Auth::routes(['verify' => true]);
 //Ficha Casa
 
 Route::middleware('auth')->group(function (){
@@ -37,10 +40,14 @@ Route::middleware('auth')->group(function (){
     Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
     Route::get('/deleteComentario/{id}',[ComentariController::class,'delete'])->name('comentario.delete.get');
     Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
-    Route::get('/comentarios',[ComentariController::class,'allComentarios'])->name('comentarios');
+    Route::get('/comentarios',[ComentariController::class,'comentarios'])->name('comentarios');
     Route::get('/comentariosUserAjax',[ComentariController::class,'allComent'])->name('comentariosAU');
     Route::get('/comentariosPropertiesAjax',[ComentariController::class,'allCommentsForProperties'])->name('comentariosAP');
-    Route::get('/reservas',[CasaController::class,'allReservas'])->name('reservas');
+    Route::get('/reservas',[CasaController::class,'reservas'])->name('reservas');
+    Route::get('/historialReservas',[CasaController::class,'historialReservas'])->name('historialReservas');
+    Route::get('/reservasAjax',[CasaController::class,'allReservasAjax'])->name('reservasA');
+    Route::get('/reservasPropertiesAjax',[CasaController::class,'allReservasPropertiesAjax'])->name('reservasAP');
+    Route::post('/logout',[UserController::class,'logout'])->name('logout');
 
 });
 
@@ -50,7 +57,7 @@ Route::get('/',[CasaController::class,'datosFichaCasa'])->name('principal');
 //Login
 Route::view('/login','login')->name('login');
 Route::post('/login/check',[UserController::class,'checkLogin'])->name('login.check');
-Route::post('/logout',[UserController::class,'logout'])->name('logout');
+
 
 //Register
 Route::get('/user/register', [UserController::class,'register'])->name('user.register');
