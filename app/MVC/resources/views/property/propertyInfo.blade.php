@@ -41,7 +41,7 @@
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-house"></i>
-                                <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Servicios</a></a>
+                                <a href="{{route('property.service')}}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Servicios</a></a>
                         </li>
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">

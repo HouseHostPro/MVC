@@ -55,10 +55,10 @@
                     url: `http://localhost:8100/reservasPropertiesAjax`
                 }).done(function (reservas) {
                     console.log(reservas);
-                    printCommnets(reservas)
+                    printReservas(reservas)
                 });
             })
-            function printCommnets(reserva){
+            function printReservas(reserva){
                 reserva.forEach( function (value){
 
                     let fila = $('<tr>');

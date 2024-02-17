@@ -27,31 +27,48 @@ use App\Http\Controllers\PropertyFormController;
 Route::get('/traduccio', [TraduccioController::class, 'show']);
 Route::get('/phpinfo', function () {phpinfo();});
 
-//Mailgun
-Auth::routes(['verify' => true]);
 //Ficha Casa
 
 Route::middleware('auth')->group(function (){
-    Route::post('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
-    Route::get('/confirmacionReserva',[CasaController::class,'sinAcceso'])->name('confirmacionReserva');
-    Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
-    Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
+
+    //Dashboard usuari
     Route::post('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
     Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
+
+    //CRUD comentaris
     Route::get('/deleteComentario/{id}',[ComentariController::class,'delete'])->name('comentario.delete.get');
     Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
+    Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
     Route::get('/comentarios',[ComentariController::class,'comentarios'])->name('comentarios');
     Route::get('/comentariosUserAjax',[ComentariController::class,'allComent'])->name('comentariosAU');
     Route::get('/comentariosPropertiesAjax',[ComentariController::class,'allCommentsForProperties'])->name('comentariosAP');
+
+    //CRUD reservas
+    //Crear nueva reserva
+    Route::post('/confirmacionReserva',[CasaController::class,'confirmacion'])->name('confirmacionReserva');
+    Route::get('/confirmacionReserva',[CasaController::class,'sinAcceso'])->name('confirmacionReserva');
+    Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
+    //Mostrar reservas hechas
     Route::get('/reservas',[CasaController::class,'reservas'])->name('reservas');
     Route::get('/historialReservas',[CasaController::class,'historialReservas'])->name('historialReservas');
     Route::get('/reservasAjax',[CasaController::class,'allReservasAjax'])->name('reservasA');
     Route::get('/reservasPropertiesAjax',[CasaController::class,'allReservasPropertiesAjax'])->name('reservasAP');
+
+    //CRUD servicios
+    Route::get('/servicios',[PropertyFormController::class,'loadSevice'])->name('property.service');
+    Route::get('/serviciosAjax',[PropertyFormController::class,'allService'])->name('serviceA');
+    Route::get('/servicio/{id}',[PropertyFormController::class,'serviceById'])->name('serviceId');
+
+    //Mostrar todas las propiedades
+    Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
+
+    //Cerrar sesión
     Route::post('/logout',[UserController::class,'logout'])->name('logout');
 
 });
 
-Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
+
+//Página principal
 Route::get('/',[CasaController::class,'datosFichaCasa'])->name('principal');
 
 //Login

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ciutat;
 use App\Models\Reserva;
+use App\Models\Servei;
 use Illuminate\Http\Request;
 use App\Models\Traduccio;
 use App\Models\Propietat;
@@ -109,5 +110,29 @@ class PropertyFormController extends Controller {
         }
 
         return $dates;
+    }
+
+    public function loadSevice(Request $request){
+
+        $id = $request->session()->get('idPropiedad');
+        $servicios = Servei::all();
+
+        $propietat = Propietat::where('id', $id)->first();
+
+        return view('property/serveiForm', compact('propietat','servicios'));
+    }
+
+    public function allService(){
+
+        $servicios = Servei::all();
+
+        return $servicios;
+    }
+    public function serviceById(Request $request){
+
+
+        $servicio = Servei::find($request->id);
+
+        return $servicio;
     }
 }
