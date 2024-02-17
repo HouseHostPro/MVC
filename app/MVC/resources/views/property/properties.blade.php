@@ -3,15 +3,15 @@
 @section('url')
     {{route('cuenta')}}
 @endsection
-@section('title','Propiedades')
+@section('title',__('Propiedades'))
 @section('content')
 
     <div class="row col-12 justify-content-between">
         <nav class="mt-3 col-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
-                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Propiedades</li>
+                <li class="breadcrumb-item"><a href="{{route('principal')}}">{{__('Principal')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{__('Propiedades')}}</li>
             </ol>
         </nav>
         <div class="col-3 mt-3 text-end">
@@ -19,14 +19,14 @@
                 <button type="submit" class="btn bg-primary bg-opacity-50">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus pb-1" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                    </svg>Añadir propiedad
+                    </svg>{{__('Añadir propiedad')}}
                 </button>
             </form>
         </div>
     </div>
     <div class="row col-12">
         <div class=" col-2 mb-3">
-            <label>Buscar casa:</label>
+            <label>{{__('Buscar casa')}}:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>
@@ -39,10 +39,10 @@
                             <table class="table mb-0 bg-white border-bottom border-dark">
                                 <thead>
                                 <tr>
-                                    <th>Nombre propiedad</th>
-                                    <th>Imagen</th>
-                                    <th>Ubicación</th>
-                                    <th>Acciones</th>
+                                    <th>{{__('Nombre propiedad')}}</th>
+                                    <th>{{__('Imagen')}}</th>
+                                    <th>{{__('Ubicación')}}</th>
+                                    <th>{{__('Acciones')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody id="tabla">
@@ -93,7 +93,7 @@
 
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     let form = $('<form>').attr('method', 'get').attr('action', '/property/edit/' + value.id);
-                    let botonEditar = $('<button>').attr('type', 'submit').addClass('btn bg-success bg-opacity-50').text('Editar');
+                    let botonEditar = $('<button>').attr('type', 'submit').addClass('btn bg-success bg-opacity-50').text("{{__('Editar')}}");
                     form.append(botonEditar);
                     let celdaFormulario = $('<td>').append(form);
                     fila.append(celdaFormulario);

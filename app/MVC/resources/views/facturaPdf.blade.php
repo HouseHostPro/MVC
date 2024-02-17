@@ -5,58 +5,58 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>{{__('Factura')}}</title>
 </head>
 <body>
-<h1>Factura</h1>
+<h1>{{__('Factura')}}</h1>
 
 <table>
     <tr>
-        <td>Propietario</td>
+        <td>{{__('Propietario')}}</td>
         <td>{{Session::get('factura') -> nom_propietari}}</td>
     </tr>
     <tr>
-        <td>Nombre propiedad</td>
+        <td>{{__('Nombre propiedad')}}</td>
         <td>{{Session::get('factura') -> nom_propietat}}</td>
     </tr>
     <tr>
-        <td>Cliente</td>
+        <td>{{__('Cliente')}}</td>
         <td>{{Session::get('factura') -> nom_client}}</td>
     </tr>
     <tr>
-        <td>Primer apellido</td>
+        <td>{{__('Primer apellido')}}</td>
         <td>{{Session::get('factura') -> cognom1}}</td>
     </tr>
     <tr>
-        <td>Segundo apellido</td>
+        <td>{{__('Segundo apellido')}}</td>
         <td>{{Session::get('factura') -> cognom2}}</td>
     </tr>
     <tr>
-        <td>Email</td>
+        <td>{{__('E-mail')}}</td>
         <td>{{Session::get('factura') -> email}}</td>
     </tr>
     <tr>
-        <td>Dirección</td>
+        <td>{{__('Dirección')}}</td>
         <td>{{Session::get('factura') -> direccio}}</td>
     </tr>
     <tr>
-        <td>Nombre de acompañantes</td>
+        <td>{{__('Nombre de acompañantes')}}</td>
         <td>{{Session::get('factura') -> numero_acompanyants}}</td>
     </tr>
     <tr>
-        <td>Precio limpieza</td>
+        <td>{{__('Precio limpieza')}}</td>
         <td>{{Session::get('factura') -> preu_neteja}}</td>
     </tr>
     <tr>
-        <td>Fecha inicio</td>
+        <td>{{__('Fecha inicio')}}</td>
         <td>{{Session::get('factura') -> data_inici}}</td>
     </tr>
     <tr>
-        <td>Fecha fin</td>
+        <td>{{__('Fecha fin')}}</td>
         <td>{{Session::get('factura') -> data_fi}}</td>
     </tr>
     <tr>
-        <td>Precio</td>
+        <td>{{__('Precio total')}}</td>
         <td>{{Session::get('factura') -> preu_total}}</td>
     </tr>
 </table>

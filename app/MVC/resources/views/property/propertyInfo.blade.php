@@ -3,7 +3,7 @@
 @section('url')
     {{ route('cuenta') }}
 @endsection
-@section('title','Propiedades','Editar propiedad')
+@section('title',__('Propiedades'),__('Editar propiedad'))
 @section('content')
 
     @foreach($traduccioNom as $nom)
@@ -20,10 +20,10 @@
     <div class="row col-12 justify-content-between">
         <nav class="mt-3 col-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
-                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
-                <li class="breadcrumb-item"><a href="{{route('property.properties')}}">Propiedades</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Editar propiedad</li>
+                <li class="breadcrumb-item"><a href="{{route('principal')}}">{{__('Principal')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('property.properties')}}">{{__('Propiedades')}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{__('Editar propiedad')}}</li>
             </ol>
         </nav>
     </div>
@@ -72,7 +72,7 @@
                 <div class="col py-3">
                     <div class="container rounded bg-white mt-5 mb-5">
                         <div class="row">
-                            <h2>Edición de la propiedad</h2>
+                            <h2>{{__('Editar propiedad')}}</h2>
                             <div class="col-md-3 border-right">
                                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                                     <img style="height: 200px; width: 200px" src="https://images.adsttc.com/media/images/5d34/e507/284d/d109/5600/0240/large_jpg/_FI.jpg?1563747560">
@@ -85,20 +85,20 @@
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-md-6">
-                                            <label class="labels">Name</label>
+                                            <label class="labels">{{__('Nombre')}}</label>
                                             <input type="text" name="nombre" class="form-control" value="{{ $nomTraduit -> value }}">
                                         </div>
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
-                                            <label class="language-">Descripción</label>
+                                            <label class="language-">{{__('Descripción')}}</label>
                                             <textarea class="form-control" name="descripcion">{{ $descTraduit -> value }}</textarea>
                                         </div>
                                     </div>
                                     <div class="row mt-3">
-                                        <div class="col-md-6"><label class="labels">Ubicació</label><input type="text" class="form-control" placeholder="country" value="{{$propietat -> localitzacio}}"></div>
+                                        <div class="col-md-6"><label class="labels">{{__('Ubicación')}}</label><input type="text" class="form-control" placeholder="country" value="{{$propietat -> localitzacio}}"></div>
                                         <div class="col-md-6">
-                                            <label class="label">Ciutat</label>
+                                            <label class="label">{{__('Ciutat')}}</label>
                                             <select class="form-control">
                                                 @foreach($ciutats as $ciutat)
                                                     <option value="{{$ciutat -> id}}" @if($ciutat -> id === $propietat -> ciutat_id) selected @endif>{{$ciutat -> nom}}</option>
@@ -110,7 +110,7 @@
                                     <input type="hidden" name="descCode" value="{{ $propietat -> descripcio }}" />
                                     <input type="hidden" name="id" value="{{ $propietat -> id }}" />
                                     <div class="mt-5 text-center">
-                                        <button class="btn btn-primary profile-button" type="submit">Guardar cambios</button>
+                                        <button class="btn btn-primary profile-button" type="submit">{{__('Guardar cambios')}}</button>
                                     </div>
                                 </div>
                             </div>

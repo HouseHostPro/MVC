@@ -3,12 +3,12 @@
 @section('url')
     {{route('cuenta')}}
 @endsection
-@section('title','Comentarios')
+@section('title',__('Comentarios'))
 @section('content')
     <nav class="mt-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Comentarios</li>
+            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{__('Comentarios')}}</li>
         </ol>
     </nav>
     <div class="gradient-custom-1 ">
@@ -20,10 +20,10 @@
                             <table class="table mb-0 bg-white border-bottom border-dark">
                                 <thead>
                                 <tr class="text-center">
-                                    <th>Nombre propiedad</th>
-                                    <th >Descripción</th>
-                                    <th>Puntuación</th>
-                                    <th>Acciones</th>
+                                    <th>{{__('Nombre propiedad')}}</th>
+                                    <th>{{__('Descripción')}}</th>
+                                    <th>{{__('Puntuación')}}</th>
+                                    <th>{{__('Acciones')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -45,7 +45,7 @@
                                         <td>
                                             <form method="get" action="{{route('comentario.delete')}}">
                                                 @csrf
-                                                <button type="submit" class="btn bg-danger bg-opacity-50">Eliminar</button>
+                                                <button type="submit" class="btn bg-danger bg-opacity-50">{{__('Eliminar')}}</button>
                                             </form>
                                         </td>
                                     </tr>
