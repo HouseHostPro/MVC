@@ -96,3 +96,10 @@ Route::controller(RedsysController::class)->prefix('redsys')
 
 //PDF
 Route::get('/factures/pdf',[RedsysController::class, 'exportPdf']) -> name('facturaPdf');
+
+//Localization
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+});

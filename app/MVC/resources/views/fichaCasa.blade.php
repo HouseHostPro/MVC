@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <!-- TODO posar tot lo referent a sa casa de forma dinàmica QUAN TENGUEM ES VIRTUALHOSTS -->
+
     <h1 class="mt-3">Cas Concos</h1>
     <div class="container-fluid bg-light rounded row">
         <div class="col-6 pt-1 px-0 my-2 me-2">
@@ -41,20 +43,20 @@
                     <h2 class="fs-4">Casa Rural en Binissalem Mallorca</h2>
                     <div>
                         <p>
-                            5 personas - 3 dormitorios - 4 camas - 1 baño
+                            5 {{__('Personas')}} - 3 {{__('Dormitorios')}} - 4 {{__('Camas')}} - 1 {{__('Baños')}}
                         </p>
                         <div>
-                            <h3 class="fs-5">Normas de la casa</h3>
+                            <h3 class="fs-5">{{__('Normas de la casa')}}</h3>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Horario de llegada: 16:00 a 22:00</li>
+                                <li class="list-group-item">{{__('Horario de llegada')}}: 16:00 a 22:00</li>
                                 <li class="list-group-item">Salida antes de las 14:00</li>
                                 <li class="list-group-item">Máximo 6 huéspedes</li>
-                                <li class="list-group-item">No de admiten mascotas</li>
-                                <li class="list-group-item border-bottom border-dark">No fumar</li>
+                                <li class="list-group-item">{{__('No se admiten mascotas')}}</li>
+                                <li class="list-group-item border-bottom border-dark">{{__('No fumar')}}</li>
                             </ul>
                         </div>
                         <div>
-                            <h3 class="fs-5 mt-3">Habitaciones</h3>
+                            <h3 class="fs-5 mt-3">{{__('Habitaciones')}}</h3>
                             <div id="owl-example1" class="owl-carousel">
                                 <div class="item mb-1">
                                     <div class="carousel-item active rounded border border-black shadow p-4" data-bs-interval="false">
@@ -62,8 +64,8 @@
                                             <img src="img/cama-individual2.png" class="d-block w-25" alt="camas-individuales">
                                         </div>
                                         <div class="d-none d-md-block col-12">
-                                            <h5 class="text-dark">Dormitorio 1</h5>
-                                            <p class="text-dark">2 camas individuales</p>
+                                            <h5 class="text-dark">{{__('Dormitorio')}} 1</h5>
+                                            <p class="text-dark">2 {{__('camas individuales')}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -73,8 +75,8 @@
                                             <img src="img/cama-individual.png" class="d-block w-25" alt="cama-individual">
                                         </div>
                                         <div class="d-none d-md-block col-12">
-                                            <h5 class="text-dark">Dormitorio 2</h5>
-                                            <p class="text-dark">1 cama individual</p>
+                                            <h5 class="text-dark">{{__('Dormitorio')}} 2</h5>
+                                            <p class="text-dark">1 {{__('cama individual')}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -84,15 +86,15 @@
                                             <img src="img/cama-doble.png" class="d-block w-25" alt="cama-doble">
                                         </div>
                                         <div class="d-none d-md-block col-12">
-                                            <h5 class="text-dark">Dormitorio 3</h5>
-                                            <p class="text-dark">1 cama de matrimo</p>
+                                            <h5 class="text-dark">{{__('Dormitorio')}} 3</h5>
+                                            <p class="text-dark">1 {{__('cama de matrimonio')}}</p>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="mt-3 border-bottom border-dark">
-                                <h3 class="fs-5 ">¿Que hay en el alojamiento?</h3>
+                                <h3 class="fs-5 ">{{__('¿Qué hay en el alojamiento?')}}</h3>
                                 <ul class="list-group list-group-flush">
                                     @php
                                     $count = 0;
@@ -107,7 +109,7 @@
                                             @endphp
                                     @endforeach
                                     <div class="col-4">
-                                        <button type="button" class="btn bg-white border border-dark my-3" data-bs-toggle="modal" data-bs-target="#servicios">Mostrar más</button>
+                                        <button type="button" class="btn bg-white border border-dark my-3" data-bs-toggle="modal" data-bs-target="#servicios">{{__('Mostrar más')}}</button>
                                     </div>
                                 </ul>
                             </div>
@@ -121,23 +123,23 @@
                             <input class="border-0 form-control p-0 text-end fs-5 bold" value="150" type="text" id="pd" name="pd" readonly>
                         </div>
                         <div class="col-8 px-0">
-                            <p><span class="fs-5 bold">€</span> noche</p>
+                            <p><span class="fs-5 bold">€</span> {{__('noche')}}</p>
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center ">
                         <div class="col-12 row ">
                             <label class="custom-input col-12 col-xl-6" for="from">
                                 <input class="border-1 form-control" type="text" id="from" name="from" autocomplete="off" required></br>
-                                <span class="ph">Llegada:</span>
+                                <span class="ph">{{__('Llegada')}}:</span>
                             </label>
                             <label class="custom-input col-12 col-xl-6" for="to">
                                 <input class="border-1 form-control" type="text" id="to" name="to" autocomplete="off" required>
-                                <span class="ph">Salida:</span>
+                                <span class="ph">{{__('Salida')}}:</span>
                             </label>
                         </div>
                         <div class="col-12 row justify-content-start my-3">
                             <div class="col-5 col-xl-4">
-                                <label for="personas" class=" m-0" style="font-size: 18px">Huéspedes:</label>
+                                <label for="personas" class=" m-0" style="font-size: 18px">{{__('Huéspedes')}}:</label>
                             </div>
                             <button id="menos" type="button" class="col-2 col-xl-1  p-0 border-0 bg-white" disabled>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
@@ -158,7 +160,7 @@
                         <div class="col-12 justify-content-start ms-3 my-xl-3 ">
                             <div class="form-check form-switch ps-5">
                                 <input class="form-check-input" type="checkbox" value="true" name="mascotas" id="flexSwitchCheckDefault">
-                                <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 18px">Mascotas</label>
+                                <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 18px">{{__('Mascotas')}}</label>
                             </div>
                         </div>
                         <!-- Inputs con los formatos de hora del formato de la bbdd -->
@@ -169,7 +171,7 @@
                         <input type="text" id="usuari" name="usuari" hidden>
                     </div>
                     <div class="d-flex justify-content-center">
-                    <button type="submit" class="col-6 btn bg-primary bg-opacity-25 border border-dark mt-3 mb-4">Reservar</button>
+                    <button type="submit" class="col-6 btn bg-primary bg-opacity-25 border border-dark mt-3 mb-4">{{__('Reservar')}}</button>
                     </div>
                     <div id="divpxn" class="col-12 row mx-2" hidden>
                         <div class="col-8">
@@ -188,7 +190,7 @@
                         </div>
                     </div>
                     <div class="row mx-2 border-top">
-                        <label for="ptotal" class="h5 col-8 my-3">Total</label>
+                        <label for="ptotal" class="h5 col-8 my-3">{{__('Total')}}</label>
                         <input id="ptotal" name="ptotal" class="bg-white border-0 h5 col-4 text-end my-3" readonly>
                     </div>
                 </form>
@@ -197,7 +199,7 @@
                 </div>
                 <div class="col-12 row border-top border-bottom border-dark d-flex justify-content-between">
                     <div class="col-12 text-end my-3">
-                        <button type="button" class="btn bg-white btn-white border-0 text-black text-decoration-underline" data-bs-toggle="modal" data-bs-target="#crearComenatrio">Añadir comentario</button>
+                        <button type="button" class="btn bg-white btn-white border-0 text-black text-decoration-underline" data-bs-toggle="modal" data-bs-target="#crearComenatrio">{{__('Añadir comentario')}}</button>
                     </div>
                         <div class="modal-body row col-12 justify-content-between">
                             @foreach($comentarios as $comentario)
@@ -244,12 +246,12 @@
                             @endforeach
                         </div>
                     <div class="col-4 ">
-                        <button type="button" class="btn bg-white border border-dark my-3" data-bs-toggle="modal" data-bs-target="#comenarios">Mostrar más</button>
+                        <button type="button" class="btn bg-white border border-dark my-3" data-bs-toggle="modal" data-bs-target="#comenarios">{{__('Mostrar más')}}</button>
                     </div>
                 </div>
                 <div class="col-12 row mt-5 mb-4 border-bottom border-dark" >
                     <div class="col-12">
-                        <h4>¿Dónde me voy a quedar?</h4>
+                        <h4>{{__('¿Dónde me voy a quedar?')}}</h4>
                     </div>
                     <div id="containerMap" class="mt-4">
                         <div id="map" class="container-sm"></div>
@@ -266,7 +268,7 @@
                         </svg>
                     </div>
                     <div class="col-9 ps-0 d-flex align-self-center">
-                        <h5>Anfitrión: Lucas</h5>
+                        <h5>{{__('Anfitrión')}}: Lucas</h5>
                     </div>
 
                     <div class="col-12 mt-3">
