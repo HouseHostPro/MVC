@@ -14,74 +14,122 @@
             <li class="breadcrumb-item active" aria-current="page">Servicios</li>
         </ol>
     </nav>
-        <select id="servicios" name="servicios" class="form-control">
-            @foreach($servicios as $servicio)
-                <option value="{{ $servicio->id}}" selected>{{$servicio->nom}}</option>
-            @endforeach
-        </select>
-    <form id="formSevice">
-        @csrf
-        <button type="submit" class="btn bg-primary bg-opacity-50">Guardar</button>
-    </form>
+    <div id="selectContainer"  class="mb-2">
 
+    </div>
+    <div class="gradient-custom-1 ">
+        <div class="mask d-flex align-items-center ">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-10">
+                        <div class="table-responsive bg-white">
+                            <form action="post" class="row col-12 justify-content-end">
+                                @csrf
+                            <table class="table table-hover mb-0 bg-white border-bottom border-dark">
+                                <thead>
+                                <tr class="text-center">
+                                    <th>Nom</th>
+                                    <th>Descripción</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                                    <tbody id="tabla">
+
+                                    </tbody>
+                            </table>
+                                <div class="col-2">
+                                    <button type="submit" class="btn bg-primary bg-opacity-50 mt-3 ">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
 
-        let services = [];
+        let serviceObj = [];
+        let allservices = [];
+
         $(document).ready(function (){
 
             $.ajax({
                 method: 'GET',
                 url: `http://localhost:8100/serviciosAjax`
-            }).done(function (servicios) {
-                console.log(servicios);
-                //printServicios(servicios)
+            }).done(function (service) {
+                allservices.push.apply(allservices, service);
+                printSelect();
             });
         })
 
-        $('#servicios').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                method: 'GET',
-                url: `http://localhost:8100/servicio/${id}`
-            }).done(function (servicio) {
-                console.log(servicio);
-                services.push(servicio);
-                printServicios()
-            });
-        })
 
+
+        function printSelect(){
+
+            let select = $('<select>').attr({
+                id: 'servicios',
+                name: 'servicios',
+                class: 'form-control'
+            })
+
+            allservices.forEach( function(value){
+
+                let option = $('<option>').attr('value', value.id).text(value.nom);
+                select.append(option);
+            })
+            $('#selectContainer').append(select);
+
+            $('#servicios').change(function(){
+                let id = $(this).val();
+                console.log(id)
+                $.ajax({
+                    method: 'GET',
+                    url: `http://localhost:8100/servicio/${id}`
+                }).done(function (servicio) {
+                    console.log(servicio);
+                    serviceObj.push(servicio);
+                    printServicios()
+                });
+            })
+        }
         function printServicios(){
 
+            $('#tabla').html("");
 
-            services.forEach( function (value){
+            serviceObj.forEach( function (value){
 
-                let labelNom = $('<label>').attr('for','nom' + value.id).text('Nom:')
-                $('#formSevice').append(labelNom);
-                let inputNom = $('<input>').attr({
-                    type: 'text',
-                    id: 'nom' + value.id,
-                    name: 'nom' + value.id,
-                    value: value.nom
-                })
-                $('#formSevice').append(inputNom);
+                let fila = $('<tr>');
+                let columnName = $('<td>');
 
-                let labelDesc = $('<label>').attr('for','desc' + value.id).text('Descripcio:')
-                $('#formSevice').append(labelDesc);
-                let inputDesc = $('<input>').attr({
-                    type: 'text',
-                    id: 'desc' + value.id,
-                    name: 'desc' + value.id,
-                    value: value.descripcio
-                })
-                $('#formSevice').append(inputDesc);
+                let pNom = $('<p>').text(value.nom);
+                columnName.append(pNom).addClass('text-center');
+                fila.append(columnName);
+
+
+                let columnDesc = $('<td>');
+                let pDesc = $('<p>').text(value.descripcio);
+                columnDesc.append(pDesc).addClass('text-center');
+                fila.append(columnDesc);
 
                 let inputHidden = $('<inpunt>').attr({
                     type: 'hidden',
                     name: 'id' + value.id,
                     value: value.id
                 })
-                $('#formSevice').append(inputHidden);
+                columnDesc.append(inputHidden);
 
+                fila.append(columnName);
+                fila.append(columnDesc);
+
+                let columnButton = $('<td>');
+                let botonGuardar = $('<button>').attr({
+                    type: 'button',
+                    id: 'delete'
+                }).addClass('btn bg-danger bg-opacity-50').text('Eliminar');
+                columnButton.append(botonGuardar).addClass('text-center');
+                fila.append(columnButton);
+                $('#tabla').append(fila);
             })
         }
         $('#atras').remove();
