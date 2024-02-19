@@ -13,9 +13,12 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "*",
+        "mailgun/mailgun-php": "^4.1",
         "mongodb/laravel-mongodb": "^4.1",
+        "nyholm/psr7": "^1.8",
         "php-http/client-common": "^2.7",
-        "ssheduardo/redsys-laravel": "^1.4"
+        "ssheduardo/redsys-laravel": "^1.4",
+        "symfony/http-client": "^7.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -63,7 +66,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "stable",

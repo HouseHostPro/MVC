@@ -12,6 +12,7 @@ use \App\Http\Controllers\EspaiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TraduccioController;
 use App\Http\Controllers\PropertyFormController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,3 +104,7 @@ Route::get('language/{locale}', function ($locale) {
     session()->put('locale', $locale);
     return redirect()->back();
 });
+
+
+//Mail
+Route::get('/mailprova', [MailController::class, 'emailprova']);
