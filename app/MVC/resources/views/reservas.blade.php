@@ -6,14 +6,14 @@
 @section('title','Reservas')
 @section('content')
     <div class="row col-12 justify-content-between mb-4">
-        <nav class="mt-3 col-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <nav class="mt-3 col-sm-6 col-12" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
                 <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Reservas</li>
             </ol>
         </nav>
-        <div class="col-2 mt-3">
+        <div class="col-sm-2 col-6 mt-3">
             <label>Buscar casa:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
@@ -54,18 +54,31 @@
                     method: 'GET',
                     url: `http://localhost:8100/reservasAjax`
                 }).done(function (reservas) {
-                    console.log(reservas);
                     printReservas(reservas)
                 });
             })
             function printReservas(reserva){
                 reserva.forEach( function (value){
 
+                    let fecha_ini = new Date(value.data_inici);
+                    let fecha_fin = new Date(value.data_fi);
+
+                    let fecha_ini_format = fecha_ini.toLocaleDateString('es-ES', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    });
+                    let fecha_fin_format = fecha_fin.toLocaleDateString('es-ES', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    });
+
                     let fila = $('<tr>');
                     fila.append($('<td>').text(value.nomPropietat).addClass('text-center'));
-                    fila.append($('<td>').text(value.data_inici + "-" + value.data_fi).addClass('text-center'));
+                    fila.append($('<td>').text(fecha_ini_format + " - " + fecha_fin_format).addClass('text-center'));
                     fila.append($('<td>').text(value.persones).addClass('text-center'));
-                    fila.append($('<td>').text(value.preu_total).addClass('text-center'));
+                    fila.append($('<td>').text(value.preu_total + "€").addClass('text-center'));
 
 
                     //Creamos el botón, el formulario, la columna del botón y el formulario

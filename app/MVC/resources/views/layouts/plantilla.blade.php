@@ -108,7 +108,7 @@
     </div>
     <div></div>
     <main class="container-fluid d-flex justify-content-center" >
-        <div class="container-sm" >
+        <div id="container-principal" class="container-sm" >
 
         @yield('content')
         </div>

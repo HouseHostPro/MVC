@@ -19,11 +19,11 @@
         <form class="d-flex flex-column justify-content-center gap-4" method="POST" action="{{route('user.store')}}">
             @csrf
             <div class="row justify-content-center mt-4">
-                <div class="form-group mb-1 col-5">
+                <div class="form-group mb-sm-1 mb-3 col-sm-5 col-12">
                     <label for="emailInput">Correo electrónico:</label>
                     <input required type="email" class="form-control" name="email" value="@auth{{$user->email}}@endauth" aria-label="correo electronico" placeholder="correo electrónico">
                 </div>
-                <div class="form-group mb-1 col-5">
+                <div class="form-group mb-sm-1 mb-0 col-sm-5 col-12">
                     <div class="col-12 row">
                         <div class="col-11">
                             <label for="passwordInput">Contraseña:</label>
@@ -48,31 +48,31 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="form-group mb-1 col-5">
+                <div class="form-group mb-sm-1 mb-3 col-sm-5 col-12">
                     <label for="nameInput">Nombre:</label>
                     <input required type="text" class="form-control" value="@auth{{$user->nom}}@endauth" name="nom" placeholder="Nombre">
                 </div>
-                <div class="form-group mb-1 col-5">
+                <div class="form-group mb-sm-1 mb-0 col-sm-5 col-12">
                     <label for="surnameInput">Primer Apellido:</label>
                     <input required type="text" class="form-control" value="@auth{{$user->cognom1}}@endauth" name="cognom1" placeholder="Apellido">
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="form-group mb-1 col-5">
+                <div class="form-group mb-sm-1 mb-3 col-sm-5 col-12">
                     <label for="secondSurnameInput">Segundo Apellido:</label>
                     <input type="text" class="form-control" value="@auth{{$user->cognom2}}@endauth" name="cognom2" placeholder="Segundo apellido">
                 </div>
-                <div class="form-group mb-1 col-5">
+                <div class="form-group mb-sm-1 mb-0 col-sm-5 col-12">
                     <label for="phoneInput">Teléfono:</label>
                     <input required type="tel" class="form-control" value="@auth{{$user->telefon}}@endauth" name="telefon" placeholder="Telefono">
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="form-group mb-1 col-4">
+                <div class="form-group mb-sm-1 mb-3 col-sm-4 col-12">
                     <label for="addressInput">Dirección:</label>
                     <input required type="text" class="form-control" value="@auth{{$user->direccio}}@endauth" name="direccio" placeholder="Direccion">
                 </div>
-                <div class="form-group mb-1 col-3">
+                <div class="form-group mb-sm-1 mb-0 col-sm-3 col-6">
                     <label for="ciutat">Ciudad</label>
                     <select id="city" required name="ciutat_id" class="form-control">
                         @foreach($ciutats as $ciutat)
@@ -87,7 +87,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group mb-2 col-3">
+                <div class="form-group mb-sm-2 mb-0 col-sm-3 col-6">
                     <label for="pais">Pais</label>
                     <select required name="pais_id" class="form-control">
                         @foreach($paises as $pais)

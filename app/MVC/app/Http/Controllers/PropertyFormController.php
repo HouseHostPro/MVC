@@ -151,8 +151,21 @@ class PropertyFormController extends Controller {
     public function saveService(Request $request){
 
         $id = $request->session()->get('idPropiedad');
-        var_dump(count($request->all()));
 
+        Configuracio_Servei::where('configuracio_id',$id)->delete();
 
+        $servicios = array_slice($request->all(),1,count($request->all()));
+
+        foreach ($servicios as $key => $value){
+
+            $servicio = new Configuracio_Servei();
+
+            $servicio->configuracio_id =$id;
+            $servicio->servei_id = $value;
+
+            $servicio -> save();
+        }
+        $propietat = Propietat::where('id',$id) -> first();
+        return view('property/serveiForm', compact('propietat'));
     }
 }

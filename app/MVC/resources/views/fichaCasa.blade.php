@@ -3,41 +3,11 @@
 @section('content')
 
     <h1 class="mt-3">Cas Concos</h1>
-    <div class="container-fluid bg-light rounded row">
-        <div class="col-6 pt-1 px-0 my-2 me-2">
-            <a href="" data-bs-toggle="modal" data-bs-target="#fotos">
-                <img  class="object-fit-fill shadow size-img rounded-start" src="img/frontCasa.webp" alt="dormitorio">
-            </a>
-        </div>
-        <div class="col-6 row px-0 my-2">
-            <div class="col-6 p-1">
-                <div class="col-12 padd-img ms-2">
-                    <a href="" data-bs-toggle="modal" data-bs-target="#fotos">
-                        <img class="object-fit-fill shadow size-img " src="img/dormitori1.webp" alt="dormitorio">
-                    </a>
-                </div>
-                <div class="col-12 ms-2">
-                    <a href="" data-bs-toggle="modal" data-bs-target="#fotos">
-                        <img class="object-fit-fill shadow size-img " src="img/bany1.webp" alt="dormitorio">
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 p-1" >
-                <div class="col-12 padd-img ms-2">
-                    <a href="" data-bs-toggle="modal" data-bs-target="#fotos">
-                        <img id="radius-tr" class="object-fit-fill shadow size-img " src="img/bany1.webp" alt="dormitorio">
-                    </a>
-                </div>
-                <div class="col-12 ms-2">
-                    <a href="" data-bs-toggle="modal" data-bs-target="#fotos">
-                        <img id="radius-br" class="object-fit-fill shadow size-img" src="img/piscina.webp" alt="dormitorio">
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div id="contenedor-imagnes" class="row">
+
     </div>
-    <div class="col-12 mt-5 justify-content-between row">
-                <div class="col-7">
+    <div class="col-12 mt-sm-5 mt-sm-4 mt-1 justify-content-between row ms-sm-0 ms-1">
+                <div class="col-sm-7 col-12">
                     <h2 class="fs-4">Casa Rural en Binissalem Mallorca</h2>
                     <div>
                         <p>
@@ -59,7 +29,7 @@
                                 <div class="item mb-1">
                                     <div class="carousel-item active rounded border border-black shadow p-4" data-bs-interval="false">
                                         <div class="col-12 d-flex justify-content-center">
-                                            <img src="img/cama-individual2.png" class="d-block w-25" alt="camas-individuales">
+                                            <img src="img/cama-individual2.png" class="d-block w-50" alt="camas-individuales">
                                         </div>
                                         <div class="d-none d-md-block col-12">
                                             <h5 class="text-dark">Dormitorio 1</h5>
@@ -70,7 +40,7 @@
                                 <div class="item">
                                     <div class="carousel-item active rounded border border-black shadow p-4" data-bs-interval="false">
                                         <div class="col-12 d-flex justify-content-center">
-                                            <img src="img/cama-individual.png" class="d-block w-25" alt="cama-individual">
+                                            <img src="img/cama-individual.png" class="d-block w-50" alt="cama-individual">
                                         </div>
                                         <div class="d-none d-md-block col-12">
                                             <h5 class="text-dark">Dormitorio 2</h5>
@@ -81,11 +51,11 @@
                                 <div class="item me-1">
                                     <div class="carousel-item active rounded border border-black shadow p-4">
                                         <div class="col-12 d-flex justify-content-center">
-                                            <img src="img/cama-doble.png" class="d-block w-25" alt="cama-doble">
+                                            <img src="img/cama-doble.png" class="d-block w-50" alt="cama-doble">
                                         </div>
                                         <div class="d-none d-md-block col-12">
                                             <h5 class="text-dark">Dormitorio 3</h5>
-                                            <p class="text-dark">1 cama de matrimo</p>
+                                            <p class="text-dark">1 cama de matrimonio</p>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +76,7 @@
                                                 $count++;
                                             @endphp
                                     @endforeach
-                                    <div class="col-4">
+                                    <div class="col-sm-4 col-5">
                                         <button type="button" class="btn bg-white border border-dark my-3" data-bs-toggle="modal" data-bs-target="#servicios">Mostrar más</button>
                                     </div>
                                 </ul>
@@ -114,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="POST" action="{{ /*route('confirmacionReserva')*/ route('redsys') }}" class="col-4 border border-dark rounded shadow" style="height: 35%">
+                <form method="POST" action="{{ /*route('confirmacionReserva')*/ route('redsys') }}" class="col-sm-4 mt-sm-0 mt-3 col-12 border border-dark rounded shadow" style="height: 35%">
                     @csrf
                     <div class="mt-2 col-12 row mx-3">
                         <div class="col-2 px-0">
@@ -191,17 +161,24 @@
                         <input id="ptotal" name="ptotal" class="bg-white border-0 h5 col-4 text-end my-3" readonly>
                     </div>
                 </form>
-                <div id="calendari" class="col-7 ">
+                <div id="calendari" class="col-sm-7 col-12 px-0">
                     <div id="inline-picker" class="col-12 my-3"></div>
                 </div>
-                <div class="col-12 row border-top border-bottom border-dark d-flex justify-content-between">
+                <div class="border-top border-bottom border-dark d-flex justify-content-end">
+                    <div class="row col-12">
                     <div class="col-12 text-end my-3">
                         <button type="button" class="btn bg-white btn-white border-0 text-black text-decoration-underline" data-bs-toggle="modal" data-bs-target="#crearComenatrio">Añadir comentario</button>
                     </div>
-                        <div class="modal-body row col-12 justify-content-between">
-                            @foreach($comentarios as $comentario)
-                            <div class="col-6 row mt-4">
-                                <div class="col-2 me-md-2 text-center">
+                    <div class="modal-body col-12 justify-content-between">
+                        @php
+                            $count = 0;
+                        @endphp
+                        @foreach($comentarios as $comentario)
+                            @if($count > 5)
+                                @break
+                            @endif
+                            <div class="col-sm-6 col-12 row mt-4">
+                                <div class="col-sm-2 col-3 me-md-2 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
@@ -240,13 +217,17 @@
                                     </p>
                                 </div>
                             </div>
-                            @endforeach
-                        </div>
-                    <div class="col-4 ">
+                            @php
+                                $count++;
+                            @endphp
+                        @endforeach
+                    </div>
+                    <div class="col-sm-4 col-6 ">
                         <button type="button" class="btn bg-white border border-dark my-3" data-bs-toggle="modal" data-bs-target="#comenarios">Mostrar más</button>
                     </div>
+                    </div>
                 </div>
-                <div class="col-12 row mt-5 mb-4 border-bottom border-dark" >
+                <div class="mt-5 mb-4 border-bottom border-dark" >
                     <div class="col-12">
                         <h4>¿Dónde me voy a quedar?</h4>
                     </div>
@@ -258,13 +239,13 @@
                     </div>
                 </div>
                 <div class="col-12 col-xl-6 row">
-                    <div class="col-xl-2 col-1 me-2 me-xl-0 text-center">
+                    <div class="col-sm-2 col-3 me-2 me-xl-0 text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                         </svg>
                     </div>
-                    <div class="col-9 ps-0 d-flex align-self-center">
+                    <div class="col-8 ps-0 d-flex align-self-center">
                         <h5>Anfitrión: Lucas</h5>
                     </div>
                     <div class="col-12">
@@ -296,7 +277,7 @@
                 @foreach($comentarios as $comentario)
                 <div class="modal-body row col-12">
                     <div class="col-12 col-xl-6 row mt-4">
-                        <div class="col-2 text-center">
+                        <div class="col-sm-2 col-3 text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
@@ -316,7 +297,7 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <p>
+                            <p >
                                 {{$comentario->comentari}}
                             </p>
                         </div>
@@ -390,7 +371,7 @@
                     <h5 class="modal-title" id="vFotos">Fotos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body  d-flex justify-content-center">
                     <div class="row col-12">
                         <div class="col-6 mb-2 pe-1 ">
                             <img class="object-fit-fill shadow size-img rounded-start" src="img/dormitori1.webp" alt="dormitorio">
@@ -422,6 +403,98 @@
 
         let huespedes = 0;
         let totalRating;
+
+
+        //Pintar imagenes y model de imagenes
+
+        $(function (){
+
+            function resizeImage() {
+                let windowWidth = $(window).width();
+
+                if (windowWidth < 540) {
+                    // Ocultar las imágenes en las columnas col-6
+                    $('#contenedor-imagnes .col-6 img').not('#frontCasa').hide();
+                    // Ajustar el tamaño de la imagen firstImage para ocupar todo el contenedor
+                    $('#frontCasa').addClass('full-width rounded-end');
+
+                } else {
+                    // Mostrar las imágenes en las columnas col-6
+                    $('.col-6 img').show();
+                    // Eliminar la clase que ajusta el tamaño de la imagen firstImage
+                    $('#frontCasa').removeClass('full-width rounded-end');
+                }
+            }
+
+            $(window).resize(resizeImage);
+
+            let container = $('#contenedor-imagnes');
+
+            // Crear el primer div col-6
+            let firstDiv = $('<div>').addClass('col-sm-6 col-12 pt-1 px-0 my-2 me-2');
+            let firstLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
+            let firstImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-start').attr('src', 'img/frontCasa.webp').attr('alt', 'entrada').attr('id','frontCasa');
+            firstLink.append(firstImage);
+            firstDiv.append(firstLink);
+
+            // Crear el segundo div col-6
+            let secondDiv = $('<div>').addClass('col-6 row px-0 my-2');
+
+            // Crear las dos columnas col-6 dentro del segundo div
+            let col1 = $('<div>').addClass('col-6 p-1');
+            let col2 = $('<div>').addClass('col-6 p-1');
+
+            // Crear las imágenes y añadir al primer div col-6
+            let img1 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/dormitori1.webp').attr('alt', 'dormitorio');
+            let link1 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img1);
+            col1.append($('<div>').addClass('col-12 padd-img ms-2').append(link1));
+
+            let img2 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/bany1.webp').attr('alt', 'baño');
+            let link2 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img2);
+            col1.append($('<div>').addClass('col-12 ms-2').append(link2));
+
+            // Crear las imágenes y añadir al segundo div col-6
+            let img3 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/bany1.webp').attr('alt', 'baño').attr('id','radius-tr');
+            let link3 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img3);
+            col2.append($('<div>').addClass('col-12 padd-img ms-2').append(link3));
+
+            let img4 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/piscina.webp').attr('alt', 'piscina').attr('id','radius-br');
+            let link4 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img4);
+            col2.append($('<div>').addClass('col-12 ms-2').append(link4));
+
+            // Añadir las columnas al segundo div col-6
+            secondDiv.append(col1);
+            secondDiv.append(col2);
+
+            // Añadir los divs al contenedor principal
+            container.append(firstDiv);
+            container.append(secondDiv);
+
+            // Agregar evento de clic a las imágenes
+            $('img').click(function() {
+                $('#fotos').modal('show'); // Mostrar el modal al hacer clic en cualquier imagen
+            });
+
+            resizeImage();
+        })
+
+        function resizeImage() {
+            var windowWidth = $(window).width();
+
+            if (windowWidth < 540) {
+                // Ocultar las imágenes en las columnas col-6
+                $('.col-6 img').not('#frontCasa').hide();
+                // Ajustar el tamaño de la imagen firstImage para ocupar todo el contenedor
+                $('#frontCasa').addClass('full-width');
+            } else {
+                // Mostrar las imágenes en las columnas col-6
+                $('.col-6 img').show();
+                // Eliminar la clase que ajusta el tamaño de la imagen firstImage
+                $('#frontCasa').removeClass('full-width');
+            }
+        }
+
+
 
         //Carousel
         $("#owl-example1").owlCarousel({

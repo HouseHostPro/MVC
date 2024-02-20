@@ -7,25 +7,25 @@
 @section('content')
 
     <div class="row col-12 justify-content-between">
-        <nav class="mt-3 col-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <nav class="mt-3 col-sm-6 col-10" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
                 <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Propiedades</li>
             </ol>
         </nav>
-        <div class="col-3 mt-3 text-end">
+        <div class="col-sm-3 col-2 mt-3  text-end">
             <form method="get" action="{{ route('property.loadForm') }}">
-                <button type="submit" class="btn bg-primary bg-opacity-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus pb-1" viewBox="0 0 16 16">
+                <button type="submit" class="btn bg-primary bg-opacity-50 p-sm-2 p-1">
+                    <svg id="icono" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus pb-1" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                    </svg>Añadir propiedad
+                    </svg><span id="palabra">Añadir propiedad</span>
                 </button>
             </form>
         </div>
     </div>
     <div class="row col-12">
-        <div class=" col-2 mb-3">
+        <div class=" col-sm-2 col-6 mb-3">
             <label>Buscar casa:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
@@ -65,9 +65,21 @@
                     method: 'GET',
                     url: `http://localhost:8100/allProperties`
                 }).done(function (propiedades) {
-                    console.log(propiedades);
                     printProperties(propiedades);
                 });
+                function resizeSpan() {
+                    let windowWidth = $(window).width();
+
+                    if (windowWidth < 540) {
+                        $('#palabra').hide();
+                        $('#icono').css({"width":"30","height":"30"});
+                    } else {
+                        $('#palabra').show();
+                    }
+                }
+
+                $(window).resize(resizeSpan);
+                resizeSpan();
 
             })
 

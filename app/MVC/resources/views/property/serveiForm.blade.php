@@ -5,15 +5,21 @@
 @endsection
 @section('title','Servicios')
 @section('content')
-    <nav class="mt-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('principal')}}">{{__('Principal')}}</a></li>
-            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
-            <li class="breadcrumb-item"><a href="{{route('property.properties')}}">{{__('Propiedades')}}</a></li>
-            <li class="breadcrumb-item"><a href="{{URL::previous()}}">{{$propietat->nom}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{__('Servicios')}}</li>
-        </ol>
-    </nav>
+    <div class="row col-12 justify-content-between">
+        <nav class="mt-3 col-7" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('principal')}}">{{__('Principal')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('property.properties')}}">{{__('Propiedades')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{URL::previous()}}">{{$propietat->nom}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{__('Servicios')}}</li>
+            </ol>
+        </nav>
+        <div class="col-2 my-3">
+            <label>Buscar servicio:</label>
+            <input id="cercador" class="form-control" type="text">
+        </div>
+    </div>
     <div class="gradient-custom-1 ">
         <div class="mask d-flex align-items-center ">
             <div class="container">
@@ -117,20 +123,25 @@
                 fila.append(columnCheckbox);
                 $('#tabla').append(fila);
             })
-            let inputTotal = $('<inpunt>').attr({
-                type: 'hidden',
-                id: 'total',
-                name: 'total'
-            })
-            let checkboxes = $('input[type="checkbox"]');
-            checkboxes.change(function(){
-                let count = checkboxes.filter(':checked').length
-                $('#total').val(count);
-            })
         }
         $('buttonSave').submit( function (value){
-
         })
+
+        $('#cercador').on("input",function (){
+
+            const caracters = $(this).val().toUpperCase();
+            const tabla = $('#tabla');
+
+            tabla.find('tr').each(function () {
+                const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
+                if (nombrePropiedad.includes(caracters)) {
+                    $(this).show(); // Mostrar fila si coincide con la búsqueda
+                } else {
+                    $(this).hide(); // Ocultar fila si no coincide con la búsqueda
+
+                }
+            });
+        });
         $('#atras').remove();
     </script>
 @endsection

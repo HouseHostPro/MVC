@@ -18,8 +18,6 @@
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>
-
-
     <div class="col-12 row justify-content-center mt-3 mb-4">
         <h2 class="text-center">Mis comentarios</h2>
     </div>
@@ -101,7 +99,6 @@
             })
 
             function printCommnets(comentario, num){
-
 
                 comentario.forEach( function (value){
 
