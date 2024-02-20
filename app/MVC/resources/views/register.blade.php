@@ -78,11 +78,9 @@
                             @auth
                                 @if($user->ciutat->nom == $ciutat->nom)
                                     <option value="{{ $ciutat->id }}" selected>{{$ciutat->nom}}</option>
-                                    <input id="city{{ $ciutat->id }}" type="text" value="{{ $ciutat->pais_id }}" hidden>
-                                @else
-                                    <option value="{{ $ciutat->id }}">{{$ciutat->nom}}</option>
                                 @endif
                             @endauth
+                                    <option value="{{ $ciutat->id }}">{{$ciutat->nom}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -93,10 +91,9 @@
                             @auth
                                 @if($user->ciutat->pais->nom == $pais->nom)
                                     <option value="{{ $pais->id }}" selected>{{$pais->nom}}</option>
-                                @else
-                                    <option value="{{ $pais->id }}">{{$pais->nom}}</option>
                                 @endif
                             @endauth
+                                    <option value="{{ $pais->id }}">{{$pais->nom}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -132,6 +129,7 @@
             $(this).prop('hidden', true);
             $('#noVer').prop('hidden', false);
         })
+
 
 
     </script>

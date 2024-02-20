@@ -31,10 +31,7 @@
             <span class="absolute left-0 text-sm -top-4 text-blue-600">{{__('Precio limpieza')}}</span>
             <p>{{ $limpieza }}</p>
         </div>
-        <div class="input_text mt-8 relative">
-            <span class="absolute left-0 text-sm -top-4 text-blue-600">{{__('Mascotas'}}</span>
-            <p>{{ $mascotas }}</p>
-        </div>
+
 
         <p class="text-lg text-left mt-4 text-gray-600 font-semibold">{{__('Total a pagar')}}: {{ $precioTotal }}</p>
         <div class="flex justify-center mt-4">

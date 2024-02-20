@@ -107,4 +107,5 @@ Route::get('language/{locale}', function ($locale) {
 
 
 //Mail
-Route::get('/mailprova', [MailController::class, 'emailprova']);
+Route::get('/mailprova', [MailController::class, 'emailprova']) -> name('email.prova');
+Route::post('/verificado', [MailController::class, 'verificar']) -> name('email.verificar');

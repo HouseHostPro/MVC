@@ -7,13 +7,13 @@
 @section('content')
 
     @foreach($traduccioNom as $nom)
-        @if($nom -> lang === Config::get('app.locale'))
+        @if($nom -> lang === app()->getLocale())
             <?php $nomTraduit = $nom ?>
         @endif
     @endforeach
 
     @foreach($traduccioDesc as $desc)
-        @if($desc -> lang === Config::get('app.locale'))
+        @if($desc -> lang === app()->getLocale())
                 <?php $descTraduit = $desc ?>
         @endif
     @endforeach

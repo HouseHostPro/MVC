@@ -39,8 +39,8 @@ class PropertyFormController extends Controller {
     }
 
     public function updatePropietat(Request $request) {
-        $traduccioNom = Traduccio::where('code', $request -> nameCode) -> where('lang', "es") -> first();
-        $traduccioDesc = Traduccio::where('code', $request -> descCode) -> where('lang', "es") -> first();
+        $traduccioNom = Traduccio::where('code', $request -> nameCode) -> where('lang', app()->getLocale()) -> first();
+        $traduccioDesc = Traduccio::where('code', $request -> descCode) -> where('lang', app()->getLocale()) -> first();
 
         $traduccioNom -> value = $request -> nombre;
         $traduccioDesc -> value = $request -> descripcion;
