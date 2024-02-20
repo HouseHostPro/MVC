@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ciutat;
+use App\Models\Configuracio_Servei;
 use App\Models\Reserva;
 use App\Models\Servei;
+use Couchbase\RegexpSearchQuery;
 use Illuminate\Http\Request;
 use App\Models\Traduccio;
 use App\Models\Propietat;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 class PropertyFormController extends Controller {
 
 
+    //Propiedades
     public function findAllByUser() {
         $propietats = Propietat::where('usuari_id',Auth::user()->id) -> get();
         return view("property/properties", compact("propietats"));
@@ -35,16 +38,6 @@ class PropertyFormController extends Controller {
         return view("property/propertyInfo", compact("propietat",
             "ciutats", "traduccioNom", "traduccioDesc"));
     }
-    public function loadForm() {
-        $ciutats = $this -> findAllCiutats();
-        return view("property/propertyForm", compact("ciutats"));
-    }
-
-    public function findAllCiutats() {
-        $ciutats = Ciutat::all();
-        return $ciutats;
-    }
-
     public function store(Request $request) {
         $property = new Propietat();
         $property -> nom = $request -> nombre_propiedad;
@@ -56,13 +49,6 @@ class PropertyFormController extends Controller {
         $property -> save();
         $success = "Tu propiedad está casi lista! Ahora, añade algunos espacios";
         return redirect() -> route('espai.loadForm') -> with('success', $success);
-    }
-
-    private function findTraduccions($descCode, $titleCode) {
-        $traduccioNom = Traduccio::where('code', $titleCode) -> get();
-        $traduccioDesc = Traduccio::where('code', $descCode) -> get();
-
-        return [$traduccioNom, $traduccioDesc];
     }
 
     public function updatePropietat(Request $request) {
@@ -77,6 +63,27 @@ class PropertyFormController extends Controller {
 
         return redirect(route('property.edit', ['id' => $request -> id])) -> with('success', 'Actualizado');
     }
+
+    //Ciudades
+    public function loadForm() {
+        $ciutats = $this -> findAllCiutats();
+        return view("property/propertyForm", compact("ciutats"));
+    }
+
+    public function findAllCiutats() {
+        $ciutats = Ciutat::all();
+        return $ciutats;
+    }
+
+    //Traducciones
+    private function findTraduccions($descCode, $titleCode) {
+        $traduccioNom = Traduccio::where('code', $titleCode) -> get();
+        $traduccioDesc = Traduccio::where('code', $descCode) -> get();
+
+        return [$traduccioNom, $traduccioDesc];
+    }
+
+    //Calendario
 
     public function loadCalendar(Request $request) {
         $dates = $this->findAllDatesReservades($request);
@@ -112,6 +119,8 @@ class PropertyFormController extends Controller {
         return $dates;
     }
 
+
+    //Servicios
     public function loadSevice(Request $request){
 
         $id = $request->session()->get('idPropiedad');
@@ -128,11 +137,22 @@ class PropertyFormController extends Controller {
 
         return $servicios;
     }
-    public function serviceById(Request $request){
+
+    public function serviceByProperty(Request $request){
+
+        $id = $request->session()->get('idPropiedad');
+
+        $servicios = Configuracio_Servei::where('configuracio_id',$id)->get();
+
+        return $servicios;
+
+    }
+
+    public function saveService(Request $request){
+
+        $id = $request->session()->get('idPropiedad');
+        var_dump(count($request->all()));
 
 
-        $servicio = Servei::find($request->id);
-
-        return $servicio;
     }
 }

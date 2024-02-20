@@ -7,30 +7,27 @@
 @section('content')
     <nav class="mt-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
-            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
-            <li class="breadcrumb-item"><a href="{{route('property.properties')}}">Propiedades</a></li>
+            <li class="breadcrumb-item"><a href="{{route('principal')}}">{{__('Principal')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('property.properties')}}">{{__('Propiedades')}}</a></li>
             <li class="breadcrumb-item"><a href="{{URL::previous()}}">{{$propietat->nom}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Servicios</li>
+            <li class="breadcrumb-item active" aria-current="page">{{__('Servicios')}}</li>
         </ol>
     </nav>
-    <div id="selectContainer"  class="mb-2">
-
-    </div>
     <div class="gradient-custom-1 ">
         <div class="mask d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-10">
                         <div class="table-responsive bg-white">
-                            <form action="post" class="row col-12 justify-content-end">
+                            <form action="{{route('saveService')}}" method="post" class="row col-12 justify-content-end">
                                 @csrf
                             <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                 <thead>
                                 <tr class="text-center">
-                                    <th>Nom</th>
-                                    <th>Descripción</th>
-                                    <th>Acciones</th>
+                                    <th>{{__('Nom')}}</th>
+                                    <th>{{__('Descripción')}}</th>
+                                    <th>{{__('Acciones')}}</th>
                                 </tr>
                                 </thead>
                                     <tbody id="tabla">
@@ -38,7 +35,7 @@
                                     </tbody>
                             </table>
                                 <div class="col-2">
-                                    <button type="submit" class="btn bg-primary bg-opacity-50 mt-3 ">Guardar</button>
+                                    <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 mt-3 ">Guardar</button>
                                 </div>
                             </form>
                         </div>
@@ -49,8 +46,9 @@
     </div>
     <script>
 
-        let serviceObj = [];
-        let allservices = [];
+
+        let allServices = [];
+        let allServicesByProperty = [];
 
         $(document).ready(function (){
 
@@ -58,46 +56,26 @@
                 method: 'GET',
                 url: `http://localhost:8100/serviciosAjax`
             }).done(function (service) {
-                allservices.push.apply(allservices, service);
-                printSelect();
+                allServices.push.apply(allServices, service);
+                $.ajax({
+                    method: 'GET',
+                    url: `http://localhost:8100/serviciosByProperty`
+                }).done(function (service) {
+                    allServicesByProperty.push.apply(allServicesByProperty, service);
+                    printServicios();
+                });
+
             });
+
+
         })
 
 
-
-        function printSelect(){
-
-            let select = $('<select>').attr({
-                id: 'servicios',
-                name: 'servicios',
-                class: 'form-control'
-            })
-
-            allservices.forEach( function(value){
-
-                let option = $('<option>').attr('value', value.id).text(value.nom);
-                select.append(option);
-            })
-            $('#selectContainer').append(select);
-
-            $('#servicios').change(function(){
-                let id = $(this).val();
-                console.log(id)
-                $.ajax({
-                    method: 'GET',
-                    url: `http://localhost:8100/servicio/${id}`
-                }).done(function (servicio) {
-                    console.log(servicio);
-                    serviceObj.push(servicio);
-                    printServicios()
-                });
-            })
-        }
         function printServicios(){
 
             $('#tabla').html("");
 
-            serviceObj.forEach( function (value){
+            allServices.forEach( function (value){
 
                 let fila = $('<tr>');
                 let columnName = $('<td>');
@@ -122,16 +100,37 @@
                 fila.append(columnName);
                 fila.append(columnDesc);
 
-                let columnButton = $('<td>');
-                let botonGuardar = $('<button>').attr({
-                    type: 'button',
-                    id: 'delete'
-                }).addClass('btn bg-danger bg-opacity-50').text('Eliminar');
-                columnButton.append(botonGuardar).addClass('text-center');
-                fila.append(columnButton);
+                let columnCheckbox = $('<td>');
+                let chechkbox = $('<input>').attr({
+                    type: 'checkbox',
+                    name: `s-${value.id}`,
+                    value: value.id
+                });
+
+                allServicesByProperty.forEach( function (serv){
+                    if(serv.servei_id === value.id){
+                        chechkbox.prop('checked',true);
+                    }
+                })
+
+                columnCheckbox.append(chechkbox).addClass('text-center');
+                fila.append(columnCheckbox);
                 $('#tabla').append(fila);
             })
+            let inputTotal = $('<inpunt>').attr({
+                type: 'hidden',
+                id: 'total',
+                name: 'total'
+            })
+            let checkboxes = $('input[type="checkbox"]');
+            checkboxes.change(function(){
+                let count = checkboxes.filter(':checked').length
+                $('#total').val(count);
+            })
         }
+        $('buttonSave').submit( function (value){
+
+        })
         $('#atras').remove();
     </script>
 @endsection

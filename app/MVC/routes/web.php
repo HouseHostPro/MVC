@@ -57,7 +57,8 @@ Route::middleware('auth')->group(function (){
     //CRUD servicios
     Route::get('/servicios',[PropertyFormController::class,'loadSevice'])->name('property.service');
     Route::get('/serviciosAjax',[PropertyFormController::class,'allService'])->name('serviceA');
-    Route::get('/servicio/{id}',[PropertyFormController::class,'serviceById'])->name('serviceId');
+    Route::get('/serviciosByProperty',[PropertyFormController::class,'serviceByProperty'])->name('serviciosPreperty');
+    Route::post('/saveService',[PropertyFormController::class,'saveService'])->name('saveService');
 
     //Mostrar todas las propiedades
     Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
