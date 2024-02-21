@@ -14,32 +14,29 @@
 <body>
 <div class="flex justify-center items-center min-h-screen bg-blue-300">
     <div class="h-auto w-80 bg-white p-3 rounded-lg">
-        <p class="text-xl font-semibold">Detalles del pago</p>
+        <p class="text-xl font-semibold">{{__('Detalles del pago')}}</p>
         <div class="input_text mt-6 relative">
-            <span class="absolute left-0 text-sm -top-4 text-blue-600">Desde</span>
+            <span class="absolute left-0 text-sm -top-4 text-blue-600">{{__('Desde')}}</span>
             <p>{{ $from }}</p>
         </div>
         <div class="input_text mt-8 relative">
-            <span class="absolute left-0 text-sm -top-4 text-blue-600">Hasta</span>
+            <span class="absolute left-0 text-sm -top-4 text-blue-600">{{__('Hasta')}}</span>
             <p>{{ $to }}</p>
         </div>
         <div class="input_text mt-8 relative">
-            <span class="absolute left-0 text-sm -top-4 text-blue-600">Personas</span>
+            <span class="absolute left-0 text-sm -top-4 text-blue-600">{{__('Personas')}}</span>
             <p>{{ $personas }}</p>
         </div>
         <div class="input_text mt-8 relative">
-            <span class="absolute left-0 text-sm -top-4 text-blue-600">Coste limpieza</span>
+            <span class="absolute left-0 text-sm -top-4 text-blue-600">{{__('Precio limpieza')}}</span>
             <p>{{ $limpieza }}</p>
         </div>
-        <div class="input_text mt-8 relative">
-            <span class="absolute left-0 text-sm -top-4 text-blue-600">Mascotas</span>
-            <p>{{ $mascotas }}</p>
-        </div>
 
-        <p class="text-lg text-left mt-4 text-gray-600 font-semibold">Total a pagar: {{ $precioTotal }}</p>
+
+        <p class="text-lg text-left mt-4 text-gray-600 font-semibold">{{__('Total a pagar')}}: {{ $precioTotal }}</p>
         <div class="flex justify-center mt-4">
             <button id="pay"
-                    class="outline-none pay h-12 bg-orange-600 text-white mb-3 hover:bg-orange-700 rounded-lg w-1/2 cursor-pointer transition-all">Pagar</button>
+                    class="outline-none pay h-12 bg-orange-600 text-white mb-3 hover:bg-orange-700 rounded-lg w-1/2 cursor-pointer transition-all">{{__('Pagar')}}</button>
             {!! $form !!}
         </div>
     </div>

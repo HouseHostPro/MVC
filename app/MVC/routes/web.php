@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TraduccioController;
 use App\Http\Controllers\PropertyFormController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,8 @@ Route::get('/property/edit/{id}', [PropertyFormController::class, 'getPropietat'
 Route::post('/property/edit/{id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
 Route::get('/property/edit/{id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
 
+Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
+
 Route::view('/propertyView', 'property.property') -> name('property.view');
 Route::view('/propertyForm', 'property.propertyForm');
 
@@ -119,3 +122,18 @@ Route::controller(RedsysController::class)->prefix('redsys')
         Route::get('/ko', 'ko');
         Route::get('/notification', 'notification');
     });
+
+//PDF
+Route::get('/factures/pdf',[RedsysController::class, 'exportPdf']) -> name('facturaPdf');
+
+//Localization
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
+
+
+//Mail
+Route::get('/mailprova', [MailController::class, 'emailprova']) -> name('email.prova');
+Route::post('/verificado', [MailController::class, 'verificar']) -> name('email.verificar');

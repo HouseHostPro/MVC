@@ -82,7 +82,14 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
+
+    'available_locales' => [
+        'English' => 'en',
+        'Spanish' => 'es',
+        'Catalan' => 'ca',
+        'Korean' => 'ko',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -183,6 +190,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         MongoDB\Laravel\MongoDBServiceProvider::class,
 
+        //PDF
+        Barryvdh\DomPDF\ServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -211,6 +221,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
+
+
 
 ];

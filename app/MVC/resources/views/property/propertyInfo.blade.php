@@ -11,13 +11,13 @@
 </head>
 <body>
     @foreach($traduccioNom as $nom)
-        @if($nom -> lang === "es")
-            <?php $nomTraduit = $nom?>
+        @if($nom -> lang === app()->getLocale())
+            <?php $nomTraduit = $nom ?>
         @endif
     @endforeach
 
     @foreach($traduccioDesc as $desc)
-        @if($desc -> lang === "es")
+        @if($desc -> lang === app()->getLocale())
                 <?php $descTraduit = $desc ?>
         @endif
     @endforeach
@@ -81,7 +81,7 @@
                 <form method="post" action="{{ route('property.update', ['id' => $propietat -> id]) }}" class="col-12 position-absolute"  style="top: 60px">
                     @csrf
                     <div class="row col-12">
-                        <h2>Edición de la propiedad</h2>
+                        <h2>{{__('Editar propiedad')}}</h2>
                         <div class="col-sm-4 col-12 ">
                             <div class="d-flex flex-column align-items-center">
                                 <img class="img-fluid mt-4"  src="https://images.adsttc.com/media/images/5d34/e507/284d/d109/5600/0240/large_jpg/_FI.jpg?1563747560" >
@@ -94,23 +94,23 @@
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-sm-6">
-                                        <label class="labels">Nombre</label>
+                                        <label class="labels">{{__('Nombre')}}</label>
                                         <input type="text" name="nombre" class="form-control" value="{{ $nomTraduit -> value }}">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-sm-12">
-                                        <label class="language-">Descripción</label>
+                                        <label class="language-">{{__('Descripción')}}</label>
                                         <textarea class="form-control" name="descripcion">{{ $descTraduit -> value }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-sm-6 col-12">
-                                        <label class="labels">Ubicación</label>
+                                        <label class="labels">{{__('Ubicación')}}</label>
                                         <input type="text" class="form-control" placeholder="country" value="{{$propietat -> localitzacio}}">
                                     </div>
                                     <div class="col-sm-6 col-12">
-                                        <label class="label">Ciutat</label>
+                                        <label class="label">{{__('Ciutat')}}</label>
                                         <select class="form-control">
                                             @foreach($ciutats as $ciutat)
                                                 <option value="{{$ciutat -> id}}" @if($ciutat -> id === $propietat -> ciutat_id) selected @endif>{{$ciutat -> nom}}</option>
@@ -122,7 +122,7 @@
                                 <input type="hidden" name="descCode" value="{{ $propietat -> descripcio }}" />
                                 <input type="hidden" name="id" value="{{ $propietat -> id }}" />
                                 <div class="mt-5 text-center">
-                                    <button class="btn btn-primary profile-button" type="submit">Guardar cambios</button>
+                                    <button class="btn btn-primary profile-button" type="submit">{{__('Guardar cambios')}}</button>
                                 </div>
                             </div>
                         </div>

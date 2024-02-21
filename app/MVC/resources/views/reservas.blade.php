@@ -3,14 +3,14 @@
 @section('url')
     {{route('cuenta')}}
 @endsection
-@section('title','Reservas')
+@section('title',__('Reservas'))
 @section('content')
     <div class="row col-12 justify-content-between mb-4">
         <nav class="mt-3 col-sm-6 col-12" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
-                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Reservas</li>
+                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{__('Reservas')}}</li>
             </ol>
         </nav>
         <div class="col-sm-2 col-6 mt-sm-3 mt-1">
@@ -27,11 +27,11 @@
                             <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                 <thead>
                                 <tr class="text-center">
-                                    <th>Nombre propiedad</th>
-                                    <th>Fecha entrada/salida</th>
-                                    <th>Personas</th>
-                                    <th>Precio total</th>
-                                    <th>Acciones</th>
+                                    <th>{{__('Nombre propiedad')}}</th>
+                                    <th>{{__('Fecha entrada/salida')}}</th>
+                                    <th>{{__('Personas')}}</th>
+                                    <th>{{__('Precio total')}}</th>
+                                    <th>{{__('Acciones')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody id="tabla">
@@ -84,7 +84,7 @@
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     //!!!CAMBIAR EL ACTION DEL BOTON!!!
                     let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
-                    let botonVer = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text('Ver');
+                    let botonVer = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text({{__('Ver')}});
                     form.append(botonVer);
                     let celdaFormulario = $('<td>').append(form).addClass('text-center');
                     fila.append(celdaFormulario);

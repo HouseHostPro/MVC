@@ -3,16 +3,16 @@
     {{route('login')}}
 @endsection
 @guest
-@section('title','Crear de usuario')
+@section('title',__('Creación de usuario'))
 @endguest
-@section('title','Modificar de usuario')
+@section('title',__('Edición de usuario'))
 @section('content')
     @auth
     <nav class="mt-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
-            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Información Personal</li>
+            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{__('Información personal')}}</li>
         </ol>
     </nav>
     @endauth
@@ -20,13 +20,13 @@
             @csrf
             <div class="row justify-content-center mt-4">
                 <div class="form-group mb-sm-1 mb-3 col-sm-5 col-12">
-                    <label for="emailInput">Correo electrónico:</label>
-                    <input required type="email" class="form-control" name="email" value="@auth{{$user->email}}@endauth" aria-label="correo electronico" placeholder="correo electrónico">
+                    <label for="emailInput">{{__('Correo electrónico')}}:</label>
+                    <input required type="email" class="form-control" name="email" value="@auth{{$user->email}}@endauth" aria-label="correo electronico" placeholder="{{__('Correo electrónico')}}">
                 </div>
                 <div class="form-group mb-sm-1 mb-0 col-sm-5 col-12">
                     <div class="col-12 row">
                         <div class="col-11">
-                            <label for="passwordInput">Contraseña:</label>
+                            <label for="passwordInput">{{__('Contraseña')}}:</label>
                             <input required id="pass" type="password" class="form-control" value="@auth{{$user->contrasenya}}@endauth" name="contrasenya" placeholder="Contraseña">
                         </div>
                         <div class="col-1 pt-4 ">
@@ -49,55 +49,52 @@
             </div>
             <div class="row justify-content-center">
                 <div class="form-group mb-sm-1 mb-3 col-sm-5 col-12">
-                    <label for="nameInput">Nombre:</label>
-                    <input required type="text" class="form-control" value="@auth{{$user->nom}}@endauth" name="nom" placeholder="Nombre">
+                    <label for="nameInput">{{__('Nombre')}}:</label>
+                    <input required type="text" class="form-control" value="@auth{{$user->nom}}@endauth" name="nom" placeholder="{{__('Nombre')}}">
                 </div>
                 <div class="form-group mb-sm-1 mb-0 col-sm-5 col-12">
-                    <label for="surnameInput">Primer Apellido:</label>
-                    <input required type="text" class="form-control" value="@auth{{$user->cognom1}}@endauth" name="cognom1" placeholder="Apellido">
+                    <label for="surnameInput">{{__('Primer apellido')}}:</label>
+                    <input required type="text" class="form-control" value="@auth{{$user->cognom1}}@endauth" name="cognom1" placeholder="{{__('Primer apellido')}}">
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="form-group mb-sm-1 mb-3 col-sm-5 col-12">
-                    <label for="secondSurnameInput">Segundo Apellido:</label>
-                    <input type="text" class="form-control" value="@auth{{$user->cognom2}}@endauth" name="cognom2" placeholder="Segundo apellido">
+                    <label for="secondSurnameInput">{{__('Segundo apellido')}}:</label>
+                    <input type="text" class="form-control" value="@auth{{$user->cognom2}}@endauth" name="cognom2" placeholder="{{__('Segundo apellido')}}">
                 </div>
                 <div class="form-group mb-sm-1 mb-0 col-sm-5 col-12">
-                    <label for="phoneInput">Teléfono:</label>
-                    <input required type="tel" class="form-control" value="@auth{{$user->telefon}}@endauth" name="telefon" placeholder="Telefono">
+                    <label for="phoneInput">{{__('Teléfono')}}:</label>
+                    <input required type="tel" class="form-control" value="@auth{{$user->telefon}}@endauth" name="telefon" placeholder="{{__('Teléfono')}}">
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="form-group mb-sm-1 mb-3 col-sm-4 col-12">
-                    <label for="addressInput">Dirección:</label>
-                    <input required type="text" class="form-control" value="@auth{{$user->direccio}}@endauth" name="direccio" placeholder="Direccion">
+                    <label for="addressInput">{{__('Dirección')}}:</label>
+                    <input required type="text" class="form-control" value="@auth{{$user->direccio}}@endauth" name="direccio" placeholder="{{__('Dirección')}}">
                 </div>
                 <div class="form-group mb-sm-1 mb-0 col-sm-3 col-6">
-                    <label for="ciutat">Ciudad</label>
+                    <label for="ciutat">{{__('Ciudad')}}</label>
                     <select id="city" required name="ciutat_id" class="form-control">
                         @foreach($ciutats as $ciutat)
                             @auth
                                 @if($user->ciutat->nom == $ciutat->nom)
                                     <option value="{{ $ciutat->id }}" selected>{{$ciutat->nom}}</option>
-                                    <input id="city{{ $ciutat->id }}" type="text" value="{{ $ciutat->pais_id }}" hidden>
-                                @else
-                                    <option value="{{ $ciutat->id }}">{{$ciutat->nom}}</option>
                                 @endif
                             @endauth
+                                    <option value="{{ $ciutat->id }}">{{$ciutat->nom}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group mb-sm-2 mb-0 col-sm-3 col-6">
-                    <label for="pais">Pais</label>
+                    <label for="pais">{{__('País')}}</label>
                     <select required name="pais_id" class="form-control">
                         @foreach($paises as $pais)
                             @auth
                                 @if($user->ciutat->pais->nom == $pais->nom)
                                     <option value="{{ $pais->id }}" selected>{{$pais->nom}}</option>
-                                @else
-                                    <option value="{{ $pais->id }}">{{$pais->nom}}</option>
                                 @endif
                             @endauth
+                                    <option value="{{ $pais->id }}">{{$pais->nom}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -107,12 +104,12 @@
                 <div class="form-check col-10 ms-4">
                     <input required class="form-check-input" type="checkbox" value="" name="privacyPolicyCheckbox">
                     <label class="form-check-label" for="privacyPolicyCheckbox">
-                        Acepto la política de privacidad y seguridad
+                        {{__('Acepto la política de privacidad y seguridad')}}
                     </label>
                 </div>
                 @endguest
                 <di class="text-end col-10">
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="submit" class="btn btn-primary">{{__('Enviar')}}</button>
                 </di>
             </div>
         </form>
@@ -133,6 +130,7 @@
             $(this).prop('hidden', true);
             $('#noVer').prop('hidden', false);
         })
+
 
 
     </script>

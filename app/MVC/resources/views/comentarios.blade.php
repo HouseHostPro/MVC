@@ -3,14 +3,14 @@
 @section('url')
     {{route('cuenta')}}
 @endsection
-@section('title','Comentarios')
+@section('title',__('Comentarios'))
 @section('content')
     <div class="row col-12 justify-content-between">
         <nav class="mt-3 col-sm-6 col-12" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
-                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Comentarios</li>
+                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{__('Comentarios')}}</li>
             </ol>
         </nav>
         <div class="col-sm-2 col-6 mt-sm-3 mt-1">
@@ -30,10 +30,10 @@
                             <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                 <thead>
                                 <tr class="text-center">
-                                    <th>Nombre propiedad</th>
-                                    <th >Descripción</th>
-                                    <th>Puntuación</th>
-                                    <th>Acciones</th>
+                                    <th>{{__('Nombre propiedad')}}</th>
+                                    <th>{{__('Descripción')}}</th>
+                                    <th>{{__('Puntuación')}}</th>
+                                    <th>{{__('Acciones')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody id="tabla">
@@ -60,10 +60,10 @@
                                     <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                         <thead>
                                         <tr class="text-center">
-                                            <th>Nombre propiedad</th>
-                                            <th >Descripción</th>
-                                            <th>Puntuación</th>
-                                            <th>Acciones</th>
+                                            <th>{{__('Nombre propiedad')}}</th>
+                                            <th>{{__('Descripción')}}</th>
+                                            <th>{{__('Puntuación')}}</th>
+                                            <th>{{__('Acciones')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody id="tablaAll">
@@ -127,7 +127,7 @@
                         $('#tabla').append(fila);
                         //Creamos el botón, el formulario, la columna del botón y el formulario
                         let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
-                        let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text('Eliminar');
+                        let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text({{__('Eliminar')}});
                         form.append(botonEliminar);
                         let celdaFormulario = $('<td>').append(form);
                         fila.append(celdaFormulario);

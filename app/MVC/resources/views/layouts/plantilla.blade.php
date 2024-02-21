@@ -46,7 +46,7 @@
                     <ul class="navbar-nav" >
                         <li class="nav-item me-3" >
                             <button type="button" class="btn btn-link text-decoration-none text-light fs-5" data-bs-toggle="modal" data-bs-target="#idiomes">
-                                Idioma
+                                {{__('Idioma')}}
                             </button>
                         </li>
                         <li class="nav-item dropdown">
@@ -57,19 +57,19 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
                                 @guest
-                                    <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar sesion</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('login') }}">{{__('Iniciar sesión')}}</a></li>
                                 @endguest
                                     <li>
                                         <form method="post" action="{{ route('cuenta') }}">
                                             @csrf
-                                            <button type="submit" class="btn btn-link text-black text-decoration-none ps-3">Cuenta</button>
+                                            <button type="submit" class="btn btn-link text-black text-decoration-none ps-3">{{__('Cuenta')}}</button>
                                         </form>
                                     </li>
                                 @auth
                                     <li>
                                         <form method="post" action="{{ route('logout') }}">
                                             @csrf
-                                            <button type="submit" class="btn btn-link text-black text-decoration-none ps-3">Cerrar Sesión</button>
+                                            <button type="submit" class="btn btn-link text-black text-decoration-none ps-3">{{__('Cerrar sesión')}}</button>
                                         </form>
                                     </li>
                                 @endauth
@@ -85,23 +85,24 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Idiomas</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{__('Idiomas')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
                             <form class="d-flex justify-content-between" >
-                                <button type="submit" class="btn btn-link text-decoration-none text-dark col-2 p-0 border-0" data-bs-dismiss="modal">Catalan</button>
+                                @include('language_switcher')
+                                <!--<button type="submit" class="btn btn-link text-decoration-none text-dark col-2 p-0 border-0" data-bs-dismiss="modal">Catalan</button>
                                 <button type="submit" class="btn btn-link text-decoration-none text-dark col-2 p-0 border-0" data-bs-dismiss="modal">Castellano</button>
                                 <button type="submit" class="btn btn-link text-decoration-none text-dark col-2 p-0 border-0" data-bs-dismiss="modal">Inglés</button>
-                                <button type="submit" class="btn btn-link text-decoration-none text-dark col-2 p-0 border-0" data-bs-dismiss="modal">Aleman</button>
+                                <button type="submit" class="btn btn-link text-decoration-none text-dark col-2 p-0 border-0" data-bs-dismiss="modal">Aleman</button>-->
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('Cerrar')}}</button>
                 </div>
             </div>
         </div>
