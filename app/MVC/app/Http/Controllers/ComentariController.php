@@ -44,7 +44,9 @@ class ComentariController extends Controller{
 
     public function comentarios(Request $request){
 
-        return view('comentarios');
+        $user = $request->session()->get('user');
+
+        return view('comentarios',compact('user'));
 
     }
 

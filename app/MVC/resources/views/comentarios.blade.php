@@ -1,4 +1,4 @@
-@extends('layouts.plantillaFormularios');
+@extends('layouts.plantillaFormularios')
 
 @section('url')
     {{route('cuenta')}}
@@ -6,26 +6,26 @@
 @section('title','Comentarios')
 @section('content')
     <div class="row col-12 justify-content-between">
-        <nav class="mt-3 col-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <nav class="mt-3 col-sm-6 col-12" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
                 <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Comentarios</li>
             </ol>
         </nav>
-        <div class="col-2 mt-3">
+        <div class="col-sm-2 col-6 mt-sm-3 mt-1">
             <label>Buscar casa:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>
-    <div class="col-12 row justify-content-center mt-3 mb-4">
+    <div class="col-12 row justify-content-center mt-sm-3 mt-4 mb-sm-4 mb-3">
         <h2 class="text-center">Mis comentarios</h2>
     </div>
     <div class="gradient-custom-1">
         <div class="mask d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-10">
+                    <div class="col-sm-10 col-12">
                         <div class="table-responsive bg-white">
                             <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                 <thead>
@@ -46,36 +46,39 @@
             </div>
         </div>
     </div>
-    <div class="col-12 row justify-content-center mt-5 pt-5 mb-4">
-        <h2 class="text-center">Comentarios de mis propiedades</h2>
-    </div>
-    <div class="gradient-custom-1 ">
-        <div class="mask d-flex align-items-center ">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-10">
-                        <div class="table-responsive bg-white">
-                            <table class="table table-hover mb-0 bg-white border-bottom border-dark">
-                                <thead>
-                                <tr class="text-center">
-                                    <th>Nombre propiedad</th>
-                                    <th >Descripción</th>
-                                    <th>Puntuación</th>
-                                    <th>Acciones</th>
-                                </tr>
-                                </thead>
-                                <tbody id="tablaAll">
+    @foreach($user->rol as $rol)
+        @if($rol->Rrol->nom === 'PROPIETARI' || $rol->Rrol->nom === 'ADMINISTADOR')
+            <div class="col-12 row justify-content-center mt-5 pt-5 mb-4">
+                <h2 class="text-center">Comentarios de mis propiedades</h2>
+            </div>
+            <div class="gradient-custom-1 ">
+                <div class="mask d-flex align-items-center ">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-10">
+                                <div class="table-responsive bg-white">
+                                    <table class="table table-hover mb-0 bg-white border-bottom border-dark">
+                                        <thead>
+                                        <tr class="text-center">
+                                            <th>Nombre propiedad</th>
+                                            <th >Descripción</th>
+                                            <th>Puntuación</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tablaAll">
 
-                                </tbody>
-                            </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        @endif
+    @endforeach
 
-    @auth
         <script>
 
             $(document).ready(function (){
@@ -120,18 +123,22 @@
                     TD.append(contenedor);
                     fila.append(TD);
 
-
-                    //Creamos el botón, el formulario, la columna del botón y el formulario
-                    let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
-                    let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text('Eliminar');
-                    form.append(botonEliminar);
-                    let celdaFormulario = $('<td>').append(form);
-                    fila.append(celdaFormulario);
-
                     if(num === 1){
                         $('#tabla').append(fila);
+                        //Creamos el botón, el formulario, la columna del botón y el formulario
+                        let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
+                        let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text('Eliminar');
+                        form.append(botonEliminar);
+                        let celdaFormulario = $('<td>').append(form);
+                        fila.append(celdaFormulario);
                     }else {
                         $('#tablaAll').append(fila);
+                        //Creamos el botón, el formulario, la columna del botón y el formulario
+                        let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
+                        let botonComment = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text('Comentar');
+                        form.append(botonComment);
+                        let celdaFormulario = $('<td>').append(form);
+                        fila.append(celdaFormulario);
                     }
 
                     //Mostrar estrellas asignadas de cada usuario
@@ -182,7 +189,7 @@
             }
         </script>
 
-    @endauth
+
 
 @endsection
 

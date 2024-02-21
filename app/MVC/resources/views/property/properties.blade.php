@@ -7,16 +7,16 @@
 @section('content')
 
     <div class="row col-12 justify-content-between">
-        <nav class="mt-3 col-sm-6 col-10" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <nav class="mt-3 col-sm-6 col-11" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
                 <li class="breadcrumb-item"><a href="{{route('cuenta')}}">Cuenta</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Propiedades</li>
             </ol>
         </nav>
-        <div class="col-sm-3 col-2 mt-3  text-end">
+        <div class="col-sm-3 col-1 mt-3  text-end">
             <form method="get" action="{{ route('property.loadForm') }}">
-                <button type="submit" class="btn bg-primary bg-opacity-50 p-sm-2 p-1">
+                <button type="submit" class="btn bg-primary bg-opacity-50 p-sm-2 p-0  pt-1">
                     <svg id="icono" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus pb-1" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                     </svg><span id="palabra">Añadir propiedad</span>
@@ -34,7 +34,7 @@
             <div class="mask d-flex align-items-center ">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-10">
+                        <div class="col-sm-10 col-12">
                             <div class="table-responsive bg-white">
                                 <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                     <thead>

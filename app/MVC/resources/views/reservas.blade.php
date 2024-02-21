@@ -13,7 +13,7 @@
                 <li class="breadcrumb-item active" aria-current="page">Reservas</li>
             </ol>
         </nav>
-        <div class="col-sm-2 col-6 mt-3">
+        <div class="col-sm-2 col-6 mt-sm-3 mt-1">
             <label>Buscar casa:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
@@ -22,7 +22,7 @@
         <div class="mask d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-10">
+                    <div class="col-sm-10 col-12">
                         <div class="table-responsive bg-white">
                             <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                 <thead>
