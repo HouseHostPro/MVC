@@ -9,25 +9,6 @@
     <script src="{{asset('build/assets/custom2.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-    <!-- Map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-    <!-- Rating -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.1.2/js/star-rating.min.js" integrity="sha512-BjVoLC9Qjuh4uR64WRzkwGnbJ+05UxQZphP2n7TJE/b0D/onZ/vkhKTWpelfV6+8sLtQTUqvZQbvvGnzRZniTQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.1.2/css/star-rating.min.css" integrity="sha512-0VKIzRYJRN0QKkUNbaW7Ifj5sPZiJVAKF1ZmHB/EMHtZKXlzzbs4ve0Z0chgkwDWP6HkZlGShFj5FHoPstke1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Date-picker -->
-    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script>
-
-
-    <!--Carousel-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 </head>
 <body style="height: 98vh;">
 <nav class="navbar navbar-expand navbar-dark bg-primary sticky-top" >
@@ -43,7 +24,7 @@
                 <ul class="navbar-nav" >
                     <li class="nav-item me-3" >
                         <button type="button" class="btn btn-link text-decoration-none text-light fs-5" data-bs-toggle="modal" data-bs-target="#idiomes">
-                            Idioma
+                            {{__('Idioma')}}
                         </button>
                     </li>
                     <li class="nav-item dropdown">
@@ -54,9 +35,9 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
                             @guest
-                                <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar sesion</a></li>
+                                <li><a class="dropdown-item" href="{{ route('login') }}">{{__('Iniciar sesión')}}</a></li>
                             @endguest
-                            <li><a class="dropdown-item" href="{{ route('cuenta') }}">Cuenta</a></li>
+                            <li><a class="dropdown-item" href="{{ route('cuenta') }}">{{__('Cuenta')}}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -69,7 +50,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Idiomas</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('Idiomas')}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -85,7 +66,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('Cerrar')}}</button>
             </div>
         </div>
     </div>
@@ -94,15 +75,15 @@
         <div class="container-sm container-fluid d-flex justify-content-center">
             <div class="card border-black shadow" style="width: 50%; height: 40%">
                 <div class="card-body mx-5">
-                    <h1 class="card-title text-center text-primary my-4 ">Iniciar Sesión</h1>
+                    <h1 class="card-title text-center text-primary my-4 ">{{__('Iniciar sesión')}}</h1>
                     <form method="post" action="{{ route('login.check') }}" class="d-flex flex-column justify-content-end" style="height: 80%;">
                         @csrf
                         <div class="form-group mt-4">
-                            <label for="correo">Correo electrónico:</label>
+                            <label for="correo">{{__('Correo electrónico')}}:</label>
                             <input type="email" class="form-control mt-2 border-black" id="correo" name="email" aria-describedby="emailHelp" placeholder="user@...." autocomplete="username" required>
                         </div>
                         <div class="form-group mt-4">
-                            <label for="contraseña">Contraseña:</label>
+                            <label for="contraseña">{{__('Contraseña')}}:</label>
                             <input type="password" class="form-control mt-2 border-black" id="contraseña" name="password" placeholder="*******" autocomplete="current-password" required>
                         </div>
                         <!--
@@ -112,9 +93,9 @@
                         </div>
                         -->
                         <div class="d-flex justify-content-center mt-5 mb-3">
-                            <button type="submit" class="btn btn-primary btn-lg">Iniciar Sesión</button>
+                            <button type="submit" class="btn btn-primary btn-lg">{{__('Iniciar sesión')}}</button>
                         </div>
-                        <p class="my-4">No tienes cuenta? <a href="{{ route('user.register') }}" class="link-underline-light">Registrarse</a></p>
+                        <p class="my-4">No tienes cuenta? <a href="{{ route('user.register') }}" class="link-underline-light">{{__('Registrarse')}}</a></p>
                     </form>
                 </div>
             </div>

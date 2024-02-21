@@ -8,13 +8,13 @@
     <div class="row col-12 justify-content-between mb-4">
         <nav class="mt-3 col-sm-6 col-12" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
+                <li class="breadcrumb-item"><a href="{{route('principal')}}">{{__('Principal')}}</a></li>
                 <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{__('Reservas')}}</li>
             </ol>
         </nav>
         <div class="col-sm-2 col-6 mt-sm-3 mt-1">
-            <label>Buscar casa:</label>
+            <label>{{__('Buscar casa')}}:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>

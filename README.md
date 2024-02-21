@@ -13,3 +13,5 @@ Proyecto Laravel
 Para comprimir js i scss ->npm run build
 Para poder ver la aplicaiocn -> php artisan serve --host=0.0.0.0 --port=8000(luego cambiar 0.0.0.0 por localhost)
 mongo: composer require mongodb/laravel-mongodb --ignore-platform-reqs
+mailgun: composer require mailgun/mailgun-php symfony/http-client nyholm/psr7
+pdf: composer require barryvdh/laravel-dompdf

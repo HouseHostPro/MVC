@@ -14,12 +14,12 @@
             </ol>
         </nav>
         <div class="col-sm-2 col-6 mt-sm-3 mt-1">
-            <label>Buscar casa:</label>
+            <label>{{__('Buscar casa')}}:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>
     <div class="col-12 row justify-content-center mt-sm-3 mt-4 mb-sm-4 mb-3">
-        <h2 class="text-center">Mis comentarios</h2>
+        <h2 class="text-center">{{__('Mis comentarios')}}</h2>
     </div>
     <div class="gradient-custom-1">
         <div class="mask d-flex align-items-center ">
@@ -49,7 +49,7 @@
     @foreach($user->rol as $rol)
         @if($rol->Rrol->nom === 'PROPIETARI' || $rol->Rrol->nom === 'ADMINISTADOR')
             <div class="col-12 row justify-content-center mt-5 pt-5 mb-4">
-                <h2 class="text-center">Comentarios de mis propiedades</h2>
+                <h2 class="text-center">{{__('Comentarios de mis propiedades')}}</h2>
             </div>
             <div class="gradient-custom-1 ">
                 <div class="mask d-flex align-items-center ">

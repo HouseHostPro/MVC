@@ -17,8 +17,8 @@
                             <h3 class="fs-5">{{__('Normas de la casa')}}</h3>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">{{__('Horario de llegada')}}: 16:00 a 22:00</li>
-                                <li class="list-group-item">Salida antes de las 14:00</li>
-                                <li class="list-group-item">Máximo 6 huéspedes</li>
+                                <li class="list-group-item">{{__('Salida antes de las')}} 14:00</li>
+                                <li class="list-group-item">{{__('Máximo')}} 6 {{__('huéspedes')}}</li>
                                 <li class="list-group-item">{{__('No se admiten mascotas')}}</li>
                                 <li class="list-group-item border-bottom border-dark">{{__('No fumar')}}</li>
                             </ul>
