@@ -21,43 +21,43 @@
                 <?php $descTraduit = $desc ?>
         @endif
     @endforeach
-    <div class="container-fluid" id="contenedor">
-        <div class="row flex-nowrap">
-            <div class="col-sm-2 px-0 bg-primary bg-opacity-25">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+    <div id="container" class="container-fluid d-flex justify-content-center">
+        <div class="row col-12">
+            <div class="col-sm-2 col-12 px-0 bg-primary bg-opacity-25 pb-3">
+                <div id="sidebar-custom" class=" d-flex flex-column align-items-sm-start pt-2 text-white min-vh-100">
                     <div class="text-center pb-3 text-dark">
-                        <h4 class="d-none d-sm-inline ">Opciones de configuración</h4>
+                        <h4 class="d-sm-inline">Opciones de configuración</h4>
                     </div>
                     <ul class="ms-2 mt-2 nav nav-pills flex-column  gap-2" id="menu">
-                        <li class="nav-item">
+                        <li class="nav-item ps-3">
                             <a href="{{route('espai.espais', ['id' => $propietat->id])}}" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mb-1 me-1 bi bi-arrow-return-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
                                 </svg>Espacios
                             </a>
                         </li>
-                        <li>
+                        <li class="nav-item ps-3">
                             <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mb-1 me-1 bi bi-arrow-return-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
                                 </svg>Normas
                             </a>
                         </li>
-                        <li>
+                        <li class="nav-item ps-3">
                             <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mb-1 me-1 bi bi-arrow-return-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
                                 </svg>Galería
                             </a>
                         </li>
-                        <li>
+                        <li class="nav-item ps-3">
                             <a href="{{route('property.service')}}" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mb-1 me-1 bi bi-arrow-return-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
                                 </svg>Servicios
                             </a>
                         </li>
-                        <li>
+                        <li class="nav-item ps-3">
                             <a href="{{route('property.calendar', ['id' => $propietat->id])}}" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mb-1 me-1 bi bi-arrow-return-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
@@ -65,30 +65,30 @@
                             </a>
                         </li>
                     </ul>
-                    <hr>
                 </div>
             </div>
-            <div class="col-md-10 row">
-
-                <nav class="mt-4 col-12" style="--bs-breadcrumb-divider: '>'; height: 500px;" aria-label="breadcrumb" >
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('principal')}}">{{__('Principal')}}</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('property.properties')}}">{{__('Propiedades')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{$propietat->nom}}</li>
-                    </ol>
-                </nav>
-                <form method="post" action="{{ route('property.update', ['id' => $propietat -> id]) }}" class="col-12" >
+            <div class="col-sm-10 col-12 row ">
+                <div class="mt-4 col-12" style="height: 50px">
+                    <nav  style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" >
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{route('principal')}}">{{__('Principal')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('property.properties')}}">{{__('Propiedades')}}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{$propietat->nom}}</li>
+                        </ol>
+                    </nav>
+                </div>
+                <form method="post" action="{{ route('property.update', ['id' => $propietat -> id]) }}" class="col-12 position-absolute"  style="top: 60px">
                     @csrf
-                    <div class="row">
+                    <div class="row col-12">
                         <h2>Edición de la propiedad</h2>
-                        <div class="col-sm-4 col-12 border-right">
-                            <div class="d-flex flex-column align-items-center text-center ">
-                                <img class="img-fluid ms-3 mt-4"  src="https://images.adsttc.com/media/images/5d34/e507/284d/d109/5600/0240/large_jpg/_FI.jpg?1563747560">
+                        <div class="col-sm-4 col-12 ">
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="img-fluid mt-4"  src="https://images.adsttc.com/media/images/5d34/e507/284d/d109/5600/0240/large_jpg/_FI.jpg?1563747560" >
                             </div>
                         </div>
-                        <div class="col-sm-6 col-12 border-right">
-                            <div class="p-3 py-4">
+                        <div class="col-sm-6 col-12">
+                            <div class=" py-4">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h4 class="text-right">{{ $nomTraduit -> value }}</h4>
                                 </div>
@@ -99,14 +99,17 @@
                                     </div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-md-12">
+                                    <div class="col-sm-12">
                                         <label class="language-">Descripción</label>
                                         <textarea class="form-control" name="descripcion">{{ $descTraduit -> value }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-md-6"><label class="labels">Ubicación</label><input type="text" class="form-control" placeholder="country" value="{{$propietat -> localitzacio}}"></div>
-                                    <div class="col-md-6">
+                                    <div class="col-sm-6 col-12">
+                                        <label class="labels">Ubicación</label>
+                                        <input type="text" class="form-control" placeholder="country" value="{{$propietat -> localitzacio}}">
+                                    </div>
+                                    <div class="col-sm-6 col-12">
                                         <label class="label">Ciutat</label>
                                         <select class="form-control">
                                             @foreach($ciutats as $ciutat)
@@ -138,6 +141,33 @@
 
 
     <script>
+
+        $(document).ready(function (){
+
+            function resizeProperty() {
+                let windowWidth = $(window).width();
+
+                if (windowWidth < 540) {
+
+                    $('form').removeClass('position-absolute').css('top','');
+                    $('ul').removeClass('ms-2');
+                    $('#sidebar-custom').removeClass('min-vh-100');
+                    $('#container').addClass('d-flex justify-content-center');
+
+                } else {
+
+                    $('form').addClass('position-absolute').css('top','60px');
+                    $('ul').addClass('ms-2');
+                    $('#sidebar-custom').addClass('min-vh-100');
+                    $('#container').removeClass('d-flex justify-content-center');
+
+
+                }
+            }
+
+            $(window).resize(resizeProperty);
+            resizeProperty();
+        })
         $(document).click("#cancelMessage")
     </script>
 </body>

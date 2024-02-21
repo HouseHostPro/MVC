@@ -6,7 +6,7 @@
 @section('title','Servicios')
 @section('content')
     <div class="row col-12 justify-content-between">
-        <nav class="mt-3 col-7" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <nav class="mt-3 col-sm-7 col-12" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('principal')}}">{{__('Principal')}}</a></li>
                 <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
@@ -15,7 +15,7 @@
                 <li class="breadcrumb-item active" aria-current="page">{{__('Servicios')}}</li>
             </ol>
         </nav>
-        <div class="col-2 my-3">
+        <div class="col-sm-2 col-6 my-sm-3 my-2">
             <label>Buscar servicio:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
@@ -24,7 +24,7 @@
         <div class="mask d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-10">
+                    <div class="col-sm-10 col-12">
                         <div class="table-responsive bg-white">
                             <form action="{{route('saveService')}}" method="post" class="row col-12 justify-content-end">
                                 @csrf
@@ -40,8 +40,8 @@
 
                                     </tbody>
                             </table>
-                                <div class="col-2">
-                                    <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 mt-3 ">Guardar</button>
+                                <div class="col-2 me-sm-0 me-5">
+                                    <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 my-3 ">Guardar</button>
                                 </div>
                             </form>
                         </div>
