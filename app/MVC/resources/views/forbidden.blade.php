@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('build/assets/custom.css')}}">
-    <script src="{{asset('build/assets/custom2.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('build/assets/plantilla1.css')}}">
+    <script src="{{asset('build/assets/custom.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <!-- Title -->
 <title>Sorry, This Page Can&#39;t Be Accessed</title>

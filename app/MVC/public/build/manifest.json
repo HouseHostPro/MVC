@@ -1,12 +1,17 @@
 {
   "resources/js/custom.js": {
-    "file": "assets/custom2.js",
+    "file": "assets/custom.js",
     "isEntry": true,
     "src": "resources/js/custom.js"
   },
-  "resources/scss/custom.scss": {
-    "file": "assets/custom.css",
+  "resources/scss/plantilla1.scss": {
+    "file": "assets/plantilla1.css",
     "isEntry": true,
-    "src": "resources/scss/custom.scss"
+    "src": "resources/scss/plantilla1.scss"
+  },
+  "resources/scss/plantilla2.scss": {
+    "file": "assets/plantilla2.css",
+    "isEntry": true,
+    "src": "resources/scss/plantilla2.scss"
   }
 }

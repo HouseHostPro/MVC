@@ -1,4 +1,4 @@
-@extends('layouts.plantilla')
+@extends('layouts.plantilla1')
 
 @section('content')
         <form class="container-fluid d-flex flex-column px-0 align-items-center" method="post">

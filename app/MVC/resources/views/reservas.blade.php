@@ -84,7 +84,7 @@
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     //!!!CAMBIAR EL ACTION DEL BOTON!!!
                     let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
-                    let botonVer = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text({{__('Ver')}});
+                    let botonVer = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text('{{__('Ver')}}');
                     form.append(botonVer);
                     let celdaFormulario = $('<td>').append(form).addClass('text-center');
                     fila.append(celdaFormulario);

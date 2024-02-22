@@ -4,7 +4,7 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/scss/custom.scss', 'resources/js/custom.js'],
+            input: ['resources/scss/plantilla1.scss','resources/scss/plantilla2.scss','resources/js/custom.js'],
             refresh: true,
         }),
     ],
@@ -12,7 +12,8 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 entryFileNames: `assets/[name].js`,
-                assetFileNames: `assets/[name].css`
+                chunkFileNames: `assets/[name].js`,
+                assetFileNames: 'assets/[name].css',
             }
         }
     }

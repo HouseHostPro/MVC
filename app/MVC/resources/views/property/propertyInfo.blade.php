@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('build/assets/custom.css')}}">
-    <script src="{{asset('build/assets/custom2.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('build/assets/plantilla1.css')}}">
+    <script src="{{asset('build/assets/custom.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
     @foreach($traduccioNom as $nom)
-        @if($nom -> lang === app()->getLocale())
+        @if($nom -> lang === "es")
             <?php $nomTraduit = $nom ?>
         @endif
     @endforeach
 
     @foreach($traduccioDesc as $desc)
-        @if($desc -> lang === app()->getLocale())
+        @if($desc -> lang === "es")
                 <?php $descTraduit = $desc ?>
         @endif
     @endforeach

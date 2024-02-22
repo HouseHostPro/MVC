@@ -1,0 +1,181 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/mixins";
+
+// 4. Include any optional Bootstrap components as you like
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/placeholders";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/utilities/api";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/close";
+
+
+.input-group-append {
+    cursor: pointer;
+}
+.size-img{
+    max-width: 100%;
+    height: auto;
+}
+.padd-img{
+    padding-bottom: 11px;
+}
+#radius-br {
+    border-bottom-right-radius: 6px;
+}
+#radius-tr{
+    border-top-right-radius: 6px;
+}
+.custom-input{
+    position: relative;
+    font-size: 14px;
+}
+.custom-input input{
+
+    background: #fafafa;
+    padding: 25px 0 10px 15px;
+    border-radius: 3px;
+    font-size: 14px;
+    width: 100%;
+}
+.custom-input .ph{
+    position: absolute;
+    left: 20px;
+    top: 25%;
+    transform: translateY(-75%);
+    color: black;
+}
+
+.ui-widget-header{
+
+    border: none !important;
+    background: #0a53be !important;
+}
+.ui-widget-content{
+    background: white !important;
+}
+.ui-state-highlight, .ui-state-hover, .ui-state-focus, .ui-state-active{
+    background: #f6f6f6 !important;
+    border: black !important;
+}
+.ui-widget-content a{
+    color: black !important;
+    border: 1px solid #cccccc !important;
+}
+.event a {
+    background: #5FBA7D !important;
+    color: #ffffff !important;
+    height: 60px;
+}
+
+
+.ui-datepicker td[title]::after {
+    content: attr(title);
+    display: block;
+    position: relative;
+    font-size: .8em;
+    height: 1.25em;
+    margin-top: -1.25em;
+    text-align: right;
+    padding-right: .25em;
+    color: grey;
+}
+
+.ui-datepicker td>a,
+.ui-datepicker td>span{
+    height: 42px !important;
+    padding: 1em;
+
+}
+#inline-picker>.ui-datepicker td>a,
+#inline-picker>.ui-datepicker td>span{
+    height: 50px !important;
+}
+#inline-picker>.ui-datepicker table{
+    height: 300px !important;
+    text-align: center !important;
+}
+#inline-picker>.ui-datepicker,
+#inline-picker>.ui-datepicker-header,
+#inline-picker>.ui-datepicker-calendar{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#map {
+    height: 350px;
+}
+
+#containerMap{
+    height: 350px;
+}
+
+
+.rating {
+    font-size: 20px;
+}
+
+.star, .starE {
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.2s;
+}
+.star{
+    color: #ccc;
+}
+.star.active{
+    color: #ffcc00;
+
+}
+.starE:hover,
+.starE.active {
+    color: #ffcc00;
+}
+
+#successMessage {
+    position: sticky;
+    bottom: 15px;
+    left: 50%;
+}
+
+.ui-datepicker td a:after
+{
+    content: "";
+    display: block;
+    text-align: center;
+    color: green;
+    font-size: small;
+    font-weight: bold;
+}
+
+
+
+#ui-datepicker-div > .ui-datepicker {
+    background-color: red;
+    width: 500px;
+}
+

@@ -1,171 +1,21 @@
-@extends('layouts.plantilla')
+@extends('layouts.plantilla1')
 
 @section('content')
 
     <h1 class="mt-3">Cas Concos</h1>
-    <div id="contenedor-imagnes" class="row">
-
-    </div>
+    @include('components.imagenesCasa')
     <div class="col-12 mt-sm-5 mt-sm-4 mt-1 justify-content-between row ms-sm-0 ms-1">
-                <div class="col-sm-7 col-12">
-                    <h2 class="fs-4">Casa Rural en Binissalem Mallorca</h2>
-                    <div>
-                        <p>
-                            5 {{__('Personas')}} - 3 {{__('Dormitorios')}} - 4 {{__('Camas')}} - 1 {{__('Baños')}}
-                        </p>
-                        <div>
-                            <h3 class="fs-5">{{__('Normas de la casa')}}</h3>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">{{__('Horario de llegada')}}: 16:00 a 22:00</li>
-                                <li class="list-group-item">{{__('Salida antes de las')}} 14:00</li>
-                                <li class="list-group-item">{{__('Máximo')}} 6 {{__('huéspedes')}}</li>
-                                <li class="list-group-item">{{__('No se admiten mascotas')}}</li>
-                                <li class="list-group-item border-bottom border-dark">{{__('No fumar')}}</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="fs-5 mt-3">{{__('Habitaciones')}}</h3>
-                            <div id="owl-example1" class="owl-carousel">
-                                <div class="item mb-1">
-                                    <div class="carousel-item active rounded border border-black shadow p-4" data-bs-interval="false">
-                                        <div class="col-12 d-flex justify-content-center">
-                                            <img src="img/cama-individual2.png" class="d-block w-50" alt="camas-individuales">
-                                        </div>
-                                        <div class="d-none d-md-block col-12">
-                                            <h5 class="text-dark">{{__('Dormitorio')}} 1</h5>
-                                            <p class="text-dark">2 {{__('camas individuales')}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="carousel-item active rounded border border-black shadow p-4" data-bs-interval="false">
-                                        <div class="col-12 d-flex justify-content-center">
-                                            <img src="img/cama-individual.png" class="d-block w-50" alt="cama-individual">
-                                        </div>
-                                        <div class="d-none d-md-block col-12">
-                                            <h5 class="text-dark">{{__('Dormitorio')}} 2</h5>
-                                            <p class="text-dark">1 {{__('cama individual')}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item me-1">
-                                    <div class="carousel-item active rounded border border-black shadow p-4">
-                                        <div class="col-12 d-flex justify-content-center">
-                                            <img src="img/cama-doble.png" class="d-block w-50" alt="cama-doble">
-                                        </div>
-                                        <div class="d-none d-md-block col-12">
-                                            <h5 class="text-dark">{{__('Dormitorio')}} 3</h5>
-                                            <p class="text-dark">1 {{__('cama de matrimonio')}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="mt-3 border-bottom border-dark">
-                                <h3 class="fs-5 ">{{__('¿Qué hay en el alojamiento?')}}</h3>
-                                <ul class="list-group list-group-flush">
-                                    @php
-                                    $count = 0;
-                                    @endphp
-                                    @foreach($servicios as $servicio)
-                                        @if($count >= 5)
-                                            @break
-                                        @endif
-                                        <li class="list-group-item">{{$servicio->Cservicios->nom}}</li>
-                                            @php
-                                                $count++;
-                                            @endphp
-                                    @endforeach
-                                    <div class="col-sm-4 col-5">
-                                        <button type="button" class="btn bg-white border border-dark my-3" data-bs-toggle="modal" data-bs-target="#servicios">{{__('Mostrar más')}}</button>
-                                    </div>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div id="opciones-casa" class="col-sm-7 col-12">
+                    @include('components.opcionesCasa')
                 </div>
-                <form method="POST" action="{{ route('redsys') }}" class="col-4 border border-dark rounded shadow" style="height: 35%">
+                <form id="form-casa" method="POST" action="{{ route('redsys') }}" class="col-sm-4 col-12 mt-sm-0 mt-3 border border-dark rounded shadow" style="height: 35%">
                     @csrf
-                    <div class="mt-2 col-12 row mx-3">
-                        <div class="col-2 px-0">
-                            <input class="border-0 form-control p-0 text-end fs-5 bold" value="150" type="text" id="pd" name="pd" readonly>
-                        </div>
-                        <div class="col-8 px-0">
-                            <p><span class="fs-5 bold">€</span> {{__('noche')}}</p>
-                        </div>
-                    </div>
-                    <div class="row d-flex justify-content-center ">
-                        <div class="col-12 row ">
-                            <label class="custom-input col-12 col-xl-6" for="from">
-                                <input class="border-1 form-control" type="text" id="from" name="from" autocomplete="off" required></br>
-                                <span class="ph">{{__('Llegada')}}:</span>
-                            </label>
-                            <label class="custom-input col-12 col-xl-6" for="to">
-                                <input class="border-1 form-control" type="text" id="to" name="to" autocomplete="off" required>
-                                <span class="ph">{{__('Salida')}}:</span>
-                            </label>
-                        </div>
-                        <div class="col-12 row justify-content-start my-3">
-                            <div class="col-5 col-xl-4">
-                                <label for="personas" class=" m-0" style="font-size: 18px">{{__('Huéspedes')}}:</label>
-                            </div>
-                            <button id="menos" type="button" class="col-2 col-xl-1  p-0 border-0 bg-white" disabled>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-                                </svg>
-                            </button>
-                            <div class="col-2">
-                                <input id="personas" name="personas" class="form-control bg-white border-0 fs-5 text-center m-0 p-0" readonly required>
-                            </div>
-                            <button id="mas" type="button" class="col-2 col-xl-1 p-0 border-0 bg-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle " viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="col-12 justify-content-start ms-3 my-xl-3 ">
-                            <div class="form-check form-switch ps-5">
-                                <input class="form-check-input" type="checkbox" value="true" name="mascotas" id="flexSwitchCheckDefault">
-                                <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 18px">{{__('Mascotas')}}</label>
-                            </div>
-                        </div>
-                        <!-- Inputs con los formatos de hora del formato de la bbdd -->
-                        <input type="text" id="titol" name="titol" value="Cas concos" hidden>
-                        <input type="text" id="days" name="days" hidden>
-                        <input type="text" id="entrada" name="frombd" hidden>
-                        <input type="text" id="sortida" name="tobd" hidden>
-                        <input type="text" id="usuari" name="usuari" hidden>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                    <button type="submit" class="col-6 btn bg-primary bg-opacity-25 border border-dark mt-3 mb-4">{{__('Reservar')}}</button>
-                    </div>
-                    <div id="divpxn" class="col-12 row mx-2" hidden>
-                        <div class="col-8">
-                            <label id="pxn" for="pxnt" class="col-12 pt-1"></label>
-                        </div>
-                        <div class="col-4">
-                            <input id="pxnt" name="pxn" class="bg-white border-0 form-control col-12 text-end" readonly>
-                        </div>
-                    </div>
-                    <div id="divlimpiza" class="col-12 row mx-2" hidden>
-                        <div class="col-4">
-                            <label id="limpieza" for="limpiezat" class="col-12 pt-1"></label>
-                        </div>
-                        <div class="col-6">
-                            <input id="limpiezat" name="limpieza" class="bg-white border-0 form-control col-12 text-end" readonly>
-                        </div>
-                    </div>
-                    <div class="row mx-2 border-top">
-                        <label for="ptotal" class="h5 col-8 my-3">{{__('Total')}}</label>
-                        <input id="ptotal" name="ptotal" class="bg-white border-0 h5 col-4 text-end my-3" readonly>
-                    </div>
+                   @include('components.formCasa')
                 </form>
-                <div id="calendari" class="col-sm-7 col-12 px-0">
+                <div id="calendari-casa" class="col-sm-7 col-12 px-0">
                     <div id="inline-picker" class="col-12 my-3"></div>
                 </div>
-                <div class="border-top border-bottom border-dark d-flex justify-content-end">
+                <div id="comentario-casa" class="border-top border-bottom border-dark d-flex justify-content-end">
                     <div class="row col-12">
                     <div class="col-12 text-end my-3">
                         <button type="button" class="btn bg-white btn-white border-0 text-black text-decoration-underline" data-bs-toggle="modal" data-bs-target="#crearComenatrio">{{__('Añadir comentario')}}</button>
@@ -231,7 +81,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="mt-5 mb-4 border-bottom border-dark" >
+                <div id="mapa-casa" class="mt-5 mb-4 border-bottom border-dark" >
                     <div class="col-12">
                         <h4>{{__('¿Dónde me voy a quedar?')}}</h4>
                     </div>
@@ -242,7 +92,7 @@
                         <h5>Binissalem Mallorca</h5>
                     </div>
                 </div>
-                <div class="col-12 col-xl-6 row">
+                <div id="anfitrion-casa" class="col-12 col-xl-6 row">
                     <div class="col-sm-2 col-3 me-2 me-xl-0 text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -409,105 +259,10 @@
         let totalRating;
 
 
-        //Pintar imagenes y model de imagenes
-
-        $(function (){
-
-            function resizeImage() {
-                let windowWidth = $(window).width();
-
-                if (windowWidth < 540) {
-                    // Ocultar las imágenes en las columnas col-6
-                    $('#contenedor-imagnes .col-6 img').not('#frontCasa').hide();
-                    // Ajustar el tamaño de la imagen firstImage para ocupar todo el contenedor
-                    $('#frontCasa').addClass('full-width rounded-end');
-
-                } else {
-                    // Mostrar las imágenes en las columnas col-6
-                    $('.col-6 img').show();
-                    // Eliminar la clase que ajusta el tamaño de la imagen firstImage
-                    $('#frontCasa').removeClass('full-width rounded-end');
-                }
-            }
-
-            $(window).resize(resizeImage);
-
-            let container = $('#contenedor-imagnes');
-
-            // Crear el primer div col-6
-            let firstDiv = $('<div>').addClass('col-sm-6 col-12 pt-1 px-0 my-2 me-2');
-            let firstLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
-            let firstImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-start').attr('src', 'img/frontCasa.webp').attr('alt', 'entrada').attr('id','frontCasa');
-            firstLink.append(firstImage);
-            firstDiv.append(firstLink);
-
-            // Crear el segundo div col-6
-            let secondDiv = $('<div>').addClass('col-6 row px-0 my-2');
-
-            // Crear las dos columnas col-6 dentro del segundo div
-            let col1 = $('<div>').addClass('col-6 p-1');
-            let col2 = $('<div>').addClass('col-6 p-1');
-
-            // Crear las imágenes y añadir al primer div col-6
-            let img1 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/dormitori1.webp').attr('alt', 'dormitorio');
-            let link1 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img1);
-            col1.append($('<div>').addClass('col-12 padd-img ms-2').append(link1));
-
-            let img2 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/bany1.webp').attr('alt', 'baño');
-            let link2 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img2);
-            col1.append($('<div>').addClass('col-12 ms-2').append(link2));
-
-            // Crear las imágenes y añadir al segundo div col-6
-            let img3 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/bany1.webp').attr('alt', 'baño').attr('id','radius-tr');
-            let link3 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img3);
-            col2.append($('<div>').addClass('col-12 padd-img ms-2').append(link3));
-
-            let img4 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/piscina.webp').attr('alt', 'piscina').attr('id','radius-br');
-            let link4 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img4);
-            col2.append($('<div>').addClass('col-12 ms-2').append(link4));
-
-            // Añadir las columnas al segundo div col-6
-            secondDiv.append(col1);
-            secondDiv.append(col2);
-
-            // Añadir los divs al contenedor principal
-            container.append(firstDiv);
-            container.append(secondDiv);
-
-            // Agregar evento de clic a las imágenes
-            $('img').click(function() {
-                $('#fotos').modal('show'); // Mostrar el modal al hacer clic en cualquier imagen
-            });
-
-            resizeImage();
-        })
-
-        function resizeImage() {
-            var windowWidth = $(window).width();
-
-            if (windowWidth < 540) {
-                // Ocultar las imágenes en las columnas col-6
-                $('.col-6 img').not('#frontCasa').hide();
-                // Ajustar el tamaño de la imagen firstImage para ocupar todo el contenedor
-                $('#frontCasa').addClass('full-width');
-            } else {
-                // Mostrar las imágenes en las columnas col-6
-                $('.col-6 img').show();
-                // Eliminar la clase que ajusta el tamaño de la imagen firstImage
-                $('#frontCasa').removeClass('full-width');
-            }
-        }
-
-
-
         //Carousel
         $("#owl-example1").owlCarousel({
             margin:10,
             items:2,
-            /*autoplay:true,
-            autoplayTimeout:10000,
-
-             */
         });
 
         //Date-picker

@@ -105,7 +105,7 @@
 
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     let form = $('<form>').attr('method', 'get').attr('action', '/property/edit/' + value.id);
-                    let botonEditar = $('<button>').attr('type', 'submit').addClass('btn bg-success bg-opacity-50').text({{__('Editar')}});
+                    let botonEditar = $('<button>').attr('type', 'submit').addClass('btn bg-success bg-opacity-50').text('{{__('Editar')}}');
                     form.append(botonEditar);
                     let celdaFormulario = $('<td>').append(form);
                     fila.append(celdaFormulario);
