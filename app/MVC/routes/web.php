@@ -71,7 +71,10 @@ Route::middleware('auth')->group(function (){
 
 
 //Página principal
-Route::get('/',[CasaController::class,'datosFichaCasa'])->name('principal');
+Route::get('/property/{id}',[CasaController::class,'datosFichaCasa'])->name('principal');
+
+//ENDPOINT -> traduccions de una casa
+Route::get('/findTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('findTraduccions');
 
 //Login
 Route::view('/login','login')->name('login');
@@ -86,7 +89,7 @@ Route::post('/user/register', [UserController::class, 'store'])->name('user.stor
 //Property
 Route::get('/propertyForm', [PropertyFormController::class, '']);
 
-Route::get('/property', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
+Route::get('/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
 Route::get('/property/edit/{id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
 Route::post('/property/edit/{id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
 Route::get('/property/edit/{id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
