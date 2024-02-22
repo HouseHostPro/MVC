@@ -34,7 +34,7 @@
 </head>
 <body style="height: 100vh;" class="d-flex flex-column justify-content-between">
 <div>
-    <nav class="navbar navbar-expand navbar-dark bg-primary sticky-top" >
+    <nav id="header" class="color-header navbar navbar-expand navbar-dark" >
         <div class="container-fluid" >
             <a class="navbar-brand" href="{{ route('principal') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill mb-2" viewBox="0 0 16 16">
@@ -116,7 +116,7 @@
         </div>
     </main>
 </div>
-<footer class="bg-dark text-light">
+<footer class="footer-color text-light">
     <div class="container py-4">
         <div class="row">
             <div class="col-md-4">
@@ -146,7 +146,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-secondary text-center py-2">
+    <div class="container-fluid footer2-color text-center py-2">
         <p class="mb-0">Derechos de autor &copy; 2024 Reservas Nacionales. Todos los derechos reservados.</p>
     </div>
 </footer>
@@ -224,6 +224,12 @@
 
             resizeImage();
         })
+        //Carousel
+
+        $("#owl-example1").owlCarousel({
+            margin:10,
+            items:2,
+        });
     });
 
 </script>

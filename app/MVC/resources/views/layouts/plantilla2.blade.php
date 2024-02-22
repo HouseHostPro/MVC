@@ -34,7 +34,7 @@
 </head>
 <body style="height: 100vh;" class="d-flex flex-column justify-content-between">
 <div>
-    <nav class="navbar navbar-expand navbar-dark bg-primary sticky-top" >
+    <nav id="header" class="color-header navbar navbar-expand navbar-dark" >
         <div class="container-fluid" >
             <a class="navbar-brand" href="{{ route('principal') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill mb-2" viewBox="0 0 16 16">
@@ -116,7 +116,7 @@
         </div>
     </main>
 </div>
-<footer class="bg-dark text-light">
+<footer class="footer-color text-light">
     <div class="container py-4">
         <div class="row">
             <div class="col-md-4">
@@ -140,15 +140,97 @@
                 <form action="#" method="post">
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Tu Correo Electrónico" aria-label="Tu Correo Electrónico" aria-describedby="button-addon2">
-                        <button class="btn btn-primary" type="submit" id="button-addon2">Suscribirse</button>
+                        <button class="btn bg-danger bg-opacity-50" type="submit" id="button-addon2">Suscribirse</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-secondary text-center py-2">
+    <div class="container-fluid footer2-color text-center py-2">
         <p class="mb-0">Derechos de autor &copy; 2024 Reservas Nacionales. Todos los derechos reservados.</p>
     </div>
 </footer>
+<script>
+    $(document).ready(function() {
+
+        //Pintar imagenes y model de imagenes
+        $(function () {
+
+            function resizeImage() {
+                let windowWidth = $(window).width();
+
+                if (windowWidth < 540) {
+                    // Ocultar las imágenes en las columnas col-6
+                    $('#contenedor-imagnes .col-6 img').not('#frontCasa').hide();
+                    // Ajustar el tamaño de la imagen firstImage para ocupar todo el contenedor
+                    $('#frontCasa').addClass('full-width rounded-end');
+
+                } else {
+                    // Mostrar las imágenes en las columnas col-6
+                    $('.col-6 img').show();
+                    // Eliminar la clase que ajusta el tamaño de la imagen firstImage
+                    $('#frontCasa').removeClass('full-width rounded-end');
+                }
+            }
+
+            $(window).resize(resizeImage);
+
+            let container = $('#contenedor-imagnes');
+
+            // Crear el primer div col-6
+            let firstDiv = $('<div>').addClass('col-sm-6 col-12 pt-1 px-0 my-2 me-2');
+            let firstLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
+            let firstImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-start').attr('src', 'img/frontCasa.webp').attr('alt', 'entrada').attr('id', 'frontCasa');
+            firstLink.append(firstImage);
+            firstDiv.append(firstLink);
+
+            // Crear el segundo div col-6
+            let secondDiv = $('<div>').addClass('col-6 row px-0 my-2');
+
+            // Crear las dos columnas col-6 dentro del segundo div
+            let col1 = $('<div>').addClass('col-6 p-1');
+            let col2 = $('<div>').addClass('col-6 p-1');
+
+            // Crear las imágenes y añadir al primer div col-6
+            let img1 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/dormitori1.webp').attr('alt', 'dormitorio');
+            let link1 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img1);
+            col1.append($('<div>').addClass('col-12 padd-img ms-2').append(link1));
+
+            let img2 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/bany1.webp').attr('alt', 'baño');
+            let link2 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img2);
+            col1.append($('<div>').addClass('col-12 ms-2').append(link2));
+
+            // Crear las imágenes y añadir al segundo div col-6
+            let img3 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/bany1.webp').attr('alt', 'baño').attr('id', 'radius-tr');
+            let link3 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img3);
+            col2.append($('<div>').addClass('col-12 padd-img ms-2').append(link3));
+
+            let img4 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/piscina.webp').attr('alt', 'piscina').attr('id', 'radius-br');
+            let link4 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img4);
+            col2.append($('<div>').addClass('col-12 ms-2').append(link4));
+
+            // Añadir las columnas al segundo div col-6
+            secondDiv.append(col1);
+            secondDiv.append(col2);
+
+            // Añadir los divs al contenedor principal
+            container.append(firstDiv);
+            container.append(secondDiv);
+
+            // Agregar evento de clic a las imágenes
+            $('img').click(function () {
+                $('#fotos').modal('show'); // Mostrar el modal al hacer clic en cualquier imagen
+            });
+
+            resizeImage();
+        })
+        //Carousel
+        $("#owl-example1").owlCarousel({
+            margin:10,
+            items:3,
+        });
+    });
+
+</script>
 </body>
 </html>

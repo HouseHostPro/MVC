@@ -1,12 +1,4 @@
-<div class="mt-2 col-12 row mx-3">
-    <div class="col-2 px-0">
-        <input class="border-0 form-control p-0 text-end fs-5 bold" value="150" type="text" id="pd" name="pd" readonly>
-    </div>
-    <div class="col-8 px-0">
-        <p><span class="fs-5 bold">€</span> {{__('noche')}}</p>
-    </div>
-</div>
-<div class="row d-flex justify-content-center ">
+<div class="row d-flex justify-content-center mt-3 ">
     <div class="col-12 row ">
         <label class="custom-input col-12 col-xl-6" for="from">
             <input class="border-1 form-control" type="text" id="from" name="from" autocomplete="off" required></br>
@@ -37,7 +29,7 @@
             </svg>
         </button>
     </div>
-    <div class="col-12 justify-content-start ms-3 my-xl-3 ">
+    <div id="mascotas" class="col-12 justify-content-start ms-3 my-xl-3 ">
         <div class="form-check form-switch ps-5">
             <input class="form-check-input" type="checkbox" value="true" name="mascotas" id="flexSwitchCheckDefault">
             <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 18px">{{__('Mascotas')}}</label>
@@ -50,7 +42,7 @@
     <input type="text" id="sortida" name="tobd" hidden>
     <input type="text" id="usuari" name="usuari" hidden>
 </div>
-<div class="d-flex justify-content-center">
+<div id="boton-reservar" class="d-flex justify-content-center">
     <button type="submit" class="col-6 btn bg-primary bg-opacity-25 border border-dark mt-3 mb-4">{{__('Reservar')}}</button>
 </div>
 <div id="divpxn" class="col-12 row mx-2" hidden>

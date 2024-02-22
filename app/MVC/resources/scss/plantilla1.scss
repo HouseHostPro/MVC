@@ -1,7 +1,10 @@
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "bootstrap/scss/functions";
 
-// 2. Include any default variable overrides here
+// 2. Variables
+$primary: #2471A3;
+$danger: #C0392B;
+$success: #82E0AA;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "bootstrap/scss/variables";
@@ -51,7 +54,7 @@
 @import "bootstrap/scss/button-group";
  */
 
-
+//imagnes de la propiedad
 .input-group-append {
     cursor: pointer;
 }
@@ -87,11 +90,11 @@
     transform: translateY(-75%);
     color: black;
 }
-
+//date-picker
 .ui-widget-header{
 
     border: none !important;
-    background: #0a53be !important;
+    background: #355C78 !important;
 }
 .ui-widget-content{
     background: white !important;
@@ -105,8 +108,8 @@
     border: 1px solid #cccccc !important;
 }
 .event a {
-    background: #5FBA7D !important;
-    color: #ffffff !important;
+    background: #F7E9D5 !important;
+    color: black !important;
     height: 60px;
 }
 
@@ -122,6 +125,21 @@
     padding-right: .25em;
     color: grey;
 }
+.ui-datepicker td a:after
+{
+    content: "";
+    display: block;
+    text-align: center;
+    color: Blue;
+    font-size: small;
+    font-weight: bold;
+}
+
+#ui-datepicker-div > .ui-datepicker {
+    background-color: red;
+    width: 500px;
+}
+
 
 .ui-datepicker td>a,
 .ui-datepicker td>span{
@@ -144,6 +162,7 @@
     height: 100% !important;
 }
 
+//mapa
 #map {
     height: 350px;
 }
@@ -152,7 +171,7 @@
     height: 350px;
 }
 
-
+//rating de comentarios
 .rating {
     font-size: 20px;
 }
@@ -174,25 +193,72 @@
     color: #ffcc00;
 }
 
+.owl-carousel .owl-dots{
+    display: none;
+}
+//pop up
 #successMessage {
     position: sticky;
     bottom: 15px;
     left: 50%;
 }
 
-.ui-datepicker td a:after
-{
-    content: "";
-    display: block;
-    text-align: center;
-    color: Blue;
-    font-size: small;
-    font-weight: bold;
+#header{
+    @extend .sticky-top;
+}
+#opciones-casa{
+    @extend .col-sm-7;
+    @extend .col-12;
+}
+#servicios-casa div{
+    @extend .mt-3;
+}
+#form-casa{
+    @extend .col-sm-4;
+    @extend .col-12;
+    @extend .mt-sm-0;
+    @extend .mt-3;
+    @extend .border;
+    @extend .border-dark;
+    @extend .rounded;
+    @extend .shadow;
+    @extend .bg-white;
+    height: 35%;
+}
+#contenedor-imagnes{
+    @extend .bg-white;
+}
+#calendari-casa{
+    @extend .col-sm-7;
+    @extend .col-12;
+    @extend .px-0;
+}
+#comentario-casa{
+    @extend .justify-content-end;
+    @extend .d-flex;
+    @extend .border-bottom;
+    @extend .border-top;
+    @extend .border-dark;
+}
+#mapa-casa{
+    @extend .mt-5;
+    @extend .mb-4;
+    @extend .border-bottom;
+    @extend .border-dark;
 }
 
-
-
-#ui-datepicker-div > .ui-datepicker {
-    background-color: red;
-    width: 500px;
+.color-header{
+    background-color: #3599DB;
+}
+.footer-color{
+    background-color: #4887B1;
+}
+.footer2-color{
+    background-color: #C4B091 !important;
+}
+.body-color > *{
+    @extend .bg-opacity-25;
+}
+body {
+    background: linear-gradient(to right, #D5E9F7  , #f8f8ff);
 }

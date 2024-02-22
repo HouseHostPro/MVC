@@ -11,7 +11,7 @@
 
 </head>
 <body style="height: 98vh;">
-<nav class="navbar navbar-expand navbar-dark bg-primary sticky-top" >
+<nav id="header" class="navbar navbar-expand navbar-dark bg-primary" >
     <div class="container-fluid" >
         <a class="navbar-brand" href="{{ route('principal') }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill mb-2" viewBox="0 0 16 16">
