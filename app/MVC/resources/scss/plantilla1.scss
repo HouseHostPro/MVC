@@ -223,7 +223,13 @@ $success: #82E0AA;
     @extend .rounded;
     @extend .shadow;
     @extend .bg-white;
-    height: 35%;
+    @extend .sticky-sm-top;
+    @extend .mb-3;
+    top:70px;
+    z-index: 0;
+    height: 28%;
+
+
 }
 #contenedor-imagnes{
     @extend .bg-white;
@@ -232,6 +238,7 @@ $success: #82E0AA;
     @extend .col-sm-7;
     @extend .col-12;
     @extend .px-0;
+
 }
 #comentario-casa{
     @extend .justify-content-end;

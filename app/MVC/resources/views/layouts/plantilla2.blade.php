@@ -34,7 +34,7 @@
 </head>
 <body style="height: 100vh;" class="d-flex flex-column justify-content-between">
 <div>
-    <nav id="header" class="color-header navbar navbar-expand navbar-dark" >
+    <nav id="header" class="color-header navbar navbar-expand navbar-dark" style="z-index: 1">
         <div class="container-fluid" >
             <a class="navbar-brand" href="{{ route('principal') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill mb-2" viewBox="0 0 16 16">
@@ -161,15 +161,16 @@
 
                 if (windowWidth < 540) {
                     // Ocultar las imágenes en las columnas col-6
-                    $('#contenedor-imagnes .col-6 img').not('#frontCasa').hide();
+                    $('#img-hide').hide();
                     // Ajustar el tamaño de la imagen firstImage para ocupar todo el contenedor
                     $('#frontCasa').addClass('full-width rounded-end');
 
                 } else {
                     // Mostrar las imágenes en las columnas col-6
-                    $('.col-6 img').show();
+                    $('#img-hide').show();
                     // Eliminar la clase que ajusta el tamaño de la imagen firstImage
                     $('#frontCasa').removeClass('full-width rounded-end');
+
                 }
             }
 
@@ -178,12 +179,18 @@
             let container = $('#contenedor-imagnes');
 
             // Crear el primer div col-6
-            let firstDiv = $('<div>').addClass('col-sm-6 col-12 pt-1 px-0 my-2 me-2');
+            let firstDiv = $('<div>').addClass('col-sm-6 col-12 pt-1 px-0 my-2');
             let firstLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
             let firstImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-start').attr('src', 'img/frontCasa.webp').attr('alt', 'entrada').attr('id', 'frontCasa');
             firstLink.append(firstImage);
             firstDiv.append(firstLink);
 
+            let secondDiv = $('<div>').addClass('col-6 px-0 mt-3 ps-2').attr('id','img-hide');
+            let secondLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
+            let secondImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-end').attr('src', 'img/dormitori1.webp').attr('alt', 'entrada').attr('id', 'frontCasa');
+            secondLink.append(secondImage);
+            secondDiv.append(secondLink);
+/*
             // Crear el segundo div col-6
             let secondDiv = $('<div>').addClass('col-6 row px-0 my-2');
 
@@ -212,6 +219,8 @@
             // Añadir las columnas al segundo div col-6
             secondDiv.append(col1);
             secondDiv.append(col2);
+
+ */
 
             // Añadir los divs al contenedor principal
             container.append(firstDiv);

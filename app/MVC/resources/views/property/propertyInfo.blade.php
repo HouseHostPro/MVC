@@ -9,7 +9,7 @@
     <script src="{{asset('build/assets/custom.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
-<body>
+<body >
     @foreach($traduccioNom as $nom)
         @if($nom -> lang === "es")
             <?php $nomTraduit = $nom ?>
@@ -23,8 +23,8 @@
     @endforeach
     <div id="container" class="container-fluid d-flex justify-content-center">
         <div class="row col-12">
-            <div class="col-sm-2 col-12 px-0 bg-primary bg-opacity-25 pb-3">
-                <div id="sidebar-custom" class=" d-flex flex-column align-items-sm-start pt-2 text-white min-vh-100">
+            <div class="col-sm-2 col-12 px-0 bg-primary bg-opacity-25 pb-3" style="height: 100vh">
+                <div id="sidebar-custom" class=" d-flex flex-column align-items-sm-start pt-2 text-white ">
                     <div class="text-center pb-3 text-dark">
                         <h4 class="d-sm-inline">Opciones de configuración</h4>
                     </div>
@@ -66,7 +66,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div >
             <div class="col-sm-10 col-12 row ">
                 <div class="mt-4 col-12" style="height: 50px">
                     <nav  style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" >
@@ -78,7 +78,7 @@
                         </ol>
                     </nav>
                 </div>
-                <form method="post" action="{{ route('property.update', ['id' => $propietat -> id]) }}" class="col-12 position-absolute"  style="top: 60px">
+                <form method="post" action="{{ route('property.update', ['id' => $propietat -> id]) }}" class="col-12 position-fixed"  style="top: 60px">
                     @csrf
                     <div class="row col-12">
                         <h2>{{__('Editar propiedad')}}</h2>

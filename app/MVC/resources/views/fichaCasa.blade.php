@@ -5,34 +5,36 @@
     <h1 class="mt-3">Cas Concos</h1>
     @include('components.imagenesCasa')
     <div id="contenedor-principal-casa" class="col-12 mt-sm-5 mt-sm-4 mt-1 justify-content-between row ms-sm-0 ms-1">
-                <div id="opciones-casa">
-                    @include('components.opcionesCasa')
-                </div>
-                <form id="form-casa" method="POST" action="{{ route('redsys') }}">
-                    @csrf
-                   @include('components.formCasa')
-                </form>
-                <div id="calendari-casa">
-                    <div id="inline-picker" class="col-12 my-3"></div>
-                </div>
-                <div id="comentario-casa" >
-                   @include('components.comentarioCasa')
-                </div>
-                <div id="mapa-casa">
-                    <div class="col-12">
-                        <h4>{{__('¿Dónde me voy a quedar?')}}</h4>
-                    </div>
-                    <div id="containerMap" class="mt-4">
-                        <div id="map" class="container-sm"></div>
-                    </div>
-                    <div class="col-12 my-4">
-                        <h5>Binissalem Mallorca</h5>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-5 row order-last">
-                    @include('components.anfitrionCasa')
-                </div>
+        <div class="row col-12 justify-content-between">
+            <div id="opciones-casa">
+                @include('components.opcionesCasa')
             </div>
+            <form id="form-casa" method="POST" action="{{ route('redsys') }}" >
+                @csrf
+               @include('components.formCasa')
+            </form>
+            <div id="calendari-casa">
+                <div id="inline-picker" class="col-12 my-3"></div>
+            </div>
+        </div>
+        <div id="comentario-casa" >
+           @include('components.comentarioCasa')
+        </div>
+        <div id="mapa-casa">
+            <div class="col-12">
+                <h4>{{__('¿Dónde me voy a quedar?')}}</h4>
+            </div>
+            <div id="containerMap" class="mt-4">
+                <div id="map" class="container-sm"></div>
+            </div>
+            <div class="col-12 my-4">
+                <h5>Binissalem Mallorca</h5>
+            </div>
+        </div>
+        <div class="col-12 col-xl-5 row order-last">
+            @include('components.anfitrionCasa')
+        </div>
+    </div>
 
     <!-- Modals -->
     <!-- Ver Comentarios -->

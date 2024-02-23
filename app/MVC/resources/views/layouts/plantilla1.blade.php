@@ -161,15 +161,17 @@
 
                 if (windowWidth < 540) {
                     // Ocultar las imágenes en las columnas col-6
-                    $('#contenedor-imagnes .col-6 img').not('#frontCasa').hide();
+                    $('.img-hide').hide();
                     // Ajustar el tamaño de la imagen firstImage para ocupar todo el contenedor
                     $('#frontCasa').addClass('full-width rounded-end');
 
+
                 } else {
                     // Mostrar las imágenes en las columnas col-6
-                    $('.col-6 img').show();
+                    $('.img-hide').show();
                     // Eliminar la clase que ajusta el tamaño de la imagen firstImage
                     $('#frontCasa').removeClass('full-width rounded-end');
+
                 }
             }
 
@@ -188,8 +190,8 @@
             let secondDiv = $('<div>').addClass('col-6 row px-0 my-2');
 
             // Crear las dos columnas col-6 dentro del segundo div
-            let col1 = $('<div>').addClass('col-6 p-1');
-            let col2 = $('<div>').addClass('col-6 p-1');
+            let col1 = $('<div>').addClass('col-6 p-1').addClass('img-hide');
+            let col2 = $('<div>').addClass('col-6 p-1').addClass('img-hide');
 
             // Crear las imágenes y añadir al primer div col-6
             let img1 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/dormitori1.webp').attr('alt', 'dormitorio');

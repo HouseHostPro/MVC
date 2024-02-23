@@ -218,10 +218,10 @@ $success: #F39C12;
     @extend .order-1;
     @extend .col-sm-6;
     @extend .col-12;
-
-
 }
-
+#servicios-casa button{
+    @extend .mt-3;
+}
 #carousel-casa{
     @extend .order-2;
     @extend .col-12;
