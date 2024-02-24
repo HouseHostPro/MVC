@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use League\Flysystem\Config;
 use Symfony\Component\HttpFoundation\Response;
 
 class Localization
