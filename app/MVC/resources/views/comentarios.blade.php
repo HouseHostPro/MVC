@@ -46,38 +46,6 @@
             </div>
         </div>
     </div>
-    @foreach($user->rol as $rol)
-        @if($rol->Rrol->nom === 'PROPIETARI' || $rol->Rrol->nom === 'ADMINISTADOR')
-            <div class="col-12 row justify-content-center mt-5 pt-5 mb-4">
-                <h2 class="text-center">{{__('Comentarios de mis propiedades')}}</h2>
-            </div>
-            <div class="gradient-custom-1 ">
-                <div class="mask d-flex align-items-center ">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-10">
-                                <div class="table-responsive bg-white">
-                                    <table class="table table-hover mb-0 bg-white border-bottom border-dark">
-                                        <thead>
-                                        <tr class="text-center">
-                                            <th>{{__('Nombre propiedad')}}</th>
-                                            <th>{{__('Descripción')}}</th>
-                                            <th>{{__('Puntuación')}}</th>
-                                            <th>{{__('Acciones')}}</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="tablaAll">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-    @endforeach
 
         <script>
 
@@ -88,20 +56,11 @@
                     url: `http://localhost:8100/comentariosUserAjax`
                 }).done(function (comentarios) {
                     console.log(comentarios);
-                    printCommnets(comentarios,1)
+                    printCommnets(comentarios)
                 });
-
-                $.ajax({
-                    method: 'GET',
-                    url: `http://localhost:8100/comentariosPropertiesAjax`
-                }).done(function (comentarios) {
-                    console.log(comentarios);
-                    printCommnets(comentarios,2)
-                });
-
             })
 
-            function printCommnets(comentario, num){
+            function printCommnets(comentario){
 
                 comentario.forEach( function (value){
 
@@ -123,23 +82,13 @@
                     TD.append(contenedor);
                     fila.append(TD);
 
-                    if(num === 1){
-                        $('#tabla').append(fila);
-                        //Creamos el botón, el formulario, la columna del botón y el formulario
-                        let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
-                        let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text({{__('Eliminar')}});
-                        form.append(botonEliminar);
-                        let celdaFormulario = $('<td>').append(form);
-                        fila.append(celdaFormulario);
-                    }else {
-                        $('#tablaAll').append(fila);
-                        //Creamos el botón, el formulario, la columna del botón y el formulario
-                        let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
-                        let botonComment = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text('Comentar');
-                        form.append(botonComment);
-                        let celdaFormulario = $('<td>').append(form);
-                        fila.append(celdaFormulario);
-                    }
+                    $('#tabla').append(fila);
+                    //Creamos el botón, el formulario, la columna del botón y el formulario
+                    let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
+                    let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text('{{__('Eliminar')}}');
+                    form.append(botonEliminar);
+                    let celdaFormulario = $('<td>').append(form);
+                    fila.append(celdaFormulario);
 
                     //Mostrar estrellas asignadas de cada usuario
                     $('.rating-container').each(function(index) {
@@ -157,15 +106,6 @@
                 const tablaAll = $('#tablaAll');
 
                 tabla.find('tr').each(function () {
-                    const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
-                    if (nombrePropiedad.includes(caracters)) {
-                        $(this).show(); // Mostrar fila si coincide con la búsqueda
-                    } else {
-                        $(this).hide(); // Ocultar fila si no coincide con la búsqueda
-
-                    }
-                });
-                tablaAll.find('tr').each(function () {
                     const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
                     if (nombrePropiedad.includes(caracters)) {
                         $(this).show(); // Mostrar fila si coincide con la búsqueda

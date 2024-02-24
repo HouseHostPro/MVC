@@ -29,6 +29,7 @@ Route::get('/traduccio', [TraduccioController::class, 'show']);
 Route::get('/phpinfo', function () {phpinfo();});
 
 //Ficha Casa
+//PONER EL FORBIDDEN A TODOS LOS FORM PARA QUE NO SE PUEDA ACCEDER POR GET
 
 Route::middleware('auth')->group(function (){
 
@@ -41,6 +42,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
     Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
     Route::get('/comentarios',[ComentariController::class,'comentarios'])->name('comentarios');
+    Route::get('/allComentarios',[ComentariController::class,'allComentarios'])->name('allComentarios');
     Route::get('/comentariosUserAjax',[ComentariController::class,'allComent'])->name('comentariosAU');
     Route::get('/comentariosPropertiesAjax',[ComentariController::class,'allCommentsForProperties'])->name('comentariosAP');
 

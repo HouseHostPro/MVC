@@ -252,48 +252,6 @@
             });
         });
 
-        $('#from').change(function() {
-            startDate = $(this).
-            datepicker('getDate');
-            $("#to").
-            datepicker("option", "minDate", startDate);
-            if($('#to').val() !== ""){
-
-                pintarprecioReserva();
-            }
-
-        })
-
-        //Cuando se ponga la fecha de salida se
-        $('#to').change(function() {
-            endDate = $(this).
-            datepicker('getDate');
-            $("#from").
-            datepicker("option", "maxDate", endDate);
-            if($('#from').val() !== ""){
-
-                pintarprecioReserva();
-            }
-
-        })
-
-        function pintarprecioReserva(){
-
-            //Calcular días de diferencia entre fecha entrada y salida
-            let entrada = new Date($('#entrada').val());
-            let salida = new Date($('#sortida').val());
-            let diffMs = Math.abs(salida - entrada);
-            let diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-
-            if(diffDays > 0){
-                $('#divpxn').prop("hidden",false);
-                let preuTotal = 150*diffDays;
-                $('#pxn').text(150 + "€ x " + diffDays + " noches");
-                $('#pxnt').val(preuTotal);
-                $('#ptotal').val(preuTotal);
-                $('#days').val(diffDays);
-            }
-        }
 
         $('#menos').on('click',function (){
 

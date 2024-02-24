@@ -24,6 +24,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script>
 </head>
 <body style="height: 98vh;">
+@section('titol','Cas Concos')
+@include('components.header')
     <main class="container-fluid d-flex justify-content-center">
         <div class="container-sm">
             <div class="col-12 row border-bottom border-black mt-4 ">

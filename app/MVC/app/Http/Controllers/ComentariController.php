@@ -44,10 +44,12 @@ class ComentariController extends Controller{
 
     public function comentarios(Request $request){
 
-        $user = $request->session()->get('user');
+        return view('comentarios');
+    }
 
-        return view('comentarios',compact('user'));
+    public function allComentarios(Request $request){
 
+        return view('historialComentarios');
     }
 
     public function allCommentsForProperties(Request $request){
