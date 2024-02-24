@@ -57,10 +57,10 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
                                 @guest
-                                    <li><a class="dropdown-item" href="{{ route('login') }}">{{__('Iniciar sesión')}}</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('login', ['id' => $PROPIETAT_ID]) }}">{{__('Iniciar sesión')}}</a></li>
                                 @endguest
                                     <li>
-                                        <form method="post" action="{{ route('cuenta') }}">
+                                        <form method="post" action="{{ route('cuenta', ['id' => $PROPIETAT_ID]) }}">
                                             @csrf
                                             <button type="submit" class="btn btn-link text-black text-decoration-none ps-3">{{__('Cuenta')}}</button>
                                         </form>

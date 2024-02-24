@@ -1,6 +1,6 @@
 @extends('layouts.plantillaFormularios')
 @section('url')
-    {{route('login')}}
+    {{route('login', ['id' => $PROPIETAT_ID])}}
 @endsection
 @guest
 @section('title',__('Creación de usuario'))
@@ -10,8 +10,8 @@
     @auth
     <nav class="mt-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
-            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('principal', ['id' => $PROPIETAT_ID])}}">Principal</a></li>
+            <li class="breadcrumb-item"><a href="{{route('cuenta', ['id' => $PROPIETAT_ID])}}">{{__('Cuenta')}}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{__('Información personal')}}</li>
         </ol>
     </nav>

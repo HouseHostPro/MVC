@@ -33,8 +33,8 @@ Route::get('/phpinfo', function () {phpinfo();});
 Route::middleware('auth')->group(function (){
 
     //Dashboard usuari
-    Route::post('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
-    Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
+    Route::post('/property/{id}/cuenta',[UserController::class,'cuenta'])->name('cuenta');
+    Route::get('/property/{id}/cuenta',[UserController::class,'cuenta'])->name('cuenta');
 
     //CRUD comentaris
     Route::get('/deleteComentario/{id}',[ComentariController::class,'delete'])->name('comentario.delete.get');
@@ -77,30 +77,30 @@ Route::get('/property/{id}',[CasaController::class,'datosFichaCasa'])->name('pri
 Route::get('/findTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('findTraduccions');
 
 //Login
-Route::view('/login','login')->name('login');
-Route::post('/login/check',[UserController::class,'checkLogin'])->name('login.check');
+Route::view('/property/{id}/login','login')->name('login');
+Route::post('/property/{id}/login/check',[UserController::class,'checkLogin'])->name('login.check');
 
 
 //Register
-Route::get('/user/register', [UserController::class,'register'])->name('user.register');
+Route::get('/property/{id}/user/register', [UserController::class,'register'])->name('user.register');
 Route::post('/user/register', [UserController::class, 'store'])->name('user.store');
 
 
 //Property
 Route::get('/propertyForm', [PropertyFormController::class, '']);
-
-Route::get('/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
-Route::get('/property/edit/{id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
-Route::post('/property/edit/{id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
-Route::get('/property/edit/{id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
-
 Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
+
+Route::get('/property/{id}/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
+Route::get('/property/{id}/property/edit', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
+Route::post('/property/{id}/property/edit', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
+Route::get('/property/{id}/property/edit/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
+
 
 Route::view('/propertyView', 'property.property') -> name('property.view');
 Route::view('/propertyForm', 'property.propertyForm');
 
-Route::get('/propertyForm', [PropertyFormController::class, 'loadForm']) ->name('property.loadForm');
-Route::post('/propertyForm', [PropertyFormController::class, 'store']) ->name('property.createProperty');
+Route::get('property/{id}/propertyForm', [PropertyFormController::class, 'loadForm']) ->name('property.loadForm');
+Route::post('property/{id}/propertyForm', [PropertyFormController::class, 'store']) ->name('property.createProperty');
 
 
 Route::controller(PropertyFormController::class) -> prefix('property/edit/{id}')

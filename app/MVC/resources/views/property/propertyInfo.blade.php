@@ -71,9 +71,9 @@
                 <div class="mt-4 col-12" style="height: 50px">
                     <nav  style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" >
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('principal')}}">{{__('Principal')}}</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('property.properties')}}">{{__('Propiedades')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('principal', ['id' => $PROPIETAT_ID])}}">{{__('Principal')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('cuenta', ['id' => $PROPIETAT_ID])}}">{{__('Cuenta')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('property.properties', ['id' => $PROPIETAT_ID])}}">{{__('Propiedades')}}</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{$propietat->nom}}</li>
                         </ol>
                     </nav>
