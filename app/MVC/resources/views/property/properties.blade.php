@@ -65,6 +65,7 @@
                     method: 'GET',
                     url: `http://localhost:8100/allProperties`
                 }).done(function (propiedades) {
+                    console.log(propiedades);
                     printProperties(propiedades);
                 });
                 function resizeSpan() {
@@ -105,7 +106,10 @@
 
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     //let form = $('<form>').attr('method', 'get').attr('action', '/property/edit/' + value.id);
-                    let form = $('<form>').attr('method', 'get').attr('action', '{{ route('property.edit', ['id' => $PROPIETAT_ID]) }}' + value.id);
+
+                    let editUrl = "{{ route('property.edit', ['id' => $PROPIETAT_ID, ':prop_id']) }}";
+                    let form = $('<form>').attr('method', 'get').attr('action', editUrl.replace(':prop_id', value.id));
+
                     let botonEditar = $('<button>').attr('type', 'submit').addClass('btn bg-success bg-opacity-50').text('{{__('Editar')}}');
                     form.append(botonEditar);
                     let celdaFormulario = $('<td>').append(form);
