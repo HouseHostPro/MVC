@@ -49,7 +49,7 @@ class PropietatController extends Controller {
         return $ciutats;
     }
 
-    private function findTraduccions($descCode, $titleCode) {
+    public function findTraduccions($descCode, $titleCode) {
         //return Traduccio::where('casa_id', $casa_id) -> first();
         $traduccioNom = Traduccio::where('code', $titleCode) -> get();
         $traduccioDesc = Traduccio::where('code', $descCode)  -> get();

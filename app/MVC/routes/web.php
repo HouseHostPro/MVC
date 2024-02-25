@@ -56,13 +56,16 @@ Route::middleware('auth')->group(function (){
     Route::get('/reservasPropertiesAjax',[CasaController::class,'allReservasPropertiesAjax'])->name('reservasAP');
 
     //CRUD servicios
-    Route::get('/servicios',[PropertyFormController::class,'loadSevice'])->name('property.service');
+    Route::get('/property/{id}/property/{prop_id}/servicios',[PropertyFormController::class,'loadSevice'])->name('property.service');
     Route::get('/serviciosAjax',[PropertyFormController::class,'allService'])->name('serviceA');
     Route::get('/serviciosByProperty',[PropertyFormController::class,'serviceByProperty'])->name('serviciosPreperty');
     Route::post('/saveService',[PropertyFormController::class,'saveService'])->name('saveService');
 
     //Mostrar todas las propiedades
     Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
+
+    Route::get('/property/{id}/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
+    Route::get('/allTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('property.traduccions');
 
     //Cerrar sesión
     Route::post('/logout',[UserController::class,'logout'])->name('logout');
@@ -88,9 +91,8 @@ Route::post('/user/register', [UserController::class, 'store'])->name('user.stor
 
 //Property
 Route::get('/propertyForm', [PropertyFormController::class, '']);
-Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
+//Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
 
-Route::get('/property/{id}/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
 Route::get('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
 Route::post('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
 Route::get('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');

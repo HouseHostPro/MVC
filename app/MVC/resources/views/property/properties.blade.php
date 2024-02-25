@@ -65,7 +65,21 @@
                     method: 'GET',
                     url: `http://localhost:8100/allProperties`
                 }).done(function (propiedades) {
-                    console.log(propiedades);
+
+                    for (const p of propiedades) {
+                        $.ajax({
+                            method: 'GET',
+                            url: '{{ route('property.traduccions') }}',
+                            data: {
+                                "nom": p.nom
+                            }
+                        }).done( function (traduccions) {
+                            const nomTraduit = traduccions[0].filter((tr) => tr.lang === '{{ app() -> getLocale() }}')[0].value;
+                            console.log(nomTraduit);
+                            $('td:contains("' + p.nom + '")').html(nomTraduit);
+                        });
+                    }
+
                     printProperties(propiedades);
                 });
                 function resizeSpan() {
@@ -78,6 +92,7 @@
                         $('#palabra').show();
                     }
                 }
+
 
                 $(window).resize(resizeSpan);
                 resizeSpan();
@@ -105,8 +120,6 @@
                     console.log("entra");
 
                     //Creamos el botón, el formulario, la columna del botón y el formulario
-                    //let form = $('<form>').attr('method', 'get').attr('action', '/property/edit/' + value.id);
-
                     let editUrl = "{{ route('property.edit', ['id' => $PROPIETAT_ID, ':prop_id']) }}";
                     let form = $('<form>').attr('method', 'get').attr('action', editUrl.replace(':prop_id', value.id));
 

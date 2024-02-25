@@ -19,6 +19,9 @@ class RutaPropietat
         $url = url() -> current();
 
         if ($url === "http://localhost:8100/allProperties" ||
+            $url === "http://localhost:8100/allTraduccions" ||
+            $url === "http://localhost:8100/serviciosAjax" ||
+            $url === "http://localhost:8100/serviciosByProperty" ||
             $url === "http://localhost:8100/es" ||
             $url === "http://localhost:8100/en")
             return $next($request);

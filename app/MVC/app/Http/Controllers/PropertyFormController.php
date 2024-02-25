@@ -126,7 +126,8 @@ class PropertyFormController extends Controller {
     //Servicios
     public function loadSevice(Request $request){
 
-        $id = $request->session()->get('idPropiedad');
+        //$id = $request->session()->get('idPropiedad');
+        $id = $request -> prop_id;
         $servicios = Servei::all();
 
         $propietat = Propietat::where('id', $id)->first();
