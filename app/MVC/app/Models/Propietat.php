@@ -26,4 +26,7 @@ class Propietat extends Model {
     public function propietari(){
         return $this->belongsTo(User::class,'usuari_id','id');
     }
+    public function tiquetComentario(){
+        return $this->hasMany(Propietat::class,'propietat_id','id');
+    }
 }

@@ -25,7 +25,7 @@
         <div class="mask d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-sm-10 col-12">
+                    <div class="col-12">
                         <div class="table-responsive bg-white">
                             <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                 <thead>
@@ -65,8 +65,8 @@
                 comentario.forEach( function (value){
 
                     let fila = $('<tr>');
-                    fila.append($('<td>').text(value.nomPropietat));
-                    fila.append($('<td>').text(value.comentari).addClass('w-50'));
+                    fila.append($('<td>').text(value.nomPropietat).addClass('text-center'));
+                    fila.append($('<td>').text(value.comentari).addClass('w-50 '));
 
                     //Crear el rating per els comentaris
                     let contenedor = $('<div>').addClass('col-12 rating-container').attr('data-rating', value.puntuacio);
@@ -78,24 +78,33 @@
                     }
 
                     let TD = $('<td>');
-                    contenedor.append(rating);
-                    TD.append(contenedor);
                     fila.append(TD);
+
+                    //Reemplazar las variables para que las coja en get
+                    let url = "{{ route('comentario.delete.get', ['id' => ':id', 'estat' => ':estat']) }}";
+                    url = url.replace(':id',value.tc_id).replace(':estat',value.fa_contesta);
 
                     $('#tabla').append(fila);
                     //Creamos el botón, el formulario, la columna del botón y el formulario
-                    let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
+                    let form = $('<form>').attr('method', 'get').attr('action', url);
                     let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text('{{__('Eliminar')}}');
                     form.append(botonEliminar);
-                    let celdaFormulario = $('<td>').append(form);
+                    let celdaFormulario = $('<td>').append(form).addClass('text-center');
                     fila.append(celdaFormulario);
 
-                    //Mostrar estrellas asignadas de cada usuario
-                    $('.rating-container').each(function(index) {
-                        var $container = $(this);
-                        var ratingValue = $container.attr('data-rating');
-                        activateStars($container,ratingValue);
-                    });
+                    if(value.puntuacio !== null){
+
+                        contenedor.append(rating).addClass('text-center');
+                        TD.append(contenedor);
+
+                        console.log("entra")
+                        //Mostrar estrellas asignadas de cada usuario
+                        $('.rating-container').each(function(index) {
+                            var $container = $(this);
+                            var ratingValue = $container.attr('data-rating');
+                            activateStars($container,ratingValue);
+                        });
+                    }
                 })
             }
 
@@ -103,7 +112,6 @@
 
                 const caracters = $(this).val().toUpperCase();
                 const tabla = $('#tabla');
-                const tablaAll = $('#tablaAll');
 
                 tabla.find('tr').each(function () {
                     const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
@@ -127,6 +135,8 @@
                     }
                 });
             }
+
+
         </script>
 
 

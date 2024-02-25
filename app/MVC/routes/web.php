@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
 
     //CRUD comentaris
-    Route::get('/deleteComentario/{id}',[ComentariController::class,'delete'])->name('comentario.delete.get');
+    Route::get('/deleteComentario/{id}/{estat}',[ComentariController::class,'delete'])->name('comentario.delete.get');
     Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
     Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
     Route::get('/comentarios',[ComentariController::class,'comentarios'])->name('comentarios');
