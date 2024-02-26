@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
     <link rel="stylesheet" type="text/css" href="{{asset('build/assets/custom.css')}}">
     <script src="{{asset('build/assets/custom2.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
 </head>
 <body>
 
@@ -110,7 +115,7 @@
                                 <div class="row mt-3">
                                     <div class="col-sm-6 col-12">
                                         <label class="labels">{{__('Ubicación')}}</label>
-                                        <input type="text" class="form-control" placeholder="country" value="{{$propietat -> localitzacio}}">
+                                        <input id="ubi" name="ubi" type="text" class="form-control" placeholder="country" value="{{$propietat -> localitzacio}}">
                                     </div>
                                     <div class="col-sm-6 col-12">
                                         <label class="label">{{__('Ciutat')}}</label>
@@ -130,6 +135,7 @@
                             </div>
                         </div>
                     </div>
+                    <div id="map" style="height: 180px"></div>
                 </form>
             </div>
         </div>
@@ -146,6 +152,28 @@
     <script>
 
         $(document).ready(function (){
+
+            const lat = $('#ubi').val().split(',')[0];
+            const lng = $('#ubi').val().split(',')[1];
+
+            const map = L.map('map').setView([lat, lng], 13);
+            L.marker([39.68793, 2.84433]).addTo(map);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+            const circle = L.circle([lat, lng], {
+                color: 'blue',
+                fillColor: '#ADD8E6',
+                fillOpacity: 0.5,
+                radius: 50
+            }).addTo(map);
+
+
+            map.on('click', function(e) {
+                alert("Lat, Lon : " + e.latlng.lat + "," + e.latlng.lng);
+                $('#ubi').val(e.latlng.lat + ", " + e.latlng.lng);
+            });
 
             function resizeProperty() {
                 let windowWidth = $(window).width();
