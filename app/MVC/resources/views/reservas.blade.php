@@ -24,7 +24,7 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-10 col-12">
                         <div class="table-responsive bg-white">
-                            <table class="table table-hover mb-0 bg-white border-bottom border-dark">
+                            <table class="table table-hover mb-0 bg-white">
                                 <thead>
                                 <tr class="text-center">
                                     <th>{{__('Nombre propiedad')}}</th>
@@ -56,8 +56,9 @@
                 }).done(function (reservas) {
                     printReservas(reservas)
                 });
-            })
+
             function printReservas(reserva){
+
                 reserva.forEach( function (value){
 
                     let fecha_ini = new Date(value.data_inici);
@@ -75,10 +76,10 @@
                     });
 
                     let fila = $('<tr>');
-                    fila.append($('<td>').text(value.nomPropietat).addClass('text-center'));
-                    fila.append($('<td>').text(fecha_ini_format + " - " + fecha_fin_format).addClass('text-center'));
-                    fila.append($('<td>').text(value.persones).addClass('text-center'));
-                    fila.append($('<td>').text(value.preu_total + "€").addClass('text-center'));
+                    fila.append($('<td>').text(value.nomPropietat).attr('data-label', 'Nombre propiedad'));
+                    fila.append($('<td>').text(fecha_ini_format + " - " + fecha_fin_format).attr('data-label', 'Fecha entrada/salida'));
+                    fila.append($('<td>').text(value.persones).attr('data-label', 'Personas'));
+                    fila.append($('<td>').text(value.preu_total + "€").attr('data-label', 'Precio total'));
 
 
                     //Creamos el botón, el formulario, la columna del botón y el formulario
@@ -86,7 +87,7 @@
                     let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
                     let botonVer = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text('{{__('Ver')}}');
                     form.append(botonVer);
-                    let celdaFormulario = $('<td>').append(form).addClass('text-center');
+                    let celdaFormulario = $('<td>').append(form).attr('data-label', 'Acción');
                     fila.append(celdaFormulario);
 
                     $('#tabla').append(fila);
@@ -109,6 +110,7 @@
             });
 
             $('#atras').remove();
+            })
         </script>
 
     @endauth

@@ -27,7 +27,7 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-10 col-12">
                         <div class="table-responsive bg-white">
-                            <table class="table table-hover mb-0 bg-white border-bottom border-dark">
+                            <table class="table table-hover mb-0 bg-white ">
                                 <thead>
                                 <tr class="text-center">
                                     <th>{{__('Nombre propiedad')}}</th>
@@ -67,8 +67,8 @@
             comentario.forEach( function (value){
 
                 let fila = $('<tr>');
-                fila.append($('<td>').text(value.nomPropietat));
-                fila.append($('<td>').text(value.comentari).addClass('w-50'));
+                fila.append($('<td>').text(value.nomPropietat).attr('data-label', 'Nombre propiedad'));
+                fila.append($('<td>').text(value.comentari).attr('data-label','Descripción'));
 
                 //Crear el rating per els comentaris
                 let contenedor = $('<div>').addClass('col-12 rating-container').attr('data-rating', value.puntuacio);
@@ -79,7 +79,7 @@
                     rating.append(estrella);
                 }
 
-                let TD = $('<td>');
+                let TD = $('<td>').attr('data-label','Puntuación');
                 contenedor.append(rating);
                 TD.append(contenedor);
                 fila.append(TD);
@@ -89,7 +89,7 @@
                 let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
                 let botonComment = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text('{{__('Comentar')}}');
                 form.append(botonComment);
-                let celdaFormulario = $('<td>').append(form);
+                let celdaFormulario = $('<td>').append(form).attr('data-label','Acción');
                 fila.append(celdaFormulario);
 
                 //Mostrar estrellas asignadas de cada usuario

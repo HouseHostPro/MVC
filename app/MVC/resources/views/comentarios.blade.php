@@ -24,19 +24,19 @@
     <div class="gradient-custom-1">
         <div class="mask d-flex align-items-center ">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center ">
                     <div class="col-sm-10 col-12">
-                        <div class="table-responsive bg-white">
-                            <table class="table table-hover mb-0 bg-white border-bottom border-dark">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 bg-white" >
                                 <thead>
-                                <tr class="text-center">
+                                <tr class="text-center ">
                                     <th>{{__('Nombre propiedad')}}</th>
                                     <th>{{__('Descripción')}}</th>
                                     <th>{{__('Puntuación')}}</th>
                                     <th>{{__('Acciones')}}</th>
                                 </tr>
                                 </thead>
-                                <tbody id="tabla">
+                                <tbody id="tabla" >
 
                                 </tbody>
                             </table>
@@ -58,15 +58,19 @@
                     console.log(comentarios);
                     printCommnets(comentarios)
                 });
-            })
+
+
 
             function printCommnets(comentario){
 
                 comentario.forEach( function (value){
 
                     let fila = $('<tr>');
-                    fila.append($('<td>').text(value.nomPropietat));
-                    fila.append($('<td>').text(value.comentari).addClass('w-50'));
+                    fila.append($('<td>').text(value.nomPropietat).attr('data-label', 'Nombre propiedad'));
+                    //Acabar d'arreglar lo de  comentari, he defer un td, i afegir el p al td
+                    let p = $('<p>').text(value.comentari)
+                    fila.append($('<td>').attr('data-label','Descripción'));
+
 
                     //Crear el rating per els comentaris
                     let contenedor = $('<div>').addClass('col-12 rating-container').attr('data-rating', value.puntuacio);
@@ -77,7 +81,7 @@
                         rating.append(estrella);
                     }
 
-                    let TD = $('<td>');
+                    let TD = $('<td>').attr('data-label','Puntuación');
                     contenedor.append(rating);
                     TD.append(contenedor);
                     fila.append(TD);
@@ -87,7 +91,7 @@
                     let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
                     let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text('{{__('Eliminar')}}');
                     form.append(botonEliminar);
-                    let celdaFormulario = $('<td>').append(form);
+                    let celdaFormulario = $('<td>').append(form).attr('data-label','Acción');
                     fila.append(celdaFormulario);
 
                     //Mostrar estrellas asignadas de cada usuario
@@ -127,6 +131,7 @@
                     }
                 });
             }
+            })
         </script>
 
 

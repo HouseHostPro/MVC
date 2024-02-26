@@ -76,7 +76,7 @@
                 $('.img-hide').hide();
                 // Ajustar el tamaño de la imagen firstImage para ocupar todo el contenedor
                 $('#frontCasa').addClass('full-width rounded-end');
-                $('#form-casa').css('height', '');
+                $('#form-casa').css('height', 'auto');
 
 
             } else {
@@ -84,7 +84,7 @@
                 $('.img-hide').show();
                 // Eliminar la clase que ajusta el tamaño de la imagen firstImage
                 $('#frontCasa').removeClass('full-width rounded-end');
-                $('#form-casa').css('height', '28%');
+                $('#form-casa').css('height', '26%');
 
             }
         }
@@ -204,7 +204,7 @@
 
                 //Resize form reserva, quan afagueixes un nou camp
                 if (windowWidth > 540) {
-                    $('#form-casa').css('height','31%');
+                    $('#form-casa').css('height','28%');
 
                 }else {
                     resizeImageAndForm();

@@ -27,7 +27,7 @@
 @section('titol','Cas Concos')
 @include('components.header')
     <main class="container-fluid d-flex justify-content-center">
-        <div class="container-sm">
+        <div id="container-form" class="container-sm">
             <div class="col-12 row border-bottom border-black mt-4 ">
                 <div class="col-12 col-md-11 col-lg-7 row">
                     <button type="button" id="atras" class="col-1 border-0 bg-white mb-3 text-end" >
