@@ -73,7 +73,6 @@ class UserController extends Controller{
 
     public function checkLogin(Request $request){
 
-
         $email = $request->email;
         $password = $request->password;
         $idPropiedad = 1;
@@ -96,10 +95,23 @@ class UserController extends Controller{
     }
     public function logout(Request $request){
 
-        Auth::logout();
+        $id = $request->session()->get('idPropiedad');
         $request->session()->invalidate();
-        $comentarios = Comentari::where('propietat_id',1)->get();
+        $tiquet_comentari = Tiquet_Comentari::where('propietat_id',1)->get();
+
+        $comentarios = [];
+
+        foreach ($tiquet_comentari as $tiquet) {
+            $comentariosQuery = Comentari::where('tc_id',$tiquet->id)
+                ->orderBy('tc_id','asc')
+                ->orderByRaw("CASE WHEN fa_contesta = 'F' THEN 0 ELSE 1 END")
+                ->get();
+            foreach ($comentariosQuery as $comentario) {
+                array_push($comentarios,$comentario);
+            }
+        }
         $servicios = Configuracio_Servei::where('configuracio_id',1)->get();
+        Auth::logout();
 
         return redirect()->route('principal',compact('comentarios','servicios'));
     }

@@ -48,7 +48,7 @@
         </div>
     </div>
     <!-- Crear Comentarios -->
-    <div class="modal fade" id="crearComenatrio" tabindex="-1" aria-labelledby="cComenatrio" aria-hidden="true">
+    <div class="modal fade" id="crearComentario" tabindex="-1" aria-labelledby="cComenatrio" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -56,22 +56,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('comentario.store')}}" class="d-flex flex-column gap-3">
+                    <form method="get" action="{{route('comentario.store.get')}}" class="d-flex flex-column gap-3">
                         @csrf
-                        <div class="col-12 rating-container" data-rating="">
-                            <div class="rating" >
-                                <span class="starE" data-rating="1">&#9733;</span>
-                                <span class="starE" data-rating="2">&#9733;</span>
-                                <span class="starE" data-rating="3">&#9733;</span>
-                                <span class="starE" data-rating="4">&#9733;</span>
-                                <span class="starE" data-rating="5">&#9733;</span>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label for="descripcion">Descripción:</label>
                             <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
                         </div>
                         <input type="text" id="rating" name="rating" hidden>
+                        <input type="text" id="tcId" name="tcId" hidden>
                         <div class="col-12 row justify-content-end">
                             <button type="submit" class="col-2 btn bg-primary bg-opacity-25 border border-dark">Añadir</button>
                         </div>
@@ -119,16 +111,20 @@
                 fila.append(TD);
 
                 $('#tabla').append(fila);
-                //Creamos el botón, el formulario, la columna del botón y el formulario
-                let botonComment = $('<button>').attr({
-                    'type':'submit',
-                    'data-bs-toggle': 'modal',
-                    'data-bs-target': '#crearComentario'
-                }).addClass('btn bg-primary bg-opacity-50').text('{{__('Comentar')}}');
-                let celdaFormulario = $('<td>').append(botonComment).addClass('text-center');
-                fila.append(celdaFormulario);
 
                 if(value.comentario.puntuacio !== null){
+
+                    //Creamos el botón, el formulario, la columna del botón y el formulario
+                    let botonComment = $('<button>').attr({
+                        'type':'button',
+                        'data-bs-toggle': 'modal',
+                        'data-bs-target': '#crearComentario'
+                    }).addClass('btn bg-primary bg-opacity-50').text('{{__('Comentar')}}');
+                    botonComment.click(function (){
+                        $('#tcId').val(value.comentario.tc_id);
+                    })
+                    let celdaFormulario = $('<td>').append(botonComment).addClass('text-center');
+                    fila.append(celdaFormulario);
 
                     contenedor.append(rating).addClass('text-center');
                     TD.append(contenedor);
@@ -140,6 +136,19 @@
                         var ratingValue = $container.attr('data-rating');
                         activateStars($container,ratingValue);
                     });
+                }else {
+                    //Creamos el botón, el formulario, la columna del botón y el formulario
+                    let botonComment = $('<button>').attr({
+                        'type':'button',
+                        'data-bs-toggle': 'modal',
+                        'data-bs-target': '#crearComentario'
+                    }).addClass('btn bg-primary bg-opacity-50 invisible').text('{{__('Comentar')}}');
+                    botonComment.click(function (){
+                        $('#tcId').val(value.comentario.tc_id);
+                    })
+                    let celdaFormulario = $('<td>').append(botonComment).addClass('text-center');
+                    fila.append(celdaFormulario);
+
                 }
             })
         }

@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/deleteComentario/{id}/{estat}',[ComentariController::class,'delete'])->name('comentario.delete.get');
     Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
     Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
+    Route::get('addComentario',[ComentariController::class, 'create'])->name('comentario.store.get');
     Route::get('/comentarios',[ComentariController::class,'comentarios'])->name('comentarios');
     Route::get('/allComentarios',[ComentariController::class,'allComentarios'])->name('allComentarios');
     Route::get('/comentariosUserAjax',[ComentariController::class,'allComent'])->name('comentariosAU');

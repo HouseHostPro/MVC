@@ -15,34 +15,36 @@ class ComentariController extends Controller{
 
         $idPropiedad = $request->session()->get('idPropiedad');
 
-        $tiquetExist = Tiquet_Comentari::where('propietat_id', $idPropiedad)->first();
 
-        if(!$tiquetExist) {
-
+        if($request->isMethod('post')){
             $tiquet = new Tiquet_Comentari();
             $tiquet->propietat_id = $idPropiedad;
             $tiquet->save();
 
-            $tiquetNou = Tiquet_Comentari::where('propietat_id', $idPropiedad)->first();
+            $tiquetNou = Tiquet_Comentari::latest('id')->first();
 
             $this->crearComentari($tiquetNou->id,'F',$request);
 
         }else{
-            $this->crearComentari($tiquetExist->id,'C',$request);
+
+            $this->crearComentari($request->tcId,'C',$request);
         }
 
-        return redirect() -> route('principal');
+
+        return redirect() -> back();
     }
 
     private function crearComentari($tiquet,$fa_contesta, $request){
+
+
         $comentario = new Comentari();
         $comentario->usuari_id = Auth::user()->id;
-        $comentario->tc_id = $tiquet->id;
-        $comentario->comentari = $request -> input('descripcion');
+        $comentario->tc_id = $tiquet;
+        $comentario->comentari = $request->descripcion;
         if($request -> input('rating') !== NULL){
-            $comentario->puntuacio = $request -> input('rating');
+            $comentario->puntuacio = $request->rating;
         }else{
-            $comentario->puntuacio = 0;
+
         }
         $comentario->fa_contesta = $fa_contesta;
         $comentario->save();
