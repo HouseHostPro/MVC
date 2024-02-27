@@ -80,7 +80,8 @@ class UserController extends Controller{
 
         $user = User::where('email', $email)->first();
 
-        if ($email == $user->email /* || !Hash::check($password,$user->contrasenya)*/) {
+        /* || !Hash::check($password,$user->contrasenya)*/
+        if ($user != null) {
 
             if($password == $user->contrasenya){
                 Auth::login($user);

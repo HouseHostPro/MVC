@@ -266,19 +266,19 @@ $success: #82E0AA;
 body {
     background: linear-gradient(to right, #D5E9F7  , #f8f8ff);
 }
-table td{
+#tabla td{
     text-align: center;
 }
-table{
+#tabla{
     @extend .border-bottom;
     @extend .border-dark;
 }
-table td:nth-child(2){
+#tabla td:nth-child(2){
     @extend .w-50;
 }
 
 @media screen and (max-width: 540px) {
-    table thead {
+    #tabla thead {
         border: none;
         clip: rect(0 0 0 0);
         height: 1px;
@@ -293,39 +293,47 @@ table td:nth-child(2){
         margin-bottom: 20px;
     }
 
-    table td::before {
+    #tabla td::before {
         content: attr(data-label);
         float: left;
         font-weight: bold;
     }
-    table tr {
+
+    #tabla tr {
         border: 1px solid #ddd;
         display: block;
         margin-bottom: 10px;
 
     }
-    table tr:last-child {
+    #tabla tr:last-child {
         margin-bottom: 0 !important;
 
     }
 
-    table{
+    #tabla{
         border-collapse: separate;
         border-bottom: 0 #ddd !important;
-
     }
-    table td {
+    #tdP{
+        display: flex;
+        justify-content: space-between;
+    }
+    #tdP>div{
+
+        width: 75%;
+    }
+    #tabla td {
 
         text-align: right !important;
         display: block;
         font-size: .8em;
 
     }
-    table td:nth-child(2){
+    #tabla td:nth-child(2){
         width: auto !important;
     }
 
-    table td:last-child {
+    #tabla td:last-child {
         border-bottom: 0;
     }
 }

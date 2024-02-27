@@ -67,9 +67,14 @@
 
                     let fila = $('<tr>');
                     fila.append($('<td>').text(value.nomPropietat).attr('data-label', 'Nombre propiedad'));
-                    //Acabar d'arreglar lo de  comentari, he defer un td, i afegir el p al td
+
+                    //Le pongo una id al td para darle estilo, porque si el comentario es muy grande no me ocupe todo el td
+                    let divP = $('<div>');
                     let p = $('<p>').text(value.comentari)
-                    fila.append($('<td>').attr('data-label','Descripción'));
+                    divP.append(p)
+                    let tdDesc = $('<td>').attr('data-label','Descripción').attr('id','tdP');
+                    tdDesc.append(divP);
+                    fila.append(tdDesc);
 
 
                     //Crear el rating per els comentaris

@@ -34,7 +34,7 @@
             <div class="mask d-flex align-items-center ">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-sm-10 col-12">
+                        <div class="col-sm-8 col-12">
                             <div class="table-responsive bg-white">
                                 <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                     <thead>
@@ -75,6 +75,7 @@
                         $('#icono').css({"width":"30","height":"30"});
                     } else {
                         $('#palabra').show();
+                        $('th').addClass('text-center');
                     }
                 }
 
@@ -93,21 +94,19 @@
                 propiedad.forEach( function (value){
 
                     let fila = $('<tr>');
-                    fila.append($('<td>').text(value.nom));
+                    fila.append($('<td>').text(value.nom).attr('data-label', 'Nombre propiedad'));
 
                     //Creamos la imagen y  la columna de la imagen
-                    const celdaImagen = $('<td>').append(imagen.clone());
+                    const celdaImagen = $('<td>').append(imagen.clone()).attr('data-label', 'Imagen');
                     fila.append(celdaImagen);
 
-                    fila.append($('<td>').text(value.nomCiutat));
-
-                    console.log("entra");
+                    fila.append($('<td>').text(value.nomCiutat).attr('data-label', 'Ubicación'));
 
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     let form = $('<form>').attr('method', 'get').attr('action', '/property/edit/' + value.id);
                     let botonEditar = $('<button>').attr('type', 'submit').addClass('btn bg-success bg-opacity-50').text('{{__('Editar')}}');
                     form.append(botonEditar);
-                    let celdaFormulario = $('<td>').append(form);
+                    let celdaFormulario = $('<td>').append(form).attr('data-label', 'Acción');
                     fila.append(celdaFormulario);
 
                     $('#tabla').append(fila);

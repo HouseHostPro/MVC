@@ -60,6 +60,8 @@
             })
 
             function printReservas(reserva){
+
+
                 reserva.forEach( function (value){
 
                     let fecha_ini = new Date(value.data_inici);

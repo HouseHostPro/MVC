@@ -27,7 +27,7 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-10 col-12">
                         <div class="table-responsive bg-white">
-                            <table class="table table-hover mb-0 bg-white ">
+                            <table class="table table-hover mb-0 bg-white">
                                 <thead>
                                 <tr class="text-center">
                                     <th>{{__('Nombre propiedad')}}</th>
@@ -60,74 +60,83 @@
                 printCommnets(comentarios)
             });
 
-        })
 
-        function printCommnets(comentario){
+            function printCommnets(comentario){
 
-            comentario.forEach( function (value){
 
-                let fila = $('<tr>');
-                fila.append($('<td>').text(value.nomPropietat).attr('data-label', 'Nombre propiedad'));
-                fila.append($('<td>').text(value.comentari).attr('data-label','Descripción'));
+                comentario.forEach( function (value){
 
-                //Crear el rating per els comentaris
-                let contenedor = $('<div>').addClass('col-12 rating-container').attr('data-rating', value.puntuacio);
-                let rating = $('<div>').addClass('rating');
+                    let fila = $('<tr>');
+                    fila.append($('<td>').text(value.nomPropietat).attr('data-label', 'Nombre propiedad'));
 
-                for (let i = 1; i <= 5; i++) {
-                    let estrella = $('<span>').addClass('star').attr('data-rating', i).html('&#9733;');
-                    rating.append(estrella);
-                }
+                    //Le pongo una id al td para darle estilo, porque si el comentario es muy grande no me ocupe todo el td
+                    let divP = $('<div>');
+                    let p = $('<p>').text(value.comentari)
+                    divP.append(p)
+                    let tdDesc = $('<td>').attr('data-label','Descripción').attr('id','tdP');
+                    tdDesc.append(divP);
+                    fila.append(tdDesc);
 
-                let TD = $('<td>').attr('data-label','Puntuación');
-                contenedor.append(rating);
-                TD.append(contenedor);
-                fila.append(TD);
+                    //Crear el rating per els comentaris
+                    let contenedor = $('<div>').addClass('col-12 rating-container').attr('data-rating', value.puntuacio);
+                    let rating = $('<div>').addClass('rating');
 
-                $('#tabla').append(fila);
-                //Creamos el botón, el formulario, la columna del botón y el formulario
-                let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
-                let botonComment = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text('{{__('Comentar')}}');
-                form.append(botonComment);
-                let celdaFormulario = $('<td>').append(form).attr('data-label','Acción');
-                fila.append(celdaFormulario);
+                    for (let i = 1; i <= 5; i++) {
+                        let estrella = $('<span>').addClass('star').attr('data-rating', i).html('&#9733;');
+                        rating.append(estrella);
+                    }
 
-                //Mostrar estrellas asignadas de cada usuario
-                $('.rating-container').each(function(index) {
-                    var $container = $(this);
-                    var ratingValue = $container.attr('data-rating');
-                    activateStars($container,ratingValue);
+                    let TD = $('<td>').attr('data-label','Puntuación');
+                    contenedor.append(rating);
+                    TD.append(contenedor);
+                    fila.append(TD);
+
+                    $('#tabla').append(fila);
+                    //Creamos el botón, el formulario, la columna del botón y el formulario
+                    let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
+                    let botonComment = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text('{{__('Comentar')}}');
+                    form.append(botonComment);
+                    let celdaFormulario = $('<td>').append(form).attr('data-label','Acción');
+                    fila.append(celdaFormulario);
+
+                    //Mostrar estrellas asignadas de cada usuario
+                    $('.rating-container').each(function(index) {
+                        var $container = $(this);
+                        var ratingValue = $container.attr('data-rating');
+                        activateStars($container,ratingValue);
+                    });
+                })
+
+            }
+
+            $('#cercador').on("input",function (){
+
+                const caracters = $(this).val().toUpperCase();
+                const tabla = $('#tabla');
+                const tablaAll = $('#tablaAll');
+
+                tabla.find('tr').each(function () {
+                    const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
+                    if (nombrePropiedad.includes(caracters)) {
+                        $(this).show(); // Mostrar fila si coincide con la búsqueda
+                    } else {
+                        $(this).hide(); // Ocultar fila si no coincide con la búsqueda
+
+                    }
                 });
-            })
-        }
-
-        $('#cercador').on("input",function (){
-
-            const caracters = $(this).val().toUpperCase();
-            const tabla = $('#tabla');
-            const tablaAll = $('#tablaAll');
-
-            tabla.find('tr').each(function () {
-                const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
-                if (nombrePropiedad.includes(caracters)) {
-                    $(this).show(); // Mostrar fila si coincide con la búsqueda
-                } else {
-                    $(this).hide(); // Ocultar fila si no coincide con la búsqueda
-
-                }
             });
+            $('#atras').remove();
+
+
+
+            function activateStars($container, ratingValue) {
+                $container.find('.star').removeClass('active');
+                $container.find('.star').each(function() {
+                    if ($(this).attr('data-rating') <= ratingValue) {
+                        $(this).addClass('active');
+                    }
+                });
+            }
         });
-        $('#atras').remove();
-
-
-
-        function activateStars($container, ratingValue) {
-            $container.find('.star').removeClass('active');
-            $container.find('.star').each(function() {
-                if ($(this).attr('data-rating') <= ratingValue) {
-                    $(this).addClass('active');
-                }
-            });
-        }
     </script>
 @endsection
