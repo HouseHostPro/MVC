@@ -7,6 +7,7 @@
 @endguest
 @section('title',__('Edición de usuario'))
 @section('content')
+    @include('sweetalert::alert')
     @auth
     <nav class="mt-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">

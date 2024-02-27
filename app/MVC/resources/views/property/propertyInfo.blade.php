@@ -51,7 +51,7 @@
                             </a>
                         </li>
                         <li class="nav-item ps-3">
-                            <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                            <a href="{{ route('property.gallery', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id]) }}" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mb-1 me-1 bi bi-arrow-return-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
                                 </svg>{{__('Galería')}}
@@ -135,29 +135,22 @@
                             </div>
                         </div>
                     </div>
-                    <div id="map" style="height: 180px"></div>
+                    <div id="map" style="height: 380px"></div>
                 </form>
             </div>
         </div>
     </div>
-
-    @if (\Session::has('success'))
-        <div id="successMessage" class="alert alert-success col-md-2 d-flex justify-content-between align-items-center">
-            <p class="mb-0">{!! \Session::get('success') !!}</p>
-            <span id="cancelMessage" class="material-symbols-outlined">cancel</span>
-        </div>
-    @endif
 
 
     <script>
 
         $(document).ready(function (){
 
-            const lat = $('#ubi').val().split(',')[0];
-            const lng = $('#ubi').val().split(',')[1];
+            let lat = $('#ubi').val().split(',')[0];
+            let lng = $('#ubi').val().split(',')[1];
 
             const map = L.map('map').setView([lat, lng], 13);
-            L.marker([39.68793, 2.84433]).addTo(map);
+            L.marker([lat, lng]).addTo(map);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -171,7 +164,8 @@
 
 
             map.on('click', function(e) {
-                alert("Lat, Lon : " + e.latlng.lat + "," + e.latlng.lng);
+                lat = e.latlng.lat;
+                lng = e.latlng.lng;
                 $('#ubi').val(e.latlng.lat + ", " + e.latlng.lng);
             });
 
@@ -199,7 +193,6 @@
             $(window).resize(resizeProperty);
             resizeProperty();
         })
-        $(document).click("#cancelMessage")
     </script>
 </body>
 </html>

@@ -727,13 +727,13 @@
             }
         }
 
-        var map = L.map('map').setView([39.68793, 2.84433], 13);
-        var marker = L.marker([39.68793, 2.84433]).addTo(map);
+        var map = L.map('map').setView([{{ explode("," ,$propietat -> localitzacio)[0] }}, {{ explode("," ,$propietat -> localitzacio)[1] }}], 13);
+        var marker = L.marker([{{ explode("," ,$propietat -> localitzacio)[0] }}, {{ explode("," ,$propietat -> localitzacio)[1] }}]).addTo(map);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
-        var circle = L.circle([39.68793, 2.84433], {
+        var circle = L.circle([{{ explode("," ,$propietat -> localitzacio)[0] }}, {{ explode("," ,$propietat -> localitzacio)[1] }}], {
             color: 'blue',
             fillColor: '#ADD8E6',
             fillOpacity: 0.5,

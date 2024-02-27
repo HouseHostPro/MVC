@@ -61,6 +61,9 @@ Route::middleware('auth')->group(function (){
     Route::get('/serviciosByProperty',[PropertyFormController::class,'serviceByProperty'])->name('serviciosPreperty');
     Route::post('/saveService',[PropertyFormController::class,'saveService'])->name('saveService');
 
+    //Galería
+    Route::get('/property/{id}/property/{prop_id}/galeria', [PropertyFormController::class, 'loadGaleria']) -> name('property.gallery');
+
     //Mostrar todas las propiedades
     Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
 
@@ -68,7 +71,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/allTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('property.traduccions');
 
     //Cerrar sesión
-    Route::post('/logout',[UserController::class,'logout'])->name('logout');
+    Route::post('/property/{id}/logout',[UserController::class,'logout'])->name('logout');
 
 });
 

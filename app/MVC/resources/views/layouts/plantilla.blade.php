@@ -67,8 +67,9 @@
                                     </li>
                                 @auth
                                     <li>
-                                        <form method="post" action="{{ route('logout') }}">
+                                        <form method="post" action="{{ route('logout', ['id' => $PROPIETAT_ID]) }}">
                                             @csrf
+                                            <input type="hidden" name="id" value="{{ $PROPIETAT_ID }}">
                                             <button type="submit" class="btn btn-link text-black text-decoration-none ps-3">{{__('Cerrar sesión')}}</button>
                                         </form>
                                     </li>

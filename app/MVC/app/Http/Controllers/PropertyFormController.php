@@ -174,4 +174,11 @@ class PropertyFormController extends Controller {
         $propietat = Propietat::where('id',$id) -> first();
         return view('property/serveiForm', compact('propietat'));
     }
+
+    //Galeria
+
+    public function loadGaleria(Request $request) {
+        $propietat = Propietat::where('id', $request -> id) -> first();
+        return view('galeria', compact('propietat'));
+    }
 }

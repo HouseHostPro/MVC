@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller{
 
@@ -39,11 +40,14 @@ class UserController extends Controller{
     public function store(Request $request) {
 
         User::hashPassword();
-        var_dump($request);
 
         if(Auth::check()){
             $user = User::find(Auth::user()->id);
             $user->update($request->all());
+
+            Alert::success(__('Actualizado'), __(''));
+
+            return redirect() -> back() -> with('success', 'Actualizado');
         }else{
             User::create($request->all());
         }
@@ -104,7 +108,7 @@ class UserController extends Controller{
         $comentarios = Comentari::where('propietat_id',1)->get();
         $servicios = Configuracio_Servei::where('configuracio_id',1)->get();
 
-        return redirect()->route('principal',compact('comentarios','servicios'));
+        return redirect()->route('principal', ['id' => $request -> id, 'comentarios' => $comentarios, 'servicios' => $servicios]);
     }
     public function cuenta(Request $request){
 
