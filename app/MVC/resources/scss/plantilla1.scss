@@ -266,19 +266,19 @@ $success: #82E0AA;
 body {
     background: linear-gradient(to right, #D5E9F7  , #f8f8ff);
 }
-#tabla td{
+#table td{
     text-align: center;
 }
-#tabla{
+#table{
     @extend .border-bottom;
     @extend .border-dark;
 }
-#tabla td:nth-child(2){
+#table td:nth-child(2){
     @extend .w-50;
 }
 
 @media screen and (max-width: 540px) {
-    #tabla thead {
+    #table thead {
         border: none;
         clip: rect(0 0 0 0);
         height: 1px;
@@ -293,24 +293,24 @@ body {
         margin-bottom: 20px;
     }
 
-    #tabla td::before {
+    #table td::before {
         content: attr(data-label);
         float: left;
         font-weight: bold;
     }
 
-    #tabla tr {
+    #table tr {
         border: 1px solid #ddd;
         display: block;
         margin-bottom: 10px;
 
     }
-    #tabla tr:last-child {
+    #table tr:last-child {
         margin-bottom: 0 !important;
 
     }
 
-    #tabla{
+    #table{
         border-collapse: separate;
         border-bottom: 0 #ddd !important;
     }
@@ -322,18 +322,18 @@ body {
 
         width: 75%;
     }
-    #tabla td {
+    #table td {
 
         text-align: right !important;
         display: block;
         font-size: .8em;
 
     }
-    #tabla td:nth-child(2){
+    #table td:nth-child(2){
         width: auto !important;
     }
 
-    #tabla td:last-child {
+    #table td:last-child {
         border-bottom: 0;
     }
 }

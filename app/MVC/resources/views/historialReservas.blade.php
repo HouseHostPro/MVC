@@ -24,7 +24,7 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-10 col-12">
                         <div class="table-responsive bg-white">
-                            <table class="table table-hover mb-0 bg-white ">
+                            <table id="table" class="table table-hover mb-0 bg-white ">
                                 <thead>
                                 <tr class="text-center">
                                     <th>{{__('Nombre propiedad')}}</th>

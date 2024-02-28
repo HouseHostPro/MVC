@@ -220,7 +220,7 @@ $success: #F39C12;
     @extend .col-12;
 }
 #servicios-casa button{
-    @extend .mt-3;
+    @extend .mt-3 ;
 }
 #carousel-casa{
     @extend .order-2;
@@ -279,4 +279,76 @@ $success: #F39C12;
 }
 body{
     background: linear-gradient(to right, #EAFAF1  , #FAECEB);
+}
+
+#table td{
+    text-align: center;
+}
+#table{
+    @extend .border-bottom;
+    @extend .border-dark;
+}
+#table td:nth-child(2){
+    @extend .w-50;
+}
+
+@media screen and (max-width: 540px) {
+    #table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    #container-form{
+        margin-bottom: 20px;
+    }
+
+    #table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+
+    #table tr {
+        border: 1px solid #ddd;
+        display: block;
+        margin-bottom: 10px;
+
+    }
+    #table tr:last-child {
+        margin-bottom: 0 !important;
+
+    }
+
+    #table{
+        border-collapse: separate;
+        border-bottom: 0 #ddd !important;
+    }
+    #tdP{
+        display: flex;
+        justify-content: space-between;
+    }
+    #tdP>div{
+
+        width: 75%;
+    }
+    #table td {
+
+        text-align: right !important;
+        display: block;
+        font-size: .8em;
+
+    }
+    #table td:nth-child(2){
+        width: auto !important;
+    }
+
+    #table td:last-child {
+        border-bottom: 0;
+    }
 }

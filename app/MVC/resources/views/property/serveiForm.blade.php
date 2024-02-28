@@ -111,7 +111,7 @@
                     type: 'checkbox',
                     name: `s-${value.id}`,
                     value: value.id
-                });
+                }).addClass('form-check-input');
 
                 allServicesByProperty.forEach( function (serv){
                     if(serv.servei_id === value.id){
