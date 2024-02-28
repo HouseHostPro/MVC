@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comentari;
+use App\Models\Tiquet_Comentari;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,37 +13,108 @@ class ComentariController extends Controller{
 
     public function create(Request $request){
 
-        $comentario = new Comentari();
+        $idPropiedad = $request->session()->get('idPropiedad');
 
-        $comentario->propietat_id = $request->session()->get('idPropiedad');
-        $comentario->usuari_id = Auth::user()->id;
-        $comentario->comentari = $request -> input('descripcion');
-        if($request -> input('rating') !== NULL){
-            $comentario->puntuacio = $request -> input('rating');
+
+        if($request->isMethod('post')){
+            $tiquet = new Tiquet_Comentari();
+            $tiquet->propietat_id = $idPropiedad;
+            $tiquet->save();
+
+            $tiquetNou = Tiquet_Comentari::latest('id')->first();
+
+            $this->crearComentari($tiquetNou->id,'F',$request);
+
         }else{
-            $comentario->puntuacio = 0;
+
+            $this->crearComentari($request->tcId,'C',$request);
         }
 
+
+        return redirect() -> back();
+    }
+
+    private function crearComentari($tiquet,$fa_contesta, $request){
+
+
+        $comentario = new Comentari();
+        $comentario->usuari_id = Auth::user()->id;
+        $comentario->tc_id = $tiquet;
+        $comentario->comentari = $request->descripcion;
+        if($request -> input('rating') !== NULL){
+            $comentario->puntuacio = $request->rating;
+        }else{
+
+        }
+        $comentario->fa_contesta = $fa_contesta;
         $comentario->save();
-        return redirect() -> route('principal');
+    }
+
+    public function allComent(Request $request) {
+
+        $idUser = Auth::user()->id;
+
+        $comentarios = User::findOrFail($idUser)
+            ->comentarios()
+            ->select('comentari.*', 'propietat.nom as nomPropietat')
+            ->join('tiquet_comentari','comentari.tc_id','=','tiquet_comentari.id')
+            ->join('propietat','tiquet_comentari.propietat_id','=','propietat.id')
+            ->get();
+
+        return $comentarios;
+    }
+    public function allCommentsForProperties(Request $request){
+
+        $idUser = Auth::user()->id;
+        $propiedades = User::find($idUser)->propiedad;
+        $comentarios = [];
+
+        foreach ($propiedades as $propiedad){
+            $tiquet_comentari = Tiquet_Comentari::where('propietat_id',$propiedad->id)->get();
+            foreach ($tiquet_comentari as $tiquet) {
+                $comentariosQuery = Comentari::where('tc_id',$tiquet->id)->get();
+
+                foreach ($comentariosQuery as $comentario) {
+
+                    $comentarios[] = [
+                        'nomPropietat' => $propiedad->nom,
+                        'nomUser' => $comentario->user->nom,
+                        'comentario' => $comentario
+                    ];
+                }
+            }
+        }
+
+        return $comentarios;
     }
 
     public function delete(Request $request){
 
         $idU = Auth::user()->id;
         if(!$request->isMethod('post')){
-            $idP = $request->id;
-            Comentari::where('propietat_id',$idP)->where('usuari_id',$idU)->delete();
-
+            $idTc = $request->id;
+            $estat = $request->estat;
+            if($estat === 'F'){
+                Comentari::where('tc_id',$idTc)->delete();
+                Tiquet_Comentari::where('id',$idTc)->delete();
+            }else{
+                Comentari::where('tc_id',$idTc)->where('usuari_id',$idU)->delete();
+            }
             return redirect() -> route('comentarios');
         }else{
-            $idP = $request->session()->get('idPropiedad');
-            Comentari::where('propietat_id',$idP)->where('usuari_id',$idU)->delete();
+            $id = $request->input('idTc');
+            $estat = $request->input('estat');
+            if($estat === 'F'){
+
+                Comentari::where('tc_id',$id)->delete();
+                Tiquet_Comentari::where('id',$id)->delete();
+            }else{
+                Comentari::where('tc_id',$id)->where('usuari_id',$idU)->delete();
+            }
 
             return redirect() -> route('principal');
         }
     }
-
     public function comentarios(Request $request){
 
         return view('comentarios');
@@ -51,26 +124,4 @@ class ComentariController extends Controller{
 
         return view('historialComentarios');
     }
-
-    public function allCommentsForProperties(Request $request){
-
-        $comentarios = Comentari::select('comentari.*', 'propietat.nom as nomPropietat')
-            ->join('propietat', 'comentari.propietat_id', '=', 'propietat.id')
-            ->where('propietat.usuari_id', Auth::user()->id)
-            ->get();
-
-        return $comentarios;
-
-    }
-
-    public function allComent() {
-
-        $comentarios = Comentari::select('comentari.*', 'propietat.nom as nomPropietat')
-            ->where('comentari.usuari_id', Auth::user()->id)
-            ->join('propietat', 'comentari.propietat_id', '=', 'propietat.id')
-            ->get();
-
-        return $comentarios;
-    }
-
 }

@@ -45,35 +45,74 @@
                     <h5 class="modal-title" id="comment">Comentarios</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                @php
+                    $count = 0;
+                @endphp
                 @foreach($comentarios as $comentario)
-                <div class="modal-body row col-12">
-                    <div class="col-12 col-xl-6 row mt-4">
-                        <div class="col-sm-2 col-3 text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                            </svg>
-                        </div>
-                        <div class="col-9 ps-0">
-                            <h5>{{$comentario->user->nom}}</h5>
-                            <p style="font-size: 12px">{{$comentario->user->ciutat->nom}}, {{$comentario->user->ciutat->pais->nom}}</p>
-                        </div>
-                        <div class="col-12 rating-container" data-rating="{{$comentario->puntuacio}}">
-                            <div class="rating" >
-                                <span class="star" data-rating="1">&#9733;</span>
-                                <span class="star" data-rating="2">&#9733;</span>
-                                <span class="star" data-rating="3">&#9733;</span>
-                                <span class="star" data-rating="4">&#9733;</span>
-                                <span class="star" data-rating="5">&#9733;</span>
+                    @if($comentario->fa_contesta === 'F')
+                        <div class="modal-body row col-12">
+                            <div class="col-12 col-xl-6 row mt-4">
+                                <div class="col-sm-2 col-3 text-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                    </svg>
+                                </div>
+                                <div class="col-9 ps-0">
+                                    <h5>{{$comentario->user->nom}}</h5>
+                                    <p style="font-size: 12px">{{$comentario->user->ciutat->nom}}, {{$comentario->user->ciutat->pais->nom}}</p>
+                                </div>
+                                <div class="col-12 rating-container" data-rating="{{$comentario->puntuacio}}">
+                                    <div class="rating" >
+                                        <span class="star" data-rating="1">&#9733;</span>
+                                        <span class="star" data-rating="2">&#9733;</span>
+                                        <span class="star" data-rating="3">&#9733;</span>
+                                        <span class="star" data-rating="4">&#9733;</span>
+                                        <span class="star" data-rating="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <p >
+                                        {{$comentario->comentari}}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <p >
-                                {{$comentario->comentari}}
-                            </p>
+                        @php
+                            $count = 0;
+                        @endphp
+                    @else
+                        @if($count === 0)
+                            <div class="row col-12 justify-content-end">
+                                <div class="col-11">
+                                    <p class="fw-bold">Respuestas</p>
+                                </div>
+                            </div>
+                        @endif
+                        <div class="modal-body row col-12 justify-content-end">
+                            <div class="col-11 col-xl-6 row mt-4">
+                                <div class="col-sm-2 col-3 text-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                    </svg>
+                                </div>
+                                <div class="col-9 ps-0">
+                                    <h5>{{$comentario->user->nom}}</h5>
+                                    <p style="font-size: 12px">{{$comentario->user->ciutat->nom}}, {{$comentario->user->ciutat->pais->nom}}</p>
+                                </div>
+                                <div class="col-12">
+                                    <p >
+                                        {{$comentario->comentari}}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        @php
+                            $count++;
+                        @endphp
+                    @endif
+                    <div class="col-12 border-bottom"></div>
                 @endforeach
             </div>
         </div>

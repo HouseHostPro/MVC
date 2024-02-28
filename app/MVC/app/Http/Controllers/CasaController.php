@@ -7,6 +7,7 @@ use App\Models\Configuracio;
 use App\Models\Configuracio_Servei;
 use App\Models\Reserva;
 use App\Models\Servei;
+use App\Models\Tiquet_Comentari;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,21 @@ class CasaController extends Controller{
 
     public function datosFichaCasa(){
 
-        $comentarios = Comentari::where('propietat_id',1)->get();
-        $servicios = Configuracio_Servei::where('configuracio_id',1)->get();
+        $tiquet_comentari = Tiquet_Comentari::where('propietat_id',1)->get();
 
+        $comentarios = [];
+
+        foreach ($tiquet_comentari as $tiquet) {
+            $comentariosQuery = Comentari::where('tc_id',$tiquet->id)
+                ->orderBy('tc_id','asc')
+                ->orderByRaw("CASE WHEN fa_contesta = 'F' THEN 0 ELSE 1 END")
+                ->get();
+            foreach ($comentariosQuery as $comentario) {
+                array_push($comentarios,$comentario);
+            }
+        }
+
+        $servicios = Configuracio_Servei::where('configuracio_id',1)->get();
 
         return view('fichaCasa',compact('comentarios','servicios'));
     }

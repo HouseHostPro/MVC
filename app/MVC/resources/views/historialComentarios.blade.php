@@ -25,12 +25,13 @@
         <div class="mask d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-sm-10 col-12">
+                    <div class="col-12">
                         <div class="table-responsive bg-white">
                             <table id="table" class="table table-hover mb-0 bg-white">
                                 <thead>
                                 <tr class="text-center">
                                     <th>{{__('Nombre propiedad')}}</th>
+                                    <th>{{__('Nombre Usuario')}}</th>
                                     <th>{{__('Descripción')}}</th>
                                     <th>{{__('Puntuación')}}</th>
                                     <th>{{__('Acciones')}}</th>
@@ -42,6 +43,31 @@
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Crear Comentarios -->
+    <div class="modal fade" id="crearComentario" tabindex="-1" aria-labelledby="cComenatrio" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cComenatrio">Añadir cometario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="get" action="{{route('comentario.store.get')}}" class="d-flex flex-column gap-3">
+                        @csrf
+                        <div class="form-group">
+                            <label for="descripcion">Descripción:</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
+                        </div>
+                        <input type="text" id="rating" name="rating" hidden>
+                        <input type="text" id="tcId" name="tcId" hidden>
+                        <div class="col-12 row justify-content-end">
+                            <button type="submit" class="col-2 btn bg-primary bg-opacity-25 border border-dark">Añadir</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -60,60 +86,84 @@
                 printCommnets(comentarios)
             });
 
+        })
 
             function printCommnets(comentario){
 
-
-                comentario.forEach( function (value){
+            comentario.forEach( function (value){
 
                     let fila = $('<tr>');
                     fila.append($('<td>').text(value.nomPropietat).attr('data-label', 'Nombre propiedad'));
+                    fila.append($('<td>').text(value.nomUser));
 
                     //Le pongo una id al td para darle estilo, porque si el comentario es muy grande no me ocupe todo el td
                     let divP = $('<div>');
-                    let p = $('<p>').text(value.comentari)
+                    let p = $('<p>').text(value.comentario.comentari)
                     divP.append(p)
                     let tdDesc = $('<td>').attr('data-label','Descripción').attr('id','tdP');
                     tdDesc.append(divP);
                     fila.append(tdDesc);
 
-                    //Crear el rating per els comentaris
-                    let contenedor = $('<div>').addClass('col-12 rating-container').attr('data-rating', value.puntuacio);
-                    let rating = $('<div>').addClass('rating');
+                //Crear el rating per els comentaris
+                let contenedor = $('<div>').addClass('col-12 rating-container').attr('data-rating', value.comentario.puntuacio);
+                let rating = $('<div>').addClass('rating');
 
                     for (let i = 1; i <= 5; i++) {
                         let estrella = $('<span>').addClass('star').attr('data-rating', i).html('&#9733;');
                         rating.append(estrella);
                     }
 
-                    let TD = $('<td>').attr('data-label','Puntuación');
-                    contenedor.append(rating);
-                    TD.append(contenedor);
-                    fila.append(TD);
+                let TD = $('<td>').attr('data-label','Puntuación');
+                fila.append(TD);
 
-                    $('#tabla').append(fila);
+                $('#tabla').append(fila);
+
+                if(value.comentario.puntuacio !== null){
+
                     //Creamos el botón, el formulario, la columna del botón y el formulario
-                    let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
-                    let botonComment = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text('{{__('Comentar')}}');
-                    form.append(botonComment);
-                    let celdaFormulario = $('<td>').append(form).attr('data-label','Acción');
+                    let botonComment = $('<button>').attr({
+                        'type':'button',
+                        'data-bs-toggle': 'modal',
+                        'data-bs-target': '#crearComentario'
+                    }).addClass('btn bg-primary bg-opacity-50').text('{{__('Comentar')}}');
+                    botonComment.click(function (){
+                        $('#tcId').val(value.comentario.tc_id);
+                    })
+                    let celdaFormulario = $('<td>').append(botonComment).addClass('text-center').attr('data-label','Acción');
                     fila.append(celdaFormulario);
 
+                    contenedor.append(rating).addClass('text-center');
+                    TD.append(contenedor);
+
+                    console.log("entra")
                     //Mostrar estrellas asignadas de cada usuario
                     $('.rating-container').each(function(index) {
                         var $container = $(this);
                         var ratingValue = $container.attr('data-rating');
                         activateStars($container,ratingValue);
                     });
-                })
+                }else {
+                    //Creamos el botón, el formulario, la columna del botón y el formulario
+                    let botonComment = $('<button>').attr({
+                        'type':'button',
+                        'data-bs-toggle': 'modal',
+                        'data-bs-target': '#crearComentario'
+                    }).addClass('btn bg-primary bg-opacity-50 invisible').text('{{__('Comentar')}}');
+                    botonComment.click(function (){
+                        $('#tcId').val(value.comentario.tc_id);
+                    })
+                    let celdaFormulario = $('<td>').append(botonComment).addClass('text-center');
+                    fila.append(celdaFormulario);
 
-            }
+                }
+            })
+        }
+
 
             $('#cercador').on("input",function (){
 
-                const caracters = $(this).val().toUpperCase();
-                const tabla = $('#tabla');
-                const tablaAll = $('#tablaAll');
+            const caracters = $(this).val().toUpperCase();
+            const tabla = $('#tabla');
 
                 tabla.find('tr').each(function () {
                     const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
@@ -129,14 +179,13 @@
 
 
 
-            function activateStars($container, ratingValue) {
-                $container.find('.star').removeClass('active');
-                $container.find('.star').each(function() {
-                    if ($(this).attr('data-rating') <= ratingValue) {
-                        $(this).addClass('active');
-                    }
-                });
-            }
-        });
+        function activateStars($container, ratingValue) {
+            $container.find('.star').removeClass('active');
+            $container.find('.star').each(function() {
+                if ($(this).attr('data-rating') <= ratingValue) {
+                    $(this).addClass('active');
+                }
+            });
+        }
     </script>
 @endsection

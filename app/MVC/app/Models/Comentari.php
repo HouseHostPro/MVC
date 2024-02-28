@@ -18,4 +18,7 @@ class Comentari extends Model{
     public function user():BelongsTo{
         return $this->belongsTo(User::class,'usuari_id','id');
     }
+    public function tiquetComentari(){
+        return $this->belongsTo(Propietat::class,'tc_id','id');
+    }
 }

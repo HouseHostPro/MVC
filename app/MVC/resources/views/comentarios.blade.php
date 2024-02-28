@@ -36,7 +36,7 @@
                                     <th>{{__('Acciones')}}</th>
                                 </tr>
                                 </thead>
-                                <tbody id="tabla" >
+                                <tbody id="tabla">
 
                                 </tbody>
                             </table>
@@ -58,8 +58,7 @@
                     console.log(comentarios);
                     printCommnets(comentarios)
                 });
-
-
+            })
 
             function printCommnets(comentario){
 
@@ -87,24 +86,33 @@
                     }
 
                     let TD = $('<td>').attr('data-label','Puntuación');
-                    contenedor.append(rating);
-                    TD.append(contenedor);
                     fila.append(TD);
+
+                    //Reemplazar las variables para que las coja en get
+                    let url = "{{ route('comentario.delete.get', ['id' => ':id', 'estat' => ':estat']) }}";
+                    url = url.replace(':id',value.tc_id).replace(':estat',value.fa_contesta);
 
                     $('#tabla').append(fila);
                     //Creamos el botón, el formulario, la columna del botón y el formulario
-                    let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
+                    let form = $('<form>').attr('method', 'get').attr('action', url);
                     let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text('{{__('Eliminar')}}');
                     form.append(botonEliminar);
                     let celdaFormulario = $('<td>').append(form).attr('data-label','Acción');
                     fila.append(celdaFormulario);
 
-                    //Mostrar estrellas asignadas de cada usuario
-                    $('.rating-container').each(function(index) {
-                        var $container = $(this);
-                        var ratingValue = $container.attr('data-rating');
-                        activateStars($container,ratingValue);
-                    });
+                    if(value.puntuacio !== null){
+
+                        contenedor.append(rating).addClass('text-center');
+                        TD.append(contenedor);
+
+                        console.log("entra")
+                        //Mostrar estrellas asignadas de cada usuario
+                        $('.rating-container').each(function(index) {
+                            var $container = $(this);
+                            var ratingValue = $container.attr('data-rating');
+                            activateStars($container,ratingValue);
+                        });
+                    }
                 })
             }
 
@@ -136,7 +144,6 @@
                     }
                 });
             }
-            })
         </script>
 
 

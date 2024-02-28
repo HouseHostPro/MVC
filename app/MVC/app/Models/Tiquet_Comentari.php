@@ -5,21 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reserva extends Model{
-
-    use HasFactory;
-    protected $table = 'reserva';
+class Tiquet_Comentari extends Model{
+    protected $table = 'tiquet_comentari';
     public $timestamps = false;
+    protected $fillable = [
 
-    public function factura() {
-        return $this -> hasOne(Factura::class);
-    }
+    ];
 
     public function propiedad(){
         return $this->belongsTo(Propietat::class,'propietat_id','id');
     }
-    public function uuarios(){
-        return $this->belongsTo(User::class,'usuari_id','id');
+    public function comentarios(){
+        return $this->hasMany(Comentari::class,'tc_id','id');
     }
-
 }
