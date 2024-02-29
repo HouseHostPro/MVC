@@ -84,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="POST" action="{{ route('redsys') }}" class="col-4 border border-dark rounded shadow" style="height: 35%">
+                <form method="POST" action="{{ route('redsys', ['id' => explode("/", url() ->current())[4]]) }}" class="col-4 border border-dark rounded shadow" style="height: 35%">
                     @csrf
                     <div class="mt-2 col-12 row mx-3">
                         <div class="col-2 px-0">

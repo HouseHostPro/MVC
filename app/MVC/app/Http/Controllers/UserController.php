@@ -84,11 +84,10 @@ class UserController extends Controller{
         $idPropiedad = $request -> casaId;
 
         $user = User::where('email', $email)->first();
-        var_dump($request -> casaId);
 
         if ($email == $user->email /* || !Hash::check($password,$user->contrasenya)*/) {
-
-            if($password == $user->contrasenya){
+        if($password == $user -> contrasenya)
+            /*if(Hash::check($password, $user -> contrasenya))*/{
                 Auth::login($user);
                 $request->session()->put('idPropiedad',$idPropiedad);
                 $request->session()->put('user',$user);

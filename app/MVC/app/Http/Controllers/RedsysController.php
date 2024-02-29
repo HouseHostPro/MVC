@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Factura;
+use App\Models\Propietat;
 use App\Models\Reserva;
+use App\Models\Traduccio;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,9 +40,12 @@ class RedsysController extends Controller
             $reserva = new Reserva();
             $reserva -> preu_total = $precioTotal;
             $reserva -> usuari_id = Auth::user() -> id;
-            $reserva -> propietat_id = 1;
+            $reserva -> propietat_id = explode("/", url() ->current())[4];
             $reserva -> data_inici = $request -> from;
             $reserva -> data_fi = $request -> to;
+
+            $nomPropietat = Propietat::where('id', $reserva -> propietat_id) -> first() -> nom;
+            $nomTraduit = Traduccio::where(['code' => $nomPropietat, 'lang' => app() -> getLocale()]) -> first() -> value;
 
             Session::put('reserva', $reserva);
 
@@ -57,7 +62,7 @@ class RedsysController extends Controller
             Redsys::setVersion('HMAC_SHA256_V1');
             Redsys::setTradeName('Tienda S.L');
             Redsys::setTitular('Pedro Risco');
-            Redsys::setProductDescription('Reserva en ');
+            Redsys::setProductDescription('Reserva en ' . $nomTraduit);
             Redsys::setEnviroment('test'); //Entorno test
             Redsys::setAttributesSubmit('btn_submit', 'btn_id', '', 'display:none');
 
