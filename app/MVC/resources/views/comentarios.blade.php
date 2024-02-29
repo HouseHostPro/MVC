@@ -78,10 +78,10 @@
 
                     //Crear el rating per els comentaris
                     let contenedor = $('<div>').addClass('col-12 rating-container').attr('data-rating', value.puntuacio);
+                    let rating = $('<div>').addClass('rating');
 
 
                     if(value.puntuacio !== null){
-                        let rating = $('<div>').addClass('rating');
 
                         for (let i = 1; i <= 5; i++) {
                             let estrella = $('<span>').addClass('star').attr('data-rating', i).html('&#9733;');
@@ -89,15 +89,14 @@
                         }
 
                         let TD = $('<td>').attr('data-label','Puntuación');
-                        fila.append(TD);
-
                         contenedor.append(rating);
                         TD.append(contenedor);
+                        fila.append(TD);
+                        $('#tabla').append(fila);
 
-                        console.log(value.puntuacio)
                         //Mostrar estrellas asignadas de cada usuario
                         $('.rating-container').each(function(index) {
-                            console.log(this)
+
                             let $container = $(this);
                             let ratingValue = $container.attr('data-rating');
                             activateStars($container,ratingValue);
