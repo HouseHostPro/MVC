@@ -78,15 +78,42 @@
 
                     //Crear el rating per els comentaris
                     let contenedor = $('<div>').addClass('col-12 rating-container').attr('data-rating', value.puntuacio);
-                    let rating = $('<div>').addClass('rating');
 
-                    for (let i = 1; i <= 5; i++) {
-                        let estrella = $('<span>').addClass('star').attr('data-rating', i).html('&#9733;');
-                        rating.append(estrella);
+
+                    if(value.puntuacio !== null){
+                        let rating = $('<div>').addClass('rating');
+
+                        for (let i = 1; i <= 5; i++) {
+                            let estrella = $('<span>').addClass('star').attr('data-rating', i).html('&#9733;');
+                            rating.append(estrella);
+                        }
+
+                        let TD = $('<td>').attr('data-label','Puntuación');
+                        fila.append(TD);
+
+                        contenedor.append(rating);
+                        TD.append(contenedor);
+
+                        console.log(value.puntuacio)
+                        //Mostrar estrellas asignadas de cada usuario
+                        $('.rating-container').each(function(index) {
+                            console.log(this)
+                            let $container = $(this);
+                            let ratingValue = $container.attr('data-rating');
+                            activateStars($container,ratingValue);
+                        });
+                    }else {
+
+                        let rating = $('<div>').addClass('rating');
+
+                        for (let i = 1; i <= 5; i++) {
+                            let estrella = $('<span>').addClass('star').attr('data-rating', i).html('&#9733;');
+                            rating.append(estrella);
+                        }
+
+                        let TD = $('<td>').attr('data-label','Puntuación').addClass('invisible');
+                        fila.append(TD);
                     }
-
-                    let TD = $('<td>').attr('data-label','Puntuación');
-                    fila.append(TD);
 
                     //Reemplazar las variables para que las coja en get
                     let url = "{{ route('comentario.delete.get', ['id' => ':id', 'estat' => ':estat']) }}";
@@ -95,24 +122,11 @@
                     $('#tabla').append(fila);
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     let form = $('<form>').attr('method', 'get').attr('action', url);
-                    let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text('{{__('Eliminar')}}');
+                    let botonEliminar = $('<button>').attr('type', 'submit').attr('id','buttonForm').addClass('btn bg-danger bg-opacity-50').text('{{__('Eliminar')}}');
                     form.append(botonEliminar);
                     let celdaFormulario = $('<td>').append(form).attr('data-label','Acción');
                     fila.append(celdaFormulario);
 
-                    if(value.puntuacio !== null){
-
-                        contenedor.append(rating).addClass('text-center');
-                        TD.append(contenedor);
-
-                        console.log("entra")
-                        //Mostrar estrellas asignadas de cada usuario
-                        $('.rating-container').each(function(index) {
-                            var $container = $(this);
-                            var ratingValue = $container.attr('data-rating');
-                            activateStars($container,ratingValue);
-                        });
-                    }
                 })
             }
 
@@ -120,7 +134,7 @@
 
                 const caracters = $(this).val().toUpperCase();
                 const tabla = $('#tabla');
-                const tablaAll = $('#tablaAll');
+
 
                 tabla.find('tr').each(function () {
                     const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
@@ -137,6 +151,7 @@
 
 
             function activateStars($container, ratingValue) {
+                console.log(ratingValue)
                 $container.find('.star').removeClass('active');
                 $container.find('.star').each(function() {
                     if ($(this).attr('data-rating') <= ratingValue) {

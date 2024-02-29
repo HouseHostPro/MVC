@@ -92,33 +92,35 @@
 
             comentario.forEach( function (value){
 
-                    let fila = $('<tr>');
-                    fila.append($('<td>').text(value.nomPropietat).attr('data-label', 'Nombre propiedad'));
-                    fila.append($('<td>').text(value.nomUser));
+                let fila = $('<tr>');
+                fila.append($('<td>').text(value.nomPropietat).attr('data-label', 'Nombre propiedad'));
+                fila.append($('<td>').text(value.nomUser));
 
-                    //Le pongo una id al td para darle estilo, porque si el comentario es muy grande no me ocupe todo el td
-                    let divP = $('<div>');
-                    let p = $('<p>').text(value.comentario.comentari)
-                    divP.append(p)
-                    let tdDesc = $('<td>').attr('data-label','Descripción').attr('id','tdP');
-                    tdDesc.append(divP);
-                    fila.append(tdDesc);
+                //Le pongo una id al td para darle estilo, porque si el comentario es muy grande no me ocupe todo el td
+                let divP = $('<div>');
+                let p = $('<p>').text(value.comentario.comentari)
+                divP.append(p)
+                let tdDesc = $('<td>').attr('data-label','Descripción').attr('id','tdP');
+                tdDesc.append(divP);
+                fila.append(tdDesc);
 
                 //Crear el rating per els comentaris
                 let contenedor = $('<div>').addClass('col-12 rating-container').attr('data-rating', value.comentario.puntuacio);
-                let rating = $('<div>').addClass('rating');
+
+
+                $('#tabla').append(fila);
+
+                if(value.comentario.puntuacio !== null){
+
+                    let rating = $('<div>').addClass('rating');
 
                     for (let i = 1; i <= 5; i++) {
                         let estrella = $('<span>').addClass('star').attr('data-rating', i).html('&#9733;');
                         rating.append(estrella);
                     }
 
-                let TD = $('<td>').attr('data-label','Puntuación');
-                fila.append(TD);
-
-                $('#tabla').append(fila);
-
-                if(value.comentario.puntuacio !== null){
+                    let TD = $('<td>').attr('data-label','Puntuación');
+                    fila.append(TD);
 
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     let botonComment = $('<button>').attr({
@@ -132,17 +134,28 @@
                     let celdaFormulario = $('<td>').append(botonComment).addClass('text-center').attr('data-label','Acción');
                     fila.append(celdaFormulario);
 
-                    contenedor.append(rating).addClass('text-center');
+                    contenedor.append(rating);
                     TD.append(contenedor);
 
-                    console.log("entra")
+                    console.log(value.comentario.puntuacio)
                     //Mostrar estrellas asignadas de cada usuario
                     $('.rating-container').each(function(index) {
-                        var $container = $(this);
-                        var ratingValue = $container.attr('data-rating');
+                        console.log(this)
+                        let $container = $(this);
+                        let ratingValue = $container.attr('data-rating');
                         activateStars($container,ratingValue);
                     });
                 }else {
+                    let rating = $('<div>').addClass('rating');
+
+                    for (let i = 1; i <= 5; i++) {
+                        let estrella = $('<span>').addClass('star').attr('data-rating', i).html('&#9733;');
+                        rating.append(estrella);
+                    }
+
+                    let TD = $('<td>').attr('data-label','Puntuación').addClass('invisible');
+                    fila.append(TD);
+
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     let botonComment = $('<button>').attr({
                         'type':'button',

@@ -315,8 +315,8 @@ body {
         border-bottom: 0 #ddd !important;
     }
     #tdP{
-        display: flex;
-        justify-content: space-between;
+        display: flex !important;
+        justify-content: space-between !important;
     }
     #tdP>div{
 
