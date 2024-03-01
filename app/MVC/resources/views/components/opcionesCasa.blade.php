@@ -1,5 +1,5 @@
 
-        <h2 id="desc" class="fs-4"></h2>
+        <h2 class="fs-4" id="desc"></h2>
         <p>
             5 {{__('Personas')}} - 3 {{__('Dormitorios')}} - 4 {{__('Camas')}} - 1 {{__('Baños')}}
         </p>
@@ -24,7 +24,7 @@
             <div class="item mb-1 bg-white rounded">
                 <div class="carousel-item active rounded border border-black shadow p-4" data-bs-interval="false">
                     <div class="col-12 d-flex justify-content-center">
-                        <img src="img/cama-individual2.png" class="d-block w-50" alt="camas-individuales">
+                        <img src="../img/cama-individual2.png" class="d-block w-50" alt="camas-individuales">
                     </div>
                     <div class="d-none d-md-block col-12">
                         <h5 >{{__('Dormitorio')}} 1</h5>
@@ -35,7 +35,7 @@
             <div class="item bg-white rounded">
                 <div class="carousel-item active rounded border border-black shadow p-4" data-bs-interval="false">
                     <div class="col-12 d-flex justify-content-center">
-                        <img src="img/cama-individual.png" class="d-block w-50" alt="cama-individual">
+                        <img src="../img/cama-individual.png" class="d-block w-50" alt="cama-individual">
                     </div>
                     <div class="d-none d-md-block col-12">
                         <h5 >{{__('Dormitorio')}} 2</h5>
@@ -46,7 +46,7 @@
             <div class="item me-1 bg-white rounded">
                 <div class="carousel-item active rounded border border-black shadow p-4">
                     <div class="col-12 d-flex justify-content-center">
-                        <img src="img/cama-doble.png" class="d-block w-50" alt="cama-doble">
+                        <img src="../img/cama-doble.png" class="d-block w-50" alt="cama-doble">
                     </div>
                     <div class="d-none d-md-block col-12">
                         <h5 >{{__('Dormitorio')}} 3</h5>

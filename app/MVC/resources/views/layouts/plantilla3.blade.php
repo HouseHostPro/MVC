@@ -101,13 +101,13 @@
             // Crear el primer div col-6
             let firstDiv = $('<div>').addClass('col-sm-6 col-12 pt-1 px-0 my-2');
             let firstLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
-            let firstImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-start').attr('src', 'img/frontCasa.webp').attr('alt', 'entrada').attr('id', 'frontCasa');
+            let firstImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-start').attr('src', '../img/frontCasa.webp').attr('alt', 'entrada').attr('id', 'frontCasa');
             firstLink.append(firstImage);
             firstDiv.append(firstLink);
 
             let secondDiv = $('<div>').addClass('col-6 px-0 mt-3 ps-2').attr('id','img-hide');
             let secondLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
-            let secondImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-end').attr('src', 'img/dormitori1.webp').attr('alt', 'entrada').attr('id', 'frontCasa');
+            let secondImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-end').attr('src', '../img/dormitori1.webp').attr('alt', 'entrada').attr('id', 'frontCasa');
             secondLink.append(secondImage);
             secondDiv.append(secondLink);
 

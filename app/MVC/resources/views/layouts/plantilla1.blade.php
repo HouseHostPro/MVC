@@ -112,7 +112,7 @@
             // Crear el primer div col-6
             let firstDiv = $('<div>').addClass('col-sm-6 col-12 pt-1 px-0 my-2 me-2');
             let firstLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
-            let firstImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-start').attr('src', 'img/frontCasa.webp').attr('alt', 'entrada').attr('id', 'frontCasa');
+            let firstImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-start').attr('src', '../img/frontCasa.webp').attr('alt', 'entrada').attr('id', 'frontCasa');
             firstLink.append(firstImage);
             firstDiv.append(firstLink);
 
@@ -124,20 +124,20 @@
             let col2 = $('<div>').addClass('col-6 p-1').addClass('img-hide');
 
             // Crear las imágenes y añadir al primer div col-6
-            let img1 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/dormitori1.webp').attr('alt', 'dormitorio');
+            let img1 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', '../img/dormitori1.webp').attr('alt', 'dormitorio');
             let link1 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img1);
             col1.append($('<div>').addClass('col-12 padd-img ms-2').append(link1));
 
-            let img2 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/bany1.webp').attr('alt', 'baño');
+            let img2 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', '../img/bany1.webp').attr('alt', 'baño');
             let link2 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img2);
             col1.append($('<div>').addClass('col-12 ms-2').append(link2));
 
             // Crear las imágenes y añadir al segundo div col-6
-            let img3 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/bany1.webp').attr('alt', 'baño').attr('id', 'radius-tr');
+            let img3 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', '../img/bany1.webp').attr('alt', 'baño').attr('id', 'radius-tr');
             let link3 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img3);
             col2.append($('<div>').addClass('col-12 padd-img ms-2').append(link3));
 
-            let img4 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', 'img/piscina.webp').attr('alt', 'piscina').attr('id', 'radius-br');
+            let img4 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', '../img/piscina.webp').attr('alt', 'piscina').attr('id', 'radius-br');
             let link4 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img4);
             col2.append($('<div>').addClass('col-12 ms-2').append(link4));
 

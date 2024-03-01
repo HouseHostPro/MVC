@@ -205,22 +205,22 @@
                 <div class="modal-body  d-flex justify-content-center">
                     <div class="row col-12">
                         <div class="col-6 mb-2 pe-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-start" src="img/dormitori1.webp" alt="dormitorio">
+                            <img class="object-fit-fill shadow size-img rounded-start" src="../img/dormitori1.webp" alt="dormitorio">
                         </div>
                         <div class="col-6 mb-2 ps-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-end" src="img/bany1.webp" alt="dormitorio">
+                            <img class="object-fit-fill shadow size-img rounded-end" src="../img/bany1.webp" alt="dormitorio">
                         </div>
                         <div class="col-6 mb-2 pe-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-start" src="img/dormitori1.webp" alt="dormitorio">
+                            <img class="object-fit-fill shadow size-img rounded-start" src="../img/dormitori1.webp" alt="dormitorio">
                         </div>
                         <div class="col-6 mb-2 ps-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-end" src="img/bany1.webp" alt="dormitorio">
+                            <img class="object-fit-fill shadow size-img rounded-end" src="../img/bany1.webp" alt="dormitorio">
                         </div>
                         <div class="col-6 mb-2 pe-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-start" src="img/dormitori1.webp" alt="dormitorio">
+                            <img class="object-fit-fill shadow size-img rounded-start" src="../img/dormitori1.webp" alt="dormitorio">
                         </div>
                         <div class="col-6 mb-2 ps-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-end" src="img/bany1.webp" alt="dormitorio">
+                            <img class="object-fit-fill shadow size-img rounded-end" src="../img/bany1.webp" alt="dormitorio">
                         </div>
                     </div>
                 </div>
