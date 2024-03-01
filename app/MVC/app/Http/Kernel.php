@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\RutaPropietat;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -40,6 +41,9 @@ class Kernel extends HttpKernel
 
             //Localization
             \App\Http\Middleware\Localization::class,
+
+            //Middleware per agafar sa propietat ID
+            \App\Http\Middleware\RutaPropietat::class,
         ],
 
         'api' => [

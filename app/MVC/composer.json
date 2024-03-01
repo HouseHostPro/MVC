@@ -17,6 +17,7 @@
         "mongodb/laravel-mongodb": "^4.1",
         "nyholm/psr7": "^1.8",
         "php-http/client-common": "^2.7",
+        "realrashid/sweet-alert": "^7.1",
         "ssheduardo/redsys-laravel": "^1.4",
         "symfony/http-client": "^7.0"
     },

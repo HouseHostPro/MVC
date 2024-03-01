@@ -12,6 +12,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller{
 
@@ -39,11 +41,14 @@ class UserController extends Controller{
     public function store(Request $request) {
 
         User::hashPassword();
-        var_dump($request);
 
         if(Auth::check()){
             $user = User::find(Auth::user()->id);
             $user->update($request->all());
+
+            Alert::success(__('Actualizado'), __(''));
+
+            return redirect() -> back() -> with('success', 'Actualizado');
         }else{
             User::create($request->all());
         }
@@ -76,23 +81,25 @@ class UserController extends Controller{
 
         $email = $request->email;
         $password = $request->password;
-        $idPropiedad = 1;
+        $idPropiedad = $request -> casaId;
 
         $user = User::where('email', $email)->first();
 
         /* || !Hash::check($password,$user->contrasenya)*/
         if ($user != null) {
+            /*if(Hash::check($password, $user -> contrasenya))*/
 
             if($password == $user->contrasenya){
                 Auth::login($user);
                 $request->session()->put('idPropiedad',$idPropiedad);
                 $request->session()->put('user',$user);
 
-                return redirect()->route($request->session()->has('ruta') ? $request->session()->get('ruta'): 'principal');
+                return redirect() -> route('principal', ['id' => $request -> casaId]);
+                //return redirect()->route($request->session()->has('ruta') ? $request->session()->get('ruta'): 'principal');
             }
-            return redirect()->route('login');
+            return redirect()->route('login', ['id' => $request -> casaId]);
         }else{
-            return redirect()->route('login');
+            return redirect()->route('login', ['id' => $request -> casaId]);
         }
     }
     public function logout(Request $request){
@@ -114,7 +121,7 @@ class UserController extends Controller{
         $servicios = Configuracio_Servei::where('configuracio_id',1)->get();
         Auth::logout();
 
-        return redirect()->route('principal',compact('comentarios','servicios'));
+        return redirect()->route('principal', ['id' => $request -> id, 'comentarios' => $comentarios, 'servicios' => $servicios]);
     }
     public function cuenta(Request $request){
 

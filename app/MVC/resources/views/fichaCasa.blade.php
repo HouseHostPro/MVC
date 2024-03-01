@@ -2,14 +2,14 @@
 
 @section('content')
 
-    <h1 class="mt-3">Cas Concos</h1>
+    <h1 class="mt-3" id="titol"></h1>
     @include('components.imagenesCasa')
     <div id="contenedor-principal-casa" class="col-12 mt-sm-5 mt-sm-4 mt-1 justify-content-between row ms-sm-0 ms-1">
         <div class="row col-12 justify-content-between">
             <div id="opciones-casa">
                 @include('components.opcionesCasa')
             </div>
-            <form id="form-casa" method="POST" action="{{ route('redsys') }}" >
+            <form id="form-casa" method="POST" action="{{ route('redsys', ['id' => explode("/", url() ->current())[4]]) }}" >
                 @csrf
                @include('components.formCasa')
             </form>
@@ -235,6 +235,25 @@
         let huespedes = 0;
         let totalRating;
 
+        //Encontrar traducciones de la propiedad
+        $(function () {
+            const nom = '{{ $propietat -> nom }}';
+            const desc = '{{ $propietat -> descripcio}}';
+
+            $.ajax({
+                method: 'get',
+                url: '{{ route('findTraduccions') }}' + '?nom=' + nom + '&desc=' + desc
+            }).done(function (traduccions) {
+
+                const lang = '{{ app() -> getLocale() }}';
+                const currentLang = lang.split("_");
+                const applocale = currentLang[0];
+
+                $('#titol').html(traduccions[0].filter((traduccio) => traduccio.lang === applocale)[0].value);
+                $('#desc').html(traduccions[1].filter((traduccio) => traduccio.lang === applocale)[0].value);
+            });
+        });
+
         //Date-picker
         $(function() {
             $("#from").
@@ -245,11 +264,11 @@
                 minDate: 0,
                 firstDay:1,
                 changeMonth:true,
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-                dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+                monthNames: ['{{__('Enero')}}', '{{__('Febrero')}}', '{{__('Marzo')}}', '{{__('Abril')}}', '{{__('Mayo')}}', '{{__('Junio')}}', '{{__('Julio')}}', '{{__('Agosto')}}', '{{__('Septiembre')}}', '{{__('Octubre')}}', '{{__('Noviembre')}}', '{{__('Diciembre')}}'],
+                monthNamesShort: ['{{__('Ene')}}', '{{__('Feb')}}', '{{__('Mrz')}}', '{{__('Abr')}}', '{{__('May')}}', '{{__('Jun')}}', '{{__('Jul')}}', '{{__('Ago')}}', '{{__('Sep')}}', '{{__('Oct')}}', '{{__('Nov')}}', '{{__('Dic')}}'],
+                dayNames: ['{{__('Domingo')}}', '{{__('Lunes')}}', '{{__('Martes')}}', '{{__('Miércoles')}}', '{{__('Jueves')}}', '{{__('Viernes')}}', '{{__('Sábado')}}'],
+                dayNamesShort: ['{{__('Dom')}}','{{__('Lun')}}','{{__('Mar')}}','{{__('Mié')}}','{{__('Jue')}}','{{__('Vie')}}','{{__('Sáb')}}'],
+                dayNamesMin: ['{{__('Do')}}','{{__('Lu')}}','{{__('Ma')}}','{{__('Mi')}}','{{__('Ju')}}','{{__('Vi')}}','{{__('Sá')}}'],
                 beforeShowDay: function( date) {
 
                     const string = jQuery.datepicker.formatDate('dd/mm/yy', date);
@@ -275,11 +294,11 @@
                 altFormat:'yy-mm-dd',
                 firstDay:1,
                 changeMonth:true,
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-                dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+                monthNames: ['{{__('Enero')}}', '{{__('Febrero')}}', '{{__('Marzo')}}', '{{__('Abril')}}', '{{__('Mayo')}}', '{{__('Junio')}}', '{{__('Julio')}}', '{{__('Agosto')}}', '{{__('Septiembre')}}', '{{__('Octubre')}}', '{{__('Noviembre')}}', '{{__('Diciembre')}}'],
+                monthNamesShort: ['{{__('Ene')}}', '{{__('Feb')}}', '{{__('Mrz')}}', '{{__('Abr')}}', '{{__('May')}}', '{{__('Jun')}}', '{{__('Jul')}}', '{{__('Ago')}}', '{{__('Sep')}}', '{{__('Oct')}}', '{{__('Nov')}}', '{{__('Dic')}}'],
+                dayNames: ['{{__('Domingo')}}', '{{__('Lunes')}}', '{{__('Martes')}}', '{{__('Miércoles')}}', '{{__('Jueves')}}', '{{__('Viernes')}}', '{{__('Sábado')}}'],
+                dayNamesShort: ['{{__('Dom')}}','{{__('Lun')}}','{{__('Mar')}}','{{__('Mié')}}','{{__('Jue')}}','{{__('Vie')}}','{{__('Sáb')}}'],
+                dayNamesMin: ['{{__('Do')}}','{{__('Lu')}}','{{__('Ma')}}','{{__('Mi')}}','{{__('Ju')}}','{{__('Vi')}}','{{__('Sá')}}'],
                 beforeShowDay: function( date) {
 
                 var selectable = true;
@@ -327,11 +346,11 @@
             controls: ['calendar'],
             display: 'inline',
             touchUi: true,
-            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            monthNamesShort: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+            monthNames: ['{{__('Enero')}}', '{{__('Febrero')}}', '{{__('Marzo')}}', '{{__('Abril')}}', '{{__('Mayo')}}', '{{__('Junio')}}', '{{__('Julio')}}', '{{__('Agosto')}}', '{{__('Septiembre')}}', '{{__('Octubre')}}', '{{__('Noviembre')}}', '{{__('Diciembre')}}'],
+            monthNamesShort: ['{{__('Ene')}}', '{{__('Feb')}}', '{{__('Mrz')}}', '{{__('Abr')}}', '{{__('May')}}', '{{__('Jun')}}', '{{__('Jul')}}', '{{__('Ago')}}', '{{__('Sep')}}', '{{__('Oct')}}', '{{__('Nov')}}', '{{__('Dic')}}'],
+            dayNames: ['{{__('Domingo')}}', '{{__('Lunes')}}', '{{__('Martes')}}', '{{__('Miércoles')}}', '{{__('Jueves')}}', '{{__('Viernes')}}', '{{__('Sábado')}}'],
+            dayNamesShort: ['{{__('Dom')}}','{{__('Lun')}}','{{__('Mar')}}','{{__('Mié')}}','{{__('Jue')}}','{{__('Vie')}}','{{__('Sáb')}}'],
+            dayNamesMin: ['{{__('Do')}}','{{__('Lu')}}','{{__('Ma')}}','{{__('Mi')}}','{{__('Ju')}}','{{__('Vi')}}','{{__('Sá')}}'],
             minDate: 0,
             numberOfMonths: 2,
             firstDay:1,
@@ -391,18 +410,19 @@
             }
         }
 
-        var map = L.map('map').setView([39.68793, 2.84433], 13);
-        var marker = L.marker([39.68793, 2.84433]).addTo(map);
+        var map = L.map('map').setView([{{ explode("," ,$propietat -> localitzacio)[0] }}, {{ explode("," ,$propietat -> localitzacio)[1] }}], 13);
+        var marker = L.marker([{{ explode("," ,$propietat -> localitzacio)[0] }}, {{ explode("," ,$propietat -> localitzacio)[1] }}]).addTo(map);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
-        var circle = L.circle([39.68793, 2.84433], {
+        var circle = L.circle([{{ explode("," ,$propietat -> localitzacio)[0] }}, {{ explode("," ,$propietat -> localitzacio)[1] }}], {
             color: 'blue',
             fillColor: '#ADD8E6',
             fillOpacity: 0.5,
             radius: 50
         }).addTo(map);
+
 
     });
 

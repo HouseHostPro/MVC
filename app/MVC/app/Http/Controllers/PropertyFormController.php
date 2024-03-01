@@ -12,6 +12,7 @@ use App\Models\Traduccio;
 use App\Models\Propietat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PropertyFormController extends Controller {
 
@@ -29,8 +30,8 @@ class PropertyFormController extends Controller {
 
         return $propietats;
     }
-    public function getPropietat($id) {
-        $propietat = Propietat::find($id);
+    public function getPropietat(Request $request) {
+        $propietat = Propietat::find($request -> prop_id);
         $ciutats = $this->findAllCiutats();
         $traduccions = $this -> findTraduccions($propietat -> descripcio, $propietat -> nom);
         $traduccioNom = $traduccions[0];
@@ -55,13 +56,17 @@ class PropertyFormController extends Controller {
         $traduccioNom = Traduccio::where('code', $request -> nameCode) -> where('lang', app()->getLocale()) -> first();
         $traduccioDesc = Traduccio::where('code', $request -> descCode) -> where('lang', app()->getLocale()) -> first();
 
+        Propietat::where('id', $request -> id) -> update(array('localitzacio' => $request -> ubi));
+
         $traduccioNom -> value = $request -> nombre;
         $traduccioDesc -> value = $request -> descripcion;
 
         $traduccioNom -> save();
         $traduccioDesc -> save();
 
-        return redirect(route('property.edit', ['id' => $request -> id])) -> with('success', 'Actualizado');
+        Alert::success(__('Actualizado'), __(''));
+
+        return redirect(route('property.edit', ['id' => $request -> casaId, 'prop_id' => $request -> id])) -> with('success', 'Actualizado');
     }
 
     //Ciudades
@@ -98,13 +103,13 @@ class PropertyFormController extends Controller {
             $dataF = $reserva->data_fi;
             $dataI = $reserva->data_inici;
 
-            $datesReservades[] = $this -> date_range($dataI, $dataF);
+            $datesReservades[] = $this -> dateRange($dataI, $dataF);
         }
 
         return $datesReservades;
     }
 
-    private function date_range($first, $last, $step = '+1 day', $output_format = 'd/m/Y' ) {
+    private function dateRange($first, $last, $step = '+1 day', $output_format = 'd/m/Y' ) {
 
         $dates = array();
         $current = strtotime($first);
@@ -123,7 +128,8 @@ class PropertyFormController extends Controller {
     //Servicios
     public function loadSevice(Request $request){
 
-        $id = $request->session()->get('idPropiedad');
+        //$id = $request->session()->get('idPropiedad');
+        $id = $request -> prop_id;
         $servicios = Servei::all();
 
         $propietat = Propietat::where('id', $id)->first();
@@ -167,5 +173,12 @@ class PropertyFormController extends Controller {
         }
         $propietat = Propietat::where('id',$id) -> first();
         return view('property/serveiForm', compact('propietat'));
+    }
+
+    //Galeria
+
+    public function loadGaleria(Request $request) {
+        $propietat = Propietat::where('id', $request -> id) -> first();
+        return view('galeria', compact('propietat'));
     }
 }

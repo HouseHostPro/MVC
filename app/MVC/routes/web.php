@@ -34,8 +34,8 @@ Route::get('/phpinfo', function () {phpinfo();});
 Route::middleware('auth')->group(function (){
 
     //Dashboard usuari
-    Route::post('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
-    Route::get('/cuenta',[UserController::class,'cuenta'])->name('cuenta');
+    Route::post('/property/{id}/cuenta',[UserController::class,'cuenta'])->name('cuenta');
+    Route::get('/property/{id}/cuenta',[UserController::class,'cuenta'])->name('cuenta');
 
     //CRUD comentaris
     Route::get('/deleteComentario/{id}/{estat}',[ComentariController::class,'delete'])->name('comentario.delete.get');
@@ -59,48 +59,56 @@ Route::middleware('auth')->group(function (){
     Route::get('/reservasPropertiesAjax',[CasaController::class,'allReservasPropertiesAjax'])->name('reservasAP');
 
     //CRUD servicios
-    Route::get('/servicios',[PropertyFormController::class,'loadSevice'])->name('property.service');
+    Route::get('/property/{id}/property/{prop_id}/servicios',[PropertyFormController::class,'loadSevice'])->name('property.service');
     Route::get('/serviciosAjax',[PropertyFormController::class,'allService'])->name('serviceA');
     Route::get('/serviciosByProperty',[PropertyFormController::class,'serviceByProperty'])->name('serviciosPreperty');
     Route::post('/saveService',[PropertyFormController::class,'saveService'])->name('saveService');
 
+    //Galería
+    Route::get('/property/{id}/property/{prop_id}/galeria', [PropertyFormController::class, 'loadGaleria']) -> name('property.gallery');
+
     //Mostrar todas las propiedades
     Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
 
+    Route::get('/property/{id}/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
+    Route::get('/allTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('property.traduccions');
+
     //Cerrar sesión
-    Route::post('/logout',[UserController::class,'logout'])->name('logout');
+    Route::post('/property/{id}/logout',[UserController::class,'logout'])->name('logout');
 
 });
 
 
 //Página principal
-Route::get('/',[CasaController::class,'datosFichaCasa'])->name('principal');
+Route::get('/property/{id}',[CasaController::class,'datosFichaCasa'])->name('principal');
+
+//ENDPOINT -> traduccions de una casa
+Route::get('/findTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('findTraduccions');
 
 //Login
-Route::view('/login','login')->name('login');
-Route::post('/login/check',[UserController::class,'checkLogin'])->name('login.check');
+Route::view('/property/{id}/login','login')->name('login');
+Route::post('/property/{id}/login/check',[UserController::class,'checkLogin'])->name('login.check');
 
 
 //Register
-Route::get('/user/register', [UserController::class,'register'])->name('user.register');
+Route::get('/property/{id}/user/register', [UserController::class,'register'])->name('user.register');
 Route::post('/user/register', [UserController::class, 'store'])->name('user.store');
 
 
 //Property
 Route::get('/propertyForm', [PropertyFormController::class, '']);
+//Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
 
-Route::get('/property', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
-Route::get('/property/edit/{id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
-Route::post('/property/edit/{id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
-Route::get('/property/edit/{id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
+Route::get('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
+Route::post('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
+Route::get('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
 
-Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
 
 Route::view('/propertyView', 'property.property') -> name('property.view');
 Route::view('/propertyForm', 'property.propertyForm');
 
-Route::get('/propertyForm', [PropertyFormController::class, 'loadForm']) ->name('property.loadForm');
-Route::post('/propertyForm', [PropertyFormController::class, 'store']) ->name('property.createProperty');
+Route::get('property/{id}/propertyForm', [PropertyFormController::class, 'loadForm']) ->name('property.loadForm');
+Route::post('property/{id}/propertyForm', [PropertyFormController::class, 'store']) ->name('property.createProperty');
 
 
 Route::controller(PropertyFormController::class) -> prefix('property/edit/{id}')
@@ -118,7 +126,7 @@ Route::get('/serveis', [ServeiController::class, 'findAll']) ->name('servei.all'
 
 
 //Redsys
-Route::controller(RedsysController::class)->prefix('redsys')
+Route::controller(RedsysController::class)->prefix('/property/{id}/redsys')
     ->group(function () {
         Route::post('/', 'index') -> name('redsys');
         Route::get('/ok', 'ok');
@@ -130,10 +138,20 @@ Route::controller(RedsysController::class)->prefix('redsys')
 Route::get('/factures/pdf',[RedsysController::class, 'exportPdf']) -> name('facturaPdf');
 
 //Localization
-Route::get('language/{locale}', function ($locale) {
+/*Route::get('language/{locale}', function ($locale) {
     app()->setLocale($locale);
     session()->put('locale', $locale);
     return redirect()->back();
+});*/
+
+Route::get('en', function () {
+    session(['locale' => 'en']);
+    return back();
+});
+
+Route::get('es', function () {
+    session(['locale' => 'es']);
+    return back();
 });
 
 

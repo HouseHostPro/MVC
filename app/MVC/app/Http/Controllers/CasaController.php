@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comentari;
 use App\Models\Configuracio;
 use App\Models\Configuracio_Servei;
+use App\Models\Propietat;
 use App\Models\Reserva;
 use App\Models\Servei;
 use App\Models\Tiquet_Comentari;
@@ -15,9 +16,11 @@ use Illuminate\Support\Facades\Auth;
 class CasaController extends Controller{
 
 
-    public function datosFichaCasa(){
+    public function datosFichaCasa(Request $request){
 
-        $tiquet_comentari = Tiquet_Comentari::where('propietat_id',1)->get();
+        $propietat = Propietat::where('id', $request -> id) -> first();
+
+        $tiquet_comentari = Tiquet_Comentari::where('propietat_id',$request -> id)->get();
 
         $comentarios = [];
 
@@ -31,9 +34,9 @@ class CasaController extends Controller{
             }
         }
 
-        $servicios = Configuracio_Servei::where('configuracio_id',1)->get();
+        $servicios = Configuracio_Servei::where('configuracio_id',$request -> id)->get();
 
-        return view('fichaCasa',compact('comentarios','servicios'));
+        return view('fichaCasa',compact('comentarios','servicios','propietat'));
     }
     public function confirmacion(Request $request){
 

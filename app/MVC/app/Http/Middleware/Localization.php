@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use League\Flysystem\Config;
 use Symfony\Component\HttpFoundation\Response;
 
 class Localization
@@ -15,14 +16,31 @@ class Localization
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
+
+    protected $langs = ['en', 'es'];
+
     public function handle(Request $request, Closure $next): Response
     {
-        if (Session::has('locale')) {
+        /**if (Session::has('locale')) {
             App::setLocale(Session::get('locale'));
         }
         else {
             App::setLocale($request -> getPreferredLanguage());
         }
+        return $next($request);*/
+
+        /*$default = config('app.locale');
+        $locale = Session::get('locale', $default);
+        App::setLocale($locale);
+
+        return $next($request);*/
+
+        if(!session()->has('locale')) {
+            session(['locale' => $request->getPreferredLanguage($this->langs)]);
+        }
+
+        app()->setLocale(session('locale'));
+
         return $next($request);
     }
 }
