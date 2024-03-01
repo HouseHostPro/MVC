@@ -1,5 +1,5 @@
 
-        <h2 class="fs-4">Casa Rural en Binissalem Mallorca</h2>
+        <h2 id="desc" class="fs-4"></h2>
         <p>
             5 {{__('Personas')}} - 3 {{__('Dormitorios')}} - 4 {{__('Camas')}} - 1 {{__('Baños')}}
         </p>

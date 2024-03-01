@@ -129,7 +129,7 @@ Route::get('/serveis', [ServeiController::class, 'findAll']) ->name('servei.all'
 Route::controller(RedsysController::class)->prefix('/property/{id}/redsys')
     ->group(function () {
         Route::post('/', 'index') -> name('redsys');
-        Route::get('/ok', 'ok');
+        Route::get('/ok', 'ok') -> name('redsysOk');
         Route::get('/ko', 'ko');
         Route::get('/notification', 'notification');
     });
