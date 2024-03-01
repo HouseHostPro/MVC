@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Esta és la página principal de la casa.">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('build/assets/plantilla2.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('build/assets/plantilla3.css')}}">
     <script src="{{asset('build/assets/custom.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 

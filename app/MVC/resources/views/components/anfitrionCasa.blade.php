@@ -1,3 +1,15 @@
+<!-- Este trozo de codigo es para que me cuente solo las reseñas de la propiedad(que no me cuente las respuestas de las reseñas) -->
+@php
+    $count = 0;
+@endphp
+@foreach($comentarios as $comentario)
+    @if($comentario->fa_contesta === 'F')
+        @php
+            $count++;
+        @endphp
+    @endif
+@endforeach
+
 <div class="col-xl-2 col-sm-1 col-3 me-2 me-xl-0 ">
     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -7,8 +19,8 @@
 <div class="col-8 ps-0 d-flex align-self-center">
     <h5>{{__('Anfitrión')}}: Lucas</h5>
 </div>
-<div class="col-12">
-    <p class="mb-0"><span class="star text-dark fs-3">&#9733;</span> {{count($comentarios)}} reseñas</p>
+<div id="totalComentarios" class="col-12">
+    <p class="mb-0"><span id="star-anfitrion" class="star fs-3">&#9733;</span>@php echo $count; @endphp reseñas</p>
 </div>
 <div class="col-12">
     <p>Idioma: Español</p>

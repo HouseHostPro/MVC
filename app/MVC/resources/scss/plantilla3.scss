@@ -2,9 +2,10 @@
 @import "bootstrap/scss/functions";
 
 // 2. Variables
-$primary: #2471A3;
-$danger: #C0392B;
-$success: #82E0AA;
+$primary: #1C2833;
+$danger: #2E4053;
+$success: #17202A;
+$white: #566573;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "bootstrap/scss/variables";
@@ -36,23 +37,6 @@ $success: #82E0AA;
 @import "bootstrap/scss/forms";
 @import "bootstrap/scss/close";
 
-/*
-
-//Faltan estos
-@import "bootstrap/scss/carousel";
-
-@import "bootstrap/scss/toasts";
-@import "bootstrap/scss/spinners";
-@import "bootstrap/scss/progress";
-@import "bootstrap/scss/popover";
-@import "bootstrap/scss/pagination";
-@import "bootstrap/scss/offcanvas";
-@import "bootstrap/scss/tooltip";
-@import "bootstrap/scss/badge";
-@import "bootstrap/scss/alert";
-@import "bootstrap/scss/accordion";
-@import "bootstrap/scss/button-group";
- */
 
 //imagnes de la propiedad
 .input-group-append {
@@ -77,7 +61,7 @@ $success: #82E0AA;
 }
 .custom-input input{
 
-    background: #fafafa;
+    background: #17202A;
     padding: 25px 0 10px 15px;
     border-radius: 3px;
     font-size: 14px;
@@ -94,22 +78,32 @@ $success: #82E0AA;
 .ui-widget-header{
 
     border: none !important;
-    background: #355C78 !important;
+    background: black !important;
 }
+
+
 .ui-widget-content{
-    background: white !important;
+    background: #1C2833 !important;
+    color: white !important;
 }
 .ui-state-highlight, .ui-state-hover, .ui-state-focus, .ui-state-active{
-    background: #f6f6f6 !important;
-    border: black !important;
+    background: black !important;
+    border: white !important;
 }
 .ui-widget-content a{
-    color: black !important;
+    color: white !important;
     border: 1px solid #cccccc !important;
 }
+
+.ui-widget-content>span{
+    color: white !important;
+}
+.ui-state-default, .ui-widget-content .ui-state-default{
+    background: #616A6B !important;
+}
 .event a {
-    background: #F7E9D5 !important;
-    color: black !important;
+
+    color: #ffffff !important;
     height: 60px;
 }
 
@@ -123,7 +117,7 @@ $success: #82E0AA;
     margin-top: -1.25em;
     text-align: right;
     padding-right: .25em;
-    color: grey;
+    color: white;
 }
 .ui-datepicker td a:after
 {
@@ -192,10 +186,6 @@ $success: #82E0AA;
 .starE.active {
     color: #ffcc00;
 }
-
-.owl-carousel .owl-dots{
-    display: none;
-}
 //pop up
 #successMessage {
     position: sticky;
@@ -203,15 +193,50 @@ $success: #82E0AA;
     left: 50%;
 }
 
+//custom
 #header{
     @extend .sticky-top;
 }
+#boton-reservar{
+    @extend .order-last;
+}
+#mascotas{
+    @extend .mb-3;
+}
+
+#contenedor-principal-casa{
+    @extend .d-flex;
+}
+
 #opciones-casa{
-    @extend .col-sm-7;
+    @extend .col-12;
+    @extend .order-2;
+    @extend .d-flex;
+    @extend .row;
+    @extend .mt-3;
+    @extend .border-bottom;
+    @extend .border-dark;
+    @extend .pb-4;
+
+}
+#normas-casa{
+    @extend .order-0;
+    @extend .col-sm-6;
+    @extend .col-12;
+
+}
+#servicios-casa{
+    @extend .order-1;
+    @extend .col-sm-6;
     @extend .col-12;
 }
-#servicios-casa div{
-    @extend .mt-3;
+#servicios-casa button{
+    @extend .mt-3 ;
+}
+#carousel-casa{
+    @extend .order-2;
+    @extend .col-12;
+
 }
 #form-casa{
     @extend .col-sm-4;
@@ -222,50 +247,71 @@ $success: #82E0AA;
     @extend .border-dark;
     @extend .rounded;
     @extend .shadow;
+    @extend .order-0;
     @extend .bg-white;
-    @extend .sticky-sm-top;
-    @extend .mb-3;
-    top:70px;
-    z-index: 0;
-}
-#contenedor-imagnes{
-    @extend .bg-white;
+    @extend .d-flex;
+    @extend .flex-column;
+    height: auto !important;
 }
 #calendari-casa{
     @extend .col-sm-7;
     @extend .col-12;
     @extend .px-0;
-
+    @extend .order-1;
 }
 #comentario-casa{
     @extend .justify-content-end;
     @extend .d-flex;
     @extend .border-bottom;
-    @extend .border-top;
     @extend .border-dark;
-}
-#mapa-casa{
-    @extend .mt-5;
+    @extend .order-5;
     @extend .mb-4;
-    @extend .border-bottom;
-    @extend .border-dark;
+    @extend .d-none;
+
 }
 
-.color-header{
-    background-color: #3599DB;
+#totalComentarios{
+    @extend .d-none;
 }
-.footer-color{
-    background-color: #4887B1;
+#mapa-casa{
+    @extend .mt-3;
+    @extend .mb-2;
+    @extend .border-bottom;
+    @extend .border-dark;
+    @extend .order-4;
+}
+#contenedor-imagnes{
+    @extend .bg-white;
+}
+
+
+.footer-color,.color-header,.list-unstyled li{
+    background-color: #000000 !important;
 }
 .footer2-color{
-    background-color: #C4B091 !important;
+    background-color: #17202A !important;
 }
 .body-color > *{
     @extend .bg-opacity-25;
 }
-body {
-    background: linear-gradient(to right, #D5E9F7  , #f8f8ff);
+body{
+    background: linear-gradient(to right, #2C3E50  , #212F3D);
+
 }
+
+body,a,span:not(.star),svg,h1,h2,h3,h4,h5,p,button,li,#pxnt,input,#star-anfitrion{
+    color: white !important;
+}
+.leaflet-control-zoom-out span,.leaflet-control-zoom-in span{
+    color: black !important;
+}
+
+
+input:not(.form-check-input):not(#pxnt):not(#ptotal):not(#personas),
+button.bg-white:not(.btn):not(#mas):not(#menos){
+    @extend .bg-dark;
+}
+
 #table td{
     text-align: center;
 }
@@ -273,7 +319,7 @@ body {
     @extend .border-bottom;
     @extend .border-dark;
 }
-#table td:nth-child(2){
+#tdP{
     @extend .w-50;
 }
 
@@ -315,8 +361,8 @@ body {
         border-bottom: 0 #ddd !important;
     }
     #tdP{
-        display: flex !important;
-        justify-content: space-between !important;
+        display: flex;
+        justify-content: space-between;
     }
     #tdP>div{
 

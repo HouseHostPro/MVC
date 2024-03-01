@@ -7,6 +7,7 @@ use App\Models\Ciutat;
 use App\Models\Comentari;
 use App\Models\Configuracio_Servei;
 use App\Models\Pais;
+use App\Models\Tiquet_Comentari;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -96,7 +97,6 @@ class UserController extends Controller{
     }
     public function logout(Request $request){
 
-        $id = $request->session()->get('idPropiedad');
         $request->session()->invalidate();
         $tiquet_comentari = Tiquet_Comentari::where('propietat_id',1)->get();
 

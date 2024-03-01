@@ -240,6 +240,7 @@ $success: #F39C12;
     @extend .bg-white;
     @extend .d-flex;
     @extend .flex-column;
+    height: auto !important;
 }
 #calendari-casa{
     @extend .col-sm-7;
@@ -254,6 +255,9 @@ $success: #F39C12;
     @extend .border-dark;
     @extend .order-5;
     @extend .mb-4;
+}
+#star-anfitrion{
+    @extend .text-black;
 }
 #mapa-casa{
     @extend .mt-3;
@@ -280,6 +284,9 @@ $success: #F39C12;
 body{
     background: linear-gradient(to right, #EAFAF1  , #FAECEB);
 }
+.dropdown-menu *{
+    color: black !important;
+}
 
 #table td{
     text-align: center;
@@ -288,9 +295,10 @@ body{
     @extend .border-bottom;
     @extend .border-dark;
 }
-#table td:nth-child(2){
+#tdP{
     @extend .w-50;
 }
+
 
 @media screen and (max-width: 540px) {
     #table thead {

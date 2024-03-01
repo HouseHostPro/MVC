@@ -13,5 +13,10 @@
     "file": "assets/plantilla2.css",
     "isEntry": true,
     "src": "resources/scss/plantilla2.scss"
+  },
+  "resources/scss/plantilla3.scss": {
+    "file": "assets/plantilla3.css",
+    "isEntry": true,
+    "src": "resources/scss/plantilla3.scss"
   }
 }

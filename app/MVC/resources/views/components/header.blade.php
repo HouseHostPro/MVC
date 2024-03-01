@@ -20,21 +20,21 @@
                                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                             </svg>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
+                        <ul class="dropdown-menu dropdown-menu-end mt-2 " aria-labelledby="navbarDropdownMenuLink">
                             @guest
-                                <li><a class="dropdown-item" href="{{ route('login') }}">{{__('Iniciar sesión')}}</a></li>
+                                <li><a class="text-decoration-none ms-3 pt-2" href="{{ route('login') }}">{{__('Iniciar sesión')}}</a></li>
                             @endguest
                             <li>
                                 <form method="post" action="{{ route('cuenta') }}">
                                     @csrf
-                                    <button type="submit" class="btn btn-link text-black text-decoration-none ps-3">{{__('Cuenta')}}</button>
+                                    <button type="submit" class="btn btn-link  text-decoration-none ps-3">{{__('Cuenta')}}</button>
                                 </form>
                             </li>
                             @auth
                                 <li>
                                     <form method="post" action="{{ route('logout') }}">
                                         @csrf
-                                        <button type="submit" class="btn btn-link text-black text-decoration-none ps-3">{{__('Cerrar sesión')}}</button>
+                                        <button type="submit" class="btn btn-link text-decoration-none ps-3">{{__('Cerrar sesión')}}</button>
                                     </form>
                                 </li>
                             @endauth

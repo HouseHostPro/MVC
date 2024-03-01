@@ -244,6 +244,9 @@ $success: #82E0AA;
     @extend .border-top;
     @extend .border-dark;
 }
+#star-anfitrion{
+    @extend .text-black;
+}
 #mapa-casa{
     @extend .mt-5;
     @extend .mb-4;
@@ -266,6 +269,9 @@ $success: #82E0AA;
 body {
     background: linear-gradient(to right, #D5E9F7  , #f8f8ff);
 }
+.dropdown-menu *{
+    color: black !important;
+}
 #table td{
     text-align: center;
 }
@@ -273,7 +279,7 @@ body {
     @extend .border-bottom;
     @extend .border-dark;
 }
-#table td:nth-child(2){
+#tdP{
     @extend .w-50;
 }
 

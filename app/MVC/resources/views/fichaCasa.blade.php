@@ -1,4 +1,4 @@
-@extends('layouts.plantilla3')
+@extends('layouts.plantilla1')
 
 @section('content')
 
