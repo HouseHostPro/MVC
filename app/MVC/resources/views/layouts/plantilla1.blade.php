@@ -151,7 +151,7 @@
 
             // Agregar evento de clic a las imágenes
             $('img').click(function () {
-                $('#fotos').modal('show'); // Mostrar el modal al hacer clic en cualquier imagen
+                $('#contenedor-imagnes #fotos').modal('show'); // Mostrar el modal al hacer clic en cualquier imagen
             });
 
             resizeImageAndForm();
