@@ -26,7 +26,11 @@ class Propietat extends Model {
     public function propietari(){
         return $this->belongsTo(User::class,'usuari_id','id');
     }
+    //Si da un fallo los comentarios puede que sea por esta linea
     public function tiquetComentario(){
-        return $this->hasMany(Propietat::class,'propietat_id','id');
+        return $this->hasMany(Tiquet_Comentari::class,'propietat_id','id');
+    }
+    public function imaganes(){
+        return $this->hasMany(Imatge::class,'propietat_id','id');
     }
 }

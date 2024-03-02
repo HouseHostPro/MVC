@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\CasaController;
+use App\Http\Controllers\ImagenesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RedsysController;
 use App\Http\Controllers\ComentariController;
@@ -65,13 +66,18 @@ Route::middleware('auth')->group(function (){
     Route::post('/saveService',[PropertyFormController::class,'saveService'])->name('saveService');
 
     //Galería
-    Route::get('/property/{id}/property/{prop_id}/galeria', [PropertyFormController::class, 'loadGaleria']) -> name('property.gallery');
+    //Route::get('/property/{id}/property/{prop_id}/galeria', [PropertyFormController::class, 'loadGaleria']) -> name('property.gallery');
 
     //Mostrar todas las propiedades
     Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
 
     Route::get('/property/{id}/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
     Route::get('/allTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('property.traduccions');
+
+    //CRUD imagenes
+    Route::get('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'allImages'])->name('property.gallery');
+    Route::post('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'store'])->name('store.image');
+    Route::post('/property/{id}/property/{prop_id}/galeria/delete',[ImagenesController::class, 'delete'])->name('delete.image');
 
     //Cerrar sesión
     Route::post('/property/{id}/logout',[UserController::class,'logout'])->name('logout');

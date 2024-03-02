@@ -61,8 +61,12 @@
         </div>
     </main>
 </div>
-<!-- CAMBIAR LA RUTA EN AWS Y CUANDO HAGAMOS LOS CAMBIOS DE RUTAS -->
-@if(request()->is('/') )
+<!-- Expresión regular para que solo ponga el footer cuando la url sea /property/(cualquier número) -->
+@php
+    $url = request()->path();
+@endphp
+
+@if(preg_match('/^property\/\d+$/', $url))
     @include('components.footer')
 @endif
 <script>

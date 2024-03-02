@@ -37,3 +37,13 @@ REDSYS_MERCHANT_CODE=999008881
 
 mailgun: composer require mailgun/mailgun-php symfony/http-client nyholm/psr7
 pdf: composer require barryvdh/laravel-dompdf
+
+Bucket
+AWS_ACCESS_KEY_ID=AKIAVRUVSTI6OGJ4XG7X
+AWS_SECRET_ACCESS_KEY=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
+AWS_DEFAULT_REGION=eu-north-1
+AWS_BUCKET=househostpro
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+Después hacer este comando en laravel
+composer require league/flysystem-aws-s3-v3 "^3.0" --with-all-dependencies
