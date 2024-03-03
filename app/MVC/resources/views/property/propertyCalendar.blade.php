@@ -1,7 +1,7 @@
 @extends('layouts/plantillaFormularios')
 
 @section('title')
-    <h2>Calendario de reservas</h2>
+    <h2>{{__('Precio por día')}}</h2>
 @endsection
 @section('url')
     {{ url() -> previous() }}
@@ -39,7 +39,9 @@
             beforeShowDay: function (date) {
                 $(".ui-datepicker-calendar").addClass("cellSize");
                 const string = jQuery.datepicker.formatDate('dd/mm/yy', date);
-                return [dates.indexOf(string) == -1];
+                return [dates.indexOf(string) == -1]
+                    ? [true, '', '{{ $preuBase }}€']
+                    : [true, 'event', '{{ $preuBase }}€'];
             },
 
             // selecciona rang de dates
@@ -70,6 +72,8 @@
             $('#ui-datepicker-div').addClass('calendari');
             $('#datePicker').datepicker( "show" );
         });
+
+        $
 
     </script>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ciutat;
+use App\Models\Configuracio;
 use App\Models\Configuracio_Servei;
 use App\Models\Reserva;
 use App\Models\Servei;
@@ -92,7 +93,9 @@ class PropertyFormController extends Controller {
 
     public function loadCalendar(Request $request) {
         $dates = $this->findAllDatesReservades($request);
-        return view('property/propertyCalendar', ['id' => $request -> id], compact('dates'));
+        $preuBase = Configuracio::where(['propietat_id' => $request -> prop_id, 'clau' => 'preu_base']) -> first() -> valor;
+
+        return view('property/propertyCalendar', ['id' => $request -> id], compact('dates', 'preuBase'));
     }
 
     public function findAllDatesReservades(Request $request) {

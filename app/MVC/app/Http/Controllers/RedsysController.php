@@ -28,7 +28,7 @@ class RedsysController extends Controller
                 $limpieza = $request -> limpieza;
             }
             $mascotas = $request -> mascotas;
-            $precioTotal = $request -> ptotal;
+            $precioTotal = intval(str_replace('€','', $request -> ptotal));
 
             Session::put('num_persones', $personas);
             Session::put('neteja', $limpieza);
@@ -39,6 +39,7 @@ class RedsysController extends Controller
 
             $reserva = new Reserva();
             $reserva -> preu_total = $precioTotal;
+            $reserva -> persones = $personas;
             $reserva -> usuari_id = Auth::user() -> id;
             $reserva -> propietat_id = explode("/", url() ->current())[4];
             $reserva -> data_inici = $request -> from;

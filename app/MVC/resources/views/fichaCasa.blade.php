@@ -274,7 +274,7 @@
                     const string = jQuery.datepicker.formatDate('dd/mm/yy', date);
                     //console.log([dates.indexOf(string) === -1]);
                     var selectable = true;
-                    var title = '150€';
+                    var title = '{{ $preuBase }}€';
                     var highlight = [dates.indexOf(string) === -1];
                     if( highlight ) {
                         return [selectable, "", title];
@@ -302,7 +302,7 @@
                 beforeShowDay: function( date) {
 
                 var selectable = true;
-                var title = '150€';
+                var title = '{{ $preuBase }}€';
 
                 return [selectable, "", title];
 
@@ -359,8 +359,8 @@
 
                 const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
                 return jQuery.inArray(string, dates) == -1
-                    ? [true, '', '150€']
-                    : [true, 'event', '150€'];
+                    ? [true, '', '{{ $preuBase }}€']
+                    : [true, 'event', '{{ $preuBase }}€'];
 
             }
         });

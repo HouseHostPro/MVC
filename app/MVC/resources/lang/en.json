@@ -143,7 +143,6 @@
     "Vi": "Fr",
     "Sáb": "Sat",
     "Sá": "Sa",
-    "Verificación de correo": "E-mail verification",
     "Salida antes de las": "Checkout before",
     "Máximo": "Max",
     "Registrarse": "Sign up",
@@ -153,6 +152,6 @@
     "Todas las reservas de tus propiedades": "All reservations for your properties",
     "Todos los comentarios de tus propiedades": "All comments about your properties",
     "Comentar": "Comment",
-    "Nombre Usuario": "Username"
-
+    "Nombre Usuario": "Username",
+    "Precio por día": "Price per day"
 }
