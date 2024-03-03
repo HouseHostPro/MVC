@@ -54,7 +54,6 @@
                     method: 'GET',
                     url: `http://localhost:8100/reservasPropertiesAjax`
                 }).done(function (reservas) {
-                    console.log(reservas);
                     printReservas(reservas)
                 });
             })

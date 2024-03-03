@@ -55,7 +55,6 @@
                     method: 'GET',
                     url: `http://localhost:8100/comentariosUserAjax`
                 }).done(function (comentarios) {
-                    console.log(comentarios);
                     printCommnets(comentarios)
                 });
             })
@@ -150,7 +149,6 @@
 
 
             function activateStars($container, ratingValue) {
-                console.log(ratingValue)
                 $container.find('.star').removeClass('active');
                 $container.find('.star').each(function() {
                     if ($(this).attr('data-rating') <= ratingValue) {

@@ -75,7 +75,6 @@
                             }
                         }).done( function (traduccions) {
                             const nomTraduit = traduccions[0].filter((tr) => tr.lang === '{{ app() -> getLocale() }}')[0].value;
-                            console.log(nomTraduit);
                             $('td:contains("' + p.nom + '")').html(nomTraduit);
                         });
                     }

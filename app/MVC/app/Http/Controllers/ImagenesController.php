@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Imatge;
 use App\Models\Propietat;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,8 +24,10 @@ class ImagenesController extends Controller{
         $imagenes = Imatge::all();
 
         foreach ($imagenes as $imagen){
-
-            $url = Storage::disk('propiedades')->url($imagen->url);
+            $url = Storage::disk('propiedades')->temporaryUrl(
+                $imagen->url,
+                Carbon::now()->addSeconds(30)
+            );
             $allUrls[] = [
                 'url' => $url,
                 'id' => $imagen->id,
@@ -38,11 +41,16 @@ class ImagenesController extends Controller{
 
         $allUrls = $this->allUrlsImage();
 
-
         $propietat = Propietat::find($idProp);
 
         return view('property/propertyGaleria',compact('allUrls', 'propietat'));
 
+    }
+    public function allImagesAjax(Request $request){
+
+        $allUrls = $this->allUrlsImage();
+
+        return $allUrls;
     }
     public function store(Request $request){
 

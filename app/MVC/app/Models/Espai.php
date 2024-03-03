@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Espai extends Model{
     use HasFactory;
 
+    protected $table = 'espai';
+    public $timestamps = false;
+    protected $fillable = [
+    ];
+
 }

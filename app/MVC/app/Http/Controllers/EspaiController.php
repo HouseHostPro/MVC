@@ -14,7 +14,7 @@ class EspaiController extends Controller {
     public function loadForm($propietatId) {
         $espais = $this -> findAllByPropietat($propietatId);
         //$tipus = $this-> findAllTipus();
-        return redirect() -> route('espai.espais', [$espais/*, $tipus*/]);
+        return view('property/espaiForm');
     }
 
     public function create() {

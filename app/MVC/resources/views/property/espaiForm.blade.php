@@ -1,70 +1,159 @@
-@php use Illuminate\Support\Facades\Session; @endphp
-@extends('layouts/plantillaFormularios')
+@extends('layouts.plantillaFormularios')
 
 @section('url')
-    {{route()}}
+    {{route('cuenta', ['id' => $propietat -> id])}}
 @endsection
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
+@section('title',__('Espacios'))
 @section('content')
-
-    @if(Session::has('success'))
-        <p>{{Session::get('success')}}</p>
-    @endif
-
-    <div class="d-flex flex-column align-items-center">
-    <div class="container w-50 d-flex justify-content-between pt-5 pb-3">
-        <h1>Editar espacios</h1>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-light border border-dark" data-toggle="modal" data-target="#exampleModal">
-            Añadir espacio
-        </button>
-
-        <!-- Modal -->
-    </div>
-
-    <hr class="w-50 mx-auto">
-
-        <div class="w-50">
-            <button class="align-items-center btn btn-light">
-            <span class="material-symbols-outlined">keyboard_backspace</span>
-            <a href="">Volver</a>
-            </button>
+    <div class="row col-12 justify-content-between">
+        <nav class="mt-3 col-sm-7 col-12" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('principal', ['id' => $propietat -> id])}}">{{__('Principal')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('cuenta', ['id' => $propietat -> id])}}">{{__('Cuenta')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('property.properties', ['id' => $propietat -> id])}}">{{__('Propiedades')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('property.edit', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id])}}">{{$propietat->nom}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{__('Espacios')}}</li>
+            </ol>
+        </nav>
+        <div class="col-sm-2 col-6 my-sm-3 my-2">
+            <label>Buscar servicio:</label>
+            <input id="cercador" class="form-control" type="text">
         </div>
-
-
-    <div class="w-50 d-flex flex-column pt-5 @if(empty($espais)) border border-dashed px-5 py-5 @endif">
-        @if(empty($espais))
-            <p class="text-secondary text-center">No hay nada que mostrar. Por qué no añades un espacio?</p>
-        @endif
     </div>
+    <div class="gradient-custom-1 ">
+        <div class="mask d-flex align-items-center ">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-10 col-12">
+                        <div class="table-responsive bg-white">
+                            <form action="{{route('saveService')}}" method="post" class="row col-12 justify-content-end">
+                                @csrf
+                                <table class="table table-hover mb-0 bg-white border-bottom border-dark">
+                                    <thead>
+                                    <tr class="text-center">
+                                        <th>{{__('Nom')}}</th>
+                                        <th>{{__('Descripción')}}</th>
+                                        <th>{{__('Acciones')}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tabla">
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Launch modal</button>
-        <!-- Modal -->
-        <div class="modal" id="exampleModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body pb-4">
-                        <strong><h4>Example of a Static Modal</h4></strong>
-
-                        <form class="d-flex flex-column px-0 gap-2" method="post" action="{{route()}}">
-                            @csrf
-                            <div class="d-flex flex-column w-75">
-                            <label for="tipo">Tipo</label>
-                            <input id="tipo" type="text">
-
-                            <label for="espacio_m2">Tamaño</label>
-                            <input id="espacio_m2" class="w-50" type="text">
-                            </div>
-
-                            <div class="modal-footer d-flex justify-content-end">
-                                <button type="submit" class="btn btn-success">Guardar</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            </div>
-                        </form>
+                                    </tbody>
+                                </table>
+                                <div class="col-2 me-sm-0 me-5">
+                                    <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 my-3 ">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <script>
 
+
+        let allServices = [];
+        let allServicesByProperty = [];
+
+        $(document).ready(function (){
+
+            $.ajax({
+                method: 'GET',
+                url: `http://localhost:8100/serviciosAjax`
+            }).done(function (service) {
+                allServices.push.apply(allServices, service);
+                $.ajax({
+                    method: 'GET',
+                    url: `http://localhost:8100/serviciosByProperty`
+                }).done(function (service) {
+                    allServicesByProperty.push.apply(allServicesByProperty, service);
+                    printServicios();
+                });
+
+            });
+
+
+            $.ajax({
+                method: 'GET',
+                url: '{{ route('property.traduccions') }}',
+                data: {
+                    "nom": "{{ $propietat -> nom }}",
+                }
+            }).done(function (traduccions) {
+                const nomTraduit = traduccions[0].filter((tr) => tr.lang === "{{ app() -> getLocale() }}")[0].value;
+                $("li:nth-child(4)").html(nomTraduit);
+            });
+
+
+        })
+
+
+        function printServicios(){
+
+            $('#tabla').html("");
+
+            allServices.forEach( function (value){
+
+                let fila = $('<tr>');
+                let columnName = $('<td>');
+
+                let pNom = $('<p>').text(value.nom);
+                columnName.append(pNom).addClass('text-center');
+                fila.append(columnName);
+
+
+                let columnDesc = $('<td>');
+                let pDesc = $('<p>').text(value.descripcio);
+                columnDesc.append(pDesc).addClass('text-center');
+                fila.append(columnDesc);
+
+                let inputHidden = $('<inpunt>').attr({
+                    type: 'hidden',
+                    name: 'id' + value.id,
+                    value: value.id
+                })
+                columnDesc.append(inputHidden);
+
+                fila.append(columnName);
+                fila.append(columnDesc);
+
+                let columnCheckbox = $('<td>');
+                let chechkbox = $('<input>').attr({
+                    type: 'checkbox',
+                    name: `s-${value.id}`,
+                    value: value.id
+                }).addClass('form-check-input');
+
+                allServicesByProperty.forEach( function (serv){
+                    if(serv.servei_id === value.id){
+                        chechkbox.prop('checked',true);
+                    }
+                })
+
+                columnCheckbox.append(chechkbox).addClass('text-center');
+                fila.append(columnCheckbox);
+                $('#tabla').append(fila);
+            })
+        }
+        $('buttonSave').submit( function (value){
+        })
+
+        $('#cercador').on("input",function (){
+
+            const caracters = $(this).val().toUpperCase();
+            const tabla = $('#tabla');
+
+            tabla.find('tr').each(function () {
+                const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
+                if (nombrePropiedad.includes(caracters)) {
+                    $(this).show(); // Mostrar fila si coincide con la búsqueda
+                } else {
+                    $(this).hide(); // Ocultar fila si no coincide con la búsqueda
+
+                }
+            });
+        });
+        $('#atras').remove();
+    </script>
 @endsection

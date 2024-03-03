@@ -82,7 +82,6 @@
                 method: 'GET',
                 url: `http://localhost:8100/comentariosPropertiesAjax`
             }).done(function (comentarios) {
-                console.log(comentarios);
                 printCommnets(comentarios)
             });
 

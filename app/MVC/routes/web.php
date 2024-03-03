@@ -65,12 +65,11 @@ Route::middleware('auth')->group(function (){
     Route::get('/serviciosByProperty',[PropertyFormController::class,'serviceByProperty'])->name('serviciosPreperty');
     Route::post('/saveService',[PropertyFormController::class,'saveService'])->name('saveService');
 
-    //Galería
-    //Route::get('/property/{id}/property/{prop_id}/galeria', [PropertyFormController::class, 'loadGaleria']) -> name('property.gallery');
+    //CRUD espacios
+    Route::get('/property/{id}/property/{prop_id}/espais', [EspaiController::class, 'loadForm']) -> name('espai.espais');
 
     //Mostrar todas las propiedades
     Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
-
     Route::get('/property/{id}/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
     Route::get('/allTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('property.traduccions');
 
@@ -78,6 +77,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'allImages'])->name('property.gallery');
     Route::post('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'store'])->name('store.image');
     Route::post('/property/{id}/property/{prop_id}/galeria/delete',[ImagenesController::class, 'delete'])->name('delete.image');
+    Route::get('/allImagesAjax',[ImagenesController::class,'allImagesAjax'])->name('allImagesAjax');
 
     //Cerrar sesión
     Route::post('/property/{id}/logout',[UserController::class,'logout'])->name('logout');
@@ -122,8 +122,7 @@ Route::controller(PropertyFormController::class) -> prefix('property/edit/{id}')
         Route::get('/reserves/dates', 'findAllDatesReservades') -> name('findAllDatesReservades');
     });
 
-//Espai
-Route::get('/property/edit/{id}/espais', [EspaiController::class, 'loadForm']) -> name('espai.espais');
+
 
 
 //Servei

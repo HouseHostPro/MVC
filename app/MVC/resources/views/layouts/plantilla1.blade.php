@@ -70,6 +70,7 @@
     @include('components.footer')
 @endif
 <script>
+
     $(document).ready(function() {
         let windowWidth = $(window).width();
 
@@ -77,20 +78,112 @@
         function resizeImageAndForm(){
             if (windowWidth < 540) {
                 // Ocultar las imágenes en las columnas col-6
-                $('.img-hide').hide();
+                $('#img-hide').hide();
                 // Ajustar el tamaño de la imagen firstImage para ocupar todo el contenedor
-                $('#frontCasa').addClass('full-width rounded-end');
+                $('#frontCasa').addClass('full-width rounded');
                 $('#form-casa').css('height', 'auto');
 
 
             } else {
                 // Mostrar las imágenes en las columnas col-6
-                $('.img-hide').show();
+                $('#img-hide').show();
                 // Eliminar la clase que ajusta el tamaño de la imagen firstImage
                 $('#frontCasa').removeClass('full-width rounded-end');
                 $('#form-casa').css('height', '26%');
 
             }
+        }
+        $.ajax({
+            method: 'GET',
+            url: `http://localhost:8100/allImagesAjax`
+        }).done(function (imagenes) {
+            printImagenes(imagenes)
+        });
+
+        function printImagenes(imagenes){
+
+            let container = $('#contenedor-imagnes');
+
+            if(imagenes.length >= 5){
+
+                // Crear el primer div col-6
+                let firstDiv = $('<div>').addClass('col-sm-6 col-12 pt-1 px-0 my-2 me-2');
+                let firstLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
+                let firstImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-start').attr('src', imagenes[0].url).attr('alt', 'entrada').attr('id', 'frontCasa');
+                firstLink.append(firstImage);
+                firstDiv.append(firstLink);
+
+                // Crear el segundo div col-6
+                let secondDiv = $('<div>').addClass('col-6 row px-0 my-2');
+
+                // Crear las dos columnas col-6 dentro del segundo div
+                let col1 = $('<div>').addClass('col-6 p-1').addClass('img-hide');
+                let col2 = $('<div>').addClass('col-6 p-1').addClass('img-hide');
+
+                // Crear las imágenes y añadir al primer div col-6
+                let img1 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', imagenes[1].url).attr('alt', 'dormitorio');
+                let link1 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img1);
+                col1.append($('<div>').addClass('col-12 padd-img ms-2').append(link1));
+
+                let img2 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', imagenes[2].url).attr('alt', 'baño');
+                let link2 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img2);
+                col1.append($('<div>').addClass('col-12 ms-2').append(link2));
+
+                // Crear las imágenes y añadir al segundo div col-6
+                let img3 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', imagenes[3].url).attr('alt', 'baño').attr('id', 'radius-tr');
+                let link3 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img3);
+                col2.append($('<div>').addClass('col-12 padd-img ms-2').append(link3));
+
+                let img4 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', imagenes[4].url).attr('alt', 'piscina').attr('id', 'radius-br');
+                let link4 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img4);
+                col2.append($('<div>').addClass('col-12 ms-2').append(link4));
+
+                // Añadir las columnas al segundo div col-6
+                secondDiv.append(col1);
+                secondDiv.append(col2);
+
+                // Añadir los divs al contenedor principal
+                container.append(firstDiv);
+                container.append(secondDiv);
+
+
+            }else if(imagenes.length < 5){
+
+                // Crear el primer div col-6
+                let firstDiv = $('<div>').addClass('col-sm-6 col-12 pt-1 pe-1 px-0 my-2');
+                let firstLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
+                let firstImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-start').attr('src', imagenes[0].url).attr('alt', 'entrada').attr('id', 'frontCasa');
+                firstLink.append(firstImage);
+                firstDiv.append(firstLink);
+
+                let secondDiv = $('<div>').addClass('col-sm-6 col-12 pt-1 px-0 ps-1 my-2').attr('id','img-hide');
+                let secondLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
+                let secondImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-end').attr('src', imagenes[1].url).attr('alt', 'entrada');
+                secondLink.append(secondImage);
+                secondDiv.append(secondLink);
+
+                // Añadir los divs al contenedor principal
+                container.append(firstDiv);
+                container.append(secondDiv);
+
+            }else if(imagenes.length === 1){
+                // Crear col-12
+                let firstDiv = $('<div>').addClass('col-12 pt-1 px-0 my-2 me-2');
+                let firstLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
+                let firstImage = $('<img>').addClass('object-fit-cover shadow size-img rounded w-100').attr('src', imagenes[0].url).attr('alt', 'entrada').attr('id', 'frontCasa');
+                firstLink.append(firstImage);
+                firstDiv.append(firstLink);
+
+                container.append(firstDiv);
+            }else {
+                $('#contenedor-imagnes').css('display', 'none');
+
+            }
+            // Agregar evento de clic a las imágenes
+            $('img').click(function () {
+                $('#contenedor-imagnes #fotos').modal('show'); // Mostrar el modal al hacer clic en cualquier imagen
+            });
+            resizeImageAndForm();
         }
 
         //Pintar imagenes y model de imagenes
@@ -110,53 +203,6 @@
             }
 
             $(window).resize(reResize);
-
-            let container = $('#contenedor-imagnes');
-
-            // Crear el primer div col-6
-            let firstDiv = $('<div>').addClass('col-sm-6 col-12 pt-1 px-0 my-2 me-2');
-            let firstLink = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos');
-            let firstImage = $('<img>').addClass('object-fit-fill shadow size-img rounded-start').attr('src', '../img/frontCasa.webp').attr('alt', 'entrada').attr('id', 'frontCasa');
-            firstLink.append(firstImage);
-            firstDiv.append(firstLink);
-
-            // Crear el segundo div col-6
-            let secondDiv = $('<div>').addClass('col-6 row px-0 my-2');
-
-            // Crear las dos columnas col-6 dentro del segundo div
-            let col1 = $('<div>').addClass('col-6 p-1').addClass('img-hide');
-            let col2 = $('<div>').addClass('col-6 p-1').addClass('img-hide');
-
-            // Crear las imágenes y añadir al primer div col-6
-            let img1 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', '../img/dormitori1.webp').attr('alt', 'dormitorio');
-            let link1 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img1);
-            col1.append($('<div>').addClass('col-12 padd-img ms-2').append(link1));
-
-            let img2 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', '../img/bany1.webp').attr('alt', 'baño');
-            let link2 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img2);
-            col1.append($('<div>').addClass('col-12 ms-2').append(link2));
-
-            // Crear las imágenes y añadir al segundo div col-6
-            let img3 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', '../img/bany1.webp').attr('alt', 'baño').attr('id', 'radius-tr');
-            let link3 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img3);
-            col2.append($('<div>').addClass('col-12 padd-img ms-2').append(link3));
-
-            let img4 = $('<img>').addClass('object-fit-fill shadow size-img').attr('src', '../img/piscina.webp').attr('alt', 'piscina').attr('id', 'radius-br');
-            let link4 = $('<a>').attr('href', '').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#fotos').append(img4);
-            col2.append($('<div>').addClass('col-12 ms-2').append(link4));
-
-            // Añadir las columnas al segundo div col-6
-            secondDiv.append(col1);
-            secondDiv.append(col2);
-
-            // Añadir los divs al contenedor principal
-            container.append(firstDiv);
-            container.append(secondDiv);
-
-            // Agregar evento de clic a las imágenes
-            $('img').click(function () {
-                $('#contenedor-imagnes #fotos').modal('show'); // Mostrar el modal al hacer clic en cualquier imagen
-            });
 
             resizeImageAndForm();
         })

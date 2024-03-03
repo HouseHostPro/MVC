@@ -128,11 +128,10 @@ class PropertyFormController extends Controller {
     //Servicios
     public function loadSevice(Request $request){
 
-        //$id = $request->session()->get('idPropiedad');
         $id = $request -> prop_id;
         $servicios = Servei::all();
 
-        $propietat = Propietat::where('id', $id)->first();
+        $propietat = Propietat::find($id);
 
         return view('property/serveiForm', compact('propietat','servicios'));
     }
@@ -175,10 +174,18 @@ class PropertyFormController extends Controller {
         return view('property/serveiForm', compact('propietat'));
     }
 
-    //Galeria
+    //Espcios
 
-    public function loadGaleria(Request $request) {
-        $propietat = Propietat::where('id', $request -> id) -> first();
-        return view('galeria', compact('propietat'));
+    public function loadEspacios(Request $request){
+
+        $id = $request -> prop_id;
+        $servicios = Servei::all();
+
+        $propietat = Propietat::find($id);
+
+        return view('property/serveiForm', compact('propietat','servicios'));
     }
+
+
+
 }

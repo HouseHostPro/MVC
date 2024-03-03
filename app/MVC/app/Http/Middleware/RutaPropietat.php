@@ -24,7 +24,8 @@ class RutaPropietat
             $url === "http://localhost:8100/serviciosAjax" ||
             $url === "http://localhost:8100/serviciosByProperty" ||
             $url === "http://localhost:8100/es" ||
-            $url === "http://localhost:8100/en")
+            $url === "http://localhost:8100/en" ||
+            $url === "http://localhost:8100/allImagesAjax")
             return $next($request);
 
 

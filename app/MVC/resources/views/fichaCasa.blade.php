@@ -203,25 +203,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  d-flex justify-content-center">
-                    <div class="row col-12">
-                        <div class="col-6 mb-2 pe-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-start" src="../img/dormitori1.webp" alt="dormitorio">
-                        </div>
-                        <div class="col-6 mb-2 ps-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-end" src="../img/bany1.webp" alt="dormitorio">
-                        </div>
-                        <div class="col-6 mb-2 pe-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-start" src="../img/dormitori1.webp" alt="dormitorio">
-                        </div>
-                        <div class="col-6 mb-2 ps-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-end" src="../img/bany1.webp" alt="dormitorio">
-                        </div>
-                        <div class="col-6 mb-2 pe-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-start" src="../img/dormitori1.webp" alt="dormitorio">
-                        </div>
-                        <div class="col-6 mb-2 ps-1 ">
-                            <img class="object-fit-fill shadow size-img rounded-end" src="../img/bany1.webp" alt="dormitorio">
-                        </div>
+                    <div id="modal-imatges" class="row col-12">
                     </div>
                 </div>
             </div>
@@ -252,7 +234,26 @@
                 $('#titol').html(traduccions[0].filter((traduccio) => traduccio.lang === applocale)[0].value);
                 $('#desc').html(traduccions[1].filter((traduccio) => traduccio.lang === applocale)[0].value);
             });
+            $.ajax({
+                method: 'GET',
+                url: `http://localhost:8100/allImagesAjax`
+            }).done(function (imagenes) {
+                printImagenes(imagenes)
+            });
         });
+
+        function printImagenes(imagenes){
+
+            imagenes.forEach( function (value) {
+
+                var divCol = $('<div>').addClass('col-sm-6 col-12 mb-2 pe-1');
+                var img = $('<img>').addClass('object-fit-fill shadow size-img rounded').attr('src', value.url).attr('alt', 'dormitorio');
+                divCol.append(img);
+
+                $('#modal-imatges').append(divCol);
+
+            })
+        }
 
         //Date-picker
         $(function() {
