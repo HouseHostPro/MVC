@@ -122,7 +122,7 @@ class RedsysController extends Controller
     }
 
     public function exportPdf() {
-        $pdf = PDF::loadView('factura2');
+        $pdf = PDF::loadView('factura');
         return $pdf -> download('factura');
     }
 }
