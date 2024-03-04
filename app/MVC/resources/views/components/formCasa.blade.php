@@ -36,7 +36,7 @@
         </div>
     </div>
     <!-- Inputs con los formatos de hora del formato de la bbdd -->
-    <input type="text" id="titol" name="titol" value="Cas concos" hidden>
+    <input type="text" id="titolCasa" name="titol" value="Cas concos" hidden>
     <input type="text" id="days" name="days" hidden>
     <input type="text" id="entrada" name="frombd" hidden>
     <input type="text" id="sortida" name="tobd" hidden>
