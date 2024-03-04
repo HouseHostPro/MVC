@@ -28,7 +28,7 @@
                 <div id="map" class="container-sm"></div>
             </div>
             <div class="col-12 my-4">
-                <h5>Binissalem Mallorca</h5>
+                <h5></h5>
             </div>
         </div>
         <div class="col-12 col-xl-5 row order-last">
@@ -233,6 +233,7 @@
 
                 $('#titol').html(traduccions[0].filter((traduccio) => traduccio.lang === applocale)[0].value);
                 $('#desc').html(traduccions[1].filter((traduccio) => traduccio.lang === applocale)[0].value);
+                $('#titolCasa').val(traduccions[0].filter((traduccio) => traduccio.lang === applocale)[0].value);
             });
             $.ajax({
                 method: 'GET',
@@ -275,7 +276,7 @@
                     const string = jQuery.datepicker.formatDate('dd/mm/yy', date);
                     //console.log([dates.indexOf(string) === -1]);
                     var selectable = true;
-                    var title = '150€';
+                    var title = '{{ $preuBase }}€';
                     var highlight = [dates.indexOf(string) === -1];
                     if( highlight ) {
                         return [selectable, "", title];
@@ -303,7 +304,7 @@
                 beforeShowDay: function( date) {
 
                 var selectable = true;
-                var title = '150€';
+                var title = '{{ $preuBase }}€';
 
                 return [selectable, "", title];
 
@@ -409,8 +410,8 @@
 
                 const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
                 return jQuery.inArray(string, dates) == -1
-                    ? [true, '', '150€']
-                    : [true, 'event', '150€'];
+                    ? [true, '', '{{ $preuBase }}€']
+                    : [true, 'event', '{{ $preuBase }}€'];
 
             }
         });

@@ -106,11 +106,11 @@ Route::post('/user/register', [UserController::class, 'store'])->name('user.stor
 
 //Property
 Route::get('/propertyForm', [PropertyFormController::class, '']);
-//Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
 
 Route::get('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
 Route::post('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
 Route::get('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
+Route::post('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'savePreuTemporada']) -> name('property.saveCalendar');
 
 
 Route::view('/propertyView', 'property.property') -> name('property.view');
@@ -137,10 +137,11 @@ Route::get('/serveis', [ServeiController::class, 'findAll']) ->name('servei.all'
 Route::controller(RedsysController::class)->prefix('/property/{id}/redsys')
     ->group(function () {
         Route::post('/', 'index') -> name('redsys');
-        Route::get('/ok', 'ok') -> name('redsysOk');
-        Route::get('/ko', 'ko');
         Route::get('/notification', 'notification');
     });
+
+Route::get('redsys/ok', [RedsysController::class, 'ok']);
+Route::get('redsys/ko', [RedsysController::class, 'ko']);
 
 //PDF
 Route::get('/factures/pdf',[RedsysController::class, 'exportPdf']) -> name('facturaPdf');

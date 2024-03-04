@@ -21,6 +21,8 @@ class CasaController extends Controller{
         $propietat = Propietat::where('id', $request -> id) -> first();
 
         $tiquet_comentari = Tiquet_Comentari::where('propietat_id',$request -> id)->get();
+        $preuBase = Configuracio::where(['propietat_id' => $request -> id, 'clau' => 'preu_base']) -> first() -> valor;
+
 
         $comentarios = [];
 
@@ -36,7 +38,7 @@ class CasaController extends Controller{
 
         $servicios = Configuracio_Servei::where('configuracio_id',$request -> id)->get();
 
-        return view('fichaCasa',compact('comentarios','servicios','propietat'));
+        return view('fichaCasa',compact('comentarios','servicios','propietat','preuBase'));
     }
     public function confirmacion(Request $request){
 

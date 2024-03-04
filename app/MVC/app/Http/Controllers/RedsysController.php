@@ -28,7 +28,7 @@ class RedsysController extends Controller
                 $limpieza = $request -> limpieza;
             }
             $mascotas = $request -> mascotas;
-            $precioTotal = $request -> ptotal;
+            $precioTotal = intval(str_replace('€','', $request -> ptotal));
 
             Session::put('num_persones', $personas);
             Session::put('neteja', $limpieza);
@@ -39,6 +39,7 @@ class RedsysController extends Controller
 
             $reserva = new Reserva();
             $reserva -> preu_total = $precioTotal;
+            $reserva -> persones = $personas;
             $reserva -> usuari_id = Auth::user() -> id;
             $reserva -> propietat_id = explode("/", url() ->current())[4];
             $reserva -> data_inici = $request -> from;
@@ -46,6 +47,8 @@ class RedsysController extends Controller
 
             $nomPropietat = Propietat::where('id', $reserva -> propietat_id) -> first() -> nom;
             $nomTraduit = Traduccio::where(['code' => $nomPropietat, 'lang' => app() -> getLocale()]) -> first() -> value;
+
+            Session::put('nom_casa', $nomTraduit);
 
             Session::put('reserva', $reserva);
 
@@ -60,8 +63,8 @@ class RedsysController extends Controller
             Redsys::setUrlOk(config('redsys.url_ok')); //Url OK
             Redsys::setUrlKo(config('redsys.url_ko')); //Url KO
             Redsys::setVersion('HMAC_SHA256_V1');
-            Redsys::setTradeName('Tienda S.L');
-            Redsys::setTitular('Pedro Risco');
+            Redsys::setTradeName('HouseHostPro');
+            Redsys::setTitular('HouseHostPro');
             Redsys::setProductDescription('Reserva en ' . $nomTraduit);
             Redsys::setEnviroment('test'); //Entorno test
             Redsys::setAttributesSubmit('btn_submit', 'btn_id', '', 'display:none');
@@ -88,7 +91,7 @@ class RedsysController extends Controller
 
         $factura = new Factura();
         $factura -> reserva_id = $reserva -> id;
-        $factura -> nom_propietat = "test";
+        $factura -> nom_propietat = Session::get('nom_casa');
         $factura -> nom_propietari = 'Carlos Moyà';
         $factura -> nom_client = Auth::user() -> nom;
         $factura -> cognom1 = Auth::user() -> cognom1;
@@ -119,7 +122,7 @@ class RedsysController extends Controller
     }
 
     public function exportPdf() {
-        $pdf = PDF::loadView('facturaPdf');
-        return $pdf -> download('facturaTest');
+        $pdf = PDF::loadView('factura2');
+        return $pdf -> download('factura');
     }
 }
