@@ -26,7 +26,7 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-10 col-12">
                         <div class="table-responsive bg-white">
-                            <form action="{{route('saveService')}}" method="post" class="row col-12 justify-content-end">
+                            <form action="{{route('saveService', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id])}}" method="post" class="row col-12 ps-4 justify-content-end">
                                 @csrf
                             <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                 <thead>
@@ -58,21 +58,24 @@
 
         $(document).ready(function (){
 
+            const url = window.location.href;
+            const match = url.match(/\/property\/(\d+)\/property\/\d+\/servicios/);
+
             $.ajax({
                 method: 'GET',
                 url: `http://localhost:8100/serviciosAjax`
             }).done(function (service) {
+                console.log(service)
                 allServices.push.apply(allServices, service);
                 $.ajax({
                     method: 'GET',
-                    url: `http://localhost:8100/serviciosByProperty`
+                    url: `http://localhost:8100/serviciosByProperty/${match[1]}`
                 }).done(function (service) {
+                    console.log(service)
                     allServicesByProperty.push.apply(allServicesByProperty, service);
                     printServicios();
                 });
-
             });
-
 
             $.ajax({
                 method: 'GET',
@@ -84,10 +87,7 @@
                 const nomTraduit = traduccions[0].filter((tr) => tr.lang === "{{ app() -> getLocale() }}")[0].value;
                 $("li:nth-child(4)").html(nomTraduit);
             });
-
-
         })
-
 
         function printServicios(){
 

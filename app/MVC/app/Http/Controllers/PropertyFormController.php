@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Ciutat;
 use App\Models\Configuracio;
 use App\Models\Configuracio_Servei;
+use App\Models\Espai;
+use App\Models\Espai_Defecte;
 use App\Models\PreuTemporada;
 use App\Models\Reserva;
 use App\Models\Servei;
@@ -69,6 +71,15 @@ class PropertyFormController extends Controller {
         Alert::success(__('Actualizado'), __(''));
 
         return redirect(route('property.edit', ['id' => $request -> casaId, 'prop_id' => $request -> id])) -> with('success', 'Actualizado');
+    }
+
+    private function idPropiedad($request){
+
+        $url = $request->url();
+        //Expresión regular para coger el número de la propiedad que se esá editando
+        if (preg_match('/property\/(\d+)\/property/', $url, $matches)) {
+            return $matches[1];
+        }
     }
 
     //Ciudades
@@ -160,7 +171,7 @@ class PropertyFormController extends Controller {
     //Servicios
     public function loadSevice(Request $request){
 
-        $id = $request -> prop_id;
+        $id = $this->idPropiedad($request);
         $servicios = Servei::all();
 
         $propietat = Propietat::find($id);
@@ -177,7 +188,7 @@ class PropertyFormController extends Controller {
 
     public function serviceByProperty(Request $request){
 
-        $id = $request->session()->get('idPropiedad');
+        $id = $request -> id;
 
         $servicios = Configuracio_Servei::where('configuracio_id',$id)->get();
 
@@ -187,23 +198,24 @@ class PropertyFormController extends Controller {
 
     public function saveService(Request $request){
 
-        $id = $request->session()->get('idPropiedad');
+        $id = $request -> prop_id;
 
         Configuracio_Servei::where('configuracio_id',$id)->delete();
 
+        //Recorto el array que me llega del request, porque es de un form y el primer elemento es el token del form
         $servicios = array_slice($request->all(),1,count($request->all()));
 
         foreach ($servicios as $key => $value){
 
             $servicio = new Configuracio_Servei();
 
-            $servicio->configuracio_id =$id;
+            $servicio->configuracio_id = $id;
             $servicio->servei_id = $value;
 
             $servicio -> save();
         }
-        $propietat = Propietat::where('id',$id) -> first();
-        return view('property/serveiForm', compact('propietat'));
+
+        return redirect() -> route('property.service',['id' => $request -> id, 'prop_id' => $id]);
     }
 
     //Espacios
@@ -215,6 +227,37 @@ class PropertyFormController extends Controller {
 
         $propietat = Propietat::find($id);
 
-        return view('property/serveiForm', compact('propietat','servicios'));
+        return view('property/espaiForm', compact('propietat','servicios'));
     }
+    public function allEspaciosAjax(Request $request){
+
+        $espacios = Espai_Defecte::all();
+
+        return $espacios;
+    }
+
+    public function espaciosByProperty(Request $request){
+
+        $id = $request -> id;
+
+        $servicios = Espai::where('propietat_id',$id)->with('espacios_defecto')->get();
+
+        return $servicios;
+
+    }
+
+    public function saveEspacios(Request $request){
+
+        $id = $request -> prop_id;
+
+        $espacios= array_slice($request->all(),1,count($request->all()));
+
+        var_dump($espacios);
+
+
+
+        //return redirect() -> route('property.service',['id' => $request -> id, 'prop_id' => $id]);
+    }
+
+
 }
