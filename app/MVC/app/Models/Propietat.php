@@ -33,4 +33,7 @@ class Propietat extends Model {
     public function imaganes(){
         return $this->hasMany(Imatge::class,'propietat_id','id');
     }
+    public function espacios(){
+        return $this->hasMany(Espai::class,'propietat_id','id');
+    }
 }
