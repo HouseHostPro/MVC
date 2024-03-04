@@ -28,7 +28,7 @@
                 <div id="map" class="container-sm"></div>
             </div>
             <div class="col-12 my-4">
-                <h5>Binissalem Mallorca</h5>
+                <h5></h5>
             </div>
         </div>
         <div class="col-12 col-xl-5 row order-last">
@@ -251,6 +251,7 @@
 
                 $('#titol').html(traduccions[0].filter((traduccio) => traduccio.lang === applocale)[0].value);
                 $('#desc').html(traduccions[1].filter((traduccio) => traduccio.lang === applocale)[0].value);
+                $('#titolCasa').val(traduccions[0].filter((traduccio) => traduccio.lang === applocale)[0].value);
             });
         });
 

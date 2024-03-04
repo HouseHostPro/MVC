@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ciutat;
 use App\Models\Configuracio;
 use App\Models\Configuracio_Servei;
+use App\Models\PreuTemporada;
 use App\Models\Reserva;
 use App\Models\Servei;
 use Couchbase\RegexpSearchQuery;
@@ -93,9 +94,18 @@ class PropertyFormController extends Controller {
 
     public function loadCalendar(Request $request) {
         $dates = $this->findAllDatesReservades($request);
+        $temporades = PreuTemporada::where('configuracio_id', $request -> prop_id) -> get();
+        $preusDies = [];
+
+        foreach ($temporades as $temporada) {
+            $preu = $temporada -> preu;
+            $dies = $this -> dateRange($temporada -> data_inici, $temporada -> data_fi);
+            $preusDies[] = new \stdClass($preu, $dies);
+        }
+        var_dump($preusDies);
         $preuBase = Configuracio::where(['propietat_id' => $request -> prop_id, 'clau' => 'preu_base']) -> first() -> valor;
 
-        return view('property/propertyCalendar', ['id' => $request -> id], compact('dates', 'preuBase'));
+        return view('property/propertyCalendar', ['id' => $request -> id], compact('dates','temporades' ,'preuBase'));
     }
 
     public function findAllDatesReservades(Request $request) {
@@ -183,5 +193,25 @@ class PropertyFormController extends Controller {
     public function loadGaleria(Request $request) {
         $propietat = Propietat::where('id', $request -> id) -> first();
         return view('galeria', compact('propietat'));
+    }
+
+    public function savePreuTemporada(Request $request) {
+        $temporada = new PreuTemporada();
+        $dInici = trim(explode('-', $request -> datePicker)[0]);
+        var_dump($dInici);
+        $temporada -> data_inici = date('Y-m-d', strtotime($dInici));
+        var_dump($temporada -> data_inici);
+
+        $dFi = trim(explode('-', $request -> datePicker)[1]);
+        $temporada -> data_fi = date('Y-m-d', strtotime($dFi));
+
+        $temporada -> preu = $request -> preu;
+        $temporada -> configuracio_id = $request -> prop_id;
+
+        $temporada -> save();
+
+        Alert::success(__('Actualizado'), __(''));
+
+        return redirect(route('property.calendar', ['id' => $request -> id, 'prop_id' => $request -> prop_id]));
     }
 }

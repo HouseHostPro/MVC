@@ -196,8 +196,8 @@
 
             if(diffDays > 0){
                 $('#divpxn').prop("hidden",false);
-                let preuTotal = 150*diffDays;
-                $('#pxn').text(150 + "€ x " + diffDays + " noches");
+                let preuTotal = {{ $preuBase }}*diffDays;
+                $('#pxn').text({{ $preuBase }} + "€ x " + diffDays + " noches");
                 $('#pxnt').val(preuTotal + "€");
                 $('#ptotal').val(preuTotal + "€");
                 $('#days').val(diffDays);

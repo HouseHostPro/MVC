@@ -97,11 +97,11 @@ Route::post('/user/register', [UserController::class, 'store'])->name('user.stor
 
 //Property
 Route::get('/propertyForm', [PropertyFormController::class, '']);
-//Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
 
 Route::get('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
 Route::post('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
 Route::get('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
+Route::post('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'savePreuTemporada']) -> name('property.saveCalendar');
 
 
 Route::view('/propertyView', 'property.property') -> name('property.view');
