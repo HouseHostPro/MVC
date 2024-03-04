@@ -78,6 +78,18 @@ Route::middleware('auth')->group(function (){
     Route::post('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'store'])->name('store.image');
     Route::post('/property/{id}/property/{prop_id}/galeria/delete',[ImagenesController::class, 'delete'])->name('delete.image');
 
+    //Redsys
+    Route::controller(RedsysController::class)->prefix('/property/{id}/redsys')
+        ->group(function () {
+            Route::post('/', 'index') -> name('redsys');
+            Route::get('/notification', 'notification');
+        });
+
+    Route::get('redsys/ok', [RedsysController::class, 'ok']);
+    Route::get('redsys/ko', [RedsysController::class, 'ko']);
+
+//PDF
+    Route::get('/factures/pdf',[RedsysController::class, 'exportPdf']) -> name('facturaPdf');
 
     //Cerrar sesión
     Route::post('/property/{id}/logout',[UserController::class,'logout'])->name('logout');
@@ -133,18 +145,7 @@ Route::get('/serveis', [ServeiController::class, 'findAll']) ->name('servei.all'
 
 
 
-//Redsys
-Route::controller(RedsysController::class)->prefix('/property/{id}/redsys')
-    ->group(function () {
-        Route::post('/', 'index') -> name('redsys');
-        Route::get('/notification', 'notification');
-    });
 
-Route::get('redsys/ok', [RedsysController::class, 'ok']);
-Route::get('redsys/ko', [RedsysController::class, 'ko']);
-
-//PDF
-Route::get('/factures/pdf',[RedsysController::class, 'exportPdf']) -> name('facturaPdf');
 
 //Localization
 /*Route::get('language/{locale}', function ($locale) {
