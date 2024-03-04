@@ -154,52 +154,6 @@
         })
 
 
-        //Formulario de reserva
-        //Para poner la fecha de entrada, y en caso de haber puesto primero la de salida llamar a la función pintar
-        $('#from').change(function() {
-            startDate = $(this).
-            datepicker('getDate');
-            $("#to").
-            datepicker("option", "minDate", startDate);
-            if($('#to').val() !== ""){
-
-                pintarprecioReserva();
-            }
-
-        })
-
-        //Para pponer la fecha de salida, y en caso de haber puesto primero la de entrada llamar a la función pintar
-        $('#to').change(function() {
-            endDate = $(this).
-            datepicker('getDate');
-            $("#from").
-            datepicker("option", "maxDate", endDate);
-            if($('#from').val() !== ""){
-
-                pintarprecioReserva();
-            }
-
-        })
-
-        //Pinta los precios del coste de los dias reservados, limpieza y el total
-        function pintarprecioReserva(){
-
-            //Calcular días de diferencia entre fecha entrada y salida
-            let entrada = new Date($('#entrada').val());
-            let salida = new Date($('#sortida').val());
-            let diffMs = Math.abs(salida - entrada);
-            let diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-
-            if(diffDays > 0){
-                $('#divpxn').prop("hidden",false);
-                let preuTotal = 150*diffDays;
-                $('#pxn').text(150 + "€ x " + diffDays + " noches");
-                $('#pxnt').val(preuTotal + "€");
-                $('#ptotal').val(preuTotal + "€");
-                $('#days').val(diffDays);
-                $('#form-casa').css('height','31%');
-            }
-        }
         //Carousel
         $("#owl-example1").owlCarousel({
             margin:10,

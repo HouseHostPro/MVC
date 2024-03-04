@@ -10,7 +10,7 @@
             <li class="breadcrumb-item"><a href="{{route('principal', ['id' => $PROPIETAT_ID])}}">{{__('Principal')}}</a></li>
             <li class="breadcrumb-item"><a href="{{route('cuenta', ['id' => $PROPIETAT_ID])}}">{{__('Cuenta')}}</a></li>
             <li class="breadcrumb-item"><a href="{{route('property.properties', ['id' => $PROPIETAT_ID])}}">{{__('Propiedades')}}</a></li>
-            <li class="breadcrumb-item"><a href="{{URL::previous()}}">{{$propietat->nom}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('property.edit', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id])}}">{{$propietat->nom}}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{__('Galeria')}}</li>
         </ol>
     </nav>
