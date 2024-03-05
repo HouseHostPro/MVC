@@ -9,6 +9,7 @@ use App\Models\Espai;
 use App\Models\Espai_Defecte;
 use App\Models\Imatge_Dormitori;
 use App\Models\PreuTemporada;
+use App\Models\Propietat_Servei;
 use App\Models\Reserva;
 use App\Models\Servei;
 use Couchbase\RegexpSearchQuery;
@@ -191,7 +192,7 @@ class PropertyFormController extends Controller {
 
         $id = $request -> id;
 
-        $servicios = Configuracio_Servei::where('configuracio_id',$id)->get();
+        $servicios = Propietat_Servei::where('propietat_id',$id)->get();
 
         return $servicios;
 
@@ -201,16 +202,16 @@ class PropertyFormController extends Controller {
 
         $id = $request -> prop_id;
 
-        Configuracio_Servei::where('configuracio_id',$id)->delete();
+        Propietat_Servei::where('propietat_id',$id)->delete();
 
         //Recorto el array que me llega del request, porque es de un form y el primer elemento es el token del form
         $servicios = array_slice($request->all(),1,count($request->all()));
 
         foreach ($servicios as $key => $value){
 
-            $servicio = new Configuracio_Servei();
+            $servicio = new Propietat_Servei();
 
-            $servicio->configuracio_id = $id;
+            $servicio->propietat_id = $id;
             $servicio->servei_id = $value;
 
             $servicio -> save();

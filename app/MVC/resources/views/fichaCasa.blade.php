@@ -1,4 +1,4 @@
-@extends('layouts.plantilla1')
+@extends('layouts.plantilla' . $PLANTILLA)
 
 @section('content')
 
@@ -164,7 +164,7 @@
                     <div class="mt-3">
                         <ul class="list-group list-group-flush">
                             @foreach($servicios as $servicio)
-                                <li class="list-group-item">{{$servicio->Cservicios->nom}}</li>
+                                <li class="list-group-item">{{$servicio->servicios->nom}}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -185,7 +185,7 @@
                     <div class="mt-3">
                         <ul class="list-group list-group-flush">
                             @foreach($servicios as $servicio)
-                                <li class="list-group-item">{{$servicio->Cservicios->nom}}</li>
+                                <li class="list-group-item">{{$servicio->servicios->nom}}</li>
                             @endforeach
                         </ul>
                     </div>

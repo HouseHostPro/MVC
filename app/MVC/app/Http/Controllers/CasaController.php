@@ -8,6 +8,7 @@ use App\Models\Configuracio_Servei;
 use App\Models\Espai;
 use App\Models\Imatge_Dormitori;
 use App\Models\Propietat;
+use App\Models\Propietat_Servei;
 use App\Models\Reserva;
 use App\Models\Servei;
 use App\Models\Tiquet_Comentari;
@@ -42,7 +43,7 @@ class CasaController extends Controller{
             }
         }
 
-        $servicios = Configuracio_Servei::where('configuracio_id',$request -> id)->get();
+        $servicios = Propietat_Servei::where('propietat_id',$request -> id)->get();
 
         return view('fichaCasa',compact('comentarios','servicios','propietat','preuBase','dormitorios','urlsCamas'));
     }

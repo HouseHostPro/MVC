@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Propietat;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -34,6 +35,9 @@ class RutaPropietat
 
         $id = explode("/", $url)[4];
         View::share('PROPIETAT_ID', $id);
+
+        $id_plantilla = Propietat::where('id',$id)->value('plantilla_id');
+        View::share('PLANTILLA', $id_plantilla);
 
         return $next($request);
     }

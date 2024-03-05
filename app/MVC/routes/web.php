@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function (){
     //CRUD servicios
     Route::get('/property/{id}/property/{prop_id}/servicios',[PropertyFormController::class,'loadSevice'])->name('property.service');
     Route::get('/serviciosAjax',[PropertyFormController::class,'allService'])->name('serviceA');
-    Route::get('/serviciosByProperty/{id}',[PropertyFormController::class,'serviceByProperty'])->name('serviciosPreperty');
+    Route::get('/serviciosByProperty/{id}',[PropertyFormController::class,'serviceByProperty'])->name('serviciosPreperty');//AJAX
     Route::post('/property/{id}/property/{prop_id}/saveService',[PropertyFormController::class,'saveService'])->name('saveService');
 
     //CRUD espacios

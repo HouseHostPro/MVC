@@ -61,7 +61,7 @@
                     @if($count >= 5)
                         @break
                     @endif
-                    <li class="list-group-item">{{$servicio->Cservicios->nom}}</li>
+                    <li class="list-group-item">{{$servicio->servicios->nom}}</li>
                     @php
                         $count++;
                     @endphp

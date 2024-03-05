@@ -13,8 +13,8 @@ class Servei extends Model{
     protected $fillable = [
     ];
 
-    public function configuracion(){
-        return $this->hasMany(Configuracio_Servei::class,'servei_id','id');
+    public function prop_serv(){
+        return $this->hasMany(Propietat_Servei::class,'servei_id','id');
     }
 
 }
