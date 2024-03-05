@@ -13,6 +13,6 @@ docker-compose.yml
 /app/MVC/vendor/
 /app/MVC/.env
 /.idea/
-/app/MVC/public/build/
+#/app/MVC/public/build/
 /app/MVC/public/img/
 /Cosas
