@@ -163,17 +163,14 @@
                         allEspaciosByProperty.forEach( function (espai){
                             if(espai.espaid_id === value.id && espai.imatge_id === 1 && opcion.valor === "cd"){
 
-                                console.log("primer id ->" + espai.imatge_id + " cd ->" + espai.quantitat);
                                 chechkbox.prop('checked',true);
                                 inputNumber.val(espai.quantitat).prop('disabled', false);
                             }else if(espai.espaid_id === value.id && espai.imatge_id === 2 && opcion.valor === "ci"){
 
-                                console.log("segon id ->" + espai.imatge_id + " cd ->" + espai.quantitat);
                                 chechkbox.prop('checked',true);
                                 inputNumber.val(espai.quantitat).prop('disabled', false);
                             }else if(espai.espaid_id === value.id && espai.imatge_id === 3 && opcion.valor === "ci2"){
 
-                                console.log("tercer id ->" + espai.imatge_id + " cd ->" + espai.quantitat);
                                 chechkbox.prop('checked',true);
                                 inputNumber.val(espai.quantitat).prop('disabled', false);
                             }
