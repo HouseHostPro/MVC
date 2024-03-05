@@ -212,10 +212,13 @@
 
 <script>
 
+    let allImageRooms = [];
+
     $(document).ready(function() {
 
         let huespedes = 0;
         let totalRating;
+
 
         //Encontrar traducciones de la propiedad
         $(function () {
@@ -235,12 +238,15 @@
                 $('#desc').html(traduccions[1].filter((traduccio) => traduccio.lang === applocale)[0].value);
                 $('#titolCasa').val(traduccions[0].filter((traduccio) => traduccio.lang === applocale)[0].value);
             });
+
+            //Petición Ajax para poner todas las imagenes de la casa en el modal
             $.ajax({
                 method: 'GET',
                 url: `http://localhost:8100/allImagesAjax`
             }).done(function (imagenes) {
                 printImagenes(imagenes)
             });
+
         });
 
         function printImagenes(imagenes){

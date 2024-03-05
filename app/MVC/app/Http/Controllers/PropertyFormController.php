@@ -255,54 +255,37 @@ class PropertyFormController extends Controller {
 
         $espacios= array_slice($request->all(),1,count($request->all()));
 
-
         foreach ($espacios as $key => $value){
 
             if($key === "cd"){
 
-                $espacio = new Espai();
-
-                $espacio->propietat_id = $idProp;
-                $espacio->espaid_id = 1;
-                $espacio->imatge_id = 1;
-                $espacio->quantitat = $value;
-
-                $espacio->save();
+                $this->insertEspacios($idProp,1,1,$value);
 
             }elseif ($key === "ci"){
-                $espacio = new Espai();
 
-                $espacio->propietat_id = $idProp;
-                $espacio->espaid_id = 1;
-                $espacio->imatge_id = 2;
-                $espacio->quantitat = $value;
-
-                $espacio->save();
+                $this->insertEspacios($idProp,1,2,$value);
 
             }elseif ($key === "ci2"){
-                $espacio = new Espai();
 
-                $espacio->propietat_id = $idProp;
-                $espacio->espaid_id = 1;
-                $espacio->imatge_id = 3;
-                $espacio->quantitat = $value;
-
-                $espacio->save();
+                $this->insertEspacios($idProp,1,3,$value);
 
             }else{
-                $espacio = new Espai();
                 $id= explode("s-",$key)[1];
-
-                $espacio->propietat_id = $idProp;
-                $espacio->espaid_id = $id;
-                $espacio->quantitat = $value;
-
-                $espacio->save();
-
+                $this->insertEspacios($idProp,$id,NULL,$value);
             }
         }
         return redirect() -> route('espai.espais',['id' => $request -> id, 'prop_id' => $idProp]);
     }
+    private function insertEspacios($idProp,$idEspacio,$idImagen,$cantidad){
 
+        $espacio = new Espai();
+
+        $espacio->propietat_id = $idProp;
+        $espacio->espaid_id = $idEspacio;
+        $espacio->imatge_id = $idImagen;
+        $espacio->quantitat = $cantidad;
+
+        $espacio->save();
+    }
 
 }
