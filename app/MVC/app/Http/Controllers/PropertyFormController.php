@@ -7,6 +7,7 @@ use App\Models\Configuracio;
 use App\Models\Configuracio_Servei;
 use App\Models\Espai;
 use App\Models\Espai_Defecte;
+use App\Models\Imatge_Dormitori;
 use App\Models\PreuTemporada;
 use App\Models\Reserva;
 use App\Models\Servei;
@@ -248,15 +249,59 @@ class PropertyFormController extends Controller {
 
     public function saveEspacios(Request $request){
 
-        $id = $request -> prop_id;
+        $idProp = $request -> prop_id;
+
+        Espai::where('propietat_id',$idProp)->delete();
 
         $espacios= array_slice($request->all(),1,count($request->all()));
 
-        var_dump($espacios);
 
+        foreach ($espacios as $key => $value){
 
+            if($key === "cd"){
 
-        //return redirect() -> route('property.service',['id' => $request -> id, 'prop_id' => $id]);
+                $espacio = new Espai();
+
+                $espacio->propietat_id = $idProp;
+                $espacio->espaid_id = 1;
+                $espacio->imatge_id = 1;
+                $espacio->quantitat = $value;
+
+                $espacio->save();
+
+            }elseif ($key === "ci"){
+                $espacio = new Espai();
+
+                $espacio->propietat_id = $idProp;
+                $espacio->espaid_id = 1;
+                $espacio->imatge_id = 2;
+                $espacio->quantitat = $value;
+
+                $espacio->save();
+
+            }elseif ($key === "ci2"){
+                $espacio = new Espai();
+
+                $espacio->propietat_id = $idProp;
+                $espacio->espaid_id = 1;
+                $espacio->imatge_id = 3;
+                $espacio->quantitat = $value;
+
+                $espacio->save();
+
+            }else{
+                $espacio = new Espai();
+                $id= explode("s-",$key)[1];
+
+                $espacio->propietat_id = $idProp;
+                $espacio->espaid_id = $id;
+                $espacio->quantitat = $value;
+
+                $espacio->save();
+
+            }
+        }
+        return redirect() -> route('espai.espais',['id' => $request -> id, 'prop_id' => $idProp]);
     }
 
 

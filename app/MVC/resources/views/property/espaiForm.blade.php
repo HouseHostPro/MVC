@@ -40,7 +40,7 @@
 
                                     </tbody>
                                 </table>
-                                <div class="col-2 me-sm-0 me-5">
+                                <div class="col-2 me-sm-0 me-5 ">
                                     <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 my-3 ">Guardar</button>
                                 </div>
                             </form>
@@ -98,80 +98,119 @@
 
             allEspacios.forEach( function (value){
 
-                let fila = $('<tr>');
-                let columnName = $('<td>').addClass('text-center');
-
-                let pNom = $('<p>').text(value.tipus).addClass('pt-1');
-                columnName.append(pNom);
-                fila.append(columnName);
-
-                let columnDesc = $('<td>').addClass('text-center');
-
-                //QUITAR QUE SE CREEN DORMITORIOS Y PONER 3 DORMITORIOS CON LOS TRES TIPOS DIFERENTES DE CAMAS Y UN INPUTNUMBER COMO LOS DEMAS
                 if(value.tipus === "Dormitorio"){
-                    let selectLabel = $('<label>').addClass('form-label pt-1').text('Selecciona el tipo de camas');
-                    let selectDesc = $('<select>').addClass('select-desc form-select w-50 ms-3');
-                    let opciones = ['Cama doble', 'Cama individual', '2 camas individuales'];
 
-
+                    let opciones = [{nombre:'Cama doble', valor: 'cd'},{nombre:'Cama individual', valor: 'ci'},{nombre:'2 camas individuales', valor: 'ci2'}];
                     opciones.forEach(function(opcion) {
-                        selectDesc.append($('<option>').text(opcion).val(opcion));
-                    });
-                    let contenedorSelect = $('<div>').addClass('d-flex align-items-center');
-                    contenedorSelect.append(selectLabel, selectDesc);
+                        let fila = $('<tr>');
+                        let columnName = $('<td>').addClass('text-center');
+                        let columnDesc = $('<td>').addClass('text-center');
 
-                    columnDesc.append(contenedorSelect);
-
-                    //Creo un evento en el select, para cuando se eliga un elemnto se inserte una fila debajo del elemento
-                    selectDesc.on('change', function() {
-                        let valorSeleccionado = $(this).val();
-                        if (valorSeleccionado) {
-                            let nuevaFila = $('<tr>');
-                            let nuevaColumna = $('<td>').addClass('text-center');
-                            let nomP = $('<p>').text('Dormitorio');
-                            nuevaColumna.append(nomP);
-                            let nuevaColumnaDesc = $('<td>').addClass('text-center');
-                            let nomDesc = $('<p>').text(valorSeleccionado);
-                            nuevaColumnaDesc.append(nomDesc);
-                            let columnCheckbox = $('<td>').addClass('text-center');
-                            let chechkbox = $('<input>').attr({
-                                type: 'checkbox',
-                                name: `s-${value.id}`,
-                                value: value.id
-                            }).addClass('form-check-input dormitorio').prop('checked',true);
-                            columnCheckbox.append(chechkbox);
-                            nuevaFila.append(nuevaColumna, nuevaColumnaDesc,columnCheckbox);
-                            // Agregar la nueva fila debajo de la fila actual
-                            $(this).closest('tr').after(nuevaFila);
-
-                            //Elimina un dormitorio cuando se desmarca el checkbox
-                            $('.dormitorio').on('change', function() {
-                                if (!$(this).prop('checked')) {
-                                    $(this).closest('tr').remove();
-                                }
-                            });
-                        }
-                    });
+                        let pNom = $('<p>').text(value.tipus).addClass('pt-1');
+                        columnName.append(pNom);
+                        fila.append(columnName);
 
 
+                        let labelNumber = $('<label>').addClass('form-label pt-1').text(opcion.nombre);
+                        let inputNumber = $('<input>').attr({
+                            type: 'number',
+                            min: 0,
+                            name: opcion.valor,
+                            value: 0
+                        }).addClass('form-control input-number ms-3').css('width', '10%').prop('disabled', true);
+
+                        let contenedorInput = $('<div>').addClass('d-flex justify-content-center');
+                        contenedorInput.append(labelNumber, inputNumber);
+                        columnDesc.append(contenedorInput);
+
+                        let columnCheckbox = $('<td>').addClass('text-center');
+                        let chechkbox = $('<input>').attr({
+                            type: 'checkbox',
+                        }).addClass('form-check-input');
+
+                        // Evento que cuando el valor no sea cero se active el checkbox
+                        inputNumber.on('change', function() {
+                            let checkbox = $(this).closest('tr').find('input[type="checkbox"]');
+                            if ($(this).val() !== 0) {
+                                // Activar el checkbox y habilitarlo si el valor no es 0
+                                checkbox.prop('checked', true);
+                                checkbox.prop('disabled', false);
+                            } else {
+                                // Desactivar el checkbox y deshabilitarlo si el valor es 0
+                                checkbox.prop('checked', false);
+                                checkbox.prop('disabled', true);
+                            }
+                        });
+
+                        // Evento que cuando no este checked el input number se ponga a cero
+                        $(document).on('change', 'input[type="checkbox"]', function() {
+                            let inputNumber = $(this).closest('tr').find('input[type="number"]');
+                            if (!$(this).prop('checked')) {
+                                // Si el checkbox no está marcado, establecer el valor del input en 0 y deshabilitar el checkbox
+                                inputNumber.val(0);
+                                inputNumber.prop('disabled', true);
+                            } else {
+                                // Si el checkbox está marcado, habilitar el input
+                                inputNumber.prop('disabled', false);
+                                inputNumber.val(1)
+                            }
+                        });
+                        fila.append(columnDesc);
+                        columnCheckbox.append(chechkbox);
+                        fila.append(columnCheckbox);
+                        $('#tabla').append(fila);
+
+                        allEspaciosByProperty.forEach( function (espai){
+                            if(espai.espaid_id === value.id && espai.imatge_id === 1 && opcion.valor === "cd"){
+
+                                console.log("primer id ->" + espai.imatge_id + " cd ->" + espai.quantitat);
+                                chechkbox.prop('checked',true);
+                                inputNumber.val(espai.quantitat).prop('disabled', false);
+                            }else if(espai.espaid_id === value.id && espai.imatge_id === 2 && opcion.valor === "ci"){
+
+                                console.log("segon id ->" + espai.imatge_id + " cd ->" + espai.quantitat);
+                                chechkbox.prop('checked',true);
+                                inputNumber.val(espai.quantitat).prop('disabled', false);
+                            }else if(espai.espaid_id === value.id && espai.imatge_id === 3 && opcion.valor === "ci2"){
+
+                                console.log("tercer id ->" + espai.imatge_id + " cd ->" + espai.quantitat);
+                                chechkbox.prop('checked',true);
+                                inputNumber.val(espai.quantitat).prop('disabled', false);
+                            }
+                        })
+
+                    })
                 }else {
+
+                    let fila = $('<tr>');
+                    let columnName = $('<td>').addClass('text-center');
+                    let columnDesc = $('<td>').addClass('text-center');
+
+                    let pNom = $('<p>').text(value.tipus).addClass('pt-1');
+                    columnName.append(pNom);
+                    fila.append(columnName);
+
                     let labelNumber = $('<label>').addClass('form-label pt-1').text('Cuantos hay ');
                     let inputNumber = $('<input>').attr({
                         type: 'number',
                         min: 0,
                         name: `s-${value.id}`,
                         value: 0
-                    }).addClass('form-control input-number ms-3 w-25');
+                    }).addClass('form-control input-number ms-3').css('width', '10%').prop('disabled', true);
 
                     let contenedorInput = $('<div>').addClass('d-flex justify-content-center');
                     contenedorInput.append(labelNumber, inputNumber);
                     columnDesc.append(contenedorInput);
 
+                    let columnCheckbox = $('<td>').addClass('text-center');
+                    let chechkbox = $('<input>').attr({
+                        type: 'checkbox',
+                    }).addClass('form-check-input');
 
                     // Evento que cuando el valor no sea cero se active el checkbox
                     inputNumber.on('change', function() {
                         let checkbox = $(this).closest('tr').find('input[type="checkbox"]');
-                        if ($(this).val() != 0) {
+                        if ($(this).val() !== 0) {
                             // Activar el checkbox y habilitarlo si el valor no es 0
                             checkbox.prop('checked', true);
                             checkbox.prop('disabled', false);
@@ -192,40 +231,22 @@
                         } else {
                             // Si el checkbox está marcado, habilitar el input
                             inputNumber.prop('disabled', false);
+                            inputNumber.val(1);
                         }
                     });
+                    fila.append(columnDesc);
+                    columnCheckbox.append(chechkbox);
+                    fila.append(columnCheckbox);
+                    $('#tabla').append(fila);
+
+                    allEspaciosByProperty.forEach( function (espai){
+                        if(espai.espaid_id === value.id){
+                            chechkbox.prop('checked',true);
+                            inputNumber.val(espai.quantitat).prop('disabled', false);
+                        }
+                    })
+
                 }
-
-
-                let inputHidden = $('<inpunt>').attr({
-                    type: 'hidden',
-                    name: 'id' + value.id,
-                    value: value.id
-                })
-                columnDesc.append(inputHidden);
-
-                fila.append(columnDesc);
-
-                let columnCheckbox = $('<td>').addClass('text-center');
-                let chechkbox = $('<input>').attr({
-                    type: 'checkbox',
-                    name: `s-${value.id}`,
-                    value: value.id
-                }).addClass('form-check-input');
-                if(value.tipus === "Dormitorio"){
-                    chechkbox.attr('id','dormitorio')
-                }
-
-                allEspaciosByProperty.forEach( function (espai){
-                    if(espai.espaid_id === value.id){
-                        chechkbox.prop('checked',true);
-                    }
-                })
-
-                $('#dormitorio').hide();
-                columnCheckbox.append(chechkbox);
-                fila.append(columnCheckbox);
-                $('#tabla').append(fila);
             })
         }
         $('buttonSave').submit( function (value){
