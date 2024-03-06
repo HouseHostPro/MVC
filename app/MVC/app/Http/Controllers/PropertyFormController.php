@@ -294,11 +294,73 @@ class PropertyFormController extends Controller {
     public function loadNormas(Request $request){
 
         $id = $request -> prop_id;
-        $normas = Configuracio::all();
 
         $propietat = Propietat::find($id);
 
-        return view('property/normasForm', compact('propietat','normas'));
+        return view('property/normasForm', compact('propietat'));
     }
+
+    public function saveNormas(Request $request){
+
+        $idProp = $request -> prop_id;
+
+        $normas= array_slice($request->all(),1,count($request->all()));
+
+        //Eliminar todas las normas
+        Configuracio::where('propietat_id', $idProp)
+        ->where('clau', 'like', 'norma_%')
+        ->delete();
+
+        //Le asigno el valor No en el caso de que no lleguen en la request, para después poderlo rellenar con la petición ajax
+        if(!$request->has('mascotas')){
+            $this->insertAndUpdateConfiguraio($idProp,'mascotas','No');
+        }
+        if(!$request->has('visitas')){
+            $this->insertAndUpdateConfiguraio($idProp,'visitas','No');
+        }
+        if(!$request->has('fumar')){
+            $this->insertAndUpdateConfiguraio($idProp,'fumar','No');
+        }
+        if(!$request->has('fiestas')){
+            $this->insertAndUpdateConfiguraio($idProp,'fiestas','No');
+        }
+
+        foreach ($normas as $key => $value){
+
+            var_dump("Clau ->" . $key . " Valor ->" . $value);
+
+            $this->insertAndUpdateConfiguraio($idProp,$key,$value);
+        }
+        return redirect() -> route('property.normas',['id' => $request -> id, 'prop_id' => $idProp]);
+    }
+
+    private function insertAndUpdateConfiguraio($id,$clau,$valor){
+
+        $configuracion = Configuracio::where('propietat_id', $id)
+            ->where('clau', $clau)
+            ->first();
+        if($configuracion){
+            // Actualizar el valor
+            $configuracion->valor = $valor;
+            $configuracion->save();
+        }else{
+            $config = new Configuracio();
+            $config->propietat_id = $id;
+            $config->clau = $clau;
+            $config->valor = $valor;
+            $config-> save();
+        }
+
+    }
+
+    public function allNormasAjax(Request $request){
+
+        $id = $request -> id;
+
+        $normas = Configuracio::where('propietat_id',$id)->get();
+
+        return $normas;
+    }
+
 
 }

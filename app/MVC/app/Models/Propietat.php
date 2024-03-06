@@ -39,4 +39,8 @@ class Propietat extends Model {
     public function espacios(){
         return $this->hasMany(Espai::class,'propietat_id','id');
     }
+    public function configuracion(){
+        return $this->hasMany(Configuracio::class,'propietat_id','id');
+    }
+
 }
