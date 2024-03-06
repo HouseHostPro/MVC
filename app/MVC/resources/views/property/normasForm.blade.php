@@ -3,7 +3,7 @@
 @section('url')
     {{route('cuenta', ['id' => $propietat -> id])}}
 @endsection
-@section('title',__('Servicios'))
+@section('title',__('Normas'))
 @section('content')
     <div class="row col-12 justify-content-between">
         <nav class="mt-3 col-sm-7 col-12" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -12,7 +12,7 @@
                 <li class="breadcrumb-item"><a href="{{route('cuenta', ['id' => $propietat -> id])}}">{{__('Cuenta')}}</a></li>
                 <li class="breadcrumb-item"><a href="{{route('property.properties', ['id' => $propietat -> id])}}">{{__('Propiedades')}}</a></li>
                 <li class="breadcrumb-item"><a href="{{route('property.edit', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id])}}">{{$propietat->nom}}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{__('Servicios')}}</li>
+                <li class="breadcrumb-item active" aria-current="page">{{__('Normas')}}</li>
             </ol>
         </nav>
         <div class="col-sm-2 col-6 my-sm-3 my-2">
@@ -20,36 +20,63 @@
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>
-    <div class="gradient-custom-1 ">
-        <div class="mask d-flex align-items-center ">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-sm-10 col-12">
-                        <div class="table-responsive bg-white">
-                            <form action="{{route('saveService', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id])}}" method="post" class="row col-12 ps-4 justify-content-end">
-                                @csrf
-                                <table class="table table-hover mb-0 bg-white border-bottom border-dark">
-                                    <thead>
-                                    <tr class="text-center">
-                                        <th>{{__('Nom')}}</th>
-                                        <th>{{__('Descripción')}}</th>
-                                        <th>{{__('Acciones')}}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="tabla">
+    <form class="d-flex flex-column justify-content-center gap-4" method="POST" action="{{route('user.store')}}">
+        @csrf
+        <div class="row justify-content-center mt-4">
+            <div class="form-group mb-sm-1 mb-3 col-sm-5 col-12">
+                <label for="mascotas">{{__('Mascotas')}}:</label>
+                <input required type="text" class="form-control" name="mascotas" value="" aria-label="correo electronico" placeholder="{{__('Correo electrónico')}}">
+            </div>
+            <div class="form-group mb-sm-1 mb-0 col-sm-5 col-12">
+                <label for="fumar">{{__('Fumar')}}:</label>
+                <input required id="pass" type="text" class="form-control" value="" name="fumar" placeholder="Contraseña">
 
-                                    </tbody>
-                                </table>
-                                <div class="col-2 me-sm-0 me-5">
-                                    <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 my-3 ">Guardar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
+        <div class="row justify-content-center">
+            <div class="form-group mb-sm-1 mb-3 col-sm-5 col-12">
+                <label for="visitas">{{__('Visitas')}}:</label>
+                <input required type="text" class="form-control" value="" name="visitas" placeholder="{{__('Nombre')}}">
+            </div>
+            <div class="form-group mb-sm-1 mb-0 col-sm-5 col-12">
+                <label for="fiestas">{{__('Fiestas')}}:</label>
+                <input required type="text" class="form-control" value="" name="fiestas" placeholder="{{__('Primer apellido')}}">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="form-group mb-sm-1 mb-3 col-sm-5 col-12">
+                <label for="entrada">{{__('Horario de llegada')}}:</label>
+                <input type="text" class="form-control" value="" name="entrada" placeholder="{{__('Segundo apellido')}}">
+            </div>
+            <div class="form-group mb-sm-1 mb-0 col-sm-5 col-12">
+                <label for="salida">{{__('Horario de salida')}}:</label>
+                <input required type="tel" class="form-control" value="" name="salida" placeholder="{{__('Teléfono')}}">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="form-group mb-sm-1 mb-3 col-sm-4 col-12">
+                <label for="addressInput">{{__('Dirección')}}:</label>
+                <input required type="text" class="form-control" value="" name="direccio" placeholder="{{__('Dirección')}}">
+            </div>
+            <div class="form-group mb-sm-1 mb-0 col-sm-3 col-6">
+                <label for="ciutat">{{__('Ciudad')}}</label>
+                <select id="city" required name="ciutat_id" class="form-control">
+
+                </select>
+            </div>
+            <div class="form-group mb-sm-2 mb-0 col-sm-3 col-6">
+                <label for="pais">{{__('País')}}</label>
+                <select required name="pais_id" class="form-control">
+
+                </select>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="text-end col-10">
+                <button type="submit" class="btn btn-primary">{{__('Enviar')}}</button>
+            </div>
+        </div>
+    </form>
     <script>
 
 

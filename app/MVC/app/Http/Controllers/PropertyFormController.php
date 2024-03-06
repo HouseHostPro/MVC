@@ -290,4 +290,15 @@ class PropertyFormController extends Controller {
         $espacio->save();
     }
 
+    //Normas
+    public function loadNormas(Request $request){
+
+        $id = $request -> prop_id;
+        $normas = Configuracio::all();
+
+        $propietat = Propietat::find($id);
+
+        return view('property/normasForm', compact('propietat','normas'));
+    }
+
 }

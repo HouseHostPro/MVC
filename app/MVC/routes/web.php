@@ -71,6 +71,11 @@ Route::middleware('auth')->group(function (){
     Route::get('/allEspaciosByPropertyAjax/{id}',[PropertyFormController::class,'espaciosByProperty'])->name('espaciosByProperty');
     Route::post('/property/{id}/property/{prop_id}/saveEspacios',[PropertyFormController::class,'saveEspacios'])->name('saveEspacios');
 
+    //CRUd normas
+    Route::get('/property/{id}/property/{prop_id}/normas', [PropertyFormController::class, 'loadNormas']) -> name('property.normas');
+
+
+
     //Mostrar todas las propiedades
     Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
     Route::get('/property/{id}/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
