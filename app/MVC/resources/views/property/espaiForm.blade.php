@@ -246,9 +246,6 @@
                 }
             })
         }
-        $('buttonSave').submit( function (value){
-        })
-
         $('#cercador').on("input",function (){
 
             const caracters = $(this).val().toUpperCase();
