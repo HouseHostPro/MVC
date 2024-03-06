@@ -363,7 +363,7 @@
 
                 //Resize form reserva, quan afagueixes un nou camp
                 if ($(window).width() > 540) {
-                    $('#form-casa').css('height','28%');
+                    $('#form-casa').css('height','32%');
                 }
             }
         }

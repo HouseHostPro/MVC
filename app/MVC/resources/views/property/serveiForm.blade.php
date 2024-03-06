@@ -95,45 +95,70 @@
 
             allServices.forEach( function (value){
 
+
                 let fila = $('<tr>');
-                let columnName = $('<td>');
+                let columnName = $('<td>').addClass('text-center');
+                let columnDesc = $('<td>').addClass('text-center');
 
-                let pNom = $('<p>').text(value.nom);
-                columnName.append(pNom).addClass('text-center');
+                let pNom = $('<p>').text(value.nom).addClass('pt-1');
+                columnName.append(pNom);
                 fila.append(columnName);
 
+                let labelNumber = $('<label>').addClass('form-label pt-1').text('Cuantos hay ');
+                let inputNumber = $('<input>').attr({
+                    type: 'number',
+                    min: 0,
+                    name: `s-${value.id}`,
+                    value: 0
+                }).addClass('form-control input-number ms-3').css('width', '10%').prop('disabled', true);
 
-                let columnDesc = $('<td>');
-                let pDesc = $('<p>').text(value.descripcio);
-                columnDesc.append(pDesc).addClass('text-center');
-                fila.append(columnDesc);
+                let contenedorInput = $('<div>').addClass('d-flex justify-content-center');
+                contenedorInput.append(labelNumber, inputNumber);
+                columnDesc.append(contenedorInput);
 
-                let inputHidden = $('<inpunt>').attr({
-                    type: 'hidden',
-                    name: 'id' + value.id,
-                    value: value.id
-                })
-                columnDesc.append(inputHidden);
-
-                fila.append(columnName);
-                fila.append(columnDesc);
-
-                let columnCheckbox = $('<td>');
+                let columnCheckbox = $('<td>').addClass('text-center');
                 let chechkbox = $('<input>').attr({
                     type: 'checkbox',
-                    name: `s-${value.id}`,
-                    value: value.id
                 }).addClass('form-check-input');
 
-                allServicesByProperty.forEach( function (serv){
-                    if(serv.servei_id === value.id){
-                        chechkbox.prop('checked',true);
+                // Evento que cuando el valor no sea cero se active el checkbox
+                inputNumber.on('change', function() {
+                    let checkbox = $(this).closest('tr').find('input[type="checkbox"]');
+                    if ($(this).val() !== 0) {
+                        // Activar el checkbox y habilitarlo si el valor no es 0
+                        checkbox.prop('checked', true);
+                        checkbox.prop('disabled', false);
+                    } else {
+                        // Desactivar el checkbox y deshabilitarlo si el valor es 0
+                        checkbox.prop('checked', false);
+                        checkbox.prop('disabled', true);
                     }
-                })
+                });
 
-                columnCheckbox.append(chechkbox).addClass('text-center');
+                // Evento que cuando no este checked el input number se ponga a cero
+                $(document).on('change', 'input[type="checkbox"]', function() {
+                    let inputNumber = $(this).closest('tr').find('input[type="number"]');
+                    if (!$(this).prop('checked')) {
+                        // Si el checkbox no está marcado, establecer el valor del input en 0 y deshabilitar el checkbox
+                        inputNumber.val(0);
+                        inputNumber.prop('disabled', true);
+                    } else {
+                        // Si el checkbox está marcado, habilitar el input
+                        inputNumber.prop('disabled', false);
+                        inputNumber.val(1);
+                    }
+                });
+                fila.append(columnDesc);
+                columnCheckbox.append(chechkbox);
                 fila.append(columnCheckbox);
                 $('#tabla').append(fila);
+
+                allServicesByProperty.forEach( function (servei){
+                    if(servei.servei_id === value.id){
+                        chechkbox.prop('checked',true);
+                        inputNumber.val(servei.quantitat).prop('disabled', false);
+                    }
+                })
             })
         }
         $('buttonSave').submit( function (value){

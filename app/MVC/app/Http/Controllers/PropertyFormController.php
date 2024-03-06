@@ -210,13 +210,14 @@ class PropertyFormController extends Controller {
         foreach ($servicios as $key => $value){
 
             $servicio = new Propietat_Servei();
+            $idServei= explode("s-",$key)[1];
 
             $servicio->propietat_id = $id;
-            $servicio->servei_id = $value;
+            $servicio->servei_id = $idServei;
+            $servicio->quantitat = $value;
 
             $servicio -> save();
         }
-
         return redirect() -> route('property.service',['id' => $request -> id, 'prop_id' => $id]);
     }
 
