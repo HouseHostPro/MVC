@@ -26,7 +26,7 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-10 col-12">
                         <div class="table-responsive bg-white">
-                            <form action="{{route('saveService')}}" method="post" class="row col-12 justify-content-end">
+                            <form action="{{route('saveEspacios', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id])}}" method="post" class="row col-12 ps-4 justify-content-end">
                                 @csrf
                                 <table class="table table-hover mb-0 bg-white border-bottom border-dark">
                                     <thead>
@@ -40,7 +40,7 @@
 
                                     </tbody>
                                 </table>
-                                <div class="col-2 me-sm-0 me-5">
+                                <div class="col-2 me-sm-0 me-5 ">
                                     <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 my-3 ">Guardar</button>
                                 </div>
                             </form>
@@ -53,22 +53,27 @@
     <script>
 
 
-        let allServices = [];
-        let allServicesByProperty = [];
+        let allEspacios = [];
+        let allEspaciosByProperty = [];
 
         $(document).ready(function (){
+            const url = window.location.href;
+            const match = url.match(/\/property\/(\d+)\/property\/\d+\/espacios/);
+
 
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/serviciosAjax`
-            }).done(function (service) {
-                allServices.push.apply(allServices, service);
+                url: `http://localhost:8100/allEspaciosAjax`
+            }).done(function (espacios) {
+                console.log(espacios);
+                allEspacios.push.apply(allEspacios, espacios);
                 $.ajax({
                     method: 'GET',
-                    url: `http://localhost:8100/serviciosByProperty`
-                }).done(function (service) {
-                    allServicesByProperty.push.apply(allServicesByProperty, service);
-                    printServicios();
+                    url: `http://localhost:8100/allEspaciosByPropertyAjax/${match[1]}`
+                }).done(function (espacios) {
+                    console.log(espacios);
+                    allEspaciosByProperty.push.apply(allEspaciosByProperty, espacios);
+                    printEspacios();
                 });
 
             });
@@ -84,61 +89,163 @@
                 const nomTraduit = traduccions[0].filter((tr) => tr.lang === "{{ app() -> getLocale() }}")[0].value;
                 $("li:nth-child(4)").html(nomTraduit);
             });
-
-
         })
 
 
-        function printServicios(){
+        function printEspacios(){
 
             $('#tabla').html("");
 
-            allServices.forEach( function (value){
+            allEspacios.forEach( function (value){
 
-                let fila = $('<tr>');
-                let columnName = $('<td>');
+                if(value.tipus === "Dormitorio"){
 
-                let pNom = $('<p>').text(value.nom);
-                columnName.append(pNom).addClass('text-center');
-                fila.append(columnName);
+                    let opciones = [{nombre:'Cama doble', valor: 'cd'},{nombre:'Cama individual', valor: 'ci'},{nombre:'2 camas individuales', valor: 'ci2'}];
+                    opciones.forEach(function(opcion) {
+                        let fila = $('<tr>');
+                        let columnName = $('<td>').addClass('text-center');
+                        let columnDesc = $('<td>').addClass('text-center');
+
+                        let pNom = $('<p>').text(value.tipus).addClass('pt-1');
+                        columnName.append(pNom);
+                        fila.append(columnName);
 
 
-                let columnDesc = $('<td>');
-                let pDesc = $('<p>').text(value.descripcio);
-                columnDesc.append(pDesc).addClass('text-center');
-                fila.append(columnDesc);
+                        let labelNumber = $('<label>').addClass('form-label pt-1').text(opcion.nombre);
+                        let inputNumber = $('<input>').attr({
+                            type: 'number',
+                            min: 0,
+                            name: opcion.valor,
+                            value: 0
+                        }).addClass('form-control input-number ms-3').css('width', '10%').prop('disabled', true);
 
-                let inputHidden = $('<inpunt>').attr({
-                    type: 'hidden',
-                    name: 'id' + value.id,
-                    value: value.id
-                })
-                columnDesc.append(inputHidden);
+                        let contenedorInput = $('<div>').addClass('d-flex justify-content-center');
+                        contenedorInput.append(labelNumber, inputNumber);
+                        columnDesc.append(contenedorInput);
 
-                fila.append(columnName);
-                fila.append(columnDesc);
+                        let columnCheckbox = $('<td>').addClass('text-center');
+                        let chechkbox = $('<input>').attr({
+                            type: 'checkbox',
+                        }).addClass('form-check-input');
 
-                let columnCheckbox = $('<td>');
-                let chechkbox = $('<input>').attr({
-                    type: 'checkbox',
-                    name: `s-${value.id}`,
-                    value: value.id
-                }).addClass('form-check-input');
+                        // Evento que cuando el valor no sea cero se active el checkbox
+                        inputNumber.on('change', function() {
+                            let checkbox = $(this).closest('tr').find('input[type="checkbox"]');
+                            if ($(this).val() !== 0) {
+                                // Activar el checkbox y habilitarlo si el valor no es 0
+                                checkbox.prop('checked', true);
+                                checkbox.prop('disabled', false);
+                            } else {
+                                // Desactivar el checkbox y deshabilitarlo si el valor es 0
+                                checkbox.prop('checked', false);
+                                checkbox.prop('disabled', true);
+                            }
+                        });
 
-                allServicesByProperty.forEach( function (serv){
-                    if(serv.servei_id === value.id){
-                        chechkbox.prop('checked',true);
-                    }
-                })
+                        // Evento que cuando no este checked el input number se ponga a cero
+                        $(document).on('change', 'input[type="checkbox"]', function() {
+                            let inputNumber = $(this).closest('tr').find('input[type="number"]');
+                            if (!$(this).prop('checked')) {
+                                // Si el checkbox no está marcado, establecer el valor del input en 0 y deshabilitar el checkbox
+                                inputNumber.val(0);
+                                inputNumber.prop('disabled', true);
+                            } else {
+                                // Si el checkbox está marcado, habilitar el input
+                                inputNumber.prop('disabled', false);
+                                inputNumber.val(1)
+                            }
+                        });
+                        fila.append(columnDesc);
+                        columnCheckbox.append(chechkbox);
+                        fila.append(columnCheckbox);
+                        $('#tabla').append(fila);
 
-                columnCheckbox.append(chechkbox).addClass('text-center');
-                fila.append(columnCheckbox);
-                $('#tabla').append(fila);
+                        allEspaciosByProperty.forEach( function (espai){
+                            if(espai.espaid_id === value.id && espai.imatge_id === 1 && opcion.valor === "cd"){
+
+                                chechkbox.prop('checked',true);
+                                inputNumber.val(espai.quantitat).prop('disabled', false);
+                            }else if(espai.espaid_id === value.id && espai.imatge_id === 2 && opcion.valor === "ci"){
+
+                                chechkbox.prop('checked',true);
+                                inputNumber.val(espai.quantitat).prop('disabled', false);
+                            }else if(espai.espaid_id === value.id && espai.imatge_id === 3 && opcion.valor === "ci2"){
+
+                                chechkbox.prop('checked',true);
+                                inputNumber.val(espai.quantitat).prop('disabled', false);
+                            }
+                        })
+
+                    })
+                }else {
+
+                    let fila = $('<tr>');
+                    let columnName = $('<td>').addClass('text-center');
+                    let columnDesc = $('<td>').addClass('text-center');
+
+                    let pNom = $('<p>').text(value.tipus).addClass('pt-1');
+                    columnName.append(pNom);
+                    fila.append(columnName);
+
+                    let labelNumber = $('<label>').addClass('form-label pt-1').text('Cuantos hay ');
+                    let inputNumber = $('<input>').attr({
+                        type: 'number',
+                        min: 0,
+                        name: `s-${value.id}`,
+                        value: 0
+                    }).addClass('form-control input-number ms-3').css('width', '10%').prop('disabled', true);
+
+                    let contenedorInput = $('<div>').addClass('d-flex justify-content-center');
+                    contenedorInput.append(labelNumber, inputNumber);
+                    columnDesc.append(contenedorInput);
+
+                    let columnCheckbox = $('<td>').addClass('text-center');
+                    let chechkbox = $('<input>').attr({
+                        type: 'checkbox',
+                    }).addClass('form-check-input');
+
+                    // Evento que cuando el valor no sea cero se active el checkbox
+                    inputNumber.on('change', function() {
+                        let checkbox = $(this).closest('tr').find('input[type="checkbox"]');
+                        if ($(this).val() !== 0) {
+                            // Activar el checkbox y habilitarlo si el valor no es 0
+                            checkbox.prop('checked', true);
+                            checkbox.prop('disabled', false);
+                        } else {
+                            // Desactivar el checkbox y deshabilitarlo si el valor es 0
+                            checkbox.prop('checked', false);
+                            checkbox.prop('disabled', true);
+                        }
+                    });
+
+                    // Evento que cuando no este checked el input number se ponga a cero
+                    $(document).on('change', 'input[type="checkbox"]', function() {
+                        let inputNumber = $(this).closest('tr').find('input[type="number"]');
+                        if (!$(this).prop('checked')) {
+                            // Si el checkbox no está marcado, establecer el valor del input en 0 y deshabilitar el checkbox
+                            inputNumber.val(0);
+                            inputNumber.prop('disabled', true);
+                        } else {
+                            // Si el checkbox está marcado, habilitar el input
+                            inputNumber.prop('disabled', false);
+                            inputNumber.val(1);
+                        }
+                    });
+                    fila.append(columnDesc);
+                    columnCheckbox.append(chechkbox);
+                    fila.append(columnCheckbox);
+                    $('#tabla').append(fila);
+
+                    allEspaciosByProperty.forEach( function (espai){
+                        if(espai.espaid_id === value.id){
+                            chechkbox.prop('checked',true);
+                            inputNumber.val(espai.quantitat).prop('disabled', false);
+                        }
+                    })
+
+                }
             })
         }
-        $('buttonSave').submit( function (value){
-        })
-
         $('#cercador').on("input",function (){
 
             const caracters = $(this).val().toUpperCase();

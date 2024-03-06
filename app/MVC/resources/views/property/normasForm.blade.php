@@ -28,18 +28,18 @@
                         <div class="table-responsive bg-white">
                             <form action="{{route('saveService', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id])}}" method="post" class="row col-12 ps-4 justify-content-end">
                                 @csrf
-                            <table class="table table-hover mb-0 bg-white border-bottom border-dark">
-                                <thead>
-                                <tr class="text-center">
-                                    <th>{{__('Nom')}}</th>
-                                    <th>{{__('Descripción')}}</th>
-                                    <th>{{__('Acciones')}}</th>
-                                </tr>
-                                </thead>
+                                <table class="table table-hover mb-0 bg-white border-bottom border-dark">
+                                    <thead>
+                                    <tr class="text-center">
+                                        <th>{{__('Nom')}}</th>
+                                        <th>{{__('Descripción')}}</th>
+                                        <th>{{__('Acciones')}}</th>
+                                    </tr>
+                                    </thead>
                                     <tbody id="tabla">
 
                                     </tbody>
-                            </table>
+                                </table>
                                 <div class="col-2 me-sm-0 me-5">
                                     <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 my-3 ">Guardar</button>
                                 </div>

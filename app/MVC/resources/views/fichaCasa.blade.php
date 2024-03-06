@@ -1,4 +1,4 @@
-@extends('layouts.plantilla1')
+@extends('layouts.plantilla' . $PLANTILLA)
 
 @section('content')
 
@@ -164,7 +164,7 @@
                     <div class="mt-3">
                         <ul class="list-group list-group-flush">
                             @foreach($servicios as $servicio)
-                                <li class="list-group-item">{{$servicio->Cservicios->nom}}</li>
+                                <li class="list-group-item">{{$servicio->servicios->nom}}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -185,7 +185,7 @@
                     <div class="mt-3">
                         <ul class="list-group list-group-flush">
                             @foreach($servicios as $servicio)
-                                <li class="list-group-item">{{$servicio->Cservicios->nom}}</li>
+                                <li class="list-group-item">{{$servicio->servicios->nom}}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -212,10 +212,13 @@
 
 <script>
 
+    let allImageRooms = [];
+
     $(document).ready(function() {
 
         let huespedes = 0;
         let totalRating;
+
 
         //Encontrar traducciones de la propiedad
         $(function () {
@@ -235,12 +238,15 @@
                 $('#desc').html(traduccions[1].filter((traduccio) => traduccio.lang === applocale)[0].value);
                 $('#titolCasa').val(traduccions[0].filter((traduccio) => traduccio.lang === applocale)[0].value);
             });
+
+            //Petición Ajax para poner todas las imagenes de la casa en el modal
             $.ajax({
                 method: 'GET',
                 url: `http://localhost:8100/allImagesAjax`
             }).done(function (imagenes) {
                 printImagenes(imagenes)
             });
+
         });
 
         function printImagenes(imagenes){
@@ -357,7 +363,7 @@
 
                 //Resize form reserva, quan afagueixes un nou camp
                 if ($(window).width() > 540) {
-                    $('#form-casa').css('height','28%');
+                    $('#form-casa').css('height','32%');
                 }
             }
         }

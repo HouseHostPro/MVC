@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Ciutat;
 use App\Models\Configuracio;
 use App\Models\Configuracio_Servei;
+use App\Models\Espai;
+use App\Models\Espai_Defecte;
+use App\Models\Imatge_Dormitori;
 use App\Models\PreuTemporada;
+use App\Models\Propietat_Servei;
 use App\Models\Reserva;
 use App\Models\Servei;
 use Couchbase\RegexpSearchQuery;
@@ -69,6 +73,15 @@ class PropertyFormController extends Controller {
         Alert::success(__('Actualizado'), __(''));
 
         return redirect(route('property.edit', ['id' => $request -> casaId, 'prop_id' => $request -> id])) -> with('success', 'Actualizado');
+    }
+
+    private function idPropiedad($request){
+
+        $url = $request->url();
+        //Expresión regular para coger el número de la propiedad que se esá editando
+        if (preg_match('/property\/(\d+)\/property/', $url, $matches)) {
+            return $matches[1];
+        }
     }
 
     //Ciudades
@@ -160,7 +173,7 @@ class PropertyFormController extends Controller {
     //Servicios
     public function loadSevice(Request $request){
 
-        $id = $request -> prop_id;
+        $id = $this->idPropiedad($request);
         $servicios = Servei::all();
 
         $propietat = Propietat::find($id);
@@ -177,9 +190,9 @@ class PropertyFormController extends Controller {
 
     public function serviceByProperty(Request $request){
 
-        $id = $request->session()->get('idPropiedad');
+        $id = $request -> id;
 
-        $servicios = Configuracio_Servei::where('configuracio_id',$id)->get();
+        $servicios = Propietat_Servei::where('propietat_id',$id)->get();
 
         return $servicios;
 
@@ -187,23 +200,25 @@ class PropertyFormController extends Controller {
 
     public function saveService(Request $request){
 
-        $id = $request->session()->get('idPropiedad');
+        $id = $request -> prop_id;
 
-        Configuracio_Servei::where('configuracio_id',$id)->delete();
+        Propietat_Servei::where('propietat_id',$id)->delete();
 
+        //Recorto el array que me llega del request, porque es de un form y el primer elemento es el token del form
         $servicios = array_slice($request->all(),1,count($request->all()));
 
         foreach ($servicios as $key => $value){
 
-            $servicio = new Configuracio_Servei();
+            $servicio = new Propietat_Servei();
+            $idServei= explode("s-",$key)[1];
 
-            $servicio->configuracio_id =$id;
-            $servicio->servei_id = $value;
+            $servicio->propietat_id = $id;
+            $servicio->servei_id = $idServei;
+            $servicio->quantitat = $value;
 
             $servicio -> save();
         }
-        $propietat = Propietat::where('id',$id) -> first();
-        return view('property/serveiForm', compact('propietat'));
+        return redirect() -> route('property.service',['id' => $request -> id, 'prop_id' => $id]);
     }
 
     //Espacios
@@ -215,6 +230,64 @@ class PropertyFormController extends Controller {
 
         $propietat = Propietat::find($id);
 
-        return view('property/serveiForm', compact('propietat','servicios'));
+        return view('property/espaiForm', compact('propietat','servicios'));
     }
+    public function allEspaciosAjax(Request $request){
+
+        $espacios = Espai_Defecte::all();
+
+        return $espacios;
+    }
+
+    public function espaciosByProperty(Request $request){
+
+        $id = $request -> id;
+
+        $servicios = Espai::where('propietat_id',$id)->with('espacios_defecto')->get();
+
+        return $servicios;
+
+    }
+
+    public function saveEspacios(Request $request){
+
+        $idProp = $request -> prop_id;
+
+        Espai::where('propietat_id',$idProp)->delete();
+
+        $espacios= array_slice($request->all(),1,count($request->all()));
+
+        foreach ($espacios as $key => $value){
+
+            if($key === "cd"){
+
+                $this->insertEspacios($idProp,1,1,$value);
+
+            }elseif ($key === "ci"){
+
+                $this->insertEspacios($idProp,1,2,$value);
+
+            }elseif ($key === "ci2"){
+
+                $this->insertEspacios($idProp,1,3,$value);
+
+            }else{
+                $id= explode("s-",$key)[1];
+                $this->insertEspacios($idProp,$id,NULL,$value);
+            }
+        }
+        return redirect() -> route('espai.espais',['id' => $request -> id, 'prop_id' => $idProp]);
+    }
+    private function insertEspacios($idProp,$idEspacio,$idImagen,$cantidad){
+
+        $espacio = new Espai();
+
+        $espacio->propietat_id = $idProp;
+        $espacio->espaid_id = $idEspacio;
+        $espacio->imatge_id = $idImagen;
+        $espacio->quantitat = $cantidad;
+
+        $espacio->save();
+    }
+
 }

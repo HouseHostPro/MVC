@@ -62,11 +62,14 @@ Route::middleware('auth')->group(function (){
     //CRUD servicios
     Route::get('/property/{id}/property/{prop_id}/servicios',[PropertyFormController::class,'loadSevice'])->name('property.service');
     Route::get('/serviciosAjax',[PropertyFormController::class,'allService'])->name('serviceA');
-    Route::get('/serviciosByProperty',[PropertyFormController::class,'serviceByProperty'])->name('serviciosPreperty');
-    Route::post('/saveService',[PropertyFormController::class,'saveService'])->name('saveService');
+    Route::get('/serviciosByProperty/{id}',[PropertyFormController::class,'serviceByProperty'])->name('serviciosPreperty');//AJAX
+    Route::post('/property/{id}/property/{prop_id}/saveService',[PropertyFormController::class,'saveService'])->name('saveService');
 
     //CRUD espacios
-    Route::get('/property/{id}/property/{prop_id}/espais', [EspaiController::class, 'loadForm']) -> name('espai.espais');
+    Route::get('/property/{id}/property/{prop_id}/espacios', [PropertyFormController::class, 'loadEspacios']) -> name('espai.espais');
+    Route::get('/allEspaciosAjax',[PropertyFormController::class,'allEspaciosAjax'])->name('allEspaciosAjax');
+    Route::get('/allEspaciosByPropertyAjax/{id}',[PropertyFormController::class,'espaciosByProperty'])->name('espaciosByProperty');
+    Route::post('/property/{id}/property/{prop_id}/saveEspacios',[PropertyFormController::class,'saveEspacios'])->name('saveEspacios');
 
     //Mostrar todas las propiedades
     Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
