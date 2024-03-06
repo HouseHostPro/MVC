@@ -112,7 +112,7 @@ class PropertyFormController extends Controller {
 
         foreach ($temporades as $temporada) {
             $preu = $temporada -> preu;
-            $dies = $this -> dateRange($temporada -> data_inici, $temporada -> data_fi);
+            $dies = $this -> dateRangeDMY($temporada -> data_inici, $temporada -> data_fi);
             $preusDies[] = new \stdClass($preu, $dies);
         }
         $preuBase = Configuracio::where(['propietat_id' => $request -> prop_id, 'clau' => 'preu_base']) -> first() -> valor;
@@ -128,13 +128,28 @@ class PropertyFormController extends Controller {
             $dataF = $reserva->data_fi;
             $dataI = $reserva->data_inici;
 
-            $datesReservades[] = $this -> dateRange($dataI, $dataF);
+            $datesReservades[] = $this -> dateRangeMDY($dataI, $dataF);
         }
-
-        return $datesReservades;
+        $allReservas = call_user_func_array('array_merge', $datesReservades);
+        return $allReservas;
     }
 
-    private function dateRange($first, $last, $step = '+1 day', $output_format = 'd/m/Y' ) {
+    private function dateRangeMDY($first, $last, $step = '+1 day', $output_format = 'm/d/Y' ) {
+
+        $dates = array();
+        $current = strtotime($first);
+        $last = strtotime($last);
+
+        while( $current <= $last ) {
+
+            $dates[] = date($output_format, $current);
+            $current = strtotime($step, $current);
+        }
+
+        return $dates;
+    }
+
+    private function dateRangeDMY($first, $last, $step = '+1 day', $output_format = 'd/m/Y' ) {
 
         $dates = array();
         $current = strtotime($first);

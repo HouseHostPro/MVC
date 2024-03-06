@@ -213,6 +213,7 @@
 <script>
 
     let allImageRooms = [];
+    let allReservas = [];
 
     $(document).ready(function() {
 
@@ -247,11 +248,20 @@
                 printImagenes(imagenes)
             });
 
+            $.ajax({
+                method: 'GET',
+                url: `http://localhost:8100/allDatesReservades/{{$PROPIETAT_ID}}`
+            }).done(function (reservas) {
+                pintalCalendario(reservas);
+                pintarCalendarioFrom(reservas);
+                pintarCalendarioTo(reservas);
+            });
+
         });
 
-        function printImagenes(imagenes){
+        function printImagenes(imagenes) {
 
-            imagenes.forEach( function (value) {
+            imagenes.forEach(function (value) {
 
                 var divCol = $('<div>').addClass('col-sm-6 col-12 mb-2 pe-1');
                 var img = $('<img>').addClass('object-fit-fill shadow size-img rounded').attr('src', value.url).attr('alt', 'dormitorio');
@@ -263,68 +273,62 @@
         }
 
         //Date-picker
-        $(function() {
-            $("#from").
-            datepicker({
-                dateFormat: "dd/mm/yy",
-                altField:'#entrada',
-                altFormat:'yy-mm-dd',
-                minDate: 0,
-                firstDay:1,
-                changeMonth:true,
-                monthNames: ['{{__('Enero')}}', '{{__('Febrero')}}', '{{__('Marzo')}}', '{{__('Abril')}}', '{{__('Mayo')}}', '{{__('Junio')}}', '{{__('Julio')}}', '{{__('Agosto')}}', '{{__('Septiembre')}}', '{{__('Octubre')}}', '{{__('Noviembre')}}', '{{__('Diciembre')}}'],
-                monthNamesShort: ['{{__('Ene')}}', '{{__('Feb')}}', '{{__('Mrz')}}', '{{__('Abr')}}', '{{__('May')}}', '{{__('Jun')}}', '{{__('Jul')}}', '{{__('Ago')}}', '{{__('Sep')}}', '{{__('Oct')}}', '{{__('Nov')}}', '{{__('Dic')}}'],
-                dayNames: ['{{__('Domingo')}}', '{{__('Lunes')}}', '{{__('Martes')}}', '{{__('Miércoles')}}', '{{__('Jueves')}}', '{{__('Viernes')}}', '{{__('Sábado')}}'],
-                dayNamesShort: ['{{__('Dom')}}','{{__('Lun')}}','{{__('Mar')}}','{{__('Mié')}}','{{__('Jue')}}','{{__('Vie')}}','{{__('Sáb')}}'],
-                dayNamesMin: ['{{__('Do')}}','{{__('Lu')}}','{{__('Ma')}}','{{__('Mi')}}','{{__('Ju')}}','{{__('Vi')}}','{{__('Sá')}}'],
-                beforeShowDay: function( date) {
+        function pintarCalendarioFrom(reservas){
+            $(function () {
+                $("#from").datepicker({
+                    dateFormat: "dd/mm/yy",
+                    altField: '#entrada',
+                    altFormat: 'yy-mm-dd',
+                    minDate: 0,
+                    firstDay: 1,
+                    changeMonth: true,
+                    monthNames: ['{{__('Enero')}}', '{{__('Febrero')}}', '{{__('Marzo')}}', '{{__('Abril')}}', '{{__('Mayo')}}', '{{__('Junio')}}', '{{__('Julio')}}', '{{__('Agosto')}}', '{{__('Septiembre')}}', '{{__('Octubre')}}', '{{__('Noviembre')}}', '{{__('Diciembre')}}'],
+                    monthNamesShort: ['{{__('Ene')}}', '{{__('Feb')}}', '{{__('Mrz')}}', '{{__('Abr')}}', '{{__('May')}}', '{{__('Jun')}}', '{{__('Jul')}}', '{{__('Ago')}}', '{{__('Sep')}}', '{{__('Oct')}}', '{{__('Nov')}}', '{{__('Dic')}}'],
+                    dayNames: ['{{__('Domingo')}}', '{{__('Lunes')}}', '{{__('Martes')}}', '{{__('Miércoles')}}', '{{__('Jueves')}}', '{{__('Viernes')}}', '{{__('Sábado')}}'],
+                    dayNamesShort: ['{{__('Dom')}}', '{{__('Lun')}}', '{{__('Mar')}}', '{{__('Mié')}}', '{{__('Jue')}}', '{{__('Vie')}}', '{{__('Sáb')}}'],
+                    dayNamesMin: ['{{__('Do')}}', '{{__('Lu')}}', '{{__('Ma')}}', '{{__('Mi')}}', '{{__('Ju')}}', '{{__('Vi')}}', '{{__('Sá')}}'],
+                    beforeShowDay: function (date) {
 
-                    const string = jQuery.datepicker.formatDate('dd/mm/yy', date);
-                    //console.log([dates.indexOf(string) === -1]);
-                    var selectable = true;
-                    var title = '{{ $preuBase }}€';
-                    var highlight = [dates.indexOf(string) === -1];
-                    if( highlight ) {
-                        return [selectable, "", title];
-                    } else {
-                        return [selectable, "", title];
+                        const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
+                        return jQuery.inArray(string, reservas) == -1
+                            ? [true, '', '{{ $preuBase }}€']
+                            : [true, 'event', '{{ $preuBase }}€'];
                     }
-
-                }
+                });
             });
-        });
+        }
 
-        $(function() {
-            $("#to").
-            datepicker({
-                dateFormat: "dd/mm/yy",
-                altField:'#sortida',
-                altFormat:'yy-mm-dd',
-                firstDay:1,
-                changeMonth:true,
-                monthNames: ['{{__('Enero')}}', '{{__('Febrero')}}', '{{__('Marzo')}}', '{{__('Abril')}}', '{{__('Mayo')}}', '{{__('Junio')}}', '{{__('Julio')}}', '{{__('Agosto')}}', '{{__('Septiembre')}}', '{{__('Octubre')}}', '{{__('Noviembre')}}', '{{__('Diciembre')}}'],
-                monthNamesShort: ['{{__('Ene')}}', '{{__('Feb')}}', '{{__('Mrz')}}', '{{__('Abr')}}', '{{__('May')}}', '{{__('Jun')}}', '{{__('Jul')}}', '{{__('Ago')}}', '{{__('Sep')}}', '{{__('Oct')}}', '{{__('Nov')}}', '{{__('Dic')}}'],
-                dayNames: ['{{__('Domingo')}}', '{{__('Lunes')}}', '{{__('Martes')}}', '{{__('Miércoles')}}', '{{__('Jueves')}}', '{{__('Viernes')}}', '{{__('Sábado')}}'],
-                dayNamesShort: ['{{__('Dom')}}','{{__('Lun')}}','{{__('Mar')}}','{{__('Mié')}}','{{__('Jue')}}','{{__('Vie')}}','{{__('Sáb')}}'],
-                dayNamesMin: ['{{__('Do')}}','{{__('Lu')}}','{{__('Ma')}}','{{__('Mi')}}','{{__('Ju')}}','{{__('Vi')}}','{{__('Sá')}}'],
-                beforeShowDay: function( date) {
+        function pintarCalendarioTo(reservas) {
+            $(function () {
+                $("#to").datepicker({
+                    dateFormat: "dd/mm/yy",
+                    altField: '#sortida',
+                    altFormat: 'yy-mm-dd',
+                    firstDay: 1,
+                    changeMonth: true,
+                    monthNames: ['{{__('Enero')}}', '{{__('Febrero')}}', '{{__('Marzo')}}', '{{__('Abril')}}', '{{__('Mayo')}}', '{{__('Junio')}}', '{{__('Julio')}}', '{{__('Agosto')}}', '{{__('Septiembre')}}', '{{__('Octubre')}}', '{{__('Noviembre')}}', '{{__('Diciembre')}}'],
+                    monthNamesShort: ['{{__('Ene')}}', '{{__('Feb')}}', '{{__('Mrz')}}', '{{__('Abr')}}', '{{__('May')}}', '{{__('Jun')}}', '{{__('Jul')}}', '{{__('Ago')}}', '{{__('Sep')}}', '{{__('Oct')}}', '{{__('Nov')}}', '{{__('Dic')}}'],
+                    dayNames: ['{{__('Domingo')}}', '{{__('Lunes')}}', '{{__('Martes')}}', '{{__('Miércoles')}}', '{{__('Jueves')}}', '{{__('Viernes')}}', '{{__('Sábado')}}'],
+                    dayNamesShort: ['{{__('Dom')}}', '{{__('Lun')}}', '{{__('Mar')}}', '{{__('Mié')}}', '{{__('Jue')}}', '{{__('Vie')}}', '{{__('Sáb')}}'],
+                    dayNamesMin: ['{{__('Do')}}', '{{__('Lu')}}', '{{__('Ma')}}', '{{__('Mi')}}', '{{__('Ju')}}', '{{__('Vi')}}', '{{__('Sá')}}'],
+                    beforeShowDay: function (date) {
 
-                var selectable = true;
-                var title = '{{ $preuBase }}€';
+                        const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
+                        return jQuery.inArray(string, reservas) == -1
+                            ? [true, '', '{{ $preuBase }}€']
+                            : [true, 'event', '{{ $preuBase }}€'];
 
-                return [selectable, "", title];
 
-            }
+                    }
+                });
             });
-        });
+        }
         //Formulario de reserva
         //Para poner la fecha de entrada, y en caso de haber puesto primero la de salida llamar a la función pintar
-        $('#from').change(function() {
-            startDate = $(this).
-            datepicker('getDate');
-            $("#to").
-            datepicker("option", "minDate", startDate);
-            if($('#to').val() !== ""){
+        $('#from').change(function () {
+            startDate = $(this).datepicker('getDate');
+            $("#to").datepicker("option", "minDate", startDate);
+            if ($('#to').val() !== "") {
 
                 pintarprecioReserva();
             }
@@ -332,12 +336,10 @@
         })
 
         //Para pponer la fecha de salida, y en caso de haber puesto primero la de entrada llamar a la función pintar
-        $('#to').change(function() {
-            endDate = $(this).
-            datepicker('getDate');
-            $("#from").
-            datepicker("option", "maxDate", endDate);
-            if($('#from').val() !== ""){
+        $('#to').change(function () {
+            endDate = $(this).datepicker('getDate');
+            $("#from").datepicker("option", "maxDate", endDate);
+            if ($('#from').val() !== "") {
 
                 pintarprecioReserva();
             }
@@ -345,7 +347,7 @@
         })
 
         //Pinta los precios del coste de los dias reservados, limpieza y el total
-        function pintarprecioReserva(){
+        function pintarprecioReserva() {
 
             //Calcular días de diferencia entre fecha entrada y salida
             let entrada = new Date($('#entrada').val());
@@ -353,9 +355,9 @@
             let diffMs = Math.abs(salida - entrada);
             let diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
 
-            if(diffDays > 0){
-                $('#divpxn').prop("hidden",false);
-                let preuTotal = 150*diffDays;
+            if (diffDays > 0) {
+                $('#divpxn').prop("hidden", false);
+                let preuTotal = 150 * diffDays;
                 $('#pxn').text(150 + "€ x " + diffDays + " noches");
                 $('#pxnt').val(preuTotal + "€");
                 $('#ptotal').val(preuTotal + "€");
@@ -363,28 +365,28 @@
 
                 //Resize form reserva, quan afagueixes un nou camp
                 if ($(window).width() > 540) {
-                    $('#form-casa').css('height','32%');
+                    $('#form-casa').css('height', '32%');
                 }
             }
         }
 
-        $('#menos').on('click',function (){
+        $('#menos').on('click', function () {
 
-            if(huespedes === 1){
+            if (huespedes === 1) {
 
                 huespedes--;
                 $('#personas').val("");
-                $('#menos').prop("disabled",true);
-            }else {
+                $('#menos').prop("disabled", true);
+            } else {
                 huespedes--;
                 $('#personas').val(huespedes);
             }
         })
-        $('#mas').on('click',function (){
+        $('#mas').on('click', function () {
 
             huespedes++;
             $('#personas').val(huespedes);
-            $('#menos').prop("disabled",false);
+            $('#menos').prop("disabled", false);
         })
 
         //Calendar
@@ -396,37 +398,41 @@
                 $('#inline-picker').datepicker('option', 'numberOfMonths', 2);
             }
         }
+
         //Array para señalar los dias que no estan disponibles
-        const dates = ['02/20/2024','02/21/2024','02/22/2024','02/23/2024'];
+        const dates = ['03/20/2024', '03/21/2024', '03/22/2024', '03/23/2024'];
 
-        $('#inline-picker').datepicker({
-            controls: ['calendar'],
-            display: 'inline',
-            touchUi: true,
-            monthNames: ['{{__('Enero')}}', '{{__('Febrero')}}', '{{__('Marzo')}}', '{{__('Abril')}}', '{{__('Mayo')}}', '{{__('Junio')}}', '{{__('Julio')}}', '{{__('Agosto')}}', '{{__('Septiembre')}}', '{{__('Octubre')}}', '{{__('Noviembre')}}', '{{__('Diciembre')}}'],
-            monthNamesShort: ['{{__('Ene')}}', '{{__('Feb')}}', '{{__('Mrz')}}', '{{__('Abr')}}', '{{__('May')}}', '{{__('Jun')}}', '{{__('Jul')}}', '{{__('Ago')}}', '{{__('Sep')}}', '{{__('Oct')}}', '{{__('Nov')}}', '{{__('Dic')}}'],
-            dayNames: ['{{__('Domingo')}}', '{{__('Lunes')}}', '{{__('Martes')}}', '{{__('Miércoles')}}', '{{__('Jueves')}}', '{{__('Viernes')}}', '{{__('Sábado')}}'],
-            dayNamesShort: ['{{__('Dom')}}','{{__('Lun')}}','{{__('Mar')}}','{{__('Mié')}}','{{__('Jue')}}','{{__('Vie')}}','{{__('Sáb')}}'],
-            dayNamesMin: ['{{__('Do')}}','{{__('Lu')}}','{{__('Ma')}}','{{__('Mi')}}','{{__('Ju')}}','{{__('Vi')}}','{{__('Sá')}}'],
-            minDate: 0,
-            numberOfMonths: 2,
-            firstDay:1,
-            disabled:true,
-            beforeShowDay: function( date) {
+        function pintalCalendario(reservas) {
+            $('#inline-picker').datepicker({
+                controls: ['calendar'],
+                display: 'inline',
+                touchUi: true,
+                monthNames: ['{{__('Enero')}}', '{{__('Febrero')}}', '{{__('Marzo')}}', '{{__('Abril')}}', '{{__('Mayo')}}', '{{__('Junio')}}', '{{__('Julio')}}', '{{__('Agosto')}}', '{{__('Septiembre')}}', '{{__('Octubre')}}', '{{__('Noviembre')}}', '{{__('Diciembre')}}'],
+                monthNamesShort: ['{{__('Ene')}}', '{{__('Feb')}}', '{{__('Mrz')}}', '{{__('Abr')}}', '{{__('May')}}', '{{__('Jun')}}', '{{__('Jul')}}', '{{__('Ago')}}', '{{__('Sep')}}', '{{__('Oct')}}', '{{__('Nov')}}', '{{__('Dic')}}'],
+                dayNames: ['{{__('Domingo')}}', '{{__('Lunes')}}', '{{__('Martes')}}', '{{__('Miércoles')}}', '{{__('Jueves')}}', '{{__('Viernes')}}', '{{__('Sábado')}}'],
+                dayNamesShort: ['{{__('Dom')}}', '{{__('Lun')}}', '{{__('Mar')}}', '{{__('Mié')}}', '{{__('Jue')}}', '{{__('Vie')}}', '{{__('Sáb')}}'],
+                dayNamesMin: ['{{__('Do')}}', '{{__('Lu')}}', '{{__('Ma')}}', '{{__('Mi')}}', '{{__('Ju')}}', '{{__('Vi')}}', '{{__('Sá')}}'],
+                minDate: 0,
+                numberOfMonths: 2,
+                firstDay: 1,
+                disabled: true,
+                beforeShowDay: function (date) {
 
-                const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
-                return jQuery.inArray(string, dates) == -1
-                    ? [true, '', '{{ $preuBase }}€']
-                    : [true, 'event', '{{ $preuBase }}€'];
+                    const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
+                    return jQuery.inArray(string, reservas) == -1
+                        ? [true, '', '{{ $preuBase }}€']
+                        : [true, 'event', '{{ $preuBase }}€'];
 
-            }
-        });
+                }
+            });
 
-        $(window).resize(function() {
+
+            $(window).resize(function () {
+                adjustNumberOfMonths();
+            });
+
             adjustNumberOfMonths();
-        });
-
-        adjustNumberOfMonths();
+        }
 
         //Rating
 

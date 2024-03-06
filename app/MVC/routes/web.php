@@ -76,10 +76,6 @@ Route::middleware('auth')->group(function (){
     Route::post('/property/{id}/property/{prop_id}/saveNormas',[PropertyFormController::class,'saveNormas'])->name('saveNormas');
     Route::get('/allNormasByPropertyAjax/{id}',[PropertyFormController::class,'allNormasAjax'])->name('allNormasAjax');
 
-
-
-
-
     //Mostrar todas las propiedades
     Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
     Route::get('/property/{id}/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
@@ -95,6 +91,9 @@ Route::middleware('auth')->group(function (){
     Route::post('/property/{id}/logout',[UserController::class,'logout'])->name('logout');
 
 });
+
+//Reservas
+Route::get('/allDatesReservades/{id}',[PropertyFormController::class,'findAllDatesReservades'])->name('findAllDatesReservades');
 
 //Petición Ajax Imagenes de la casa
 Route::get('/allImagesAjax',[ImagenesController::class,'allImagesAjax'])->name('allImagesAjax');
