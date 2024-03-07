@@ -256,6 +256,8 @@
                 pintarCalendarioFrom(reservas);
                 pintarCalendarioTo(reservas);
             });
+            const dates = ['03/20/2024', '03/12/2024', '04/22/2024', '03/23/2024'];
+            fechasEntre('03/04/2024',dates);
 
         });
 
@@ -292,7 +294,7 @@
                         const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
                         return jQuery.inArray(string, reservas) == -1
                             ? [true, '', '{{ $preuBase }}€']
-                            : [true, 'event', '{{ $preuBase }}€'];
+                            : [false, 'event', '{{ $preuBase }}€'];
                     }
                 });
             });
@@ -316,13 +318,67 @@
                         const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
                         return jQuery.inArray(string, reservas) == -1
                             ? [true, '', '{{ $preuBase }}€']
-                            : [true, 'event', '{{ $preuBase }}€'];
+                            : [false, 'event', '{{ $preuBase }}€'];
 
 
                     }
                 });
             });
         }
+        function fechasEntre(fecha, fechasArray) {
+            // Convertir la fecha de entrada en milisegundos
+            var fechaEntrada = new Date(fecha).getTime();
+
+            // Ordenar el array de fechas
+            fechasArray.sort(function(a, b) {
+                return new Date(a) - new Date(b);
+            });
+
+            var fechaMasCercana;
+
+            // Encontrar la fecha más cercana a la fecha de entrada
+            var fechaCercana;
+            for (var i = 0; i < fechasArray.length; i++) {
+                var fechaActual = new Date(fechasArray[i]).getTime();
+                if (fechaActual >= fechaEntrada) {
+                    fechaCercana = new Date(fechasArray[i]);
+                    break;
+                }
+            }
+
+            // Encontrar las fechas entre la fecha de entrada y la fecha más cercana
+            for (var j = 0; j < fechasArray.length; j++) {
+                var fechaActual = new Date(fechasArray[j]).getTime();
+                if (fechaActual >= fechaEntrada && fechaActual <= fechaCercana.getTime()) {
+                    fechaMasCercana = new Date(fechasArray[j]);
+                }
+            }
+            //La primera fecha es con el formato mm/dd/yyyy y la segunda con el formato que me pone Date
+            dateRange(fecha,fechaMasCercana);
+            return fechaMasCercana;
+        }
+        function dateRange(startDate, endDate, steps = 1) {
+            const dateArray = [];
+            let currentDate = new Date(startDate);
+
+            while (currentDate < endDate) {
+
+                var fechaOriginal = new Date(currentDate);
+
+                var mes = fechaOriginal.getMonth() + 1; // Se suma 1 porque los meses van de 0 a 11
+                var dia = fechaOriginal.getDate();
+                var anio = fechaOriginal.getFullYear();
+
+                // Formatear la fecha como "mm/dd/yyyy"
+                var fechaFormateada = (mes < 10 ? '0' : '') + mes + '/' + (dia < 10 ? '0' : '') + dia + '/' + anio;
+
+                dateArray.push(fechaFormateada);
+                // Use UTC date to prevent problems with time zones and DST
+                currentDate.setUTCDate(currentDate.getUTCDate() + steps);
+            }
+            return dateArray;
+        }
+
         //Formulario de reserva
         //Para poner la fecha de entrada, y en caso de haber puesto primero la de salida llamar a la función pintar
         $('#from').change(function () {
@@ -365,7 +421,7 @@
 
                 //Resize form reserva, quan afagueixes un nou camp
                 if ($(window).width() > 540) {
-                    $('#form-casa').css('height', '32%');
+                    $('#form-casa').css('height', '29%');
                 }
             }
         }
@@ -421,7 +477,7 @@
                     const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
                     return jQuery.inArray(string, reservas) == -1
                         ? [true, '', '{{ $preuBase }}€']
-                        : [true, 'event', '{{ $preuBase }}€'];
+                        : [true, 'event', ''];
 
                 }
             });

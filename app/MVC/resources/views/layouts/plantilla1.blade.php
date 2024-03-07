@@ -89,7 +89,7 @@
                 $('#img-hide').show();
                 // Eliminar la clase que ajusta el tamaño de la imagen firstImage
                 $('#frontCasa').removeClass('full-width rounded-end');
-                $('#form-casa').css('height', '30%');
+                $('#form-casa').css('height', '26%');
 
             }
         }
