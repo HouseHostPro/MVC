@@ -250,7 +250,7 @@
 
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allDatesReservades/{{$PROPIETAT_ID}}`
+                url: `http://www.househostpromp.me/allDatesReservades/{{$PROPIETAT_ID}}`
             }).done(function (reservas) {
                 allReservas = reservas;
                 pintalCalendario(reservas);
