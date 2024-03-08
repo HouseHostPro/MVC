@@ -118,10 +118,10 @@ Route::get('/allDatesReservades/{id}',[PropertyFormController::class,'findAllDat
 Route::get('/allImagesAjax',[ImagenesController::class,'allImagesAjax'])->name('allImagesAjax');
 
 
-Route::group(['middleware' => ['cors']], function () {
+//Route::group(['middleware' => ['cors']], function () {
     //Rutas a las que se permitirá acceso
     Route::get('/property/{id}',[CasaController::class,'datosFichaCasa'])->name('principal');
-});
+//});
 //Página principal
 
 //ENDPOINT -> traduccions de una casa
