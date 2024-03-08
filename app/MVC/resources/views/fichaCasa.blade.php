@@ -161,13 +161,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mt-3">
-                        <ul class="list-group list-group-flush">
-                            @foreach($servicios as $servicio)
-                                <li class="list-group-item">{{$servicio->servicios->nom}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    <ul class="list-group list-group-flush">
+                        @foreach($servicios as $servicio)
+                             <li class="list-group-item">{{$servicio->servicios->nom}} @if($servicio->quantitat !== 1) x {{$servicio->quantitat}} @endif</li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
@@ -182,13 +180,39 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mt-3">
-                        <ul class="list-group list-group-flush">
-                            @foreach($servicios as $servicio)
-                                <li class="list-group-item">{{$servicio->servicios->nom}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    <ul class="list-group list-group-flush">
+                        @foreach($normas as $norma)
+                            @if($norma->clau === 'hora_entrada')
+                                <li class="list-group-item">{{__('Horario de llegada')}}: {{$norma->valor}}</li>
+                            @elseif($norma->clau === 'hora_salida')
+                                <li class="list-group-item">{{__('Salida antes de las')}}: {{$norma->valor}}</li>
+                            @elseif($norma->clau === 'mascotas')
+                                @if($norma->valor === 'No')
+                                    <li class="list-group-item">{{__('No se admiten mascotas')}}</li>
+                                @else
+                                    <li class="list-group-item">{{__('Se admiten mascotas')}}</li>
+                                @endif
+                            @elseif($norma->clau === 'visitas')
+                                @if($norma->valor === 'No')
+                                    <li class="list-group-item">{{__('No se admiten visitas')}}</li>
+                                @else
+                                    <li class="list-group-item">{{__('Se admiten visitas')}}</li>
+                                @endif
+                            @elseif($norma->clau === 'fiestas')
+                                @if($norma->valor === 'No')
+                                    <li class="list-group-item">{{__('No se admiten fiestas')}}</li>
+                                @else
+                                    <li class="list-group-item">{{__('Se admiten fiestas')}}</li>
+                                @endif
+                            @elseif($norma->clau === 'fumar')
+                                @if($norma->valor === 'No')
+                                    <li class="list-group-item">{{__('No fumar')}}</li>
+                                @endif
+                            @elseif(Str::startsWith($norma->clau, 'normas_'))
+                                <li class="list-group-item">{{$norma->valor}}</li>
+                            @endif
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

@@ -1,15 +1,15 @@
 @extends('layouts.plantillaFormularios')
 
 @section('url')
-    {{route('cuenta')}}
+    {{route('cuenta', ['id' => $PROPIETAT_ID])}}
 @endsection
 @section('title',__('Comentarios'))
 @section('content')
     <div class="row col-12 justify-content-between">
         <nav class="mt-3 col-sm-6 col-12" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('principal')}}">Principal</a></li>
-                <li class="breadcrumb-item"><a href="{{route('cuenta')}}">{{__('Cuenta')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('principal', ['id' => $PROPIETAT_ID])}}">Principal</a></li>
+                <li class="breadcrumb-item"><a href="{{route('cuenta', ['id' => $PROPIETAT_ID])}}">{{__('Cuenta')}}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{__('Comentarios')}}</li>
             </ol>
         </nav>

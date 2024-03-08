@@ -1,17 +1,37 @@
 
         <h2 class="fs-4" id="desc"></h2>
         <p>
-            5 {{__('Personas')}} - 3 {{__('Dormitorios')}} - 4 {{__('Camas')}} - 1 {{__('Baños')}}
+            {{$personas}} {{__('Personas')}} - {{$cantidadDormitorios}} {{__('Dormitorios')}} - {{$camas}} {{__('Camas')}} - {{$baños->quantitat}} {{__('Baño')}}
         </p>
     <div id="normas-casa">
         <div class="border-bottom border-dark">
             <h3 class="fs-5">{{__('Normas de la casa')}}</h3>
             <ul class="body-color list-group list-group-flush">
-                <li class="list-group-item">{{__('Horario de llegada')}}: 16:00 a 22:00</li>
-                <li class="list-group-item">{{__('Salida antes de las')}} 14:00</li>
-                <li class="list-group-item">{{__('Máximo')}} 6 {{__('huéspedes')}}</li>
-                <li class="list-group-item">{{__('No se admiten mascotas')}}</li>
-                <li class="list-group-item ">{{__('No fumar')}}</li>
+                @foreach($normas as $norma)
+                    @if($norma->clau === 'hora_entrada')
+                        <li class="list-group-item">{{__('Horario de llegada')}}: {{$norma->valor}}</li>
+                    @elseif($norma->clau === 'hora_salida')
+                        <li class="list-group-item">{{__('Salida antes de las')}}: {{$norma->valor}}</li>
+                    @elseif($norma->clau === 'mascotas')
+                        @if($norma->valor === 'No')
+                            <li class="list-group-item">{{__('No se admiten mascotas')}}</li>
+                        @else
+                            <li class="list-group-item">{{__('Se admiten mascotas')}}</li>
+                        @endif
+                    @elseif($norma->clau === 'visitas')
+                        @if($norma->valor === 'No')
+                            <li class="list-group-item">{{__('No se admiten visitas')}}</li>
+                        @else
+                            <li class="list-group-item">{{__('Se admiten visitas')}}</li>
+                        @endif
+                    @elseif($norma->clau === 'fiestas')
+                        @if($norma->valor === 'No')
+                            <li class="list-group-item">{{__('No se admiten fiestas')}}</li>
+                        @else
+                            <li class="list-group-item">{{__('Se admiten fiestas')}}</li>
+                        @endif
+                    @endif
+                @endforeach
                 <div class="col-sm-4 col-5">
                     <button type="button" class="btn bg-white border border-dark my-3" data-bs-toggle="modal" data-bs-target="#normas">{{__('Mostrar más')}}</button>
                 </div>
@@ -61,7 +81,7 @@
                     @if($count >= 5)
                         @break
                     @endif
-                    <li class="list-group-item">{{$servicio->servicios->nom}}</li>
+                    <li class="list-group-item">{{$servicio->servicios->nom}} @if($servicio->quantitat !== 1) x {{$servicio->quantitat}} @endif</li>
                     @php
                         $count++;
                     @endphp

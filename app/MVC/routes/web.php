@@ -43,8 +43,8 @@ Route::middleware('auth')->group(function (){
     Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
     Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
     Route::get('addComentario',[ComentariController::class, 'create'])->name('comentario.store.get');
-    Route::get('/comentarios',[ComentariController::class,'comentarios'])->name('comentarios');
-    Route::get('/allComentarios',[ComentariController::class,'allComentarios'])->name('allComentarios');
+    Route::get('/property/{id}/comentarios',[ComentariController::class,'comentarios'])->name('comentarios');
+    Route::get('/property/{id}/allComentarios',[ComentariController::class,'allComentarios'])->name('allComentarios');
     Route::get('/comentariosUserAjax',[ComentariController::class,'allComent'])->name('comentariosAU');
     Route::get('/comentariosPropertiesAjax',[ComentariController::class,'allCommentsForProperties'])->name('comentariosAP');
 
@@ -54,8 +54,8 @@ Route::middleware('auth')->group(function (){
     Route::get('/confirmacionReserva',[CasaController::class,'sinAcceso'])->name('confirmacionReserva');
     Route::post('/reserva',[CasaController::class, 'newReserva']) -> name('reserva.store');
     //Mostrar reservas hechas
-    Route::get('/reservas',[CasaController::class,'reservas'])->name('reservas');
-    Route::get('/historialReservas',[CasaController::class,'historialReservas'])->name('historialReservas');
+    Route::get('/property/{id}/reservas',[CasaController::class,'reservas'])->name('reservas');
+    Route::get('/property/{id}/historialReservas',[CasaController::class,'historialReservas'])->name('historialReservas');
     Route::get('/reservasAjax',[CasaController::class,'allReservasAjax'])->name('reservasA');
     Route::get('/reservasPropertiesAjax',[CasaController::class,'allReservasPropertiesAjax'])->name('reservasAP');
 

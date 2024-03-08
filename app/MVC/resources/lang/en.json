@@ -15,6 +15,7 @@
     "camas de matrimonio": "queen beds",
     "Mostrar más": "Show more",
     "Baños": "Bathrooms",
+    "Baño": "Bathroom",
     "noche": "night",
     "Mascotas": "Pets",
     "Reservar": "Reserve",
@@ -165,6 +166,10 @@
     "Guardar": "Save",
     "Español": "Spanish",
     "Inglés": "English",
-    "Plantilla": "Template"
+    "Plantilla": "Template",
+    "No se admiten visitas": "Visits are not allowed",
+    "Se admiten visitas": "Visits are allowed",
+    "No se admiten fiestas": "Parties are not allowed",
+    "Se admiten fiestas": "Parties are allowed"
 
 }

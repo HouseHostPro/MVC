@@ -3,17 +3,16 @@
         <div class="row">
             <div class="col-md-4">
                 <h3>Información de Contacto</h3>
-                <p>Dirección: Dirección de tu empresa</p>
-                <p>Teléfono: +123456789</p>
+                <p>Dirección: C/Doctor Fleming nº14</p>
+                <p>Teléfono: +34 971 52 34 67</p>
                 <p>Correo Electrónico: info@househostpro.com</p>
             </div>
             <div class="col-md-4">
                 <h3>Enlaces Rápidos</h3>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-light">Inicio</a></li>
+                    <li><a href="{{ route('principal', ['id' => $PROPIETAT_ID]) }}" class="text-light">Inicio</a></li>
                     <li><a href="#" class="text-light">Reservas</a></li>
-                    <li><a href="#" class="text-light">Destinos</a></li>
-                    <li><a href="#" class="text-light">Contacto</a></li>
+                    <li><a href="#" class="text-light">Comentarios</a></li>
                 </ul>
             </div>
             <div class="col-md-4">

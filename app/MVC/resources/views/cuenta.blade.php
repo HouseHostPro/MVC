@@ -20,13 +20,13 @@
             </a>
         </div>
         <div class="row col-12 justify-content-around mt-4">
-            <a class="col-sm-5 col-12 text-decoration-none text-black" href="{{route('reservas')}}" >
+            <a class="col-sm-5 col-12 text-decoration-none text-black" href="{{route('reservas', ['id' => $PROPIETAT_ID])}}" >
                 <div class="shadow rounded p-3 h-100 bg-white">
                     <h5>{{__('Reservas')}}</h5>
                     <p>{{__('Todas tus reservas')}}</p>
                 </div>
             </a>
-            <a class="col-sm-5 mt-sm-0 mt-4 col-12 text-decoration-none text-black" href="{{route('comentarios')}}" >
+            <a class="col-sm-5 mt-sm-0 mt-4 col-12 text-decoration-none text-black" href="{{route('comentarios', ['id' => $PROPIETAT_ID])}}" >
                 <div class="shadow rounded p-3 h-100 bg-white">
                     <h5>{{__('Comentarios')}}</h5>
                     <p>{{__('Todos tus comentarios')}}</p>
@@ -37,13 +37,13 @@
             @foreach($user->rol as $rol)
                 @if($rol->Rrol->nom === 'PROPIETARI' || $rol->Rrol->nom === 'ADMINISTADOR')
                     <div class="row col-12 justify-content-around mt-4 mb-3">
-                        <a class="col-sm-5 col-12 text-decoration-none text-black" href="{{route('historialReservas')}}" >
+                        <a class="col-sm-5 col-12 text-decoration-none text-black" href="{{route('historialReservas', ['id' => $PROPIETAT_ID])}}" >
                             <div class="shadow rounded p-3 h-100 bg-white">
                                 <h5>{{__('Historial de reservas')}}</h5>
                                 <p>{{__('Todas las reservas de tus propiedades')}}</p>
                             </div>
                         </a>
-                        <a class="col-sm-5 mt-sm-0 mt-4 col-12 text-decoration-none text-black" href="{{route('allComentarios')}}" >
+                        <a class="col-sm-5 mt-sm-0 mt-4 col-12 text-decoration-none text-black" href="{{route('allComentarios', ['id' => $PROPIETAT_ID])}}" >
                             <div class="shadow rounded p-3 h-100 bg-white">
                                 <h5>{{__('Historial de comentarios')}}</h5>
                                 <p>{{__('Todos los comentarios de tus propiedades')}}</p>

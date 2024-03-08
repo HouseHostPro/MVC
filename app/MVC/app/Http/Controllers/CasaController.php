@@ -27,9 +27,45 @@ class CasaController extends Controller{
 
         $tiquet_comentari = Tiquet_Comentari::where('propietat_id',$request -> id)->get();
         $preuBase = Configuracio::where(['propietat_id' => $request -> id, 'clau' => 'preu_base']) -> first() -> valor;
-        $dormitorios = Espai::where('espaid_id',1)->where('propietat_id',$request -> id)->get();
+        //Que me busque todos los dormitorios
+        $dormitorios = Espai::join('espais_defecte', 'espai.espaid_id', '=', 'espais_defecte.id')
+            ->where('espais_defecte.tipus', 'Dormitorio')
+            ->get(['espai.*']);
         $urlsCamas = $this->allUrlsImage();
 
+        //Variables para la descripción de la casa
+        //Que me busque todos los baños
+        $baños = Espai::join('espais_defecte', 'espai.espaid_id', '=', 'espais_defecte.id')
+            ->where('espais_defecte.tipus', 'Baño')
+            ->first();
+        if(!$baños){
+            $baños = 0;
+        }
+        $personas = 0;
+        $camas = 0;
+        $cantidadDormitorios = 0;
+
+        foreach ($dormitorios as $dormitorio){
+
+            if($dormitorio->imatge_id === 1){
+                $personas += (2*$dormitorio->quantitat);
+                $camas += ((1*$dormitorio->quantitat));
+                $cantidadDormitorios += ((1*$dormitorio->quantitat));
+
+            }elseif ($dormitorio->imatge_id === 2){
+                $personas += (1*$dormitorio->quantitat);
+                $camas += ((1*$dormitorio->quantitat));
+                $cantidadDormitorios += ((1*$dormitorio->quantitat));
+
+
+            }elseif ($dormitorio->imatge_id === 3) {
+                $personas += (2*$dormitorio->quantitat);
+                $camas += ((2*$dormitorio->quantitat));
+                $cantidadDormitorios += ((1*$dormitorio->quantitat));
+
+            }
+        }
+        $normas = Configuracio::where('propietat_id', $request -> id)->get();
 
         $comentarios = [];
 
@@ -45,7 +81,7 @@ class CasaController extends Controller{
 
         $servicios = Propietat_Servei::where('propietat_id',$request -> id)->get();
 
-        return view('fichaCasa',compact('comentarios','servicios','propietat','preuBase','dormitorios','urlsCamas'));
+        return view('fichaCasa',compact('comentarios','servicios','propietat','preuBase','dormitorios','urlsCamas','personas','camas','baños','cantidadDormitorios','normas'));
     }
 
     private function allUrlsImage(){

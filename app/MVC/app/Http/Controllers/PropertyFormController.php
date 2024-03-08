@@ -199,12 +199,15 @@ class PropertyFormController extends Controller {
     public function findAllDatesReservades(Request $request) {
         $reserves = Reserva::where('propietat_id', $request -> id) -> get();
         $disableDays = $this->findAllDatesDisabled($request);
-        $allDisableDays = call_user_func_array('array_merge', $disableDays);
+        if($disableDays !== null) {
 
-        $fechaFormateada = [];
+            $allDisableDays = call_user_func_array('array_merge', $disableDays);
 
-        foreach ($allDisableDays as $day){
-            $fechaFormateada[] = Carbon::createFromFormat('d/m/Y', $day)->format('m/d/Y');
+            $fechaFormateada = [];
+
+            foreach ($allDisableDays as $day) {
+                $fechaFormateada[] = Carbon::createFromFormat('d/m/Y', $day)->format('m/d/Y');
+            }
         }
 
         $datesReservades = [];
@@ -217,9 +220,13 @@ class PropertyFormController extends Controller {
         }
         $allReservas = call_user_func_array('array_merge', $datesReservades);
 
-        $allReservasAndDisableDays = array_merge($allReservas,$fechaFormateada);
+        if($disableDays !== null){
 
-        return $allReservasAndDisableDays;
+            $allReservasAndDisableDays = array_merge($allReservas,$fechaFormateada);
+            return $allReservasAndDisableDays;
+        }else{
+            return $allReservas;
+        }
     }
 
     private function dateRangeMDY($first, $last, $step = '+1 day', $output_format = 'm/d/Y' ) {
