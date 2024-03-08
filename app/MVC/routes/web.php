@@ -71,7 +71,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/allEspaciosByPropertyAjax/{id}',[PropertyFormController::class,'espaciosByProperty'])->name('espaciosByProperty');
     Route::post('/property/{id}/property/{prop_id}/saveEspacios',[PropertyFormController::class,'saveEspacios'])->name('saveEspacios');
 
-    //CRUd normas
+    //CRUD normas
     Route::get('/property/{id}/property/{prop_id}/normas', [PropertyFormController::class, 'loadNormas']) -> name('property.normas');
     Route::post('/property/{id}/property/{prop_id}/saveNormas',[PropertyFormController::class,'saveNormas'])->name('saveNormas');
     Route::get('/allNormasByPropertyAjax/{id}',[PropertyFormController::class,'allNormasAjax'])->name('allNormasAjax');
@@ -85,6 +85,12 @@ Route::middleware('auth')->group(function (){
     Route::get('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'allImages'])->name('property.gallery');
     Route::post('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'store'])->name('store.image');
     Route::post('/property/{id}/property/{prop_id}/galeria/delete',[ImagenesController::class, 'delete'])->name('delete.image');
+
+    //Calendar
+    Route::get('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
+    Route::post('/property/{id}/property/edit/{prop_id}/calendar/savePrice', [PropertyFormController::class, 'savePriceForDay']) -> name('savePriceForDay');
+    Route::post('/property/{id}/property/edit/{prop_id}/calendar/saveDays', [PropertyFormController::class, 'saveDisableDays']) -> name('saveDisableDays');
+    Route::post('/property/{id}/property/edit/{prop_id}/calendar/delete', [PropertyFormController::class, 'deleteDisableDays']) -> name('deleteDisableDays');
 
 
     //Cerrar sesión
@@ -120,7 +126,7 @@ Route::get('/propertyForm', [PropertyFormController::class, '']);
 
 Route::get('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
 Route::post('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
-Route::get('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
+
 Route::post('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'savePreuTemporada']) -> name('property.saveCalendar');
 
 

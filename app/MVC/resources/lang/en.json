@@ -159,5 +159,9 @@
     "Precio por día": "Price per day",
     "Fumar": "Smoke",
     "Visitas": "Visits",
-    "Fiestas": "Parties"
+    "Fiestas": "Parties",
+    "Deshabilitar días": "Disable days",
+    "Habilitar días": "Enable days",
+    "Guardar": "Save"
+
 }

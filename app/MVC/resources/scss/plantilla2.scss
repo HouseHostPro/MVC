@@ -91,7 +91,7 @@ $success: #F39C12;
     border: 1px solid #cccccc !important;
 }
 .event a {
-    background: #5FBA7D !important;
+    background: rgba(199, 102, 91, 0.5) !important;
     color: #ffffff !important;
     height: 60px;
 }
@@ -142,7 +142,7 @@ $success: #F39C12;
 #inline-picker>.ui-datepicker-header,
 #inline-picker>.ui-datepicker-calendar{
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
 }
 
 //mapa

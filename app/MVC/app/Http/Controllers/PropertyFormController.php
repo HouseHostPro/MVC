@@ -8,10 +8,12 @@ use App\Models\Configuracio_Servei;
 use App\Models\Espai;
 use App\Models\Espai_Defecte;
 use App\Models\Imatge_Dormitori;
+use App\Models\Periode_No_Disponible;
 use App\Models\PreuTemporada;
 use App\Models\Propietat_Servei;
 use App\Models\Reserva;
 use App\Models\Servei;
+use Carbon\Carbon;
 use Couchbase\RegexpSearchQuery;
 use Illuminate\Http\Request;
 use App\Models\Traduccio;
@@ -106,19 +108,93 @@ class PropertyFormController extends Controller {
     //Calendario
 
     public function loadCalendar(Request $request) {
+
+        $id = $request -> prop_id;
+
         $dates = $this->findAllDatesReservades($request);
-        $temporades = PreuTemporada::where('configuracio_id', $request -> prop_id) -> get();
-        $preusDies = [];
+        $propietat = Propietat::find($id);
+        $preuBase = Configuracio::where(['propietat_id' => $id, 'clau' => 'preu_base']) -> first() -> valor;
+        $disableDays = $this->findAllDatesDisabled($request);
 
-        foreach ($temporades as $temporada) {
-            $preu = $temporada -> preu;
-            $dies = $this -> dateRangeDMY($temporada -> data_inici, $temporada -> data_fi);
-            $preusDies[] = new \stdClass($preu, $dies);
-        }
-        $preuBase = Configuracio::where(['propietat_id' => $request -> prop_id, 'clau' => 'preu_base']) -> first() -> valor;
-
-        return view('property/propertyCalendar', ['id' => $request -> id], compact('dates','temporades' ,'preuBase'));
+        return view('property/propertyCalendar',compact('propietat','dates','preuBase','disableDays'));
     }
+
+    public function savePriceForDay(Request $request){
+
+        $id = $request -> prop_id;
+
+        $configuracion = Configuracio::where('propietat_id', $id)
+            ->where('clau', 'preu_base')
+            ->first();
+        if($configuracion){
+            // Actualizar el valor
+            $configuracion->valor = $request->precio_dia;
+            $configuracion->save();
+        }else{
+            $config = new Configuracio();
+            $config->propietat_id = $id;
+            $config->clau = 'preu_base';
+            $config->valor = $request->precio_dia;
+            $config-> save();
+        }
+        return redirect() -> route('property.calendar',['id' => $request -> id, 'prop_id' => $id]);
+    }
+
+    public function saveDisableDays(Request $request){
+
+        $id = $request -> prop_id;
+        $from = $request -> from;
+        $to = $request -> to;
+        $fromFormateada = Carbon::createFromFormat('d/m/Y', $from)->toDateString();
+        $toFormateada = Carbon::createFromFormat('d/m/Y', $to)->toDateString();
+
+        $disableDays = new Periode_No_Disponible();
+        $disableDays->data_inici = $fromFormateada;
+        $disableDays->data_fi = $toFormateada;
+        $disableDays->propietat_id = $id;
+        $disableDays->save();
+
+
+        return redirect() -> route('property.calendar',['id' => $request -> id, 'prop_id' => $id]);
+    }
+    public function deleteDisableDays(Request $request){
+
+        $id = $request -> prop_id;
+        $fecha_inicio = $request->fecha_inicio;
+
+        $fechaFormateada = Carbon::createFromFormat('d/m/Y', $fecha_inicio)->format('Y-m-d');
+
+        Periode_No_Disponible::where('propietat_id', $id)
+            ->where('data_inici', $fechaFormateada)
+            ->delete();
+
+        return redirect() -> route('property.calendar',['id' => $request -> id, 'prop_id' => $id]);
+    }
+
+    public function findAllDatesDisabled(Request $request) {
+        $disableDays = Periode_No_Disponible::where('propietat_id', $request -> id) -> get();
+        $dates = [];
+
+        if($disableDays->isEmpty()){
+
+            return null;
+
+        }else{
+
+            foreach ($disableDays as $days) {
+                $dataF = $days->data_fi;
+                $dataI = $days->data_inici;
+
+                $dates[] = $this -> dateRangeDMY($dataI, $dataF);
+            }
+            $allDisableDays = call_user_func_array('array_merge', $dates);
+            return $allDisableDays;
+
+        }
+
+
+    }
+
 
     public function findAllDatesReservades(Request $request) {
         $reserves = Reserva::where('propietat_id', $request -> id) -> get();

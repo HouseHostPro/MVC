@@ -252,13 +252,11 @@
                 method: 'GET',
                 url: `http://localhost:8100/allDatesReservades/{{$PROPIETAT_ID}}`
             }).done(function (reservas) {
+                allReservas = reservas;
                 pintalCalendario(reservas);
                 pintarCalendarioFrom(reservas);
                 pintarCalendarioTo(reservas);
             });
-            const dates = ['03/20/2024', '03/12/2024', '04/22/2024', '03/23/2024'];
-            fechasEntre('03/04/2024',dates);
-
         });
 
         function printImagenes(imagenes) {
@@ -319,58 +317,97 @@
                         return jQuery.inArray(string, reservas) == -1
                             ? [true, '', '{{ $preuBase }}€']
                             : [false, 'event', '{{ $preuBase }}€'];
-
-
                     }
                 });
             });
         }
-        function fechasEntre(fecha, fechasArray) {
+        //Me devuelve el primer dia de la fecha más cercana, a partir de la fecha que le doy
+        function fechasMasCercana(fecha, fechasArray) {
             // Convertir la fecha de entrada en milisegundos
-            var fechaEntrada = new Date(fecha).getTime();
+            let fechaEntrada = new Date(fecha).getTime();
 
             // Ordenar el array de fechas
+
             fechasArray.sort(function(a, b) {
                 return new Date(a) - new Date(b);
             });
 
-            var fechaMasCercana;
+            let fechaMasCercana;
 
             // Encontrar la fecha más cercana a la fecha de entrada
-            var fechaCercana;
-            for (var i = 0; i < fechasArray.length; i++) {
-                var fechaActual = new Date(fechasArray[i]).getTime();
+            let fechaCercana;
+            for (let i = 0; i < fechasArray.length; i++) {
+                let fechaActual = new Date(fechasArray[i]).getTime();
                 if (fechaActual >= fechaEntrada) {
                     fechaCercana = new Date(fechasArray[i]);
                     break;
                 }
             }
-
             // Encontrar las fechas entre la fecha de entrada y la fecha más cercana
-            for (var j = 0; j < fechasArray.length; j++) {
-                var fechaActual = new Date(fechasArray[j]).getTime();
+            for (let i = 0; i < fechasArray.length; i++) {
+                let fechaActual = new Date(fechasArray[i]).getTime();
                 if (fechaActual >= fechaEntrada && fechaActual <= fechaCercana.getTime()) {
-                    fechaMasCercana = new Date(fechasArray[j]);
+                    fechaMasCercana = new Date(fechasArray[i]);
                 }
             }
-            //La primera fecha es con el formato mm/dd/yyyy y la segunda con el formato que me pone Date
-            dateRange(fecha,fechaMasCercana);
-            return fechaMasCercana;
+            return dateRange(fecha,fechaMasCercana);
         }
+
+
+        function encontrarFechaMasCercanaEnPasado(fechaEntrada, fechasArray) {
+            // Convertir la fecha de entrada al formato mm/dd/yyyy
+            var partesFechaEntrada = fechaEntrada.split('/');
+            var diaEntrada = partesFechaEntrada[0];
+            var mesEntrada = partesFechaEntrada[1];
+            var anioEntrada = partesFechaEntrada[2];
+            var fechaEntradaFormatoCorrecto = mesEntrada + '/' + diaEntrada + '/' + anioEntrada;
+
+            // Convertir la fecha de entrada a un objeto Date
+            var fechaObjEntrada = new Date(fechaEntradaFormatoCorrecto);
+
+            // Inicializar la fecha más cercana en el pasado
+            var fechaMasCercana = null;
+
+            // Iterar sobre el array de fechas
+            for (var i = 0; i < fechasArray.length; i++) {
+                // Convertir la fecha del array al objeto Date
+                var fechaObjArray = new Date(fechasArray[i]);
+
+                // Si la fecha del array está en el pasado y es más cercana que la actual
+                if (fechaObjArray < fechaObjEntrada && (fechaMasCercana === null || fechaObjArray > fechaMasCercana)) {
+                    fechaMasCercana = fechaObjArray;
+                }
+            }
+
+            // Devolver la fecha más cercana en el formato mm/dd/yyyy
+            if (fechaMasCercana !== null) {
+
+                var mesMasCercano = ('0' + (fechaMasCercana.getMonth() + 1)).slice(-2);
+                var diaMasCercano = ('0' + fechaMasCercana.getDate()).slice(-2);
+                var anioMasCercano = fechaMasCercana.getFullYear();
+
+                const fechaFormateada =  mesMasCercano + '/' + diaMasCercano + '/' + anioMasCercano;
+
+                return dateRange(fechaFormateada,fechaObjEntrada);
+            } else {
+                return null; // No se encontró ninguna fecha en el pasado
+            }
+        }
+
+
         function dateRange(startDate, endDate, steps = 1) {
             const dateArray = [];
             let currentDate = new Date(startDate);
 
             while (currentDate < endDate) {
+                let fechaOriginal = new Date(currentDate);
 
-                var fechaOriginal = new Date(currentDate);
-
-                var mes = fechaOriginal.getMonth() + 1; // Se suma 1 porque los meses van de 0 a 11
-                var dia = fechaOriginal.getDate();
-                var anio = fechaOriginal.getFullYear();
+                let mes = fechaOriginal.getMonth() + 1; // Se suma 1 porque los meses van de 0 a 11
+                let dia = fechaOriginal.getDate();
+                let anio = fechaOriginal.getFullYear();
 
                 // Formatear la fecha como "mm/dd/yyyy"
-                var fechaFormateada = (mes < 10 ? '0' : '') + mes + '/' + (dia < 10 ? '0' : '') + dia + '/' + anio;
+                let fechaFormateada = (mes < 10 ? '0' : '') + mes + '/' + (dia < 10 ? '0' : '') + dia + '/' + anio;
 
                 dateArray.push(fechaFormateada);
                 // Use UTC date to prevent problems with time zones and DST
@@ -383,9 +420,22 @@
         //Para poner la fecha de entrada, y en caso de haber puesto primero la de salida llamar a la función pintar
         $('#from').change(function () {
             startDate = $(this).datepicker('getDate');
-            $("#to").datepicker("option", "minDate", startDate);
-            if ($('#to').val() !== "") {
 
+            //Aqui Fomateo la fecha de dd/mm/yyyy a mm/dd/yyy
+            let fechaSplit = $('#from').val().split('/');
+            let fechaFormateada = fechaSplit[1] + '/' + fechaSplit[0] + '/' + fechaSplit[2];
+            //Llamo al datepicker para pasarle la fecha que he puesto, y dehabilite todo lo anteiror
+            $("#to").datepicker("option", "minDate", startDate);
+            //Llamo al datepicker para pasarle la fecha que he puesto y me deshabilite todas las fechas desde el primer dia de la reserva más cercana
+            $("#to").datepicker("option","beforeShowDay", function (date){
+
+                const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
+                return jQuery.inArray(string, fechasMasCercana(fechaFormateada,allReservas)) == -1
+                    ? [false, '', '']
+                    : [true, '', '{{ $preuBase }}€'];
+            })
+
+            if ($('#to').val() !== "") {
                 pintarprecioReserva();
             }
 
@@ -393,8 +443,31 @@
 
         //Para pponer la fecha de salida, y en caso de haber puesto primero la de entrada llamar a la función pintar
         $('#to').change(function () {
+
+            //Aqui quita la primera fecha del array(no tiene que estar), y después le añado la que he clicado(tiene que estar)
+            let arrayFechas = encontrarFechaMasCercanaEnPasado($('#to').val(),allReservas);
+            startDate = new Date(arrayFechas.shift());
+            //Aqui Fomateo la fecha de dd/mm/yyyy a mm/dd/yyy
+            let fechaSplit = $('#to').val().split('/');
+            let fechaFormateada = fechaSplit[1] + '/' + fechaSplit[0] + '/' + fechaSplit[2];
+            arrayFechas.push(fechaFormateada);
+
+            //Llamo al datepicker para pasarle la fecha que he puesto, y dehabilite todo lo de después
             endDate = $(this).datepicker('getDate');
+            //Para que se dehabiliten los dias de delante de la primer comando, y los dias de atras del segundo comando
             $("#from").datepicker("option", "maxDate", endDate);
+            $("#from").datepicker("option", "minDate", startDate);
+
+            //Llamo al datepicker para pasarle la fecha que he puesto y me deshabilite todas las fechas desde el primer dia de la reserva más cercana
+
+            $("#to").datepicker("option","beforeShowDay", function (date){
+
+                const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
+                return jQuery.inArray(string, arrayFechas) == -1
+                    ? [false, '', '']
+                    : [true, '', '{{ $preuBase }}€'];
+            })
+
             if ($('#from').val() !== "") {
 
                 pintarprecioReserva();
@@ -455,8 +528,6 @@
             }
         }
 
-        //Array para señalar los dias que no estan disponibles
-        const dates = ['03/20/2024', '03/21/2024', '03/22/2024', '03/23/2024'];
 
         function pintalCalendario(reservas) {
             $('#inline-picker').datepicker({
