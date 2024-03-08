@@ -33,7 +33,7 @@ Route::get('/phpinfo', function () {phpinfo();});
 //PONER EL FORBIDDEN A TODOS LOS FORM PARA QUE NO SE PUEDA ACCEDER POR GET
 
 
-Route::middleware('auth')->group(function (){
+Route::group(['middleware' => ['auth', 'cors']], function (){
 
     //Dashboard usuari
     Route::post('/property/{id}/cuenta',[UserController::class,'cuenta'])->name('cuenta');
@@ -118,8 +118,11 @@ Route::get('/allDatesReservades/{id}',[PropertyFormController::class,'findAllDat
 Route::get('/allImagesAjax',[ImagenesController::class,'allImagesAjax'])->name('allImagesAjax');
 
 
+Route::group(['middleware' => ['cors']], function () {
+    //Rutas a las que se permitirá acceso
+    Route::get('/property/{id}',[CasaController::class,'datosFichaCasa'])->name('principal');
+});
 //Página principal
-Route::get('/property/{id}',[CasaController::class,'datosFichaCasa'])->name('principal');
 
 //ENDPOINT -> traduccions de una casa
 Route::get('/findTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('findTraduccions');
