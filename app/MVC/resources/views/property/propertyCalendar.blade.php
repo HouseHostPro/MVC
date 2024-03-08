@@ -78,22 +78,23 @@
             <h4>Periodos no disponibles</h4>
             <ul>
                 @if($disableDays !== null)
-                    @for($i = 0; $i < 1; $i++)
-                        <form method="post" action='{{ route('deleteDisableDays', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat->id]) }}'>
-                            @csrf
+                    @foreach($disableDays as $day)
+                        @for($i = 0; $i < 1; $i++)
+                            <form method="post" action='{{ route('deleteDisableDays', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat->id]) }}'>
+                                @csrf
+                                <li class="justify-content-start mt-2">
+                                    <span>{{ $day[0] }} - {{ $day[count($day)-1] }}</span>
 
-                            <li class="justify-content-start">
-                                <span>{{ $disableDays[0] }} - {{ $disableDays[count($disableDays)-1] }}</span>
-
-                            <button type="submit" class="btn bg-danger bg-opacity-50 ms-2 pt-1 p-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                                </svg>
-                            </button>
-                            </li>
-                            <input type="hidden" name="fecha_inicio" value="{{ $disableDays[0] }}">
-                        </form>
-                    @endfor
+                                <button type="submit" class="btn bg-danger bg-opacity-50 ms-2 pt-1 pb-1 p-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                                    </svg>
+                                </button>
+                                </li>
+                                <input type="hidden" name="fecha_inicio" value="{{ $day[0] }}">
+                            </form>
+                        @endfor
+                    @endforeach
                 @endif
             </ul>
         </div>
@@ -102,7 +103,6 @@
 
     <script>
 
-        //FALTA PONER QUE COJA LAS FECHAS DE PERIODES_NO_DISPONIBLE, PARA QUE LOS PONGA EN LOS CALENDARIOS, Y QUE SI NO HAY NINGUNA RESERVA DELANTE NO SE QUITEN TODAS!!!!
         $(document).ready(function() {
             $.ajax({
                 method: 'GET',
@@ -148,6 +148,7 @@
                     dateFormat: "dd/mm/yy",
                     altField: '#sortida',
                     altFormat: 'yy-mm-dd',
+                    minDate: 0,
                     firstDay: 1,
                     changeMonth: true,
                     monthNames: ['{{__('Enero')}}', '{{__('Febrero')}}', '{{__('Marzo')}}', '{{__('Abril')}}', '{{__('Mayo')}}', '{{__('Junio')}}', '{{__('Julio')}}', '{{__('Agosto')}}', '{{__('Septiembre')}}', '{{__('Octubre')}}', '{{__('Noviembre')}}', '{{__('Diciembre')}}'],
@@ -192,30 +193,36 @@
                 let fechaActual = new Date(fechasArray[i]).getTime();
                 if (fechaActual >= fechaEntrada && fechaActual <= fechaCercana.getTime()) {
                     fechaMasCercana = new Date(fechasArray[i]);
+                }else {
+                    fechaMasCercana = null;
                 }
             }
-            return dateRange(fecha,fechaMasCercana);
+            if (fechaMasCercana !== null) {
+                return dateRange(fecha,fechaMasCercana);
+            } else {
+                return null; // No se encontró ninguna fecha en el pasado
+            }
         }
 
 
         function encontrarFechaMasCercanaEnPasado(fechaEntrada, fechasArray) {
             // Convertir la fecha de entrada al formato mm/dd/yyyy
-            var partesFechaEntrada = fechaEntrada.split('/');
-            var diaEntrada = partesFechaEntrada[0];
-            var mesEntrada = partesFechaEntrada[1];
-            var anioEntrada = partesFechaEntrada[2];
-            var fechaEntradaFormatoCorrecto = mesEntrada + '/' + diaEntrada + '/' + anioEntrada;
+            let partesFechaEntrada = fechaEntrada.split('/');
+            let diaEntrada = partesFechaEntrada[0];
+            let mesEntrada = partesFechaEntrada[1];
+            let anioEntrada = partesFechaEntrada[2];
+            let fechaEntradaFormatoCorrecto = mesEntrada + '/' + diaEntrada + '/' + anioEntrada;
 
             // Convertir la fecha de entrada a un objeto Date
-            var fechaObjEntrada = new Date(fechaEntradaFormatoCorrecto);
+            let fechaObjEntrada = new Date(fechaEntradaFormatoCorrecto);
 
             // Inicializar la fecha más cercana en el pasado
-            var fechaMasCercana = null;
+            let fechaMasCercana = null;
 
             // Iterar sobre el array de fechas
-            for (var i = 0; i < fechasArray.length; i++) {
+            for (let i = 0; i < fechasArray.length; i++) {
                 // Convertir la fecha del array al objeto Date
-                var fechaObjArray = new Date(fechasArray[i]);
+                let fechaObjArray = new Date(fechasArray[i]);
 
                 // Si la fecha del array está en el pasado y es más cercana que la actual
                 if (fechaObjArray < fechaObjEntrada && (fechaMasCercana === null || fechaObjArray > fechaMasCercana)) {
@@ -226,9 +233,9 @@
             // Devolver la fecha más cercana en el formato mm/dd/yyyy
             if (fechaMasCercana !== null) {
 
-                var mesMasCercano = ('0' + (fechaMasCercana.getMonth() + 1)).slice(-2);
-                var diaMasCercano = ('0' + fechaMasCercana.getDate()).slice(-2);
-                var anioMasCercano = fechaMasCercana.getFullYear();
+                let mesMasCercano = ('0' + (fechaMasCercana.getMonth() + 1)).slice(-2);
+                let diaMasCercano = ('0' + fechaMasCercana.getDate()).slice(-2);
+                let anioMasCercano = fechaMasCercana.getFullYear();
 
                 const fechaFormateada =  mesMasCercano + '/' + diaMasCercano + '/' + anioMasCercano;
 
@@ -270,14 +277,20 @@
             let fechaFormateada = fechaSplit[1] + '/' + fechaSplit[0] + '/' + fechaSplit[2];
             //Llamo al datepicker para pasarle la fecha que he puesto, y dehabilite todo lo anteiror
             $("#to").datepicker("option", "minDate", startDate);
-            //Llamo al datepicker para pasarle la fecha que he puesto y me deshabilite todas las fechas desde el primer dia de la reserva más cercana
-            $("#to").datepicker("option","beforeShowDay", function (date){
 
-                const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
-                return jQuery.inArray(string, fechasMasCercana(fechaFormateada,allReservas)) == -1
-                    ? [false, '', '']
-                    : [true, '', '{{ $preuBase }}€'];
-            })
+            if(fechasMasCercana(fechaFormateada,allReservas) !== null) {
+                console.log('el valor es null')
+
+
+                //Llamo al datepicker para pasarle la fecha que he puesto y me deshabilite todas las fechas desde el primer dia de la reserva más cercana
+                $("#to").datepicker("option", "beforeShowDay", function (date) {
+
+                    const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
+                    return jQuery.inArray(string, fechasMasCercana(fechaFormateada, allReservas)) == -1
+                        ? [false, '', '']
+                        : [true, '', '{{ $preuBase }}€'];
+                })
+            }
 
             if ($('#to').val() !== "") {
                 pintarprecioReserva();
@@ -291,10 +304,11 @@
             //Aqui quita la primera fecha del array(no tiene que estar), y después le añado la que he clicado(tiene que estar)
             let arrayFechas = encontrarFechaMasCercanaEnPasado($('#to').val(),allReservas);
             startDate = new Date(arrayFechas.shift());
-            //Aqui Fomateo la fecha de dd/mm/yyyy a mm/dd/yyy
+            //Aqui Fomateo la fecha que he cogido con el input de dd/mm/yyyy a mm/dd/yyy
             let fechaSplit = $('#to').val().split('/');
             let fechaFormateada = fechaSplit[1] + '/' + fechaSplit[0] + '/' + fechaSplit[2];
             arrayFechas.push(fechaFormateada);
+            console.log("Esto es el from" + encontrarFechaMasCercanaEnPasado($('#to').val(),allReservas));
 
             //Llamo al datepicker para pasarle la fecha que he puesto, y dehabilite todo lo de después
             endDate = $(this).datepicker('getDate');
@@ -336,10 +350,6 @@
                 $('#ptotal').val(preuTotal + "€");
                 $('#days').val(diffDays);
 
-                //Resize form reserva, quan afagueixes un nou camp
-                if ($(window).width() > 540) {
-                    $('#form-casa').css('height', '29%');
-                }
             }
         }
 
