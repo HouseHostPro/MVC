@@ -94,7 +94,7 @@ class UserController extends Controller{
                 $request->session()->put('idPropiedad',$idPropiedad);
                 $request->session()->put('user',$user);
 
-                return redirect() -> route('principal', ['id' => $request -> casaId]);
+                return redirect() -> route('principal', ['id' => request -> casaId]);
                 //return redirect()->route($request->session()->has('ruta') ? $request->session()->get('ruta'): 'principal');
             }
             return redirect()->route('login', ['id' => $request -> casaId]);

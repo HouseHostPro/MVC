@@ -9,7 +9,7 @@
             <div id="opciones-casa">
                 @include('components.opcionesCasa')
             </div>
-            <form id="form-casa" method="POST" action="{{ route('redsys', ['id' => explode("/", url() ->current())[4]]) }}" >
+            <form id="form-casa" method="POST" action="{{ route('redsys', ['id' => $PROPIETAT_ID]) }}" >
                 @csrf
                @include('components.formCasa')
             </form>
@@ -237,7 +237,7 @@
             });
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allImagesAjax`
+                url: `http://www.househostpromp.me/allImagesAjax`
             }).done(function (imagenes) {
                 printImagenes(imagenes)
             });

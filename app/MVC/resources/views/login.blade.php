@@ -8,7 +8,7 @@
                     <h1 class="card-title text-center text-primary my-4 ">{{__('Iniciar sesión')}}</h1>
                     <form method="post" action="{{ route('login.check', ['id' => $PROPIETAT_ID]) }}" class="d-flex flex-column justify-content-end" style="height: 80%;">
                         @csrf
-                        <input type="hidden" value="{{ $PROPIETAT_ID }}" name="casaId">
+                        <input type="hidden" value="" name="casaId">
                         <div class="form-group mt-4">
                             <label for="correo">{{__('Correo electrónico')}}:</label>
                             <input type="email" class="form-control mt-2 border-black" id="correo" name="email" aria-describedby="emailHelp" placeholder="user@...." autocomplete="username" required>

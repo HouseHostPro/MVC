@@ -18,10 +18,12 @@ class RutaPropietat
      */
     public function handle(Request $request, Closure $next): Response
     {
+	$domini = explode('/', url() -> current())[2];
+	$propietat = Propietat::where('id', Configuracio::select('propietat_id') -> where('valor', $domini) -> first() -> propietat_id) -> first();
+
 	$url = url() -> current();
 
-        if (count(explode('/', $url)) > 2) {
-	    $u = explode("/", $url)[2];
+        $u =  explode("/", $url)[3];
 
         if ($u === "allProperties" ||
             $u === "findTraduccions" ||
@@ -32,18 +34,12 @@ class RutaPropietat
             $u === "en" ||
             $u === "allImagesAjax")
             return $next($request);
-	}
-
-	//$domini = explode('/', url() -> current())[2];
-	//if ($domini === "www.househostpromp.me")
-	//	return $next($request);
-
-        //$propietat = Propietat::where('id', Configuracio::select('propietat_id') -> where('valor', $domini) -> first() -> propietat_id) -> first();
 
 
-        $id = explode("/", $url)[4];
-        View::share('PROPIETAT_ID', $id);
-	//$request -> merge(['dominiCasa' => $propietat -> id]);
+
+        //$id = explode("/", $url)[3];
+        View::share('PROPIETAT_ID', $propietat -> id);
+	$request -> merge(['dominiCasa' => $propietat -> id]);
 
         return $next($request);
     }

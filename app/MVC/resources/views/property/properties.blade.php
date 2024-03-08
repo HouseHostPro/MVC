@@ -63,7 +63,7 @@
 
                 $.ajax({
                     method: 'GET',
-                    url: `http://localhost:8100/allProperties`
+                    url: `http://www.househostpromp.me/allProperties`
                 }).done(function (propiedades) {
 
                     for (const p of propiedades) {

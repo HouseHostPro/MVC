@@ -32,12 +32,12 @@ Route::get('/phpinfo', function () {phpinfo();});
 //Ficha Casa
 //PONER EL FORBIDDEN A TODOS LOS FORM PARA QUE NO SE PUEDA ACCEDER POR GET
 
+
 Route::middleware('auth')->group(function (){
 
     //Dashboard usuari
     Route::post('/property/{id}/cuenta',[UserController::class,'cuenta'])->name('cuenta');
     Route::get('/property/{id}/cuenta',[UserController::class,'cuenta'])->name('cuenta');
-
     //CRUD comentaris
     Route::get('/deleteComentario/{id}/{estat}',[ComentariController::class,'delete'])->name('comentario.delete.get');
     Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
@@ -69,8 +69,8 @@ Route::middleware('auth')->group(function (){
     Route::get('/property/{id}/property/{prop_id}/espais', [EspaiController::class, 'loadForm']) -> name('espai.espais');
 
     //Mostrar todas las propiedades
-    Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
-    Route::get('/property/{id}/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
+    
+    Route::get('/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
     Route::get('/allTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('property.traduccions');
 
     //CRUD imagenes
@@ -96,6 +96,8 @@ Route::middleware('auth')->group(function (){
 
 });
 
+Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']);
+
 //Petición Ajax Imagenes de la casa
 Route::get('/allImagesAjax',[ImagenesController::class,'allImagesAjax'])->name('allImagesAjax');
 
@@ -107,12 +109,12 @@ Route::get('/property/{id}',[CasaController::class,'datosFichaCasa'])->name('pri
 Route::get('/findTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('findTraduccions');
 
 //Login
-Route::view('/property/{id}/login','login')->name('login');
-Route::post('/property/{id}/login/check',[UserController::class,'checkLogin'])->name('login.check');
+Route::view('property/{id}/login','login')->name('login');
+Route::post('property/{id}/login/check',[UserController::class,'checkLogin'])->name('login.check');
 
 
 //Register
-Route::get('/property/{id}/user/register', [UserController::class,'register'])->name('user.register');
+Route::get('/user/register', [UserController::class,'register'])->name('user.register');
 Route::post('/user/register', [UserController::class, 'store'])->name('user.store');
 
 

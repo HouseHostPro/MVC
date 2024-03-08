@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-require '../vendor/autoload.php';
+//require '../vendor/autoload.php';
 use Mailgun\Mailgun;
 
 class MailController extends Controller

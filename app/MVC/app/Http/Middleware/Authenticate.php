@@ -18,11 +18,11 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
 
-        $id = explode("/", url() -> current())[4];
+        /*$id = explode("/", url() -> current())[4];
 
         if (!Auth::check()) {
             $request->session()->put('ruta',$request->path());
             return route('login', ['id' => $id]);
-        }
+        }*/
     }
 }

@@ -21,6 +21,8 @@ class CasaController extends Controller{
         $propietat = Propietat::where('id', $request -> id) -> first();
 
         $tiquet_comentari = Tiquet_Comentari::where('propietat_id',$request -> id)->get();
+	//$request -> id
+	var_dump($request -> dominiCasa);
         $preuBase = Configuracio::where(['propietat_id' => $request -> id, 'clau' => 'preu_base']) -> first() -> valor;
 
 
