@@ -8,10 +8,13 @@ use App\Models\Configuracio_Servei;
 use App\Models\Espai;
 use App\Models\Espai_Defecte;
 use App\Models\Imatge_Dormitori;
+use App\Models\Periode_No_Disponible;
+use App\Models\Plantilla;
 use App\Models\PreuTemporada;
 use App\Models\Propietat_Servei;
 use App\Models\Reserva;
 use App\Models\Servei;
+use Carbon\Carbon;
 use Couchbase\RegexpSearchQuery;
 use Illuminate\Http\Request;
 use App\Models\Traduccio;
@@ -40,10 +43,11 @@ class PropertyFormController extends Controller {
         $propietat = Propietat::find($request -> prop_id);
         $ciutats = $this->findAllCiutats();
         $traduccions = $this -> findTraduccions($propietat -> descripcio, $propietat -> nom);
+        $plantillas = Plantilla::all();
         $traduccioNom = $traduccions[0];
         $traduccioDesc = $traduccions[1];
         return view("property/propertyInfo", compact("propietat",
-            "ciutats", "traduccioNom", "traduccioDesc"));
+            "ciutats", "traduccioNom", "traduccioDesc","plantillas"));
     }
     public function store(Request $request) {
         $property = new Propietat();
@@ -62,7 +66,9 @@ class PropertyFormController extends Controller {
         $traduccioNom = Traduccio::where('code', $request -> nameCode) -> where('lang', app()->getLocale()) -> first();
         $traduccioDesc = Traduccio::where('code', $request -> descCode) -> where('lang', app()->getLocale()) -> first();
 
-        Propietat::where('id', $request -> id) -> update(array('localitzacio' => $request -> ubi));
+        var_dump($request->plantilla);
+
+        Propietat::where('id', $request -> id) -> update(array('localitzacio' => $request -> ubi,'plantilla_id' => $request->plantilla));
 
         $traduccioNom -> value = $request -> nombre;
         $traduccioDesc -> value = $request -> descripcion;
@@ -106,35 +112,132 @@ class PropertyFormController extends Controller {
     //Calendario
 
     public function loadCalendar(Request $request) {
+
+        $id = $request -> prop_id;
+
         $dates = $this->findAllDatesReservades($request);
-        $temporades = PreuTemporada::where('configuracio_id', $request -> prop_id) -> get();
-        $preusDies = [];
+        $propietat = Propietat::find($id);
+        $preuBase = Configuracio::where(['propietat_id' => $id, 'clau' => 'preu_base']) -> first() -> valor;
+        $disableDays = $this->findAllDatesDisabled($request);
 
-        foreach ($temporades as $temporada) {
-            $preu = $temporada -> preu;
-            $dies = $this -> dateRange($temporada -> data_inici, $temporada -> data_fi);
-            $preusDies[] = new \stdClass($preu, $dies);
-        }
-        $preuBase = Configuracio::where(['propietat_id' => $request -> prop_id, 'clau' => 'preu_base']) -> first() -> valor;
-
-        return view('property/propertyCalendar', ['id' => $request -> id], compact('dates','temporades' ,'preuBase'));
+        return view('property/propertyCalendar',compact('propietat','dates','preuBase','disableDays'));
     }
+
+    public function savePriceForDay(Request $request){
+
+        $id = $request -> prop_id;
+
+        $configuracion = Configuracio::where('propietat_id', $id)
+            ->where('clau', 'preu_base')
+            ->first();
+        if($configuracion){
+            // Actualizar el valor
+            $configuracion->valor = $request->precio_dia;
+            $configuracion->save();
+        }else{
+            $config = new Configuracio();
+            $config->propietat_id = $id;
+            $config->clau = 'preu_base';
+            $config->valor = $request->precio_dia;
+            $config-> save();
+        }
+        return redirect() -> route('property.calendar',['id' => $request -> id, 'prop_id' => $id]);
+    }
+
+    public function saveDisableDays(Request $request){
+
+        $id = $request -> prop_id;
+        $from = $request -> from;
+        $to = $request -> to;
+        $fromFormateada = Carbon::createFromFormat('d/m/Y', $from)->toDateString();
+        $toFormateada = Carbon::createFromFormat('d/m/Y', $to)->toDateString();
+
+        $disableDays = new Periode_No_Disponible();
+        $disableDays->data_inici = $fromFormateada;
+        $disableDays->data_fi = $toFormateada;
+        $disableDays->propietat_id = $id;
+        $disableDays->save();
+
+
+        return redirect() -> route('property.calendar',['id' => $request -> id, 'prop_id' => $id]);
+    }
+    public function deleteDisableDays(Request $request){
+
+        $id = $request -> prop_id;
+        $fecha_inicio = $request->fecha_inicio;
+
+        $fechaFormateada = Carbon::createFromFormat('d/m/Y', $fecha_inicio)->format('Y-m-d');
+
+        Periode_No_Disponible::where('propietat_id', $id)
+            ->where('data_inici', $fechaFormateada)
+            ->delete();
+
+        return redirect() -> route('property.calendar',['id' => $request -> id, 'prop_id' => $id]);
+    }
+
+    public function findAllDatesDisabled(Request $request) {
+        $disableDays = Periode_No_Disponible::where('propietat_id', $request -> id) -> get();
+        $dates = [];
+
+        if($disableDays->isEmpty()){
+
+            return null;
+
+        }else{
+
+            foreach ($disableDays as $days) {
+                $dataF = $days->data_fi;
+                $dataI = $days->data_inici;
+
+                $dates[] = $this -> dateRangeDMY($dataI, $dataF);
+            }
+            return $dates;
+        }
+    }
+
 
     public function findAllDatesReservades(Request $request) {
         $reserves = Reserva::where('propietat_id', $request -> id) -> get();
+        $disableDays = $this->findAllDatesDisabled($request);
+        $allDisableDays = call_user_func_array('array_merge', $disableDays);
+
+        $fechaFormateada = [];
+
+        foreach ($allDisableDays as $day){
+            $fechaFormateada[] = Carbon::createFromFormat('d/m/Y', $day)->format('m/d/Y');
+        }
+
         $datesReservades = [];
 
         foreach ($reserves as $reserva) {
             $dataF = $reserva->data_fi;
             $dataI = $reserva->data_inici;
 
-            $datesReservades[] = $this -> dateRange($dataI, $dataF);
+            $datesReservades[] = $this -> dateRangeMDY($dataI, $dataF);
         }
+        $allReservas = call_user_func_array('array_merge', $datesReservades);
 
-        return $datesReservades;
+        $allReservasAndDisableDays = array_merge($allReservas,$fechaFormateada);
+
+        return $allReservasAndDisableDays;
     }
 
-    private function dateRange($first, $last, $step = '+1 day', $output_format = 'd/m/Y' ) {
+    private function dateRangeMDY($first, $last, $step = '+1 day', $output_format = 'm/d/Y' ) {
+
+        $dates = array();
+        $current = strtotime($first);
+        $last = strtotime($last);
+
+        while( $current <= $last ) {
+
+            $dates[] = date($output_format, $current);
+            $current = strtotime($step, $current);
+        }
+
+        return $dates;
+    }
+
+    private function dateRangeDMY($first, $last, $step = '+1 day', $output_format = 'd/m/Y' ) {
 
         $dates = array();
         $current = strtotime($first);
@@ -289,5 +392,78 @@ class PropertyFormController extends Controller {
 
         $espacio->save();
     }
+
+    //Normas
+    public function loadNormas(Request $request){
+
+        $id = $request -> prop_id;
+
+        $propietat = Propietat::find($id);
+
+        return view('property/normasForm', compact('propietat'));
+    }
+
+    public function saveNormas(Request $request){
+
+        $idProp = $request -> prop_id;
+
+        $normas= array_slice($request->all(),1,count($request->all()));
+
+        //Eliminar todas las normas
+        Configuracio::where('propietat_id', $idProp)
+        ->where('clau', 'like', 'norma_%')
+        ->delete();
+
+        //Le asigno el valor No en el caso de que no lleguen en la request, para después poderlo rellenar con la petición ajax
+        if(!$request->has('mascotas')){
+            $this->insertAndUpdateConfiguraio($idProp,'mascotas','No');
+        }
+        if(!$request->has('visitas')){
+            $this->insertAndUpdateConfiguraio($idProp,'visitas','No');
+        }
+        if(!$request->has('fumar')){
+            $this->insertAndUpdateConfiguraio($idProp,'fumar','No');
+        }
+        if(!$request->has('fiestas')){
+            $this->insertAndUpdateConfiguraio($idProp,'fiestas','No');
+        }
+
+        foreach ($normas as $key => $value){
+
+            var_dump("Clau ->" . $key . " Valor ->" . $value);
+
+            $this->insertAndUpdateConfiguraio($idProp,$key,$value);
+        }
+        return redirect() -> route('property.normas',['id' => $request -> id, 'prop_id' => $idProp]);
+    }
+
+    private function insertAndUpdateConfiguraio($id,$clau,$valor){
+
+        $configuracion = Configuracio::where('propietat_id', $id)
+            ->where('clau', $clau)
+            ->first();
+        if($configuracion){
+            // Actualizar el valor
+            $configuracion->valor = $valor;
+            $configuracion->save();
+        }else{
+            $config = new Configuracio();
+            $config->propietat_id = $id;
+            $config->clau = $clau;
+            $config->valor = $valor;
+            $config-> save();
+        }
+
+    }
+
+    public function allNormasAjax(Request $request){
+
+        $id = $request -> id;
+
+        $normas = Configuracio::where('propietat_id',$id)->get();
+
+        return $normas;
+    }
+
 
 }

@@ -140,7 +140,6 @@ $success: #82E0AA;
     width: 500px;
 }
 
-
 .ui-datepicker td>a,
 .ui-datepicker td>span{
     height: 42px !important;
@@ -159,7 +158,7 @@ $success: #82E0AA;
 #inline-picker>.ui-datepicker-header,
 #inline-picker>.ui-datepicker-calendar{
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
 }
 
 //mapa

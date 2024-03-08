@@ -3,7 +3,7 @@
 @section('url')
     {{route('cuenta', ['id' => $propietat -> id])}}
 @endsection
-@section('title',__('Servicios'))
+@section('title',__('Normas'))
 @section('content')
     <div class="row col-12 justify-content-between">
         <nav class="mt-3 col-sm-7 col-12" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -12,170 +12,135 @@
                 <li class="breadcrumb-item"><a href="{{route('cuenta', ['id' => $propietat -> id])}}">{{__('Cuenta')}}</a></li>
                 <li class="breadcrumb-item"><a href="{{route('property.properties', ['id' => $propietat -> id])}}">{{__('Propiedades')}}</a></li>
                 <li class="breadcrumb-item"><a href="{{route('property.edit', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id])}}">{{$propietat->nom}}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{__('Servicios')}}</li>
+                <li class="breadcrumb-item active" aria-current="page">{{__('Normas')}}</li>
             </ol>
         </nav>
-        <div class="col-sm-2 col-6 my-sm-3 my-2">
-            <label>Buscar servicio:</label>
-            <input id="cercador" class="form-control" type="text">
-        </div>
     </div>
-    <div class="gradient-custom-1 ">
-        <div class="mask d-flex align-items-center ">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-sm-10 col-12">
-                        <div class="table-responsive bg-white">
-                            <form action="{{route('saveService', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id])}}" method="post" class="row col-12 ps-4 justify-content-end">
-                                @csrf
-                                <table class="table table-hover mb-0 bg-white border-bottom border-dark">
-                                    <thead>
-                                    <tr class="text-center">
-                                        <th>{{__('Nom')}}</th>
-                                        <th>{{__('Descripción')}}</th>
-                                        <th>{{__('Acciones')}}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="tabla">
-
-                                    </tbody>
-                                </table>
-                                <div class="col-2 me-sm-0 me-5">
-                                    <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 my-3 ">Guardar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+    <form id="form" class="d-flex flex-column justify-content-center gap-4" method="POST" action="{{route('saveNormas', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id])}}">
+        @csrf
+        <div class="row mt-4">
+            <div class="form-check form-switch mb-sm-1 mb-3 col-sm-3 col-6 d-flex justify-content-center">
+                <input class="form-check-input" type="checkbox" name="mascotas" value="Si" id="mascotas">
+                <label class="form-check-label" for="mascotas">{{__('Mascotas')}}</label>
+            </div>
+            <div class="form-check form-switch mb-sm-1 mb-0 col-sm-3 col-6 d-flex justify-content-center">
+                <input class="form-check-input" type="checkbox" name="fumar" value="Si" id="fumar">
+                <label class="form-check-label" for="fumar">{{__('Fumar')}}</label>
+            </div>
+            <div class="form-check form-switch mb-sm-1 mb-3 col-sm-3 col-6 d-flex justify-content-center">
+                <input class="form-check-input" type="checkbox" name="visitas" value="Si" id="visitas">
+                <label class="form-check-label" for="visitas">{{__('Visitas')}}</label>
+            </div>
+            <div class="form-check form-switch mb-sm-1 mb-0 col-sm-3 col-6 d-flex justify-content-center">
+                <input class="form-check-input" type="checkbox" name="fiestas" value="Si" id="fiestas" >
+                <label class="form-check-label" for="fiestas">{{__('Fiestas')}}</label>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            <div class="form-group row mb-sm-1 mb-3 col-sm-5 col-12">
+                <div class="col-auto d-flex align-items-center">
+                    <label for="hora_entrada">{{__('Horario de llegada')}}:</label>
+                </div>
+                <div class="col-auto">
+                    <input type="time" class="form-control" id="entrada" value="" name="hora_entrada" required>
+                </div>
+            </div>
+            <div class="form-group row mb-sm-1 mb-0 col-sm-5 col-12">
+                <div class="col-auto d-flex align-items-center">
+                    <label for="hora_salida">{{__('Horario de salida')}}:</label>
+                </div>
+                <div class="col-auto">
+                    <input type="time" class="form-control" id="salida" value="" name="hora_salida" required>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="row justify-content-center">
+            <div class="form-group mb-sm-1 mb-0 col-sm-8 col-8">
+                <input type="text" class="form-control" id="nuevaNorma" placeholder="Ingrese una nueva norma">
+            </div>
+            <div class="form-group mb-sm-1 mb-0 col-sm-3 col-3">
+                <button type="button" class="btn bg-primary" id="agregarNorma">Añadir Norma</button>
+            </div>
+            <div class="form-group mb-sm-1 mt-4 mb-0 col-sm-10 col-12">
+                <ul class="ps-0 d-flex flex-column gap-2" id="normasList">Normas:
+
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="text-end col-10">
+                <button type="submit" class="btn btn-primary">{{__('Enviar')}}</button>
+            </div>
+        </div>
+    </form>
     <script>
-
-
-        let allServices = [];
-        let allServicesByProperty = [];
 
         $(document).ready(function (){
 
             const url = window.location.href;
-            const match = url.match(/\/property\/(\d+)\/property\/\d+\/servicios/);
+            const match = url.match(/\/property\/(\d+)\/property\/\d+\/normas/);
 
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/serviciosAjax`
-            }).done(function (service) {
-                console.log(service)
-                allServices.push.apply(allServices, service);
-                $.ajax({
-                    method: 'GET',
-                    url: `http://localhost:8100/serviciosByProperty/${match[1]}`
-                }).done(function (service) {
-                    console.log(service)
-                    allServicesByProperty.push.apply(allServicesByProperty, service);
-                    printServicios();
-                });
+                url: `http://localhost:8100/allNormasByPropertyAjax/${match[1]}`
+            }).done(function (normas) {
+                console.log(normas);
+                printNormas(normas);
             });
 
-            $.ajax({
-                method: 'GET',
-                url: '{{ route('property.traduccions') }}',
-                data: {
-                    "nom": "{{ $propietat -> nom }}",
-                }
-            }).done(function (traduccions) {
-                const nomTraduit = traduccions[0].filter((tr) => tr.lang === "{{ app() -> getLocale() }}")[0].value;
-                $("li:nth-child(4)").html(nomTraduit);
-            });
-        })
+            function printNormas(normas){
 
-        function printServicios(){
+                normas.forEach( function (value){
 
-            $('#tabla').html("");
-
-            allServices.forEach( function (value){
-
-
-                let fila = $('<tr>');
-                let columnName = $('<td>').addClass('text-center');
-                let columnDesc = $('<td>').addClass('text-center');
-
-                let pNom = $('<p>').text(value.nom).addClass('pt-1');
-                columnName.append(pNom);
-                fila.append(columnName);
-
-                let labelNumber = $('<label>').addClass('form-label pt-1').text('Cuantos hay ');
-                let inputNumber = $('<input>').attr({
-                    type: 'number',
-                    min: 0,
-                    name: `s-${value.id}`,
-                    value: 0
-                }).addClass('form-control input-number ms-3').css('width', '10%').prop('disabled', true);
-
-                let contenedorInput = $('<div>').addClass('d-flex justify-content-center');
-                contenedorInput.append(labelNumber, inputNumber);
-                columnDesc.append(contenedorInput);
-
-                let columnCheckbox = $('<td>').addClass('text-center');
-                let chechkbox = $('<input>').attr({
-                    type: 'checkbox',
-                }).addClass('form-check-input');
-
-                // Evento que cuando el valor no sea cero se active el checkbox
-                inputNumber.on('change', function() {
-                    let checkbox = $(this).closest('tr').find('input[type="checkbox"]');
-                    if ($(this).val() !== 0) {
-                        // Activar el checkbox y habilitarlo si el valor no es 0
-                        checkbox.prop('checked', true);
-                        checkbox.prop('disabled', false);
-                    } else {
-                        // Desactivar el checkbox y deshabilitarlo si el valor es 0
-                        checkbox.prop('checked', false);
-                        checkbox.prop('disabled', true);
-                    }
-                });
-
-                // Evento que cuando no este checked el input number se ponga a cero
-                $(document).on('change', 'input[type="checkbox"]', function() {
-                    let inputNumber = $(this).closest('tr').find('input[type="number"]');
-                    if (!$(this).prop('checked')) {
-                        // Si el checkbox no está marcado, establecer el valor del input en 0 y deshabilitar el checkbox
-                        inputNumber.val(0);
-                        inputNumber.prop('disabled', true);
-                    } else {
-                        // Si el checkbox está marcado, habilitar el input
-                        inputNumber.prop('disabled', false);
-                        inputNumber.val(1);
-                    }
-                });
-                fila.append(columnDesc);
-                columnCheckbox.append(chechkbox);
-                fila.append(columnCheckbox);
-                $('#tabla').append(fila);
-
-                allServicesByProperty.forEach( function (servei){
-                    if(servei.servei_id === value.id){
-                        chechkbox.prop('checked',true);
-                        inputNumber.val(servei.quantitat).prop('disabled', false);
+                    if(value.clau === "mascotas" && value.valor === "Si"){
+                        $('#mascotas').prop('checked', true);
+                    }else if(value.clau === "fiestas" && value.valor === "Si"){
+                        $('#fiestas').prop('checked', true);
+                    }else if(value.clau === "visitas" && value.valor === "Si"){
+                        $('#visitas').prop('checked', true);
+                    }else if(value.clau === "fumar" && value.valor === "Si"){
+                        $('#fumar').prop('checked', true);
+                    }else if(value.clau === "hora_entrada"){
+                        $('#entrada').val(value.valor);
+                    }else if(value.clau === "hora_salida"){
+                        $('#salida').val(value.valor);
+                    }else if(value.clau.includes('norma')){
+                        crearNorma(value.valor);
                     }
                 })
-            })
-        }
-        $('#cercador').on("input",function (){
+            }
 
-            const caracters = $(this).val().toUpperCase();
-            const tabla = $('#tabla');
+            let count = 0;
+            $("#agregarNorma").click(function(){
+                let nuevaNorma = $("#nuevaNorma").val().trim();
+                if (nuevaNorma !== "") {
+                    count++;
 
-            tabla.find('tr').each(function () {
-                const nombrePropiedad = $(this).find('td:first').text().toUpperCase();
-                if (nombrePropiedad.includes(caracters)) {
-                    $(this).show(); // Mostrar fila si coincide con la búsqueda
-                } else {
-                    $(this).hide(); // Ocultar fila si no coincide con la búsqueda
-
+                    crearNorma(nuevaNorma);
+                    // Vaciar el input de normas
+                    $("#nuevaNorma").val("");
                 }
             });
-        });
-        $('#atras').remove();
+
+            function crearNorma(norma){
+
+                // Crear un elemento li y un campo oculto
+                let li = $("<li>").text(norma);
+                let inputHidden = $("<input>", { type: "hidden", name: "norma_" + count, value: norma });
+                let buttonEliminar = $("<button>").addClass('ms-2 pt-1  btn-sm btn bg-danger bg-opacity-50').click(function(){
+                    $('input[type="hidden"][value="' + $(this).parent("li").text() + '"]').remove();
+                    $(this).parent("li").remove();
+                });
+                let svg = $('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/></svg>');
+
+                buttonEliminar.append(svg);
+                li.append(buttonEliminar);
+                $("#normasList").append(li);
+                $("#form").append(inputHidden);
+            }
+
+
+            $('#atras').remove();
+        })
     </script>
 @endsection

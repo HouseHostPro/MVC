@@ -71,6 +71,11 @@ Route::middleware('auth')->group(function (){
     Route::get('/allEspaciosByPropertyAjax/{id}',[PropertyFormController::class,'espaciosByProperty'])->name('espaciosByProperty');
     Route::post('/property/{id}/property/{prop_id}/saveEspacios',[PropertyFormController::class,'saveEspacios'])->name('saveEspacios');
 
+    //CRUD normas
+    Route::get('/property/{id}/property/{prop_id}/normas', [PropertyFormController::class, 'loadNormas']) -> name('property.normas');
+    Route::post('/property/{id}/property/{prop_id}/saveNormas',[PropertyFormController::class,'saveNormas'])->name('saveNormas');
+    Route::get('/allNormasByPropertyAjax/{id}',[PropertyFormController::class,'allNormasAjax'])->name('allNormasAjax');
+
     //Mostrar todas las propiedades
     Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
     Route::get('/property/{id}/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
@@ -81,11 +86,20 @@ Route::middleware('auth')->group(function (){
     Route::post('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'store'])->name('store.image');
     Route::post('/property/{id}/property/{prop_id}/galeria/delete',[ImagenesController::class, 'delete'])->name('delete.image');
 
+    //Calendar
+    Route::get('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
+    Route::post('/property/{id}/property/edit/{prop_id}/calendar/savePrice', [PropertyFormController::class, 'savePriceForDay']) -> name('savePriceForDay');
+    Route::post('/property/{id}/property/edit/{prop_id}/calendar/saveDays', [PropertyFormController::class, 'saveDisableDays']) -> name('saveDisableDays');
+    Route::post('/property/{id}/property/edit/{prop_id}/calendar/delete', [PropertyFormController::class, 'deleteDisableDays']) -> name('deleteDisableDays');
+
 
     //Cerrar sesión
     Route::post('/property/{id}/logout',[UserController::class,'logout'])->name('logout');
 
 });
+
+//Reservas
+Route::get('/allDatesReservades/{id}',[PropertyFormController::class,'findAllDatesReservades'])->name('findAllDatesReservades');
 
 //Petición Ajax Imagenes de la casa
 Route::get('/allImagesAjax',[ImagenesController::class,'allImagesAjax'])->name('allImagesAjax');
@@ -112,7 +126,7 @@ Route::get('/propertyForm', [PropertyFormController::class, '']);
 
 Route::get('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
 Route::post('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
-Route::get('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
+
 Route::post('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'savePreuTemporada']) -> name('property.saveCalendar');
 
 

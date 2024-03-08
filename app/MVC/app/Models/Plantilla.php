@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Configuracio extends Model{
+class Plantilla extends Model
+{
     use HasFactory;
 
-    protected $table = 'configuracio';
+    protected $table = 'plantilla';
     public $timestamps = false;
-    protected $fillable = [
-    ];
+    protected $fillable = [];
+
     public function propiedad(){
-        return $this->belongsTo(Propietat::class,'propietat_id','id');
+        return $this->hasMany(Propietat::class,'plantilla_id','id');
     }
 }
