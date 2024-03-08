@@ -102,10 +102,22 @@
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h4 class="text-right">{{ $nomTraduit -> value }}</h4>
                                     </div>
-                                    <div class="row mt-2">
+                                    <div class="row mt-2 justify-content-between">
                                         <div class="col-sm-6">
                                             <label class="labels">{{__('Nombre')}}</label>
                                             <input type="text" name="nombre" class="form-control" value="{{ $nomTraduit -> value }}">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="labels">{{__('Plantilla')}}</label>
+                                            <select class="form-select" name="plantilla" aria-label="Default select example">
+                                                @foreach($plantillas as $plantilla)
+                                                    @if($propietat->plantilla_id === $plantilla->id)
+                                                    <option value="{{$plantilla->id}}" selected>{{$plantilla->nom}}</option>
+                                                    @else
+                                                        <option value="{{$plantilla->id}}">{{$plantilla->nom}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mt-3">

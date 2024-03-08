@@ -45,5 +45,8 @@ class Propietat extends Model {
     public function periodosNoDisponibles(){
         return $this->hasMany(Periode_No_Disponible::class,'propietat_id','id');
     }
+    public function plantilla(){
+        return $this->belongsTo(Plantilla::class,'plantilla_id','id');
+    }
 
 }

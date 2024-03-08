@@ -9,6 +9,7 @@ use App\Models\Espai;
 use App\Models\Espai_Defecte;
 use App\Models\Imatge_Dormitori;
 use App\Models\Periode_No_Disponible;
+use App\Models\Plantilla;
 use App\Models\PreuTemporada;
 use App\Models\Propietat_Servei;
 use App\Models\Reserva;
@@ -42,10 +43,11 @@ class PropertyFormController extends Controller {
         $propietat = Propietat::find($request -> prop_id);
         $ciutats = $this->findAllCiutats();
         $traduccions = $this -> findTraduccions($propietat -> descripcio, $propietat -> nom);
+        $plantillas = Plantilla::all();
         $traduccioNom = $traduccions[0];
         $traduccioDesc = $traduccions[1];
         return view("property/propertyInfo", compact("propietat",
-            "ciutats", "traduccioNom", "traduccioDesc"));
+            "ciutats", "traduccioNom", "traduccioDesc","plantillas"));
     }
     public function store(Request $request) {
         $property = new Propietat();
@@ -64,7 +66,9 @@ class PropertyFormController extends Controller {
         $traduccioNom = Traduccio::where('code', $request -> nameCode) -> where('lang', app()->getLocale()) -> first();
         $traduccioDesc = Traduccio::where('code', $request -> descCode) -> where('lang', app()->getLocale()) -> first();
 
-        Propietat::where('id', $request -> id) -> update(array('localitzacio' => $request -> ubi));
+        var_dump($request->plantilla);
+
+        Propietat::where('id', $request -> id) -> update(array('localitzacio' => $request -> ubi,'plantilla_id' => $request->plantilla));
 
         $traduccioNom -> value = $request -> nombre;
         $traduccioDesc -> value = $request -> descripcion;
