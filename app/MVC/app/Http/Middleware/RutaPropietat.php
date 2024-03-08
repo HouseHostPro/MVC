@@ -32,7 +32,7 @@ class RutaPropietat
             $u === "en" ||
             $u === "allImagesAjax" ||
             $u === "allEspaciosAjax" ||
-            $url === "http://www.househostpromp.me/allImagesAjax/{id}")
+            $url === "http://www.househostpromp.me/allImagesAjax")
             return $next($request);
 	}
 
