@@ -14,19 +14,8 @@
                 <li class="breadcrumb-item active" aria-current="page">{{__('Propiedades')}}</li>
             </ol>
         </nav>
-        <div class="col-sm-3 col-1 mt-3  text-end">
-            <form method="get" action="{{ route('property.loadForm', ['id' => $PROPIETAT_ID]) }}">
-                <button type="submit" class="btn bg-primary bg-opacity-50 p-sm-2 p-0  pt-1">
-                    <svg id="icono" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus pb-1" viewBox="0 0 16 16">
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                    </svg><span id="palabra">{{__('Añadir propiedad')}}</span>
-                </button>
-            </form>
-        </div>
-    </div>
-    <div class="row col-12">
-        <div class=" col-sm-2 col-6 mb-3">
-            <label>{{__('Buscar casa')}}:</label>
+        <div class="col-sm-2 col-6 my-sm-3 my-2">
+            <label>Buscar servicio:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>

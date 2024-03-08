@@ -1,4 +1,4 @@
-@extends('layouts.plantilla1')
+@extends('layouts.plantilla' . $PLANTILLA)
 
 @section('content')
     <div class="container-fluid d-flex justify-content-center align-items-center mt-5" >

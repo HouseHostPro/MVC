@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Configuracio extends Model{
-    use HasFactory;
-
-    protected $table = 'configuracio';
+class Espai_Defecte extends Model{
+    protected $table = 'espais_defecte';
     public $timestamps = false;
     protected $fillable = [
     ];
-    public function propiedad(){
-        return $this->belongsTo(Propietat::class,'propietat_id','id');
+
+    public function espacios(){
+        return $this->hasMany(Espai::class,'espaid_id','id');
     }
 }

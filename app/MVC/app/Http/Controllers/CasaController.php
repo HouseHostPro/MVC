@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Comentari;
 use App\Models\Configuracio;
 use App\Models\Configuracio_Servei;
+use App\Models\Espai;
+use App\Models\Imatge_Dormitori;
 use App\Models\Propietat;
+use App\Models\Propietat_Servei;
 use App\Models\Reserva;
 use App\Models\Servei;
 use App\Models\Tiquet_Comentari;
+use Carbon\Carbon;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CasaController extends Controller{
 
@@ -24,6 +29,8 @@ class CasaController extends Controller{
 	//$request -> id
 	var_dump($request -> dominiCasa);
         $preuBase = Configuracio::where(['propietat_id' => $request -> id, 'clau' => 'preu_base']) -> first() -> valor;
+        $dormitorios = Espai::where('espaid_id',1)->where('propietat_id',$request -> id)->get();
+        $urlsCamas = $this->allUrlsImage();
 
 
         $comentarios = [];
@@ -38,9 +45,27 @@ class CasaController extends Controller{
             }
         }
 
-        $servicios = Configuracio_Servei::where('configuracio_id',$request -> id)->get();
+        $servicios = Propietat_Servei::where('propietat_id',$request -> id)->get();
 
-        return view('fichaCasa',compact('comentarios','servicios','propietat','preuBase'));
+        return view('fichaCasa',compact('comentarios','servicios','propietat','preuBase','dormitorios','urlsCamas'));
+    }
+
+    private function allUrlsImage(){
+
+        $allUrls = [];
+        $imagenes = Imatge_Dormitori::all();
+
+        foreach ($imagenes as $imagen){
+            $url = Storage::disk('camas')->temporaryUrl(
+                $imagen->url,
+                Carbon::now()->addSeconds(30)
+            );
+            $allUrls[] = [
+                'url' => $url,
+                'id' => $imagen->id,
+            ];
+        }
+        return $allUrls;
     }
     public function confirmacion(Request $request){
 

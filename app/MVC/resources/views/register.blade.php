@@ -109,9 +109,9 @@
                     </label>
                 </div>
                 @endguest
-                <di class="text-end col-10">
+                <div class="text-end col-10">
                     <button type="submit" class="btn btn-primary">{{__('Enviar')}}</button>
-                </di>
+                </div>
             </div>
         </form>
 @auth

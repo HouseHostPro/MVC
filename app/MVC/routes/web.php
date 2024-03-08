@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function (){
     //Dashboard usuari
     Route::post('/property/{id}/cuenta',[UserController::class,'cuenta'])->name('cuenta');
     Route::get('/property/{id}/cuenta',[UserController::class,'cuenta'])->name('cuenta');
+
     //CRUD comentaris
     Route::get('/deleteComentario/{id}/{estat}',[ComentariController::class,'delete'])->name('comentario.delete.get');
     Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
@@ -62,21 +63,35 @@ Route::middleware('auth')->group(function (){
     //CRUD servicios
     Route::get('/property/{id}/property/{prop_id}/servicios',[PropertyFormController::class,'loadSevice'])->name('property.service');
     Route::get('/serviciosAjax',[PropertyFormController::class,'allService'])->name('serviceA');
-    Route::get('/serviciosByProperty',[PropertyFormController::class,'serviceByProperty'])->name('serviciosPreperty');
-    Route::post('/saveService',[PropertyFormController::class,'saveService'])->name('saveService');
+    Route::get('/serviciosByProperty/{id}',[PropertyFormController::class,'serviceByProperty'])->name('serviciosPreperty');//AJAX
+    Route::post('/property/{id}/property/{prop_id}/saveService',[PropertyFormController::class,'saveService'])->name('saveService');
 
     //CRUD espacios
-    Route::get('/property/{id}/property/{prop_id}/espais', [EspaiController::class, 'loadForm']) -> name('espai.espais');
+    Route::get('/property/{id}/property/{prop_id}/espacios', [PropertyFormController::class, 'loadEspacios']) -> name('espai.espais');
+    Route::get('/allEspaciosAjax',[PropertyFormController::class,'allEspaciosAjax'])->name('allEspaciosAjax');
+    Route::get('/allEspaciosByPropertyAjax/{id}',[PropertyFormController::class,'espaciosByProperty'])->name('espaciosByProperty');
+    Route::post('/property/{id}/property/{prop_id}/saveEspacios',[PropertyFormController::class,'saveEspacios'])->name('saveEspacios');
+
+    //CRUD normas
+    Route::get('/property/{id}/property/{prop_id}/normas', [PropertyFormController::class, 'loadNormas']) -> name('property.normas');
+    Route::post('/property/{id}/property/{prop_id}/saveNormas',[PropertyFormController::class,'saveNormas'])->name('saveNormas');
+    Route::get('/allNormasByPropertyAjax/{id}',[PropertyFormController::class,'allNormasAjax'])->name('allNormasAjax');
 
     //Mostrar todas las propiedades
-    
-    Route::get('/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
+    Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']) -> name('property.properties');
+    Route::get('/property/{id}/properties', [PropertyFormController::class, 'findAllByUser']) -> name('property.properties');
     Route::get('/allTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('property.traduccions');
 
     //CRUD imagenes
     Route::get('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'allImages'])->name('property.gallery');
     Route::post('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'store'])->name('store.image');
     Route::post('/property/{id}/property/{prop_id}/galeria/delete',[ImagenesController::class, 'delete'])->name('delete.image');
+
+    //Calendar
+    Route::get('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
+    Route::post('/property/{id}/property/edit/{prop_id}/calendar/savePrice', [PropertyFormController::class, 'savePriceForDay']) -> name('savePriceForDay');
+    Route::post('/property/{id}/property/edit/{prop_id}/calendar/saveDays', [PropertyFormController::class, 'saveDisableDays']) -> name('saveDisableDays');
+    Route::post('/property/{id}/property/edit/{prop_id}/calendar/delete', [PropertyFormController::class, 'deleteDisableDays']) -> name('deleteDisableDays');
 
     //Redsys
     Route::controller(RedsysController::class)->prefix('/property/{id}/redsys')
@@ -96,7 +111,8 @@ Route::middleware('auth')->group(function (){
 
 });
 
-Route::get('/allProperties', [PropertyFormController::class, 'AllProperties']);
+//Reservas
+Route::get('/allDatesReservades/{id}',[PropertyFormController::class,'findAllDatesReservades'])->name('findAllDatesReservades');
 
 //Petición Ajax Imagenes de la casa
 Route::get('/allImagesAjax',[ImagenesController::class,'allImagesAjax'])->name('allImagesAjax');
@@ -109,12 +125,12 @@ Route::get('/property/{id}',[CasaController::class,'datosFichaCasa'])->name('pri
 Route::get('/findTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('findTraduccions');
 
 //Login
-Route::view('property/{id}/login','login')->name('login');
-Route::post('property/{id}/login/check',[UserController::class,'checkLogin'])->name('login.check');
+Route::view('/property/{id}/login','login')->name('login');
+Route::post('/property/{id}/login/check',[UserController::class,'checkLogin'])->name('login.check');
 
 
 //Register
-Route::get('/user/register', [UserController::class,'register'])->name('user.register');
+Route::get('/property/{id}/user/register', [UserController::class,'register'])->name('user.register');
 Route::post('/user/register', [UserController::class, 'store'])->name('user.store');
 
 
@@ -123,7 +139,7 @@ Route::get('/propertyForm', [PropertyFormController::class, '']);
 
 Route::get('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'getPropietat']) -> name('property.edit');
 Route::post('/property/{id}/property/edit/{prop_id}', [PropertyFormController::class, 'updatePropietat']) -> name('property.update');
-Route::get('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
+
 Route::post('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'savePreuTemporada']) -> name('property.saveCalendar');
 
 

@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Configuracio extends Model{
-    use HasFactory;
+class Imatge_Dormitori extends Model{
 
-    protected $table = 'configuracio';
+    protected $table = 'imatges_dormitoris';
     public $timestamps = false;
     protected $fillable = [
     ];
-    public function propiedad(){
-        return $this->belongsTo(Propietat::class,'propietat_id','id');
+
+    public function espacios(){
+        return $this->hasMany(Espai::class,'imatge_id','id');
     }
 }

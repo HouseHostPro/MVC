@@ -9,10 +9,18 @@
         <div class="d-flex " >
             <div class="collapse navbar-collapse" id="navbarNavDropdown" >
                 <ul class="navbar-nav" >
-                    <li class="nav-item me-3" >
-                        <button type="button" class="btn btn-link text-decoration-none text-light fs-5" data-bs-toggle="modal" data-bs-target="#idiomes">
-                            {{__('Idioma')}}
+                    <li class="nav-item me-3 align-self-center" >
+                        <button type="button" class="text-white btn bg-transparent border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{__('Idiomas')}}
                         </button>
+                        <ul class="dropdown-menu dropdown-menu-end me-5" aria-labelledby="navbarDropdownMenuLink">
+                            <li class="pt-1">
+                                <a class="text-decoration-none ms-3" href="/es">{{__('Español')}}</a>
+                            </li>
+                            <li class=" pb-1 pt-2">
+                                <a class="text-decoration-none ms-3" href="/en">{{__('Inglés')}}</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -22,7 +30,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end mt-2 " aria-labelledby="navbarDropdownMenuLink">
                             @guest
-                                <li><a class="text-decoration-none ms-3 pt-2" href="{{ route('login', ['id' => $PROPIETAT_ID]) }}">{{__('Iniciar sesión')}}</a></li>
+                                <li><a class="text-decoration-none ms-3 pt-1" href="{{ route('login', ['id' => $PROPIETAT_ID]) }}">{{__('Iniciar sesión')}}</a></li>
                             @endguest
                             <li>
                                 <form method="post" action="{{ route('cuenta', ['id' => $PROPIETAT_ID]) }}">

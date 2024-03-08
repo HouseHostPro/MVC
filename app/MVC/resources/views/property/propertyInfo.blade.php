@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('build/assets/plantilla1.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('build/assets/plantilla' . $PLANTILLA .'.css')}}">
     <script src="{{asset('build/assets/custom.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
@@ -35,7 +35,7 @@
         <div class="row h-100">
             <div class="col-sm-2 col-12 bg-primary bg-opacity-25 pb-sm-0 pb-3">
                 <div class="text-center pb-3 text-dark mt-3">
-                    <h4 class="d-sm-inline">Opciones de configuración</h4>
+                    <h4 class="d-sm-inline">{{__('Opciones de configuración')}}</h4>
                 </div>
                 <ul class="ms-2 mt-2 nav nav-pills flex-column gap-2" id="menu">
                     <li class="nav-item ps-3">
@@ -46,7 +46,7 @@
                         </a>
                     </li>
                     <li class="nav-item ps-3">
-                        <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                        <a href="{{ route('property.normas', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id]) }}" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mb-1 me-1 bi bi-arrow-return-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
                             </svg>{{__('Normas')}}
@@ -70,7 +70,7 @@
                         <a href="{{route('property.calendar', ['id' => $PROPIETAT_ID ,'prop_id' => $propietat -> id])}}" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mb-1 me-1 bi bi-arrow-return-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
-                            </svg>Disponibilidad y precios
+                            </svg>{{__('Disponibilidad y precios')}}
                         </a>
                     </li>
                 </ul>
@@ -102,10 +102,22 @@
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h4 class="text-right">{{ $nomTraduit -> value }}</h4>
                                     </div>
-                                    <div class="row mt-2">
+                                    <div class="row mt-2 justify-content-between">
                                         <div class="col-sm-6">
                                             <label class="labels">{{__('Nombre')}}</label>
                                             <input type="text" name="nombre" class="form-control" value="{{ $nomTraduit -> value }}">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="labels">{{__('Plantilla')}}</label>
+                                            <select class="form-select" name="plantilla" aria-label="Default select example">
+                                                @foreach($plantillas as $plantilla)
+                                                    @if($propietat->plantilla_id === $plantilla->id)
+                                                    <option value="{{$plantilla->id}}" selected>{{$plantilla->nom}}</option>
+                                                    @else
+                                                        <option value="{{$plantilla->id}}">{{$plantilla->nom}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mt-3">
@@ -139,7 +151,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="map" style="height: 380px"></div>
+                        <div id="map" style="height: 380px" class="mb-4"></div>
                     </form>
                 </div>
             </div>

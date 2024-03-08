@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Configuracio extends Model{
+class Periode_No_Disponible extends Model{
     use HasFactory;
-
-    protected $table = 'configuracio';
+    protected $table = 'periodes_no_disponibles';
     public $timestamps = false;
-    protected $fillable = [
-    ];
+
     public function propiedad(){
         return $this->belongsTo(Propietat::class,'propietat_id','id');
     }

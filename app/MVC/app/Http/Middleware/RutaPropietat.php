@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Propietat;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\Configuracio;
-use App\Models\Propietat;
 
 class RutaPropietat
 {
@@ -27,23 +27,22 @@ class RutaPropietat
             $u === "findTraduccions" ||
             $u === "allTraduccions" ||
             $u === "serviciosAjax" ||
-            $u === "serviciosByProperty" ||
+            $u === "serviciosByProperty/{id}" ||
             $u === "es" ||
             $u === "en" ||
-            $u === "allImagesAjax")
+            $u === "allImagesAjax" ||
+            $u === "allEspaciosAjax" ||
+            $u === "allEspaciosByPropertyAjax/{id}")
             return $next($request);
 	}
 
-	//$domini = explode('/', url() -> current())[2];
-	//if ($domini === "www.househostpromp.me")
-	//	return $next($request);
-
-        //$propietat = Propietat::where('id', Configuracio::select('propietat_id') -> where('valor', $domini) -> first() -> propietat_id) -> first();
 
 
         $id = explode("/", $url)[4];
         View::share('PROPIETAT_ID', $id);
-	//$request -> merge(['dominiCasa' => $propietat -> id]);
+
+        $id_plantilla = Propietat::where('id',$id)->value('plantilla_id');
+        View::share('PLANTILLA', $id_plantilla);
 
         return $next($request);
     }

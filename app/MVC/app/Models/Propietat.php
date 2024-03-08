@@ -33,4 +33,20 @@ class Propietat extends Model {
     public function imaganes(){
         return $this->hasMany(Imatge::class,'propietat_id','id');
     }
+    public function config_servicios(){
+        return $this->hasMany(Propietat_Servei::class,'propietat_id','id');
+    }
+    public function espacios(){
+        return $this->hasMany(Espai::class,'propietat_id','id');
+    }
+    public function configuracion(){
+        return $this->hasMany(Configuracio::class,'propietat_id','id');
+    }
+    public function periodosNoDisponibles(){
+        return $this->hasMany(Periode_No_Disponible::class,'propietat_id','id');
+    }
+    public function plantilla(){
+        return $this->belongsTo(Plantilla::class,'plantilla_id','id');
+    }
+
 }
