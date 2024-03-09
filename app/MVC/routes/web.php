@@ -116,7 +116,7 @@ Route::get('/property/{id}',[CasaController::class,'datosFichaCasa'])->name('pri
 Route::get('/findTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('findTraduccions');
 
 //Login
-Route::get('/property/{id}/login','login')->name('login');
+Route::get('/property/{id}/login', [UserController::class, 'loadFormUser'])->name('login');
 Route::post('/property/{id}/login/check',[UserController::class,'checkLogin'])->name('login.check');
 
 
