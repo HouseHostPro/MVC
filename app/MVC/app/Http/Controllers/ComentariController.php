@@ -129,6 +129,13 @@ class ComentariController extends Controller{
 
     public function allComentarios(Request $request){
 
-        return view('historialComentarios');
+        $comentarios = $this -> allCommentsForProperties($request);
+
+        foreach ($comentarios as $key => $comentario) {
+            $nomTraduit = Traduccio::where('code', $comentario['nomPropietat']) -> where('lang', app() -> getLocale()) -> first() -> value;
+            $comentarios[$key]['nomPropietat'] = $nomTraduit;
+        }
+
+        return view('historialComentarios', compact('comentarios'));
     }
 }

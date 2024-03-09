@@ -77,13 +77,13 @@
 
         $(document).ready(function (){
 
-
-            $.ajax({
+            /*$.ajax({
                 method: 'GET',
                 url: `http://localhost:8100/comentariosPropertiesAjax`
             }).done(function (comentarios) {
                 printCommnets(comentarios)
-            });
+            });*/
+            printCommnets(@json($comentarios))
 
         })
 

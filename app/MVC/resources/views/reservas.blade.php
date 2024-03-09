@@ -50,12 +50,13 @@
 
             $(document).ready(function (){
 
-                $.ajax({
+                /*$.ajax({
                     method: 'GET',
                     url: `http://localhost:8100/reservasAjax`
                 }).done(function (reservas) {
                     printReservas(reservas)
-                });
+                });*/
+            printReservas(@json($reservas))
 
             function printReservas(reserva){
 
