@@ -15,7 +15,7 @@
             </ol>
         </nav>
         <div class="col-sm-2 col-6 my-sm-3 my-2">
-            <label>{{__('Buscar servicio')}}:</label>
+            <label>{{__('Buscar propiedad')}}:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>

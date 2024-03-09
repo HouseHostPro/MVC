@@ -16,7 +16,7 @@
             </ol>
         </nav>
         <div class="col-sm-2 col-6 my-sm-3 my-2">
-            <label>Buscar servicio:</label>
+            <label>{{__('Buscar servicio')}}:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>
@@ -41,7 +41,7 @@
                                     </tbody>
                             </table>
                                 <div class="col-2 me-sm-0 me-5">
-                                    <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 my-3 ">Guardar</button>
+                                    <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 my-3 ">{{__('Guardar')}}</button>
                                 </div>
                             </form>
                         </div>
@@ -104,7 +104,7 @@
                 columnName.append(pNom);
                 fila.append(columnName);
 
-                let labelNumber = $('<label>').addClass('form-label pt-1').text('Cuantos hay ');
+                let labelNumber = $('<label>').addClass('form-label pt-1').text('{{('Cuantos hay')}}');
                 let inputNumber = $('<input>').attr({
                     type: 'number',
                     min: 0,

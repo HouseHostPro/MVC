@@ -16,7 +16,7 @@
             </ol>
         </nav>
         <div class="col-sm-2 col-6 my-sm-3 my-2">
-            <label>Buscar servicio:</label>
+            <label>{{__('Buscar servicio')}}:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>
@@ -41,7 +41,7 @@
                                     </tbody>
                                 </table>
                                 <div class="col-2 me-sm-0 me-5 ">
-                                    <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 my-3 ">Guardar</button>
+                                    <button type="submit" id="buttonSave" class="btn bg-primary bg-opacity-50 my-3 ">{{__('Guardar')}}</button>
                                 </div>
                             </form>
                         </div>
@@ -100,14 +100,14 @@
 
                 if(value.tipus === "Dormitorio"){
 
-                    let opciones = [{nombre:'Cama doble', valor: 'cd'},{nombre:'Cama individual', valor: 'ci'},{nombre:'2 camas individuales', valor: 'ci2'}];
+                    let opciones = [{nombre:'{{__('Cama doble')}}', valor: 'cd'},{nombre:'{{__('Cama individual')}}', valor: 'ci'},{nombre:'2 {{__('camas individuales')}}', valor: 'ci2'}];
                     opciones.forEach(function(opcion) {
                         let fila = $('<tr>');
                         let columnName = $('<td>').addClass('text-center');
                         let columnDesc = $('<td>').addClass('text-center');
 
                         let pNom = $('<p>').text(value.tipus).addClass('pt-1');
-                        columnName.append(pNom);
+                        columnName.append({{__(pNom)}});
                         fila.append(columnName);
 
 
@@ -187,7 +187,7 @@
                     columnName.append(pNom);
                     fila.append(columnName);
 
-                    let labelNumber = $('<label>').addClass('form-label pt-1').text('Cuantos hay ');
+                    let labelNumber = $('<label>').addClass('form-label pt-1').text('{{__('Cuantos hay')}}');
                     let inputNumber = $('<input>').attr({
                         type: 'number',
                         min: 0,
