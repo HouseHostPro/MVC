@@ -112,14 +112,6 @@ class CasaController extends Controller{
         return view('confirmacionReserva',compact('datosReserva'));
     }
 
-    public function confirmacionGet(Request $request){
-
-        $comentarios = Comentari::where('propietat_id',1)->get();
-        $servicios = Configuracio_Servei::where('configuracio_id',1)->get();
-
-
-        return view('principal',compact('comentarios','servicios'));
-    }
 
     public function newReserva(Request $request){
 
@@ -149,7 +141,12 @@ class CasaController extends Controller{
 
     public function reservas(){
 
-        return view('reservas');
+        $reservas = $this -> allReservasAjax();
+
+        foreach ($reservas as $reserva) {
+            $reserva -> nomPropietat = Traduccio::where('code', $reserva -> nomPropietat) -> where('lang', app() -> getLocale()) -> first() -> value;
+        }
+        return view('reservas', compact('reservas'));
 
     }
     public function historialReservas(){

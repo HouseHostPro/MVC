@@ -52,48 +52,28 @@
 
             $(document).ready(function (){
 
-                printProperties(@json($propietats))
 
-                /*$.ajax({
-                    method: 'GET',
-                    url: `http://localhost:8100/allProperties`
-                }).done(function (propiedades) {
 
-                    for (const p of propiedades) {
-                        $.ajax({
-                            method: 'GET',
-                            url: '{{ route('property.traduccions') }}',
-                            data: {
-                                "nom": p.nom
-                            }
-                        }).done( function (traduccions) {
-                            const nomTraduit = traduccions[0].filter((tr) => tr.lang === '{{ app() -> getLocale() }}')[0].value;
-                            $('td:contains("' + p.nom + '")').html(nomTraduit);
-                        });
-                    }
-
-                    printProperties(propiedades);
-                });*/
                     $.ajax({
                         method: 'GET',
                         url: `http://localhost:8100/imagenesPortadaAjax`
                     }).done(function (imagenes) {
                         console.log(imagenes)
                         allImages.push.apply(allImages, imagenes);
-                        printProperties(propiedades);
+                        printProperties(@json($propietats))
                     });
-                });
-                function resizeSpan() {
-                    let windowWidth = $(window).width();
 
-                    if (windowWidth < 540) {
-                        $('#palabra').hide();
-                        $('#icono').css({"width":"30","height":"30"});
-                    } else {
-                        $('#palabra').show();
-                        $('th').addClass('text-center');
+                    function resizeSpan() {
+                        let windowWidth = $(window).width();
+
+                        if (windowWidth < 540) {
+                            $('#palabra').hide();
+                            $('#icono').css({"width":"30","height":"30"});
+                        } else {
+                            $('#palabra').show();
+                            $('th').addClass('text-center');
+                        }
                     }
-                }
 
 
                 $(window).resize(resizeSpan);
@@ -109,10 +89,13 @@
                     let fila = $('<tr>');
                     fila.append($('<td>').text(propiedad[i].nom).attr('data-label', 'Nombre propiedad'));
 
+                    console.log(count)
+                    console.log(allImages.length)
                     if(count < allImages.length){
-
+                        console.log("entra")
                         if(propiedad[i].id === allImages[i].idProp){
 
+                            console.log(allImages[i].url);
                             let imagen = $('<img>').attr({
                                 'src': allImages[i].url,
                                 'style': 'height: 150px; width: 150px'
@@ -167,8 +150,6 @@
                     }
                 });
             });
-
-
 
         </script>
     @endauth

@@ -33,7 +33,10 @@ class PropertyFormController extends Controller {
     public function findAllByUser() {
         $propietats = Propietat::where('usuari_id',Auth::user()->id) -> get();
 
+
+
         foreach ($propietats as $propietat) {
+
             $nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
             $propietat -> nom = $nom;
         }
@@ -64,13 +67,18 @@ class PropertyFormController extends Controller {
         $imagen = Imatge::where('propietat_id', $id)
             ->where('portada', 1)
             ->first();
+        if($imagen){
+            $url = Storage::disk('propiedades')->temporaryUrl(
+                $imagen->url,
+                Carbon::now()->addSeconds(30)
+            );
 
-        $url = Storage::disk('propiedades')->temporaryUrl(
-            $imagen->url,
-            Carbon::now()->addSeconds(30)
-        );
+            return $url;
+        }else{
+            return null;
+        }
 
-        return $url;
+
     }
     public function store(Request $request) {
         $property = new Propietat();
