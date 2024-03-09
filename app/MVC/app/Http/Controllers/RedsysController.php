@@ -42,8 +42,8 @@ class RedsysController extends Controller
             $reserva -> persones = $personas;
             $reserva -> usuari_id = Auth::user() -> id;
             $reserva -> propietat_id = explode("/", url() ->current())[4];
-            $reserva -> data_inici = $request -> from;
-            $reserva -> data_fi = $request -> to;
+            $reserva -> data_inici = $request -> frombd;
+            $reserva -> data_fi = $request -> tobd;
 
             $nomPropietat = Propietat::where('id', $reserva -> propietat_id) -> first() -> nom;
             $nomTraduit = Traduccio::where(['code' => $nomPropietat, 'lang' => app() -> getLocale()]) -> first() -> value;
@@ -85,8 +85,8 @@ class RedsysController extends Controller
 
         $reserva = Session::get('reserva');
         $reserva -> estat = "PAGADA";
-        $reserva -> data_inici = date("y-m-d", strtotime($reserva -> data_inici));
-        $reserva -> data_fi = date("y-m-d", strtotime($reserva -> data_fi));
+        /*$reserva -> data_inici = date("y-m-d", strtotime($reserva -> data_inici));
+        $reserva -> data_fi = date("y-m-d", strtotime($reserva -> data_fi));*/
         $reserva -> save();
 
         $factura = new Factura();
