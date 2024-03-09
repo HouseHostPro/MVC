@@ -123,6 +123,8 @@ class PropertyFormController extends Controller {
 
         $dates = $this->findAllDatesReservades($request);
         $propietat = Propietat::find($id);
+        $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
+
         $preuBase = Configuracio::where(['propietat_id' => $id, 'clau' => 'preu_base']) -> first() -> valor;
         $disableDays = $this->findAllDatesDisabled($request);
 
@@ -293,6 +295,8 @@ class PropertyFormController extends Controller {
         $servicios = Servei::all();
 
         $propietat = Propietat::find($id);
+        $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
+
 
         return view('property/serveiForm', compact('propietat','servicios'));
     }
@@ -345,6 +349,8 @@ class PropertyFormController extends Controller {
         $servicios = Servei::all();
 
         $propietat = Propietat::find($id);
+        $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
+
 
         return view('property/espaiForm', compact('propietat','servicios'));
     }
@@ -412,6 +418,7 @@ class PropertyFormController extends Controller {
         $id = $request -> prop_id;
 
         $propietat = Propietat::find($id);
+        $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
 
         return view('property/normasForm', compact('propietat'));
     }

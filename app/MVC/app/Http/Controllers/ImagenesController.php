@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Imatge;
 use App\Models\Propietat;
+use App\Models\Traduccio;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -42,6 +43,8 @@ class ImagenesController extends Controller{
         $allUrls = $this->allUrlsImage();
 
         $propietat = Propietat::find($idProp);
+        $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
+
 
         return view('property/propertyGaleria',compact('allUrls', 'propietat'));
 
