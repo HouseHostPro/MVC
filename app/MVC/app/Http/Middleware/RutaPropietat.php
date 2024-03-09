@@ -19,20 +19,20 @@ class RutaPropietat
     {
         $url = url() -> current();
 
-        if ($url === "http://localhost:8100/allProperties" ||
-            $url === "http://localhost:8100/findTraduccions" ||
-            $url === "http://localhost:8100/allTraduccions" ||
-            $url === "http://localhost:8100/serviciosAjax" ||
-            $url === "http://localhost:8100/serviciosByProperty/{id}" ||
-            $url === "http://localhost:8100/es" ||
-            $url === "http://localhost:8100/en" ||
+        if ($url === "http://www.househostpromp.me/allProperties" ||
+            $url === "http://www.househostpromp.me/findTraduccions" ||
+            $url === "http://www.househostpromp.me/allTraduccions" ||
+            $url === "http://www.househostpromp.me/serviciosAjax" ||
+            $url === "http://www.househostpromp.me/serviciosByProperty/{id}" ||
+            $url === "http://www.househostpromp.me/es" ||
+            $url === "http://www.househostpromp.me/en" ||
             $url === "http://www.househostpromp.me/allImagesAjax" ||
-            $url === "http://localhost:8100/allEspaciosAjax" ||
-            $url === "http://localhost:8100/allEspaciosByPropertyAjax/{id}"||
-            $url === "http://localhost:8100/comentariosUserAjax"||
-            $url === "http://localhost:8100/comentariosPropertiesAjax"||
-            $url === "http://localhost:8100/reservasAjax"||
-            $url === "http://localhost:8100/reservasPropertiesAjax"||
+            $url === "http://www.househostpromp.me/allEspaciosAjax" ||
+            $url === "http://www.househostpromp.me/allEspaciosByPropertyAjax/{id}"||
+            $url === "http://www.househostpromp.me/comentariosUserAjax"||
+            $url === "http://www.househostpromp.me/comentariosPropertiesAjax"||
+            $url === "http://www.househostpromp.me/reservasAjax"||
+            $url === "http://www.househostpromp.me/reservasPropertiesAjax"||
             $url === "http://www.househostpromp.me/imagenesPortadaAjax")
             return $next($request);
 

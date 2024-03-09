@@ -60,15 +60,15 @@
             const url = window.location.href;
             const match = url.match(/\/property\/(\d+)\/property\/\d+\/espacios/);
 
-
+            const host = location.host;
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allEspaciosAjax`
+                url: `http://${host}/allEspaciosAjax`
             }).done(function (espacios) {
                 allEspacios.push.apply(allEspacios, espacios);
                 $.ajax({
                     method: 'GET',
-                    url: `http://localhost:8100/allEspaciosByPropertyAjax/${match[1]}`
+                    url: `http://${host}/allEspaciosByPropertyAjax/${match[1]}`
                 }).done(function (espacios) {
                     allEspaciosByProperty.push.apply(allEspaciosByProperty, espacios);
                     printEspacios();
