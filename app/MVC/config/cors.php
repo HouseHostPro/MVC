@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['casconcos.live', '*.casconcos.live', 'househostpromp.me', '*.househostpromp.me'],
 
     'allowed_origins_patterns' => [],
 
