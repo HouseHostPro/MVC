@@ -264,17 +264,18 @@
                 $('#titolCasa').val(traduccions[0].filter((traduccio) => traduccio.lang === applocale)[0].value);
             });
 
+            const host = location.host;
             //Petición Ajax para poner todas las imagenes de la casa en el modal
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allImagesAjax`
+                url: `http://${host}/allImagesAjax`
             }).done(function (imagenes) {
                 printImagenes(imagenes)
             });
 
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allDatesReservades/{{$PROPIETAT_ID}}`
+                url: `http://${host}/allDatesReservades/{{$PROPIETAT_ID}}`
             }).done(function (reservas) {
                 allReservas = reservas;
                 pintalCalendario(reservas);
