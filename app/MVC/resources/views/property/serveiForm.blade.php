@@ -78,7 +78,7 @@
                 });
             });
 
-            $.ajax({
+            /*$.ajax({
                 method: 'GET',
                 url: '{{ route('property.traduccions') }}',
                 data: {
@@ -87,7 +87,7 @@
             }).done(function (traduccions) {
                 const nomTraduit = traduccions[0].filter((tr) => tr.lang === "{{ app() -> getLocale() }}")[0].value;
                 $("li:nth-child(4)").html(nomTraduit);
-            });
+            });*/
         })
 
         function printServicios(){
