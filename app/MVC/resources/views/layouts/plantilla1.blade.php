@@ -79,7 +79,7 @@
         const host = location.host;
         $.ajax({
             method: 'GET',
-            url: `http://${host}/allImagesAjax/{{$PROPIETAT_ID}}`
+            url: `http://www.househostpromp.me/allImagesAjax/{{$PROPIETAT_ID}}`
         }).done(function (imagenes) {
             printImagenes(imagenes)
         });
