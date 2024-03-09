@@ -70,7 +70,7 @@
                 allServices.push.apply(allServices, service);
                 $.ajax({
                     method: 'GET',
-                    url: `http://localhost:8100/serviciosByProperty/${match[1]}`
+                    url: `http://${host}/serviciosByProperty/${match[1]}`
                 }).done(function (service) {
                     console.log(service)
                     allServicesByProperty.push.apply(allServicesByProperty, service);
