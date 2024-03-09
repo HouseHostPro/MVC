@@ -65,18 +65,17 @@
                 method: 'GET',
                 url: `http://localhost:8100/allEspaciosAjax`
             }).done(function (espacios) {
-                console.log(espacios);
                 allEspacios.push.apply(allEspacios, espacios);
                 $.ajax({
                     method: 'GET',
                     url: `http://localhost:8100/allEspaciosByPropertyAjax/${match[1]}`
                 }).done(function (espacios) {
-                    console.log(espacios);
                     allEspaciosByProperty.push.apply(allEspaciosByProperty, espacios);
                     printEspacios();
                 });
 
             });
+            //printEspacios();
 
 
             $.ajax({
@@ -107,7 +106,7 @@
                         let columnDesc = $('<td>').addClass('text-center');
 
                         let pNom = $('<p>').text(value.tipus).addClass('pt-1');
-                        columnName.append({{__(pNom)}});
+                        columnName.append(pNom);
                         fila.append(columnName);
 
 

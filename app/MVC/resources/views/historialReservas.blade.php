@@ -3,7 +3,7 @@
 @section('url')
     {{route('cuenta', ['id' => $PROPIETAT_ID])}}
 @endsection
-@section('title','Historial de reservas')
+@section('title',__('Historial de reservas'))
 @section('content')
     <div class="row col-12 justify-content-between mb-4">
         <nav class="mt-3 col-sm-6 col-12" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">

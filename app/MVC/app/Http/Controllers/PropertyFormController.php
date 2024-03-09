@@ -351,8 +351,17 @@ class PropertyFormController extends Controller {
         $propietat = Propietat::find($id);
         $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
 
+        $todosEspacios = $this -> allEspaciosAjax($request);
+        foreach ($todosEspacios as $e) {
+            $e -> tipus = __($e -> tipus);
+        }
 
-        return view('property/espaiForm', compact('propietat','servicios'));
+        $espaciosPropietat = $this -> espaciosByProperty($request);
+        foreach ($espaciosPropietat as $e) {
+            $e -> tipus = __($e -> tipus);
+        }
+
+        return view('property/espaiForm', compact('propietat','servicios', 'todosEspacios', 'espaciosPropietat'));
     }
     public function allEspaciosAjax(Request $request){
 
