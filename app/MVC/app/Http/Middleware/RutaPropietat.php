@@ -26,7 +26,7 @@ class RutaPropietat
             $url === "http://localhost:8100/serviciosByProperty/{id}" ||
             $url === "http://localhost:8100/es" ||
             $url === "http://localhost:8100/en" ||
-            $url === "http://localhost:8100/allImagesAjax" ||
+            //$url === "http://localhost:8100/allImagesAjax" ||
             $url === "http://localhost:8100/allEspaciosAjax" ||
             $url === "http://localhost:8100/allEspaciosByPropertyAjax/{id}"||
             $url === "http://localhost:8100/comentariosUserAjax"||
@@ -43,8 +43,6 @@ class RutaPropietat
 
         $id_plantilla = Propietat::where('id',explode("/", $url)[4])->value('plantilla_id');
         View::share('PLANTILLA', $id_plantilla);
-        var_dump($id);
-        var_dump($id);
 
         return $next($request);
     }
