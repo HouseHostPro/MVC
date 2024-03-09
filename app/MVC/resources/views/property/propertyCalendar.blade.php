@@ -102,10 +102,11 @@
 
     <script>
 
+        const host = location.host;
         $(document).ready(function() {
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allDatesReservades/{{$PROPIETAT_ID}}`
+                url: `http://${host}/allDatesReservades/{{$PROPIETAT_ID}}`
             }).done(function (reservas) {
                 allReservas = reservas;
                 pintalCalendario(reservas);
