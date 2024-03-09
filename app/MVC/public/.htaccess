@@ -5,10 +5,10 @@
 
     RewriteEngine On
 
-        RewriteBase /
+        #RewriteBase /
 
-        RewriteCond %{HTTP_HOST} ^www.househostpromp.me$ [NC]
-        RewriteRule ^property/2 http://www.casconcos.live/ [L,R=301]
+        #RewriteCond %{HTTP_HOST} ^www.househostpromp.me$ [NC]
+        #RewriteRule ^property/2 http://www.casconcos.live/ [L,R=301]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
