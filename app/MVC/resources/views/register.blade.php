@@ -69,11 +69,11 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="form-group mb-sm-1 mb-3 col-sm-4 col-12">
+                <div class="form-group mb-sm-1 mb-3 col-sm-5 col-6">
                     <label for="addressInput">{{__('Dirección')}}:</label>
                     <input required type="text" class="form-control" value="@auth{{$user->direccio}}@endauth" name="direccio" placeholder="{{__('Dirección')}}">
                 </div>
-                <div class="form-group mb-sm-1 mb-0 col-sm-3 col-6">
+                <div class="form-group mb-sm-1 mb-0 col-sm-5 col-6">
                     <label for="ciutat">{{__('Ciudad')}}</label>
                     <select id="city" required name="ciutat_id" class="form-control">
                         @foreach($ciutats as $ciutat)
@@ -83,19 +83,6 @@
                                 @endif
                             @endauth
                                     <option value="{{ $ciutat->id }}">{{$ciutat->nom}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group mb-sm-2 mb-0 col-sm-3 col-6">
-                    <label for="pais">{{__('País')}}</label>
-                    <select required name="pais_id" class="form-control">
-                        @foreach($paises as $pais)
-                            @auth
-                                @if($user->ciutat->pais->nom == $pais->nom)
-                                    <option value="{{ $pais->id }}" selected>{{$pais->nom}}</option>
-                                @endif
-                            @endauth
-                                    <option value="{{ $pais->id }}">{{$pais->nom}}</option>
                         @endforeach
                     </select>
                 </div>

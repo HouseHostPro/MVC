@@ -62,10 +62,13 @@
     "Fecha entrada/salida": "Check-in/Check-out",
     "Precio total": "Total",
     "Acción": "Action",
+    "Acciones": "Actions",
     "Ver": "Check",
     "Principal": "Main page",
     "Añadir propiedad": "Add property",
     "Buscar casa": "Search property",
+    "Buscar servicio": "Search service",
+    "Buscar propiedad": "Search property",
     "Imagen": "Image",
     "Ubicación": "Location",
     "Editar": "Edit",
@@ -173,8 +176,22 @@
     "Se admiten fiestas": "Parties are allowed",
     "NºReserva": "NºReserve",
     "Nombre propietario":"Owner name",
-    "Nombre cliente": "Client name"
-
-
-
+    "Nombre cliente": "Client name",
+    "Piscina": "Pool",
+    "Cocina": "Kitchen",
+    "Ingrese una nueva norma": "Add a new rule",
+    "Añadir Norma": "Add rule",
+    "Selecciona las imágenes": "Choose images",
+    "Cuantos hay": "How many?",
+    "Patio": "Yard",
+    "Salón": "Living room",
+    "Periodos no disponibles": "Unavailable dates",
+    "Información de Contacto": "Contact data",
+    "Enlaces Rápidos": "Quick links",
+    "Inicio": "Main page",
+    "Suscríbete a Nuestro Boletín": "Subscribe to our newsletter",
+    "Recibe ofertas especiales y actualizaciones directamente en tu bandeja de entrada": "Receive offers and updates to your inbox",
+    "Tu Correo Electrónico": "Your e-mail",
+    "Derechos de autor @ 2024 Reservas Nacionales. Todos los derechos reservados": "Copyright @ 2024, National reservations . All rights reserved",
+    "Suscribirse": "Subscribe"
 }

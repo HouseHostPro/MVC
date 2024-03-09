@@ -32,6 +32,12 @@ class PropertyFormController extends Controller {
     //Propiedades
     public function findAllByUser() {
         $propietats = Propietat::where('usuari_id',Auth::user()->id) -> get();
+
+        foreach ($propietats as $propietat) {
+            $nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
+            $propietat -> nom = $nom;
+        }
+
         return view("property/properties", compact("propietats"));
     }
     public function AllProperties() {
@@ -134,6 +140,8 @@ class PropertyFormController extends Controller {
 
         $dates = $this->findAllDatesReservades($request);
         $propietat = Propietat::find($id);
+        $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
+
         $preuBase = Configuracio::where(['propietat_id' => $id, 'clau' => 'preu_base']) -> first() -> valor;
         $disableDays = $this->findAllDatesDisabled($request);
 
@@ -303,6 +311,8 @@ class PropertyFormController extends Controller {
         $servicios = Servei::all();
 
         $propietat = Propietat::find($id);
+        $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
+
 
         return view('property/serveiForm', compact('propietat','servicios'));
     }
@@ -355,8 +365,19 @@ class PropertyFormController extends Controller {
         $servicios = Servei::all();
 
         $propietat = Propietat::find($id);
+        $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
 
-        return view('property/espaiForm', compact('propietat','servicios'));
+        $todosEspacios = $this -> allEspaciosAjax($request);
+        foreach ($todosEspacios as $e) {
+            $e -> tipus = __($e -> tipus);
+        }
+
+        $espaciosPropietat = $this -> espaciosByProperty($request);
+        foreach ($espaciosPropietat as $e) {
+            $e -> tipus = __($e -> tipus);
+        }
+
+        return view('property/espaiForm', compact('propietat','servicios', 'todosEspacios', 'espaciosPropietat'));
     }
     public function allEspaciosAjax(Request $request){
 
@@ -422,6 +443,7 @@ class PropertyFormController extends Controller {
         $id = $request -> prop_id;
 
         $propietat = Propietat::find($id);
+        $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
 
         return view('property/normasForm', compact('propietat'));
     }

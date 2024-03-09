@@ -12,6 +12,7 @@ use App\Models\Propietat_Servei;
 use App\Models\Reserva;
 use App\Models\Servei;
 use App\Models\Tiquet_Comentari;
+use App\Models\Traduccio;
 use Carbon\Carbon;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
@@ -153,7 +154,14 @@ class CasaController extends Controller{
     }
     public function historialReservas(){
 
-        return view('historialReservas');
+        $reservas = $this -> allReservasPropertiesAjax();
+
+        foreach ($reservas as $reserva) {
+            $reserva -> nomPropietat = Traduccio::where('code', $reserva -> nomPropietat) -> where('lang', app() -> getLocale()) -> first() -> value;
+        }
+
+        return view('historialReservas', compact('reservas'));
+
     }
     public function allReservasAjax(){
 

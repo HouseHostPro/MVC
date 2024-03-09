@@ -132,7 +132,7 @@
                                             <input id="ubi" name="ubi" type="text" class="form-control" placeholder="country" value="{{$propietat -> localitzacio}}">
                                         </div>
                                         <div class="col-sm-6 col-12">
-                                            <label class="label">{{__('Ciutat')}}</label>
+                                            <label class="label">{{__('Ciudad')}}</label>
                                             <select class="form-control">
                                                 @foreach($ciutats as $ciutat)
                                                     <option value="{{$ciutat -> id}}" @if($ciutat -> id === $propietat -> ciutat_id) selected @endif>{{$ciutat -> nom}}</option>

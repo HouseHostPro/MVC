@@ -75,7 +75,7 @@
             </form>
         </div>
         <div class="col-12 mt-2">
-            <h4>Periodos no disponibles</h4>
+            <h4>{{__('Periodos no disponibles')}}</h4>
             <ul>
                 @if($disableDays !== null)
                     @foreach($disableDays as $day)

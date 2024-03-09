@@ -15,7 +15,7 @@
             </ol>
         </nav>
         <div class="col-sm-2 col-6 my-sm-3 my-2">
-            <label>Buscar servicio:</label>
+            <label>{{__('Buscar propiedad')}}:</label>
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>
@@ -52,7 +52,9 @@
 
             $(document).ready(function (){
 
-                $.ajax({
+                printProperties(@json($propietats))
+
+                /*$.ajax({
                     method: 'GET',
                     url: `http://localhost:8100/allProperties`
                 }).done(function (propiedades) {
@@ -69,6 +71,9 @@
                             $('td:contains("' + p.nom + '")').html(nomTraduit);
                         });
                     }
+
+                    printProperties(propiedades);
+                });*/
                     $.ajax({
                         method: 'GET',
                         url: `http://localhost:8100/imagenesPortadaAjax`

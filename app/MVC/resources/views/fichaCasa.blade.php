@@ -349,6 +349,42 @@
             });
         }
         //Me devuelve el primer dia de la fecha más cercana, a partir de la fecha que le doy
+        /*function fechasMasCercana(fecha, fechasArray) {
+            // Convertir la fecha de entrada en milisegundos
+            let fechaEntrada = new Date(fecha).getTime();
+
+            // Ordenar el array de fechas
+
+            fechasArray.sort(function(a, b) {
+                return new Date(a) - new Date(b);
+            });
+
+            let fechaMasCercana;
+
+            // Encontrar la fecha más cercana a la fecha de entrada
+            let fechaCercana;
+            for (let i = 0; i < fechasArray.length; i++) {
+                let fechaActual = new Date(fechasArray[i]).getTime();
+                if (fechaActual >= fechaEntrada) {
+                    fechaCercana = new Date(fechasArray[i]);
+                    break;
+                }
+            }
+            // Encontrar las fechas entre la fecha de entrada y la fecha más cercana
+            for (let i = 0; i < fechasArray.length; i++) {
+                let fechaActual = new Date(fechasArray[i]).getTime();
+                if (fechaActual >= fechaEntrada && fechaActual <= fechaCercana.getTime()) {
+                    fechaMasCercana = new Date(fechasArray[i]);
+                }
+            }
+
+            if (typeof fechaMasCercana !== 'undefined') {
+                return dateRange(fecha,fechaMasCercana);
+            } else {
+                return null; // No se encontró ninguna fecha en el pasado
+            }
+        }*/
+
         function fechasMasCercana(fecha, fechasArray) {
             // Convertir la fecha de entrada en milisegundos
             let fechaEntrada = new Date(fecha).getTime();

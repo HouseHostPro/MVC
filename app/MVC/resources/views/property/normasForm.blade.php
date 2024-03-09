@@ -56,13 +56,13 @@
         </div>
         <div class="row justify-content-center">
             <div class="form-group mb-sm-1 mb-0 col-sm-8 col-8">
-                <input type="text" class="form-control" id="nuevaNorma" placeholder="Ingrese una nueva norma">
+                <input type="text" class="form-control" id="nuevaNorma" placeholder="{{__('Ingrese una nueva norma')}}">
             </div>
             <div class="form-group mb-sm-1 mb-0 col-sm-3 col-3">
-                <button type="button" class="btn bg-primary" id="agregarNorma">Añadir Norma</button>
+                <button type="button" class="btn bg-primary" id="agregarNorma">{{__('Añadir Norma')}}</button>
             </div>
             <div class="form-group mb-sm-1 mt-4 mb-0 col-sm-10 col-12">
-                <ul class="ps-0 d-flex flex-column gap-2" id="normasList">Normas:
+                <ul class="ps-0 d-flex flex-column gap-2" id="normasList">{{__('Normas')}}:
 
                 </ul>
             </div>

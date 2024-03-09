@@ -48,10 +48,10 @@
     <form action="{{route('store.image', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat->id])}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label id="allImagenes" for="formFileMultiple" class="form-label">Selecciona las imagenes:</label>
+            <label id="allImagenes" for="formFileMultiple" class="form-label">{{__('Selecciona las imágenes')}}:</label>
             <input class="form-control" type="file" name="imagen[]" id="formFileMultiple" multiple>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary">{{__('Guardar')}}</button>
     </form>
 
     <script>
