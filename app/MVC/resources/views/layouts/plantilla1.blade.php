@@ -86,6 +86,8 @@
 
         function printImagenes(imagenes){
 
+            console.log(imagenes);
+
             let container = $('#contenedor-imagnes');
 
             if(imagenes.length >= 5){
