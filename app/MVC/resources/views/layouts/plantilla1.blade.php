@@ -76,9 +76,10 @@
 
             }
         }
+        const host = location.host;
         $.ajax({
             method: 'GET',
-            url: `http://localhost:8100/allImagesAjax`
+            url: `http://${host}/allImagesAjax`
         }).done(function (imagenes) {
             printImagenes(imagenes)
         });
