@@ -43,6 +43,7 @@ class RutaPropietat
 
         $id_plantilla = Propietat::where('id',$id)->value('plantilla_id');
         View::share('PLANTILLA', $id_plantilla);
+        var_dump($id_plantilla);
 
         return $next($request);
     }
