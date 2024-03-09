@@ -30,7 +30,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end mt-2 " aria-labelledby="navbarDropdownMenuLink">
                             @guest
-                                <li><a class="text-decoration-none ms-3 pt-1" href="{{ route('login', ['id' => $PROPIETAT_ID]) }}">{{__('Iniciar sesión')}}</a></li>
+                                <li><a class="text-decoration-none ms-3 pt-1" href="{{ route('login', ['id' => $PROPIETAT_ID], false) }}">{{__('Iniciar sesión')}}</a></li>
                             @endguest
                             <li>
                                 <form method="post" action="{{ route('cuenta', ['id' => $PROPIETAT_ID]) }}">
