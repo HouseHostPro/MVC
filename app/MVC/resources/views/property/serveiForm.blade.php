@@ -61,9 +61,10 @@
             const url = window.location.href;
             const match = url.match(/\/property\/(\d+)\/property\/\d+\/servicios/);
 
+            const host = location.host;
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/serviciosAjax`
+                url: `http://${host}/serviciosAjax`
             }).done(function (service) {
                 console.log(service)
                 allServices.push.apply(allServices, service);
