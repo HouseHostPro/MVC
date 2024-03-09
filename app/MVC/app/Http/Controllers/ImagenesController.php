@@ -53,7 +53,8 @@ class ImagenesController extends Controller{
     public function allImagesAjax(Request $request){
 
         $allUrls = $this->allUrlsImage($request -> id);
-        return $allUrls;
+        //return $allUrls;
+        var_dump($allUrls);
     }
     public function store(Request $request){
 
