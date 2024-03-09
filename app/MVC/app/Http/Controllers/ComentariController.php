@@ -92,7 +92,7 @@ class ComentariController extends Controller{
 
         $idU = Auth::user()->id;
         if(!$request->isMethod('post')){
-            $idTc = $request->id;
+            $idTc = $request->idProp;
             $estat = $request->estat;
             if($estat === 'F'){
                 Comentari::where('tc_id',$idTc)->delete();
@@ -100,7 +100,7 @@ class ComentariController extends Controller{
             }else{
                 Comentari::where('tc_id',$idTc)->where('usuari_id',$idU)->delete();
             }
-            return redirect() -> route('comentarios');
+            return back();
         }else{
             $id = $request->input('idTc');
             $estat = $request->input('estat');
@@ -112,7 +112,7 @@ class ComentariController extends Controller{
                 Comentari::where('tc_id',$id)->where('usuari_id',$idU)->delete();
             }
 
-            return redirect() -> route('principal');
+            return redirect() -> route('principal',['id' => $request -> id]);
         }
     }
     public function comentarios(Request $request){
@@ -122,6 +122,10 @@ class ComentariController extends Controller{
 
     public function allComentarios(Request $request){
 
-        return view('historialComentarios');
+        $id = Auth::user()->id;
+
+        $user = User::find($id);
+
+        return view('historialComentarios',compact('user'));
     }
 }

@@ -17,15 +17,11 @@
     </svg>
 </div>
 <div class="col-8 ps-0 d-flex align-self-center">
-    <h5>{{__('Anfitrión')}}: Lucas</h5>
+    <h5>{{__('Anfitrión')}}: {{$propietario->nom}}</h5>
 </div>
 <div id="totalComentarios" class="col-12">
     <p class="mb-0"><span id="star-anfitrion" class="star fs-3">&#9733;</span>@php echo $count; @endphp reseñas</p>
 </div>
-<div class="col-12">
-    <p>Idioma: Español</p>
-</div>
-
 <div class="col-12">
     <p>
         La casita una monada, súper cómoda y acogedora.

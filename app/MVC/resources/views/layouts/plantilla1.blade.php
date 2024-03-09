@@ -64,7 +64,15 @@
                 $('#img-hide').show();
                 // Eliminar la clase que ajusta el tamaño de la imagen firstImage
                 $('#frontCasa').removeClass('full-width rounded-end');
-                $('#form-casa').css('height', '26%');
+                if ($('#permitirMascotas').val() === 'No') {
+                    console.log($('#permitirMascotas').val())
+                    $('#mascotas').hide();
+                    $('#form-casa').css('height', '22%');
+
+                }else {
+
+                    $('#form-casa').css('height', '26%');
+                }
 
             }
         }

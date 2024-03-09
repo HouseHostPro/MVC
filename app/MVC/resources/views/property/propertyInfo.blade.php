@@ -94,7 +94,7 @@
                             <h2>{{__('Editar propiedad')}}</h2>
                             <div class="col-sm-4 col-12 ">
                                 <div class="d-flex flex-column align-items-center">
-                                    <img class="img-fluid mt-4"  src="https://images.adsttc.com/media/images/5d34/e507/284d/d109/5600/0240/large_jpg/_FI.jpg?1563747560" >
+                                    <img class="img-fluid mt-4"  src="{{$urlImagen}}" >
                                 </div>
                             </div>
                             <div class="col-sm-6 col-12">
@@ -151,7 +151,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="map" style="height: 380px" class="mb-4"></div>
+                        <div id="map" style="height: 380px" class="mb-3"></div>
                     </form>
                 </div>
             </div>

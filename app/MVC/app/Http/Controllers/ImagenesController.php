@@ -31,6 +31,7 @@ class ImagenesController extends Controller{
             $allUrls[] = [
                 'url' => $url,
                 'id' => $imagen->id,
+                'idProp' => $imagen->propietat_id
             ];
         }
         return $allUrls;
@@ -65,6 +66,7 @@ class ImagenesController extends Controller{
             $imagen = new Imatge();
 
             $imagen->propietat_id = $idProp;
+            $imagen->portada = 0;
             $imagen->nom = $img;
             $imagen->url = $ruta;
 
@@ -90,6 +92,48 @@ class ImagenesController extends Controller{
 
         return redirect() ->route('property.gallery',['id' => $request -> idProp, 'prop_id' => $idProp]);
 
+    }
+    public function imagenesPrincipalesAjax(Request $request){
+        $imagenes = Imatge::where('portada', 1)->get();
+
+        $allUrls = [];
+
+        foreach ($imagenes as $imagen){
+            $url = Storage::disk('propiedades')->temporaryUrl(
+                $imagen->url,
+                Carbon::now()->addSeconds(30)
+            );
+            $allUrls[] = [
+                'url' => $url,
+                'id' => $imagen->id,
+                'idProp' => $imagen->propietat_id
+            ];
+        }
+        return $allUrls;
+    }
+
+    public function imagenPrincipal(Request $request){
+
+        $idProp = $request->prop_id;
+        $id = $request->id;
+
+        $imagen = Imatge::where('propietat_id', $idProp)
+                ->where('portada', 1)
+                ->first();
+
+        if ($imagen) {
+            $imagen->portada = 0;
+            $imagen->save();
+            $img = Imatge::find($id);
+            $img->portada = 1;
+            $img->save();
+        } else {
+            $img = Imatge::find($id);
+            $img->portada = 1;
+            $img->save();
+
+        }
+        return redirect() ->route('property.gallery',['id' => $request -> idProp, 'prop_id' => $idProp]);
     }
 
 }

@@ -17,7 +17,6 @@
 
     <div class="row mb-5">
         @foreach($allUrls as $url)
-
             <div class="col-sm-4 p-3">
                 <div class="card bg-dark text-white">
                     <img src="{{$url['url']}}" class="card-img" alt="..." style="max-height: 270px; max-width: 406px;">
@@ -34,9 +33,16 @@
                         </form>
                     </div>
                 </div>
+                <form method="post" class="text-center" action="{{ route('post.image', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat -> id])}}">
+                    @csrf
+                    <button type="submit" class="btn bg-primary bg-opacity-50 my-1">
+                        Hacer imagen Principal
+                    </button>
+                    <input type="text" name="id" value="{{$url['id']}}" hidden>
+                    <input type="text" name="idProp" value="{{$PROPIETAT_ID}}" hidden>
+                </form>
             </div>
         @endforeach
-
     </div>
 
     <form action="{{route('store.image', ['id' => $PROPIETAT_ID, 'prop_id' => $propietat->id])}}" method="post" enctype="multipart/form-data">
@@ -49,7 +55,6 @@
     </form>
 
     <script>
-
         $('#atras').remove();
 
     </script>

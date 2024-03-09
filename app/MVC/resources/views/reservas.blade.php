@@ -54,6 +54,7 @@
                     method: 'GET',
                     url: `http://localhost:8100/reservasAjax`
                 }).done(function (reservas) {
+                    console.log(reservas)
                     printReservas(reservas)
                 });
 
@@ -83,10 +84,16 @@
 
 
                     //Creamos el botón, el formulario, la columna del botón y el formulario
-                    //!!!CAMBIAR EL ACTION DEL BOTON!!!
-                    let form = $('<form>').attr('method', 'get').attr('action', '/deleteComentario/' + value.propietat_id);
+                    let editUrl = "{{ route('loadFactura', ['id' => $PROPIETAT_ID, ':prop_id']) }}";
+                    let form = $('<form>').attr('method', 'get').attr('action', editUrl.replace(':prop_id', value.propietat_id));
                     let botonVer = $('<button>').attr('type', 'submit').addClass('btn bg-primary bg-opacity-50').text('{{__('Ver')}}');
+                    let hiddenInput = $('<input>').attr({
+                        type: 'hidden',
+                        name: 'idFactura',
+                        value: value.id
+                    });
                     form.append(botonVer);
+                    form.append(hiddenInput);
                     let celdaFormulario = $('<td>').append(form).attr('data-label', 'Acción');
                     fila.append(celdaFormulario);
 

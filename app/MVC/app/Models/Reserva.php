@@ -11,15 +11,17 @@ class Reserva extends Model{
     protected $table = 'reserva';
     public $timestamps = false;
 
-    public function factura() {
-        return $this -> hasOne(Factura::class);
-    }
+
 
     public function propiedad(){
         return $this->belongsTo(Propietat::class,'propietat_id','id');
     }
-    public function uuarios(){
+    public function usuarios(){
         return $this->belongsTo(User::class,'usuari_id','id');
     }
+    public function factura(){
+        return $this->hasMany(Factura::class,'reserva_id','id');
+    }
+
 
 }

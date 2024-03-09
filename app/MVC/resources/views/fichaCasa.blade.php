@@ -39,7 +39,7 @@
     <!-- Modals -->
     <!-- Ver Comentarios -->
     <div class="modal fade" id="comenarios" tabindex="-1" aria-labelledby="comment" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-dialog modal-xl modal-dialog-centered ">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="comment">Comentarios</h5>
@@ -51,8 +51,8 @@
                 @foreach($comentarios as $comentario)
                     @if($comentario->fa_contesta === 'F')
                         <div class="modal-body row col-12">
-                            <div class="col-12 col-xl-6 row mt-4">
-                                <div class="col-sm-2 col-3 text-center">
+                            <div class="col-12  row mt-4">
+                                <div class="col-sm-1 col-3 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
@@ -90,8 +90,8 @@
                             </div>
                         @endif
                         <div class="modal-body row col-12 justify-content-end">
-                            <div class="col-11 col-xl-6 row mt-4">
-                                <div class="col-sm-2 col-3 text-center">
+                            <div class="col-11 row mt-1">
+                                <div class="col-sm-1 col-3 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
@@ -281,6 +281,8 @@
                 pintarCalendarioFrom(reservas);
                 pintarCalendarioTo(reservas);
             });
+
+
         });
 
         function printImagenes(imagenes) {
@@ -373,11 +375,10 @@
                 let fechaActual = new Date(fechasArray[i]).getTime();
                 if (fechaActual >= fechaEntrada && fechaActual <= fechaCercana.getTime()) {
                     fechaMasCercana = new Date(fechasArray[i]);
-                }else {
-                    fechaMasCercana = null;
                 }
             }
-            if (fechaMasCercana !== null) {
+
+            if (typeof fechaMasCercana !== 'undefined') {
                 return dateRange(fecha,fechaMasCercana);
             } else {
                 return null; // No se encontró ninguna fecha en el pasado
@@ -459,8 +460,6 @@
             $("#to").datepicker("option", "minDate", startDate);
 
             if(fechasMasCercana(fechaFormateada,allReservas) !== null) {
-                console.log('el valor es null')
-
 
                 //Llamo al datepicker para pasarle la fecha que he puesto y me deshabilite todas las fechas desde el primer dia de la reserva más cercana
                 $("#to").datepicker("option", "beforeShowDay", function (date) {
@@ -513,6 +512,7 @@
 
         })
 
+
         //Pinta los precios del coste de los dias reservados, limpieza y el total
         function pintarprecioReserva() {
 
@@ -532,10 +532,17 @@
 
                 //Resize form reserva, quan afagueixes un nou camp
                 if ($(window).width() > 540) {
-                    $('#form-casa').css('height', '29%');
+
+                    if ($('#permitirMascotas').val() === 'No') {
+                        $('#mascotas').hide();
+                        $('#form-casa').css('height', '24%');
+                    }else {
+                        $('#form-casa').css('height', '29%');
+                    }
                 }
             }
         }
+
 
         $('#menos').on('click', function () {
 
@@ -548,12 +555,21 @@
                 huespedes--;
                 $('#personas').val(huespedes);
             }
+
+            if($('#nPersones').val() > huespedes){
+                $('#mas').prop("disabled", false);
+            }
         })
         $('#mas').on('click', function () {
 
             huespedes++;
             $('#personas').val(huespedes);
             $('#menos').prop("disabled", false);
+
+            if($('#nPersones').val() == huespedes) {
+                $('#mas').prop("disabled", true);
+            }
+
         })
 
         //Calendar

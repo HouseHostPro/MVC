@@ -10,4 +10,10 @@ class Factura extends Model
     use HasFactory;
     protected $table = 'factura';
     public $timestamps = false;
+    protected $fillable = [
+    ];
+
+    public function reserva(){
+        return $this->belongsTo(Reserva::class,'reserva_id','id');
+    }
 }

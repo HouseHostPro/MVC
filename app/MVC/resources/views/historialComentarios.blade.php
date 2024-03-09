@@ -47,6 +47,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="nomUsuari" value="{{$user->nom}}">
     <!-- Crear Comentarios -->
     <div class="modal fade" id="crearComentario" tabindex="-1" aria-labelledby="cComenatrio" aria-hidden="true">
         <div class="modal-dialog">
@@ -77,17 +78,20 @@
 
         $(document).ready(function (){
 
-
             $.ajax({
                 method: 'GET',
                 url: `http://localhost:8100/comentariosPropertiesAjax`
             }).done(function (comentarios) {
+                console.log(comentarios)
                 printCommnets(comentarios)
             });
 
         })
 
-            function printCommnets(comentario){
+        function printCommnets(comentario){
+
+            let nomUsuari = $('#nomUsuari').val();
+            let fa_contesta_FC = {};
 
             comentario.forEach( function (value){
 
@@ -121,29 +125,51 @@
                     let TD = $('<td>').attr('data-label','Puntuación');
                     fila.append(TD);
 
+                    let divButtons = $('<div>').addClass('d-flex justify-content-sm-between justify-content-end gap-1');
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     let botonComment = $('<button>').attr({
                         'type':'button',
+                        'id': 'comentar_' + value.comentario.tc_id,
                         'data-bs-toggle': 'modal',
                         'data-bs-target': '#crearComentario'
                     }).addClass('btn bg-primary bg-opacity-50').text('{{__('Comentar')}}');
                     botonComment.click(function (){
                         $('#tcId').val(value.comentario.tc_id);
                     })
-                    let celdaFormulario = $('<td>').append(botonComment).addClass('text-center').attr('data-label','Acción');
+                    divButtons.append(botonComment);
+                    if(value.nomUser === nomUsuari) {
+                        //Reemplazar las variables para que las coja en get
+                        let url = "{{ route('comentario.delete.get', ['idProp' => ':idProp', 'estat' => ':estat', 'id' => ':id']) }}";
+                        url = url.replace(':idProp',value.comentario.tc_id).replace(':estat',value.comentario.fa_contesta).replace(':id',{{$PROPIETAT_ID}});
+
+                        //Creamos el botón, el formulario, la columna del botón y el formulario
+                        let form = $('<form>').attr('method', 'get').attr('action', url);
+                        let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text('{{__('Eliminar')}}');
+                        form.append(botonEliminar);
+                        divButtons.append(form);
+                    }
+
+                    let celdaFormulario = $('<td>').append(divButtons).addClass('text-center').attr('data-label','Acción');
                     fila.append(celdaFormulario);
 
                     contenedor.append(rating);
                     TD.append(contenedor);
 
-                    console.log(value.comentario.puntuacio)
                     //Mostrar estrellas asignadas de cada usuario
                     $('.rating-container').each(function(index) {
-                        console.log(this)
                         let $container = $(this);
                         let ratingValue = $container.attr('data-rating');
                         activateStars($container,ratingValue);
                     });
+                    let tc_id = value.comentario.tc_id;
+                    let fa_contesta = value.comentario.fa_contesta;
+
+                    if (!fa_contesta_FC.hasOwnProperty(tc_id)) {
+                        fa_contesta_FC[tc_id] = [];
+                    }
+                    fa_contesta_FC[tc_id].push(fa_contesta);
+
+
                 }else {
                     let rating = $('<div>').addClass('rating');
 
@@ -155,6 +181,7 @@
                     let TD = $('<td>').attr('data-label','Puntuación').addClass('invisible');
                     fila.append(TD);
 
+                    let divButtons = $('<div>').addClass('d-flex justify-content-sm-between justify-content-end gap-1');
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     let botonComment = $('<button>').attr({
                         'type':'button',
@@ -164,10 +191,38 @@
                     botonComment.click(function (){
                         $('#tcId').val(value.comentario.tc_id);
                     })
-                    let celdaFormulario = $('<td>').append(botonComment).addClass('text-center');
+
+                    divButtons.append(botonComment);
+                    if(value.nomUser === nomUsuari) {
+                        //Reemplazar las variables para que las coja en get
+                        let url = "{{ route('comentario.delete.get', ['idProp' => ':idProp', 'estat' => ':estat', 'id' => ':id']) }}";
+                        url = url.replace(':idProp',value.comentario.tc_id).replace(':estat',value.comentario.fa_contesta).replace(':id',{{$PROPIETAT_ID}});
+
+                        //Creamos el botón, el formulario, la columna del botón y el formulario
+                        let form = $('<form>').attr('method', 'get').attr('action', url);
+                        let botonEliminar = $('<button>').attr('type', 'submit').addClass('btn bg-danger bg-opacity-50').text('{{__('Eliminar')}}');
+                        form.append(botonEliminar);
+                        divButtons.append(form);
+                    }
+
+                    let celdaFormulario = $('<td>').append(divButtons).addClass('text-center').attr('data-label','Acción');
                     fila.append(celdaFormulario);
 
+                    let tc_id = value.comentario.tc_id;
+                    let fa_contesta = value.comentario.fa_contesta;
+
+                    if (!fa_contesta_FC.hasOwnProperty(tc_id)) {
+                        fa_contesta_FC[tc_id] = [];
+                    }
+                    fa_contesta_FC[tc_id].push(fa_contesta);
                 }
+
+                for (let tc_id in fa_contesta_FC) {
+                    if (fa_contesta_FC[tc_id].includes('F') && fa_contesta_FC[tc_id].includes('C')) {
+                        $('#comentar_' + tc_id).addClass('invisible'); // Deshabilitar el botón correspondiente
+                    }
+                }
+
             })
         }
 

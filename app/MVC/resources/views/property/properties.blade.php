@@ -48,6 +48,8 @@
     @auth
         <script>
 
+            let allImages = [];
+
             $(document).ready(function (){
 
                 $.ajax({
@@ -67,8 +69,14 @@
                             $('td:contains("' + p.nom + '")').html(nomTraduit);
                         });
                     }
-
-                    printProperties(propiedades);
+                    $.ajax({
+                        method: 'GET',
+                        url: `http://localhost:8100/imagenesPortadaAjax`
+                    }).done(function (imagenes) {
+                        console.log(imagenes)
+                        allImages.push.apply(allImages, imagenes);
+                        printProperties(propiedades);
+                    });
                 });
                 function resizeSpan() {
                     let windowWidth = $(window).width();
@@ -89,26 +97,42 @@
             })
 
             function printProperties(propiedad){
+                let count = 0;
 
-                const imagen = $('<img>').attr({
-                    'src': 'https://images.adsttc.com/media/images/5d34/e507/284d/d109/5600/0240/large_jpg/_FI.jpg?1563747560',
-                    'style': 'height: 150px; width: 150px'
-                });
-
-                propiedad.forEach( function (value){
+                for (let i = 0; i < propiedad.length; i++){
 
                     let fila = $('<tr>');
-                    fila.append($('<td>').text(value.nom).attr('data-label', 'Nombre propiedad'));
+                    fila.append($('<td>').text(propiedad[i].nom).attr('data-label', 'Nombre propiedad'));
 
-                    //Creamos la imagen y  la columna de la imagen
-                    const celdaImagen = $('<td>').append(imagen.clone()).attr('data-label', 'Imagen');
-                    fila.append(celdaImagen);
+                    if(count < allImages.length){
 
-                    fila.append($('<td>').text(value.nomCiutat).attr('data-label', 'Ubicación'));
+                        if(propiedad[i].id === allImages[i].idProp){
+
+                            let imagen = $('<img>').attr({
+                                'src': allImages[i].url,
+                                'style': 'height: 150px; width: 150px'
+                            });
+                            //Creamos la imagen y  la columna de la imagen
+                            const celdaImagen = $('<td>').append(imagen).attr('data-label', 'Imagen');
+                            fila.append(celdaImagen);
+                            count++;
+                        }
+                    }else {
+                        let imagen = $('<img>').attr({
+                            'src': 'https://i.pinimg.com/736x/f9/a3/f5/f9a3f537d0e440ee33f79199b5237600.jpg',
+                            'style': 'height: 150px; width: 150px'
+                        });
+                        //Creamos la imagen y  la columna de la imagen
+                        const celdaImagen = $('<td>').append(imagen).attr('data-label', 'Imagen');
+                        fila.append(celdaImagen);
+
+                    }
+
+                    fila.append($('<td>').text(propiedad[i].nomCiutat).attr('data-label', 'Ubicación'));
 
                     //Creamos el botón, el formulario, la columna del botón y el formulario
                     let editUrl = "{{ route('property.edit', ['id' => $PROPIETAT_ID, ':prop_id']) }}";
-                    let form = $('<form>').attr('method', 'get').attr('action', editUrl.replace(':prop_id', value.id));
+                    let form = $('<form>').attr('method', 'get').attr('action', editUrl.replace(':prop_id', propiedad[i].id));
 
                     let botonEditar = $('<button>').attr('type', 'submit').addClass('btn bg-success bg-opacity-50').text('{{__('Editar')}}');
                     form.append(botonEditar);
@@ -117,7 +141,8 @@
 
                     $('#tabla').append(fila);
 
-                })
+
+                }
             }
 
             $('#atras').remove();

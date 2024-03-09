@@ -7,6 +7,8 @@ use App\Models\Configuracio;
 use App\Models\Configuracio_Servei;
 use App\Models\Espai;
 use App\Models\Espai_Defecte;
+use App\Models\Factura;
+use App\Models\Imatge;
 use App\Models\Imatge_Dormitori;
 use App\Models\Periode_No_Disponible;
 use App\Models\Plantilla;
@@ -21,6 +23,7 @@ use App\Models\Traduccio;
 use App\Models\Propietat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PropertyFormController extends Controller {
@@ -46,8 +49,22 @@ class PropertyFormController extends Controller {
         $plantillas = Plantilla::all();
         $traduccioNom = $traduccions[0];
         $traduccioDesc = $traduccions[1];
+        $urlImagen = $this->urlImage($request -> prop_id);
         return view("property/propertyInfo", compact("propietat",
-            "ciutats", "traduccioNom", "traduccioDesc","plantillas"));
+            "ciutats", "traduccioNom", "traduccioDesc","plantillas","urlImagen"));
+    }
+    private function urlImage($id){
+
+        $imagen = Imatge::where('propietat_id', $id)
+            ->where('portada', 1)
+            ->first();
+
+        $url = Storage::disk('propiedades')->temporaryUrl(
+            $imagen->url,
+            Carbon::now()->addSeconds(30)
+        );
+
+        return $url;
     }
     public function store(Request $request) {
         $property = new Propietat();
@@ -167,7 +184,6 @@ class PropertyFormController extends Controller {
         $fecha_inicio = $request->fecha_inicio;
 
         $fechaFormateada = Carbon::createFromFormat('d/m/Y', $fecha_inicio)->format('Y-m-d');
-
         Periode_No_Disponible::where('propietat_id', $id)
             ->where('data_inici', $fechaFormateada)
             ->delete();
@@ -470,6 +486,16 @@ class PropertyFormController extends Controller {
         $normas = Configuracio::where('propietat_id',$id)->get();
 
         return $normas;
+    }
+
+    //Factura
+
+    public function loadFactura(Request $request){
+
+        $factura = Factura::where('reserva_id',$request->idFactura)->first();
+        $nomPropietat = Traduccio::where('code', $factura -> nom_propietat) -> where('lang', app() -> getLocale()) -> first() -> value;
+
+        return view('factura',compact('factura','nomPropietat'));
     }
 
 

@@ -33,6 +33,10 @@ class CasaController extends Controller{
             ->get(['espai.*']);
         $urlsCamas = $this->allUrlsImage();
 
+        $propietario = Propietat::where('propietat.id', $request -> id)
+            ->join('usuari', 'propietat.usuari_id', '=', 'usuari.id')
+            ->first('usuari.*');
+
         //Variables para la descripción de la casa
         //Que me busque todos los baños
         $baños = Espai::join('espais_defecte', 'espai.espaid_id', '=', 'espais_defecte.id')
@@ -81,7 +85,7 @@ class CasaController extends Controller{
 
         $servicios = Propietat_Servei::where('propietat_id',$request -> id)->get();
 
-        return view('fichaCasa',compact('comentarios','servicios','propietat','preuBase','dormitorios','urlsCamas','personas','camas','baños','cantidadDormitorios','normas'));
+        return view('fichaCasa',compact('comentarios','servicios','propietat','preuBase','dormitorios','urlsCamas','personas','camas','baños','cantidadDormitorios','normas','propietario'));
     }
 
     private function allUrlsImage(){
@@ -150,7 +154,6 @@ class CasaController extends Controller{
     public function historialReservas(){
 
         return view('historialReservas');
-
     }
     public function allReservasAjax(){
 
@@ -171,8 +174,6 @@ class CasaController extends Controller{
 
         return $reservas;
     }
-
-
 
     public function sinAcceso(){
 

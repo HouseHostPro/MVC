@@ -170,6 +170,11 @@
     "No se admiten visitas": "Visits are not allowed",
     "Se admiten visitas": "Visits are allowed",
     "No se admiten fiestas": "Parties are not allowed",
-    "Se admiten fiestas": "Parties are allowed"
+    "Se admiten fiestas": "Parties are allowed",
+    "NºReserva": "NºReserve",
+    "Nombre propietario":"Owner name",
+    "Nombre cliente": "Client name"
+
+
 
 }

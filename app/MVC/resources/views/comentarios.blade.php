@@ -25,7 +25,7 @@
         <div class="mask d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center ">
-                    <div class="col-sm-10 col-12">
+                    <div class="col-12">
                         <div class="table-responsive">
                             <table id="table" class="table table-hover mb-0 bg-white" >
                                 <thead>
@@ -114,8 +114,8 @@
                     }
 
                     //Reemplazar las variables para que las coja en get
-                    let url = "{{ route('comentario.delete.get', ['id' => ':id', 'estat' => ':estat']) }}";
-                    url = url.replace(':id',value.tc_id).replace(':estat',value.fa_contesta);
+                    let url = "{{ route('comentario.delete.get', ['idProp' => ':idProp', 'estat' => ':estat', 'id' => ':id']) }}";
+                    url = url.replace(':idProp',value.tc_id).replace(':estat',value.fa_contesta).replace(':id',{{$PROPIETAT_ID}});
 
                     $('#tabla').append(fila);
                     //Creamos el botón, el formulario, la columna del botón y el formulario

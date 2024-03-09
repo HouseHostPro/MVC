@@ -21,7 +21,7 @@
     </nav>
 
     <div class="row col-12 justify-content-between" id="contenedor">
-        <div id="calendari-casa" class="col-sm-6 col-12">
+        <div id="calendari-casa" class="col-sm-6 col-12 ms-sm-0 ms-4">
             <div id="inline-picker-form" class="col-12 my-3"></div>
         </div>
         <div class="col-sm-5 col-12 row">
@@ -36,8 +36,8 @@
                             <input type="number" class="form-control" id="precio_dia" value="" name="precio_dia">
                         </div>
                     </div>
-                    <div class="col-3">
-                        <button type="submit" class="btn bg-primary bg-opacity-75">{{__('Guardar')}}</button>
+                    <div class="col-3 mt-sm-0 mt-4">
+                        <button type="submit" class="btn bg-primary bg-opacity-75 align-items-center">{{__('Guardar')}}</button>
                     </div>
                 </div>
             </form>
@@ -68,7 +68,7 @@
                             <label class="form-check-label" for="fecha_deshabilitada">{{__('Deshabilitar días')}}</label>
                         </div>
                     </div>
-                    <div class="form-group row mb-sm-1 mb-3 col-6 mt-4 justify-content-center">
+                    <div class="form-group row mb-sm-1 mb-3 col-6 mt-2 mt-sm-5 justify-content-center">
                         <button type="submit" class="btn bg-primary bg-opacity-75">{{__('Guardar')}}</button>
                     </div>
                 </div>
@@ -84,7 +84,6 @@
                                 @csrf
                                 <li class="justify-content-start mt-2">
                                     <span>{{ $day[0] }} - {{ $day[count($day)-1] }}</span>
-
                                 <button type="submit" class="btn bg-danger bg-opacity-50 ms-2 pt-1 pb-1 p-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
@@ -193,11 +192,10 @@
                 let fechaActual = new Date(fechasArray[i]).getTime();
                 if (fechaActual >= fechaEntrada && fechaActual <= fechaCercana.getTime()) {
                     fechaMasCercana = new Date(fechasArray[i]);
-                }else {
-                    fechaMasCercana = null;
                 }
             }
-            if (fechaMasCercana !== null) {
+
+            if (typeof fechaMasCercana !== 'undefined') {
                 return dateRange(fecha,fechaMasCercana);
             } else {
                 return null; // No se encontró ninguna fecha en el pasado
@@ -279,8 +277,6 @@
             $("#to").datepicker("option", "minDate", startDate);
 
             if(fechasMasCercana(fechaFormateada,allReservas) !== null) {
-                console.log('el valor es null')
-
 
                 //Llamo al datepicker para pasarle la fecha que he puesto y me deshabilite todas las fechas desde el primer dia de la reserva más cercana
                 $("#to").datepicker("option", "beforeShowDay", function (date) {
@@ -342,10 +338,10 @@
             let diffMs = Math.abs(salida - entrada);
             let diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
 
-            if (diffDays > 0) {
-                $('#divpxn').prop("hidden", false);
-                let preuTotal = 150 * diffDays;
-                $('#pxn').text(150 + "€ x " + diffDays + " noches");
+            if(diffDays > 0){
+                $('#divpxn').prop("hidden",false);
+                let preuTotal = {{ $preuBase }}*diffDays;
+                $('#pxn').text({{ $preuBase }} + "€ x " + diffDays + " noches");
                 $('#pxnt').val(preuTotal + "€");
                 $('#ptotal').val(preuTotal + "€");
                 $('#days').val(diffDays);

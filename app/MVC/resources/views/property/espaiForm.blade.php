@@ -65,13 +65,11 @@
                 method: 'GET',
                 url: `http://localhost:8100/allEspaciosAjax`
             }).done(function (espacios) {
-                console.log(espacios);
                 allEspacios.push.apply(allEspacios, espacios);
                 $.ajax({
                     method: 'GET',
                     url: `http://localhost:8100/allEspaciosByPropertyAjax/${match[1]}`
                 }).done(function (espacios) {
-                    console.log(espacios);
                     allEspaciosByProperty.push.apply(allEspaciosByProperty, espacios);
                     printEspacios();
                 });
@@ -103,8 +101,8 @@
                     let opciones = [{nombre:'Cama doble', valor: 'cd'},{nombre:'Cama individual', valor: 'ci'},{nombre:'2 camas individuales', valor: 'ci2'}];
                     opciones.forEach(function(opcion) {
                         let fila = $('<tr>');
-                        let columnName = $('<td>').addClass('text-center');
-                        let columnDesc = $('<td>').addClass('text-center');
+                        let columnName = $('<td>').addClass('text-center').attr('data-label','Nombre');
+                        let columnDesc = $('<td>').addClass('text-center').attr('data-label','Descripción');
 
                         let pNom = $('<p>').text(value.tipus).addClass('pt-1');
                         columnName.append(pNom);
@@ -123,7 +121,7 @@
                         contenedorInput.append(labelNumber, inputNumber);
                         columnDesc.append(contenedorInput);
 
-                        let columnCheckbox = $('<td>').addClass('text-center');
+                        let columnCheckbox = $('<td>').addClass('text-center').attr('data-label','Puntuación');
                         let chechkbox = $('<input>').attr({
                             type: 'checkbox',
                         }).addClass('form-check-input');

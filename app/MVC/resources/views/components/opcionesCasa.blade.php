@@ -3,6 +3,7 @@
         <p>
             {{$personas}} {{__('Personas')}} - {{$cantidadDormitorios}} {{__('Dormitorios')}} - {{$camas}} {{__('Camas')}} - {{$baños->quantitat}} {{__('Baño')}}
         </p>
+        <input type="hidden" id="nPersones" value="{{$personas}}">
     <div id="normas-casa">
         <div class="border-bottom border-dark">
             <h3 class="fs-5">{{__('Normas de la casa')}}</h3>
@@ -15,8 +16,10 @@
                     @elseif($norma->clau === 'mascotas')
                         @if($norma->valor === 'No')
                             <li class="list-group-item">{{__('No se admiten mascotas')}}</li>
+                            <input type="hidden" id="permitirMascotas" value="No">
                         @else
                             <li class="list-group-item">{{__('Se admiten mascotas')}}</li>
+                            <input type="hidden" id="permitirMascotas" value="Si">
                         @endif
                     @elseif($norma->clau === 'visitas')
                         @if($norma->valor === 'No')

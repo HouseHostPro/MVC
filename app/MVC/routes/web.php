@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/property/{id}/cuenta',[UserController::class,'cuenta'])->name('cuenta');
 
     //CRUD comentaris
-    Route::get('/deleteComentario/{id}/{estat}',[ComentariController::class,'delete'])->name('comentario.delete.get');
+    Route::get('/deleteComentario/{idProp}/{estat}/{id}',[ComentariController::class,'delete'])->name('comentario.delete.get');
     Route::post('/deleteComentario',[ComentariController::class,'delete'])->name('comentario.delete');
     Route::post('addComentario',[ComentariController::class, 'create'])->name('comentario.store');
     Route::get('addComentario',[ComentariController::class, 'create'])->name('comentario.store.get');
@@ -85,6 +85,8 @@ Route::middleware('auth')->group(function (){
     Route::get('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'allImages'])->name('property.gallery');
     Route::post('/property/{id}/property/{prop_id}/galeria',[ImagenesController::class, 'store'])->name('store.image');
     Route::post('/property/{id}/property/{prop_id}/galeria/delete',[ImagenesController::class, 'delete'])->name('delete.image');
+    Route::post('/property/{id}/property/{prop_id}/galeria/principal',[ImagenesController::class, 'imagenPrincipal'])->name('post.image');
+    Route::get('/imagenesPortadaAjax',[ImagenesController::class, 'imagenesPrincipalesAjax'])->name('imagenesPrincipalesAjax');
 
     //Calendar
     Route::get('/property/{id}/property/edit/{prop_id}/calendar', [PropertyFormController::class, 'loadCalendar']) -> name('property.calendar');
@@ -92,6 +94,8 @@ Route::middleware('auth')->group(function (){
     Route::post('/property/{id}/property/edit/{prop_id}/calendar/saveDays', [PropertyFormController::class, 'saveDisableDays']) -> name('saveDisableDays');
     Route::post('/property/{id}/property/edit/{prop_id}/calendar/delete', [PropertyFormController::class, 'deleteDisableDays']) -> name('deleteDisableDays');
 
+    //Factura
+    Route::get('/property/{id}/property/edit/{prop_id}/factura', [PropertyFormController::class, 'loadFactura']) -> name('loadFactura');
 
     //Cerrar sesión
     Route::post('/property/{id}/logout',[UserController::class,'logout'])->name('logout');
