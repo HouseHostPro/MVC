@@ -49,7 +49,7 @@
 
         <script>
 
-            $(document).ready(function (){
+            /*$(document).ready(function (){
 
                 $.ajax({
                     method: 'GET',
@@ -57,7 +57,8 @@
                 }).done(function (comentarios) {
                     printCommnets(comentarios)
                 });
-            })
+            })*/
+            printCommnets(@json($comentarios))
 
             function printCommnets(comentario){
 

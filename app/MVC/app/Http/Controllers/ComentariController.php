@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comentari;
 use App\Models\Tiquet_Comentari;
+use App\Models\Traduccio;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -117,7 +118,13 @@ class ComentariController extends Controller{
     }
     public function comentarios(Request $request){
 
-        return view('comentarios');
+        $comentarios = $this -> allComent($request);
+
+        foreach ($comentarios as $comentario) {
+            $comentario -> nomPropietat = Traduccio::where('code', $comentario -> nomPropietat) -> where('lang', app() -> getLocale()) -> first() -> value;
+        }
+
+        return view('comentarios', compact('comentarios'));
     }
 
     public function allComentarios(Request $request){
