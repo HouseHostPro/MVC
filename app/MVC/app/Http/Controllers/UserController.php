@@ -17,6 +17,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller{
 
+    public function loadFormUser() {
+        return view('login');
+    }
+
     public function register()
     {
         $paises = Pais::all();
