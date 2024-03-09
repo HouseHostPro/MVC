@@ -33,7 +33,7 @@ class RutaPropietat
             $url === "http://localhost:8100/comentariosPropertiesAjax"||
             $url === "http://localhost:8100/reservasAjax"||
             $url === "http://localhost:8100/reservasPropertiesAjax"||
-            $url === "http://localhost:8100/imagenesPortadaAjax")
+            $url === "http://www.househostpromp.me/imagenesPortadaAjax")
             return $next($request);
 
 
