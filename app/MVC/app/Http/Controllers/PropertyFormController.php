@@ -29,6 +29,12 @@ class PropertyFormController extends Controller {
     //Propiedades
     public function findAllByUser() {
         $propietats = Propietat::where('usuari_id',Auth::user()->id) -> get();
+
+        foreach ($propietats as $propietat) {
+            $nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
+            $propietat -> nom = $nom;
+        }
+
         return view("property/properties", compact("propietats"));
     }
     public function AllProperties() {
