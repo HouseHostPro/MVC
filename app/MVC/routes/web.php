@@ -117,7 +117,7 @@ Route::get('/findTraduccions', [PropietatController::class, 'findTraduccionsById
 
 //Login
 Route::get('/property/{id}/login', [UserController::class, 'loadFormUser'])->name('login');
-Route::get('/login', [UserController::class, 'loadFormUser'])->name('login');
+//Route::get('/login', [UserController::class, 'loadFormUser'])->name('login');
 
 Route::post('/property/{id}/login/check',[UserController::class,'checkLogin'])->name('login.check');
 
