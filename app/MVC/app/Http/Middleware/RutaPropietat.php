@@ -38,7 +38,7 @@ class RutaPropietat
 
 
 
-        $id = explode("/", $url)[4];
+        $id = explode("/", $url)[3];
         View::share('PROPIETAT_ID', $id);
 
         $id_plantilla = Propietat::where('id',$id)->value('plantilla_id');
