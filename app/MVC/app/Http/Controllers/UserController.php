@@ -7,6 +7,7 @@ use App\Models\Ciutat;
 use App\Models\Comentari;
 use App\Models\Configuracio_Servei;
 use App\Models\Pais;
+use App\Models\Rol_User;
 use App\Models\Tiquet_Comentari;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -55,6 +56,8 @@ class UserController extends Controller{
             return redirect() -> back() -> with('success', 'Actualizado');
         }else{
             User::create($request->all());
+            $newUserId = User::find($request -> email) -> id;
+            Rol_User::create(3, $newUserId);
         }
         return view('fichaCasa');
     }
