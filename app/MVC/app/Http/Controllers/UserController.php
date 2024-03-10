@@ -57,7 +57,6 @@ class UserController extends Controller{
         }else{
             User::create($request->all());
             $newUserId = User::where('email', $request -> email) -> first() -> id;
-            var_dump($newUserId);
 
             $rolUser = new Rol_User();
             $rolUser -> rol_id = 3;
