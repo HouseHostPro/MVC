@@ -63,7 +63,7 @@ class RedsysController extends Controller
             Redsys::setUrlOk(config('redsys.url_ok')); //Url OK
             Redsys::setUrlKo(config('redsys.url_ko')); //Url KO
             Redsys::setVersion('HMAC_SHA256_V1');
-            Redsys::setTradeName('HouseHostPro');
+            Redsys::setTradeName(Auth::user() -> nom . ' ' . Auth::user() -> cognom1);
             Redsys::setTitular('HouseHostPro');
             Redsys::setProductDescription('Reserva en ' . $nomTraduit);
             Redsys::setEnviroment('test'); //Entorno test
