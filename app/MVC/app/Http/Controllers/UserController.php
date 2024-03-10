@@ -56,7 +56,7 @@ class UserController extends Controller{
             return redirect() -> back() -> with('success', 'Actualizado');
         }else{
             User::create($request->all());
-            $newUserId = User::find($request -> email) -> id;
+            $newUserId = User::where('email', $request -> email) -> first() -> id;
             var_dump($newUserId);
 
             $rolUser = new Rol_User();
