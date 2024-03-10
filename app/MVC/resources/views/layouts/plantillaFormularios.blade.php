@@ -24,7 +24,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script>
 </head>
 <body style="height: 98vh;">
-@section('titol','Cas Concos')
+@section('titol', $NOM_PROPIETAT)
 @include('components.header')
     <main class="container-fluid d-flex justify-content-center">
         <div id="container-form" class="container-sm">

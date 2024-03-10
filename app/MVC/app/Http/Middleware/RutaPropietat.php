@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Propietat;
+use App\Models\Traduccio;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -41,6 +42,11 @@ class RutaPropietat
 
         $id = explode("/", $url)[4];
         View::share('PROPIETAT_ID', $id);
+
+        $propietatActual = Propietat::find($id);
+
+        $nomTraduit = Traduccio::where('code', $propietatActual -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
+        View::share('NOM_PROPIETAT', $nomTraduit);
 
         $id_plantilla = Propietat::where('id',explode("/", $url)[4])->value('plantilla_id');
         View::share('PLANTILLA', $id_plantilla);

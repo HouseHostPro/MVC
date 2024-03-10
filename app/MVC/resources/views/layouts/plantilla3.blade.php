@@ -30,7 +30,7 @@
 </head>
 <body style="height: 100vh;" class="d-flex flex-column justify-content-between">
 <div>
-    @section('titol','Cas Concos')
+    @section('titol', $NOM_PROPIETAT)
     @include('components.header')
     <main class="container-fluid d-flex justify-content-center" >
         <div id="container-principal" class="container-sm" >
