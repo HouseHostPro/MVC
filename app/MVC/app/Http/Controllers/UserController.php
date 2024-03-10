@@ -57,9 +57,15 @@ class UserController extends Controller{
         }else{
             User::create($request->all());
             $newUserId = User::find($request -> email) -> id;
-            Rol_User::create(3, $newUserId);
+            var_dump($newUserId);
+
+            $rolUser = new Rol_User();
+            $rolUser -> rol_id = 3;
+            $rolUser -> usuari_id = $newUserId;
+
+            $rolUser -> save();
         }
-        return view('fichaCasa');
+        return redirect() -> route('principal');
     }
 
     public function userId($id)
