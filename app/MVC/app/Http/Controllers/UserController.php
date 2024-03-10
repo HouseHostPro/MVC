@@ -65,7 +65,7 @@ class UserController extends Controller{
 
             $rolUser -> save();
         }
-        return redirect() -> route('principal');
+        return redirect() -> route('principal', ['id' => $request -> id]);
     }
 
     public function userId($id)
