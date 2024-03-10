@@ -66,6 +66,7 @@ class PropietatController extends Controller {
     }
 
     public function findNomTraduit(Request $request) {
-        return Traduccio::where('code', $request -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
+        $propietat = Propietat::find($request -> id);
+        return Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
     }
 }
