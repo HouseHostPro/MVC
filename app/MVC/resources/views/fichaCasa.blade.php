@@ -42,7 +42,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="comment">Comentarios</h5>
+                    <h5 class="modal-title" id="comment">{{__('Comentarios')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 @php
@@ -85,7 +85,7 @@
                         @if($count === 0)
                             <div class="row col-12 justify-content-end">
                                 <div class="col-11">
-                                    <p class="fw-bold">Respuestas</p>
+                                    <p class="fw-bold">{{__('Respuestas')}}</p>
                                 </div>
                             </div>
                         @endif
@@ -123,7 +123,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="cComenatrio">Añadir cometario</h5>
+                    <h5 class="modal-title" id="cComenatrio">{{__('Añadir comentario')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -139,12 +139,12 @@
                            </div>
                        </div>
                        <div class="form-group">
-                           <label for="descripcion">Descripción:</label>
+                           <label for="descripcion">{{__('Descripción')}}:</label>
                            <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
                        </div>
                        <input type="text" id="rating" name="rating" hidden>
                        <div class="col-12 row justify-content-end">
-                           <button type="submit" class="col-2 btn bg-primary bg-opacity-25 border border-dark">Añadir</button>
+                           <button type="submit" class="col-2 btn bg-primary bg-opacity-25 border border-dark">{{__('Añadir')}}</button>
                        </div>
                    </form>
                 </div>
@@ -157,7 +157,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tServicios">Servicios</h5>
+                    <h5 class="modal-title" id="tServicios">{{__('Servicios')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -176,7 +176,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tNormas">Normas de la casa</h5>
+                    <h5 class="modal-title" id="tNormas">{{__('Normas de la casa')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -223,7 +223,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="vFotos">Fotos</h5>
+                    <h5 class="modal-title" id="vFotos">{{__('Fotos')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  d-flex justify-content-center">
