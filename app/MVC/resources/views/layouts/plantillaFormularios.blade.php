@@ -51,7 +51,7 @@
             url: `http://www.househostpromp.me/findNomTraduit/{{ $PROPIETAT_ID }}`
         }).done(function (nom) {
             let svg = $('#headerNom').find("svg");
-            svg.after(nom);
+            svg.after(' ' + nom);
         });
     });
 </script>
