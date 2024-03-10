@@ -88,7 +88,8 @@
             method: 'GET',
             url: `http://www.househostpromp.me/findNomTraduit/{{ $PROPIETAT_ID }}`
         }).done(function (nom) {
-            $('#headerNom').text(nom);
+            let svg = $('#headerNom').find("svg");
+            svg.after(nom);
         });
 
         function printImagenes(imagenes){
