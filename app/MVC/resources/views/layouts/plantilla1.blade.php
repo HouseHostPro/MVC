@@ -78,8 +78,9 @@
         }
         $.ajax({
             method: 'GET',
-            url: `http://localhost:8100/allImagesAjax`
+            url: `http://localhost:8100/allImagesAjax/{{$PROPIETAT_ID}}`
         }).done(function (imagenes) {
+            console.log(imagenes)
             printImagenes(imagenes)
         });
 

@@ -106,7 +106,7 @@ Route::middleware('auth')->group(function (){
 Route::get('/allDatesReservades/{id}',[PropertyFormController::class,'findAllDatesReservades'])->name('findAllDatesReservades');
 
 //Petición Ajax Imagenes de la casa
-Route::get('/allImagesAjax',[ImagenesController::class,'allImagesAjax'])->name('allImagesAjax');
+Route::get('/allImagesAjax/{id}',[ImagenesController::class,'allImagesAjax'])->name('allImagesAjax');
 
 
 //Página principal

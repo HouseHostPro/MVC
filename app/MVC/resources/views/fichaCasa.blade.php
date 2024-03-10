@@ -267,7 +267,7 @@
             //Petición Ajax para poner todas las imagenes de la casa en el modal
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allImagesAjax`
+                url: `http://localhost:8100/allImagesAjax/{{$PROPIETAT_ID}}`
             }).done(function (imagenes) {
                 printImagenes(imagenes)
             });

@@ -19,10 +19,10 @@ class ImagenesController extends Controller{
             return $matches[1];
         }
     }
-    private function allUrlsImage(){
+    private function allUrlsImage($id){
 
         $allUrls = [];
-        $imagenes = Imatge::all();
+        $imagenes = Imatge::where('propietat_id', $id)->get();
 
         foreach ($imagenes as $imagen){
             $url = Storage::disk('propiedades')->temporaryUrl(
@@ -41,7 +41,7 @@ class ImagenesController extends Controller{
 
         $idProp = $this->idPropiedad($request);
 
-        $allUrls = $this->allUrlsImage();
+        $allUrls = $this->allUrlsImage($idProp);
 
         $propietat = Propietat::find($idProp);
         $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
@@ -52,7 +52,10 @@ class ImagenesController extends Controller{
     }
     public function allImagesAjax(Request $request){
 
-        $allUrls = $this->allUrlsImage();
+        $id = $request->id;
+
+        $allUrls = $this->allUrlsImage($id);
+
         return $allUrls;
     }
     public function store(Request $request){
@@ -76,7 +79,7 @@ class ImagenesController extends Controller{
             $imagen->save();
         }
 
-        $allUrls = $this->allUrlsImage();
+        $allUrls = $this->allUrlsImage($idProp);
 
         $propietat = Propietat::find($idProp);
 
