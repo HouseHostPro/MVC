@@ -28,7 +28,7 @@
 </head>
 <body style="height: 100vh;" class="d-flex flex-column justify-content-between">
 <div>
-    @section('titol')
+
     @include('components.header')
     <main class="container-fluid d-flex justify-content-center" >
         <div id="container-principal" class="container-sm" >
@@ -82,6 +82,13 @@
             url: `http://${host}/allImagesAjax/{{ $PROPIETAT_ID }}`
         }).done(function (imagenes) {
             printImagenes(imagenes)
+        });
+
+        $.ajax({
+            method: 'GET',
+            url: `http://www.househostpromp.me/findNomTraduit/{{ $PROPIETAT_ID }}`
+        }).done(function (nom) {
+            $('#headerNom').text(nom);
         });
 
         function printImagenes(imagenes){

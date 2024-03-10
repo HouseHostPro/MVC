@@ -147,7 +147,7 @@ Route::controller(PropertyFormController::class) -> prefix('property/edit/{id}')
         Route::get('/reserves/dates', 'findAllDatesReservades') -> name('findAllDatesReservades');
     });
 
-
+Route::get('findNomTraduit/{id}', [PropietatController::class, 'findNomTraduit']);
 
 
 //Servei
