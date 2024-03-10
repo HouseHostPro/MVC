@@ -91,9 +91,9 @@ class UserController extends Controller{
 
         /* || !Hash::check($password,$user->contrasenya)*/
         if ($user != null) {
-            /*if(Hash::check($password, $user -> contrasenya))*/
+            if(Hash::check($password, $user -> contrasenya))
 
-            if($password == $user->contrasenya){
+            /*if($password == $user->contrasenya)*/{
                 Auth::login($user);
                 $request->session()->put('idPropiedad',$idPropiedad);
                 $request->session()->put('user',$user);
