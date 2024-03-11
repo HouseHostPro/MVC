@@ -39,12 +39,9 @@ class UserController extends Controller{
     public function allUsers(){
 
         $users = User::all();
-        var_dump($users);
     }
 
     public function store(Request $request) {
-
-        User::hashPassword();
 
         if(Auth::check()){
             $user = User::find(Auth::user()->id);
