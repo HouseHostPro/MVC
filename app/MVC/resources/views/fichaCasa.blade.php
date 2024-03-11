@@ -520,6 +520,7 @@
 
             //Aqui quita la primera fecha del array(no tiene que estar), y después le añado la que he clicado(tiene que estar)
             let arrayFechas = encontrarFechaMasCercanaEnPasado($('#to').val(),allReservas);
+            console.log("Array -> " + arrayFechas);
             startDate = new Date(arrayFechas.shift());
             //Aqui Fomateo la fecha que he cogido con el input de dd/mm/yyyy a mm/dd/yyy
             let fechaSplit = $('#to').val().split('/');
