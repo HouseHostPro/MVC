@@ -57,8 +57,7 @@ class UserController extends Controller{
 
             Alert::success(__('Actualizado'), __(''));
 
-            //return redirect() -> back() -> with('success', 'Actualizado');
-            var_dump('hashed ---  ' . $request -> contrasenya);
+            return redirect() -> back() -> with('success', 'Actualizado');
         }else{
             User::create($request->all());
             $newUserId = User::where('email', $request -> email) -> first() -> id;
