@@ -501,18 +501,16 @@ class PropertyFormController extends Controller {
 
     private function insertAndUpdateConfiguraio($id,$clau,$valor){
 
-
-        $configuracion = Configuracio::where('propietat_id', $id)
-            ->where('clau', $clau)
-            ->first();
-        var_dump("configuracio-> " . $configuracion);
-        if($configuracion){
+        if($clau !== Str::contains($clau,'norma')){
+            $configuracion = Configuracio::where('propietat_id', $id)
+                ->where('clau', $clau)
+                ->first();
+            var_dump("configuracio-> " . $configuracion);
             var_dump('hi ha configuracio ->' . $configuracion->clau);
             // Actualizar el valor
             $configuracion->valor = $valor;
             $configuracion->save();
         }else{
-            var_dump('no hi ha configuracio ->' . $configuracion->clau);
 
             $config = new Configuracio();
             $config->propietat_id = $id;
