@@ -41,7 +41,7 @@ class CasaController extends Controller{
 
         //Variables para la descripción de la casa
         //Que me busque todos los baños
-        $baños = Espai::where('propietat_id',$request -> id)
+        $baños = Espai::where('espai.propietat_id',$request -> id)
             ->join('espais_defecte', 'espai.espaid_id', '=', 'espais_defecte.id')
             ->where('espais_defecte.tipus', 'Baño')
             ->first();
