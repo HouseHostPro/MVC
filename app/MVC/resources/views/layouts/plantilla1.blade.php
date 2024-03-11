@@ -91,7 +91,13 @@
             svg.after(nom);
         });
 
+        if ($('#permitirMascotas').val() === 'false') {
+            $('#mascotas').hide();
+            $('#form-casa').css('height', '24%');
+        }
+
         function printImagenes(imagenes){
+
 
             let container = $('#contenedor-imagnes');
 
