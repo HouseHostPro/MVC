@@ -77,7 +77,7 @@
                 method: 'GET',
                 url: `http://www.househostpromp.me/allImagesAjax/{{$PROPIETAT_ID}}`
             }).done(function (imagenes) {
-                console.log(imagenes);
+                printImagenes(imagenes)
 
             });
 
