@@ -587,10 +587,10 @@
 
         $('#menos').on('click', function () {
 
-            if (huespedes === 1) {
+            if (huespedes === 2) {
 
                 huespedes--;
-                $('#personas').val("");
+                $('#personas').val(1);
                 $('#menos').prop("disabled", true);
             } else {
                 huespedes--;
