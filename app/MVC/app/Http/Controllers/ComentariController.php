@@ -14,8 +14,7 @@ class ComentariController extends Controller{
 
     public function create(Request $request){
 
-        $idPropiedad = $request->session()->get('idPropiedad');
-
+        $idPropiedad = $request->id;
 
         if($request->isMethod('post')){
             $tiquet = new Tiquet_Comentari();

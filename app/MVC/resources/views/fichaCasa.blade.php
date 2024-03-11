@@ -138,6 +138,7 @@
                                <span class="starE" data-rating="5">&#9733;</span>
                            </div>
                        </div>
+                       <input type="hidden" name="id" value="{{$PROPIETAT_ID}}">
                        <div class="form-group">
                            <label for="descripcion">{{__('Descripción')}}:</label>
                            <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
@@ -633,7 +634,6 @@
                 minDate: 0,
                 numberOfMonths: 2,
                 firstDay: 1,
-                disabled: true,
                 beforeShowDay: function (date) {
 
                     const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
