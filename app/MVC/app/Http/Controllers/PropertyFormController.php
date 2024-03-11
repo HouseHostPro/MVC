@@ -99,7 +99,7 @@ class PropertyFormController extends Controller {
 
         var_dump($request->plantilla);
 
-        Propietat::where('id', $request -> id) -> update(array('localitzacio' => $request -> ubi,'plantilla_id' => $request->plantilla));
+        Propietat::where('id', $request -> id) -> update(array('localitzacio' => $request -> ubi,'plantilla_id' => $request->plantilla, 'ciutat_id' => $request -> id_ciutat));
 
         $traduccioNom -> value = $request -> nombre;
         $traduccioDesc -> value = $request -> descripcion;
