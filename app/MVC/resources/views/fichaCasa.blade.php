@@ -242,7 +242,7 @@
 
     $(document).ready(function() {
 
-        let huespedes = 0;
+        let huespedes = 1;
         let totalRating;
 
 
