@@ -484,15 +484,15 @@ class PropertyFormController extends Controller {
         }
 
 
-        /*
+
         foreach ($normas as $key => $value){
 
             var_dump("Clau ->" . $key . " Valor ->" . $value);
 
             $this->insertAndUpdateConfiguraio($idProp,$key,$value);
         }
-        */
-        return redirect() -> route('property.normas',['id' => $request -> id, 'prop_id' => $idProp]);
+
+        //return redirect() -> route('property.normas',['id' => $request -> id, 'prop_id' => $idProp]);
     }
 
     private function insertAndUpdateConfiguraio($id,$clau,$valor){
