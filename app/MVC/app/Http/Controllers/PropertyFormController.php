@@ -336,7 +336,7 @@ class PropertyFormController extends Controller {
 
     public function serviceByProperty(Request $request){
 
-        $id = $request -> id;
+        $id = $request -> prop_id;
 
         $servicios = Propietat_Servei::where('propietat_id',$id)->get();
 
