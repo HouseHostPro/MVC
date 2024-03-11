@@ -464,7 +464,7 @@ class PropertyFormController extends Controller {
 
         $idProp = $request -> prop_id;
 
-        $normas= $request -> all();
+        $normas= array_slice($request->all(),1,count($request->all()));
 
         //Eliminar todas las normas
 
