@@ -351,7 +351,7 @@
             });
         }
         //Me devuelve el primer dia de la fecha más cercana, a partir de la fecha que le doy
-        /*function fechasMasCercana(fecha, fechasArray) {
+        function fechasMasCercana(fecha, fechasArray) {
             // Convertir la fecha de entrada en milisegundos
             let fechaEntrada = new Date(fecha).getTime();
 
@@ -385,7 +385,7 @@
             } else {
                 return null; // No se encontró ninguna fecha en el pasado
             }
-        }*/
+        }
 
         function fechasMasCercana(fecha, fechasArray) {
             // Convertir la fecha de entrada en milisegundos
