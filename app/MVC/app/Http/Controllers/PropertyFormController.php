@@ -456,9 +456,7 @@ class PropertyFormController extends Controller {
         $propietat -> nom = Traduccio::where('code', $propietat -> nom) -> where('lang', app() -> getLocale()) -> first() -> value;
 
         return view('property/normasForm', compact('propietat'));
-        Configuracio::where('propietat_id', $idProp)
-            ->where('clau', 'like', 'norma_%')
-            ->delete();    }
+    }
 
     public function saveNormas(Request $request){
 
@@ -467,7 +465,9 @@ class PropertyFormController extends Controller {
         $normas= array_slice($request->all(),1,count($request->all()));
 
         //Eliminar todas las normas
-
+        Configuracio::where('propietat_id', $idProp)
+        ->where('clau', 'like', 'norma_%')
+        ->delete();
 
         //Le asigno el valor No en el caso de que no lleguen en la request, para después poderlo rellenar con la petición ajax
         if(!$request->has('mascotas')){
