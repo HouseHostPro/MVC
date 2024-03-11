@@ -463,7 +463,7 @@ class PropertyFormController extends Controller {
 
         $idProp = $request -> prop_id;
 
-        $normas= array_slice($request->all(),1,count($request->all()));
+        $normas= $request->all();
 
         //Eliminar todas las normas
         Configuracio::where('propietat_id', $idProp)
