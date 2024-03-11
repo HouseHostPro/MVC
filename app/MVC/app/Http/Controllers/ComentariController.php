@@ -112,7 +112,7 @@ class ComentariController extends Controller{
                 Comentari::where('tc_id',$id)->where('usuari_id',$idU)->delete();
             }
 
-            return redirect() -> route('principal',['id' => $request -> id]);
+            return back();
         }
     }
     public function comentarios(Request $request){
