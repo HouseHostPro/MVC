@@ -20,19 +20,19 @@
         @csrf
         <div class="row mt-4">
             <div class="form-check form-switch mb-sm-1 mb-3 col-sm-3 col-6 d-flex justify-content-center">
-                <input class="form-check-input" type="checkbox" name="mascotas" value="Si" id="mascotas">
+                <input class="form-check-input" type="checkbox" name="mascotas" value="true" id="mascotas">
                 <label class="form-check-label" for="mascotas">{{__('Mascotas')}}</label>
             </div>
             <div class="form-check form-switch mb-sm-1 mb-0 col-sm-3 col-6 d-flex justify-content-center">
-                <input class="form-check-input" type="checkbox" name="fumar" value="Si" id="fumar">
+                <input class="form-check-input" type="checkbox" name="fumar" value="true" id="fumar">
                 <label class="form-check-label" for="fumar">{{__('Fumar')}}</label>
             </div>
             <div class="form-check form-switch mb-sm-1 mb-3 col-sm-3 col-6 d-flex justify-content-center">
-                <input class="form-check-input" type="checkbox" name="visitas" value="Si" id="visitas">
+                <input class="form-check-input" type="checkbox" name="visitas" value="true" id="visitas">
                 <label class="form-check-label" for="visitas">{{__('Visitas')}}</label>
             </div>
             <div class="form-check form-switch mb-sm-1 mb-0 col-sm-3 col-6 d-flex justify-content-center">
-                <input class="form-check-input" type="checkbox" name="fiestas" value="Si" id="fiestas" >
+                <input class="form-check-input" type="checkbox" name="fiestas" value="true" id="fiestas" >
                 <label class="form-check-label" for="fiestas">{{__('Fiestas')}}</label>
             </div>
         </div>
@@ -93,13 +93,13 @@
 
                 normas.forEach( function (value){
 
-                    if(value.clau === "mascotas" && value.valor === "Si"){
+                    if(value.clau === "mascotas" && value.valor === "true"){
                         $('#mascotas').prop('checked', true);
-                    }else if(value.clau === "fiestas" && value.valor === "Si"){
+                    }else if(value.clau === "fiestas" && value.valor === "true"){
                         $('#fiestas').prop('checked', true);
-                    }else if(value.clau === "visitas" && value.valor === "Si"){
+                    }else if(value.clau === "visitas" && value.valor === "true"){
                         $('#visitas').prop('checked', true);
-                    }else if(value.clau === "fumar" && value.valor === "Si"){
+                    }else if(value.clau === "fumar" && value.valor === "true"){
                         $('#fumar').prop('checked', true);
                     }else if(value.clau === "hora_entrada"){
                         $('#entrada').val(value.valor);
@@ -139,7 +139,6 @@
                 $("#normasList").append(li);
                 $("#form").append(inputHidden);
             }
-
 
             $('#atras').remove();
         })
