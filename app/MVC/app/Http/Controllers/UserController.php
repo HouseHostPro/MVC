@@ -48,7 +48,10 @@ class UserController extends Controller{
 
         if(Auth::check()){
             $user = User::find(Auth::user()->id);
-            $user->update($request->all());
+            $user-> update($request->all());
+
+            $user -> contrasenya = Hash::make($request -> constrasenya);
+            $user -> update($user -> contrasenya);
 
             Alert::success(__('Actualizado'), __(''));
 
