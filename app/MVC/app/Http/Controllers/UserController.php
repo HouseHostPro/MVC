@@ -50,7 +50,7 @@ class UserController extends Controller{
 
             $user -> update($request -> all());*/
 
-            $request->merge(['contrasenya' => Hash::make($request->input('contrasenya'))]);
+            $request->merge(['contrasenya' => bcrypt($request->input('contrasenya'))]);
 
             $user -> update($request -> all());
 
