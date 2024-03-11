@@ -7,6 +7,7 @@ use App\Models\Propietat;
 use App\Models\Traduccio;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ImagenesController extends Controller{
@@ -97,7 +98,12 @@ class ImagenesController extends Controller{
 
     }
     public function imagenesPrincipalesAjax(Request $request){
-        $imagenes = Imatge::where('portada', 1)->get();
+
+        $imagenes = Propietat::where('propietat.usuari_id',Auth::id())
+                ->join('imatge','propietat.id', '=','imatge.propietat_id')
+                ->where('imatge.portada',1)
+                ->get();
+
 
         $allUrls = [];
 
