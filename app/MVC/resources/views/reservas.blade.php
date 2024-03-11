@@ -18,6 +18,9 @@
             <input id="cercador" class="form-control" type="text">
         </div>
     </div>
+    <div class="col-12 row justify-content-center mt-sm-3 mt-4 mb-sm-4 mb-3">
+        <h2 class="text-center">{{__('Mis reservas')}}</h2>
+    </div>
     <div class="gradient-custom-1 ">
         <div class="mask d-flex align-items-center ">
             <div class="container">
