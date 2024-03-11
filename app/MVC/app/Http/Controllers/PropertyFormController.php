@@ -336,7 +336,7 @@ class PropertyFormController extends Controller {
 
     public function serviceByProperty(Request $request){
 
-        $id = $request -> prop_id;
+        $id = $request -> id;
 
         $servicios = Propietat_Servei::where('propietat_id',$id)->get();
 
@@ -398,7 +398,7 @@ class PropertyFormController extends Controller {
 
     public function espaciosByProperty(Request $request){
 
-        $id = $request -> prop_id;
+        $id = $request -> id;
 
         $servicios = Espai::where('propietat_id',$id)->with('espacios_defecto')->get();
 
