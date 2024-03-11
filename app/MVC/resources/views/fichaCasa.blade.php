@@ -247,7 +247,8 @@
 
 
         if ($('#permitirMascotas').val() === 'false') {
-                $('#mascotas').hide();
+            $('#mascotas').hide();
+            $('#form-casa').css('height', '24%');
         }
 
 
