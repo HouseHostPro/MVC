@@ -132,7 +132,7 @@
                                         </div>
                                         <div class="col-sm-6 col-12">
                                             <label class="label">{{__('Ciudad')}}</label>
-                                            <select class="form-control">
+                                            <select name="id_ciutat" class="form-control">
                                                 @foreach($ciutats as $ciutat)
                                                     <option value="{{$ciutat -> id}}" @if($ciutat -> id === $propietat -> ciutat_id) selected @endif>{{$ciutat -> nom}}</option>
                                                 @endforeach
