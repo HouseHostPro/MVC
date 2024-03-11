@@ -118,7 +118,7 @@ class PropertyFormController extends Controller {
 
         $url = $request->url();
         //Expresión regular para coger el número de la propiedad que se esá editando
-        if (preg_match('/property\/(\d+)\/property/', $url, $matches)) {
+        if (preg_match('/property/\d+/property/(\d+)/', $url, $matches)) {
             return $matches[1];
         }
     }
