@@ -488,15 +488,12 @@ class PropertyFormController extends Controller {
 
         foreach ($normas as $key => $value){
 
-            var_dump("Clau ->" . $key . " Valor ->" . $value);
-
             if(Str::contains($key,'norma')) {
-                var_dump("Clau-> " . $key);
                 $this->insertAndUpdateConfiguraio($idProp, $key, $value);
             }
         }
 
-        //return redirect() -> route('property.normas',['id' => $request -> id, 'prop_id' => $idProp]);
+        return redirect() -> route('property.normas',['id' => $request -> id, 'prop_id' => $idProp]);
     }
 
     private function insertAndUpdateConfiguraio($id,$clau,$valor){
@@ -505,7 +502,6 @@ class PropertyFormController extends Controller {
             $configuracion = Configuracio::where('propietat_id', $id)
                 ->where('clau', $clau)
                 ->first();
-var_dump("skdjhsakjhdgasjdgaskgdaskhjgd");
             // Actualizar el valor
             $configuracion->valor = $valor;
             $configuracion->save();
