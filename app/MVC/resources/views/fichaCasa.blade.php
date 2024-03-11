@@ -246,6 +246,11 @@
         let totalRating;
 
 
+        if ($('#permitirMascotas').val() === 'false') {
+                $('#mascotas').hide();
+        }
+
+
         //Encontrar traducciones de la propiedad
         $(function () {
             const nom = '{{ $propietat -> nom }}';
@@ -576,7 +581,6 @@
 
                     if ($('#permitirMascotas').val() === 'false') {
                         $('#mascotas').hide();
-                        console.log("entra24%")
                         $('#form-casa').css('height', '24%');
                     }else {
                         $('#form-casa').css('height', '29%');

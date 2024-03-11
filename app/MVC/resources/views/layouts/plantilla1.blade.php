@@ -66,7 +66,6 @@
                 $('#frontCasa').removeClass('full-width rounded-end');
                 if ($('#permitirMascotas').val() === 'false') {
                     $('#mascotas').hide();
-                    console.log("entra22%")
                     $('#form-casa').css('height', '22%');
 
                 }else {
