@@ -22,8 +22,7 @@ class UserController extends Controller{
         return view('login');
     }
 
-    public function register()
-    {
+    public function register() {
         $paises = Pais::all();
         $ciutats = Ciutat::all();
         if(Auth::check()){

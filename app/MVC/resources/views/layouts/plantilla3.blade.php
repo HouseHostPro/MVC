@@ -75,7 +75,7 @@
 
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allImagesAjax/{{$PROPIETAT_ID}}`
+                url: `http://www.househostpromp.me/allImagesAjax/{{$PROPIETAT_ID}}`
             }).done(function (imagenes) {
                 printImagenes(imagenes)
             });
