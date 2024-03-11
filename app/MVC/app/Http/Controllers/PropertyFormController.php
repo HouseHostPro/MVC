@@ -473,15 +473,22 @@ class PropertyFormController extends Controller {
         //Le asigno el valor No en el caso de que no lleguen en la request, para después poderlo rellenar con la petición ajax
         if(!$request->has('mascotas')){
             $this->insertAndUpdateConfiguraio($idProp,'mascotas','false');
+            var_dump("entra mascota");
         }
         if(!$request->has('visitas')){
             $this->insertAndUpdateConfiguraio($idProp,'visitas','false');
+            var_dump("entra visitas");
+
         }
         if(!$request->has('fumar')){
             $this->insertAndUpdateConfiguraio($idProp,'fumar','false');
+            var_dump("entra fumar");
+
         }
         if(!$request->has('fiestas')){
             $this->insertAndUpdateConfiguraio($idProp,'fiestas','false');
+            var_dump("entra fiestas");
+
         }
 
 
