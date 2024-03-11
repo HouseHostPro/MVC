@@ -51,7 +51,7 @@ class UserController extends Controller{
             $user-> update($request->all());
 
             $user -> contrasenya = Hash::make($request -> constrasenya);
-            $user -> update($user -> contrasenya);
+            $user -> update(array('contrasenya' => $user -> contrasenya));
 
             Alert::success(__('Actualizado'), __(''));
 
