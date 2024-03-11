@@ -489,7 +489,10 @@ class PropertyFormController extends Controller {
 
             var_dump("Clau ->" . $key . " Valor ->" . $value);
 
-            $this->insertAndUpdateConfiguraio($idProp,$key,$value);
+            if(Str::contains($key,'norma')) {
+                var_dump($key);
+                $this->insertAndUpdateConfiguraio($idProp, $key, $value);
+            }
         }
 
         //return redirect() -> route('property.normas',['id' => $request -> id, 'prop_id' => $idProp]);
