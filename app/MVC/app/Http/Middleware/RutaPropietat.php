@@ -36,7 +36,9 @@ class RutaPropietat
                 Str::contains($url,"househostpromp.me/reservasAjax")||
                 Str::contains($url,"househostpromp.me/reservasPropertiesAjax")||
                 Str::contains($url,"househostpromp.me/imagenesPortadaAjax") ||
-                Str::contains($url,"househostpromp.me/findNomTraduit/{id}"))
+                Str::contains($url,"househostpromp.me/findNomTraduit/{id}") ||
+                Str::contains($url,"househostpromp.me/addComentario")||
+                Str::contains($url,"househostpromp.me/deleteComentario"))
             return $next($request);
 
 
