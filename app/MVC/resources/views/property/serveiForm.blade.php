@@ -66,13 +66,11 @@
                 method: 'GET',
                 url: `http://${host}/serviciosAjax`
             }).done(function (service) {
-                console.log(service)
                 allServices.push.apply(allServices, service);
                 $.ajax({
                     method: 'GET',
                     url: `http://${host}/serviciosByProperty/${match[1]}`
                 }).done(function (service) {
-                    console.log(service)
                     allServicesByProperty.push.apply(allServicesByProperty, service);
                     printServicios();
                 });

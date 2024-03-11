@@ -58,7 +58,6 @@
                         method: 'GET',
                         url: `http://${host}/imagenesPortadaAjax`
                     }).done(function (imagenes) {
-                        console.log(imagenes)
                         allImages.push.apply(allImages, imagenes);
                         printProperties(@json($propietats))
                     });
@@ -89,13 +88,9 @@
                     let fila = $('<tr>');
                     fila.append($('<td>').text(propiedad[i].nom).attr('data-label', 'Nombre propiedad'));
 
-                    console.log(count)
-                    console.log(allImages.length)
                     if(count < allImages.length){
-                        console.log("entra")
                         if(propiedad[i].id === allImages[i].idProp){
 
-                            console.log(allImages[i].url);
                             let imagen = $('<img>').attr({
                                 'src': allImages[i].url,
                                 'style': 'height: 150px; width: 150px'

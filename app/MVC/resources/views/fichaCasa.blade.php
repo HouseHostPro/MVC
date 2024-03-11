@@ -508,7 +508,7 @@
                         : [true, '', '{{ $preuBase }}€'];
                 })
             }
-            console.log("From -> " + $('#from').val());
+
             if ($('#to').val() !== "") {
                 pintarprecioReserva();
             }
@@ -544,9 +544,7 @@
                         ? [false, '', '']
                         : [true, '', '{{ $preuBase }}€'];
                 })
-            }
 
-            console.log("To ->" + $('#to').val());
 
             if ($('#from').val() !== "") {
 

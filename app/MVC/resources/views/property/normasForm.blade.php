@@ -85,7 +85,7 @@
                 method: 'GET',
                 url: `http://${host}/allNormasByPropertyAjax/${match[1]}`
             }).done(function (normas) {
-                console.log(normas);
+
                 printNormas(normas);
             });
 
