@@ -520,6 +520,7 @@
 
             //Aqui quita la primera fecha del array(no tiene que estar), y después le añado la que he clicado(tiene que estar)
             let arrayFechas = encontrarFechaMasCercanaEnPasado($('#to').val(),allReservas);
+            console.log("All rserves ->" + allReservas)
             if(arrayFechas !== null){
 
                 startDate = new Date(arrayFechas.shift());
