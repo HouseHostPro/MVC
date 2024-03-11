@@ -64,7 +64,7 @@
                 $('#img-hide').show();
                 // Eliminar la clase que ajusta el tamaño de la imagen firstImage
                 $('#frontCasa').removeClass('full-width rounded-end');
-                if ($('#permitirMascotas').val() === 'No') {
+                if ($('#permitirMascotas').val() === 'false') {
                     $('#mascotas').hide();
                     $('#form-casa').css('height', '22%');
 

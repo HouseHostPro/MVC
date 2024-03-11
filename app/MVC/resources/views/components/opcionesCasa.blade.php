@@ -14,21 +14,21 @@
                     @elseif($norma->clau === 'hora_salida')
                         <li class="list-group-item">{{__('Salida antes de las')}}: {{$norma->valor}}</li>
                     @elseif($norma->clau === 'mascotas')
-                        @if($norma->valor === 'No')
+                        @if($norma->valor === 'false')
                             <li class="list-group-item">{{__('No se admiten mascotas')}}</li>
-                            <input type="hidden" id="permitirMascotas" value="No">
+                            <input type="hidden" id="permitirMascotas" value="false">
                         @else
                             <li class="list-group-item">{{__('Se admiten mascotas')}}</li>
-                            <input type="hidden" id="permitirMascotas" value="Si">
+                            <input type="hidden" id="permitirMascotas" value="true">
                         @endif
                     @elseif($norma->clau === 'visitas')
-                        @if($norma->valor === 'No')
+                        @if($norma->valor === 'false')
                             <li class="list-group-item">{{__('No se admiten visitas')}}</li>
                         @else
                             <li class="list-group-item">{{__('Se admiten visitas')}}</li>
                         @endif
                     @elseif($norma->clau === 'fiestas')
-                        @if($norma->valor === 'No')
+                        @if($norma->valor === 'false')
                             <li class="list-group-item">{{__('No se admiten fiestas')}}</li>
                         @else
                             <li class="list-group-item">{{__('Se admiten fiestas')}}</li>
