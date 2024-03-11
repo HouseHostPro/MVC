@@ -59,7 +59,7 @@
         $(document).ready(function (){
 
             const url = window.location.href;
-            const match = url.match(/\/property\/(\d+)\/property\/\d+\/servicios/);
+            const match = url.match(/\/property\/\d+\/property\/(\d+)\/servicios/);
 
             const host = location.host;
             $.ajax({

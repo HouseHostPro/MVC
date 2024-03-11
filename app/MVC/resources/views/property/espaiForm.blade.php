@@ -58,7 +58,7 @@
 
         $(document).ready(function (){
             const url = window.location.href;
-            const match = url.match(/\/property\/(\d+)\/property\/\d+\/espacios/);
+            const match = url.match(/\/property\/\d+\/property\/(\d+)\/espacios/);
 
             const host = location.host;
             $.ajax({
