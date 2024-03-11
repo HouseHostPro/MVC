@@ -590,7 +590,6 @@
             if (huespedes <= 2) {
 
                 huespedes--;
-                $('#personas').val(1);
                 $('#menos').prop("disabled", true);
             } else {
                 huespedes--;
