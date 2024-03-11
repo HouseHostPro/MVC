@@ -574,8 +574,9 @@
                 //Resize form reserva, quan afagueixes un nou camp
                 if ($(window).width() > 540) {
 
-                    if ($('#permitirMascotas').text() === 'false') {
+                    if ($('#permitirMascotas').val() === 'false') {
                         $('#mascotas').hide();
+                        console.log("entra24%")
                         $('#form-casa').css('height', '24%');
                     }else {
                         $('#form-casa').css('height', '29%');
