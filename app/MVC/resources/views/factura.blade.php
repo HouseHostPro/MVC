@@ -20,7 +20,7 @@
             <p class="fs-5">
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle-fill pb-1" viewBox="0 0 16 16">
                     <circle cx="8" cy="8" r="8"/>
-                </svg>{{__('Nombre propiedad')}}: <span class="fs-6 ">{{$nomPropietat}}</span></p>
+                </svg>{{__('Nombre propiedad')}}: <span class="fs-6 ">{{$factura->nom_propietat}}</span></p>
         </div>
         <div class="col-sm-3 col-12">
             <p class="fs-5">
