@@ -473,35 +473,27 @@ class PropertyFormController extends Controller {
         //Le asigno el valor No en el caso de que no lleguen en la request, para después poderlo rellenar con la petición ajax
         if(!$request->has('mascotas')){
             $this->insertAndUpdateConfiguraio($idProp,'mascotas','false');
-            var_dump("entra mascota");
         }
         if(!$request->has('visitas')){
             $this->insertAndUpdateConfiguraio($idProp,'visitas','false');
-            var_dump("entra visitas");
 
         }
         if(!$request->has('fumar')){
             $this->insertAndUpdateConfiguraio($idProp,'fumar','false');
-            var_dump("entra fumar");
 
         }
         if(!$request->has('fiestas')){
             $this->insertAndUpdateConfiguraio($idProp,'fiestas','false');
-            var_dump("entra fiestas");
 
         }
-
-
 
         foreach ($normas as $key => $value){
 
 
-            if(Str::contains($key,'norma')) {
+            $this->insertAndUpdateConfiguraio($idProp, $key, $value);
 
-                $this->insertAndUpdateConfiguraio($idProp, $key, $value);
-            }
         }
-        //return redirect() -> route('property.normas',['id' => $request -> id, 'prop_id' => $idProp]);
+        return redirect() -> route('property.normas',['id' => $request -> id, 'prop_id' => $idProp]);
     }
 
     private function insertAndUpdateConfiguraio($id,$clau,$valor){
@@ -511,8 +503,6 @@ class PropertyFormController extends Controller {
                 ->where('clau', $clau)
                 ->first();
 
-            var_dump("Clau-> "  . $clau);
-            var_dump("Valor-> "  . $valor);
             // Actualizar el valor
             $configuracion->valor = $valor;
             $configuracion->save();
