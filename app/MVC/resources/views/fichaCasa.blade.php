@@ -587,7 +587,7 @@
 
         $('#menos').on('click', function () {
 
-            if (huespedes === 2) {
+            if (huespedes <= 2) {
 
                 huespedes--;
                 $('#personas').val(1);
