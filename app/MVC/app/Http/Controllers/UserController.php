@@ -45,6 +45,7 @@ class UserController extends Controller{
 
         if(Auth::check()){
             $user = User::find(Auth::user()->id);
+            var_dump($request -> contrasenya);
 
             /*$request -> contrasenya = Hash::make($request -> contrasenya);
 
@@ -56,7 +57,8 @@ class UserController extends Controller{
 
             Alert::success(__('Actualizado'), __(''));
 
-            return redirect() -> back() -> with('success', 'Actualizado');
+            //return redirect() -> back() -> with('success', 'Actualizado');
+            var_dump('hashed ---  ' . $request -> contrasenya);
         }else{
             User::create($request->all());
             $newUserId = User::where('email', $request -> email) -> first() -> id;
