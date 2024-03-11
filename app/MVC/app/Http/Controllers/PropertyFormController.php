@@ -31,8 +31,10 @@ class PropertyFormController extends Controller {
 
     //Propiedades
     public function findAllByUser() {
-        $propietats = Propietat::where('usuari_id',Auth::user()->id) -> get();
-
+        $propietats = Propietat::select('propietat.*','ciutat.nom as nomCiutat')
+            ->where('usuari_id',Auth::id())
+            ->join('ciutat','propietat.ciutat_id', '=', 'ciutat.id')
+            -> get();
 
 
         foreach ($propietats as $propietat) {
@@ -45,7 +47,7 @@ class PropertyFormController extends Controller {
     }
     public function AllProperties() {
         $propietats = Propietat::select('propietat.id','propietat.nom','ciutat.nom as nomCiutat')
-            -> where('propietat.usuari_id',Auth::user()->id)
+            -> where('propietat.usuari_id',Auth::id())
             -> join('ciutat','propietat.ciutat_id', '=', 'ciutat.id')
             ->get();
 
