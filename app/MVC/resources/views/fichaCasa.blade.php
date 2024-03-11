@@ -508,7 +508,7 @@
                         : [true, '', '{{ $preuBase }}€'];
                 })
             }
-
+            console.log("From -> " + $('#from').val());
             if ($('#to').val() !== "") {
                 pintarprecioReserva();
             }
@@ -525,7 +525,6 @@
             let fechaSplit = $('#to').val().split('/');
             let fechaFormateada = fechaSplit[1] + '/' + fechaSplit[0] + '/' + fechaSplit[2];
             arrayFechas.push(fechaFormateada);
-            console.log("Esto es el from" + encontrarFechaMasCercanaEnPasado($('#to').val(),allReservas));
 
             //Llamo al datepicker para pasarle la fecha que he puesto, y dehabilite todo lo de después
             endDate = $(this).datepicker('getDate');
@@ -542,6 +541,8 @@
                     ? [false, '', '']
                     : [true, '', '{{ $preuBase }}€'];
             })
+
+            console.log("To ->" + $('#to').val());
 
             if ($('#from').val() !== "") {
 
