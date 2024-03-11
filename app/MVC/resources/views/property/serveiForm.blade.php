@@ -61,15 +61,16 @@
             const url = window.location.href;
             const match = url.match(/\/property\/(\d+)\/property\/\d+\/servicios/);
 
+            const host = location.host;
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/serviciosAjax`
+                url: `http://${host}/serviciosAjax`
             }).done(function (service) {
                 console.log(service)
                 allServices.push.apply(allServices, service);
                 $.ajax({
                     method: 'GET',
-                    url: `http://localhost:8100/serviciosByProperty/${match[1]}`
+                    url: `http://${host}/serviciosByProperty/${match[1]}`
                 }).done(function (service) {
                     console.log(service)
                     allServicesByProperty.push.apply(allServicesByProperty, service);
@@ -77,7 +78,7 @@
                 });
             });
 
-            $.ajax({
+            /*$.ajax({
                 method: 'GET',
                 url: '{{ route('property.traduccions') }}',
                 data: {
@@ -86,7 +87,7 @@
             }).done(function (traduccions) {
                 const nomTraduit = traduccions[0].filter((tr) => tr.lang === "{{ app() -> getLocale() }}")[0].value;
                 $("li:nth-child(4)").html(nomTraduit);
-            });
+            });*/
         })
 
         function printServicios(){

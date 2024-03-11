@@ -53,10 +53,10 @@
             $(document).ready(function (){
 
 
-
+                    const host = location.host;
                     $.ajax({
                         method: 'GET',
-                        url: `http://localhost:8100/imagenesPortadaAjax`
+                        url: `http://${host}/imagenesPortadaAjax`
                     }).done(function (imagenes) {
                         console.log(imagenes)
                         allImages.push.apply(allImages, imagenes);

@@ -60,15 +60,15 @@
             const url = window.location.href;
             const match = url.match(/\/property\/(\d+)\/property\/\d+\/espacios/);
 
-
+            const host = location.host;
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allEspaciosAjax`
+                url: `http://${host}/allEspaciosAjax`
             }).done(function (espacios) {
                 allEspacios.push.apply(allEspacios, espacios);
                 $.ajax({
                     method: 'GET',
-                    url: `http://localhost:8100/allEspaciosByPropertyAjax/${match[1]}`
+                    url: `http://${host}/allEspaciosByPropertyAjax/${match[1]}`
                 }).done(function (espacios) {
                     allEspaciosByProperty.push.apply(allEspaciosByProperty, espacios);
                     printEspacios();
@@ -78,7 +78,7 @@
             //printEspacios();
 
 
-            $.ajax({
+            /*$.ajax({
                 method: 'GET',
                 url: '{{ route('property.traduccions') }}',
                 data: {
@@ -87,7 +87,7 @@
             }).done(function (traduccions) {
                 const nomTraduit = traduccions[0].filter((tr) => tr.lang === "{{ app() -> getLocale() }}")[0].value;
                 $("li:nth-child(4)").html(nomTraduit);
-            });
+            });*/
         })
 
 

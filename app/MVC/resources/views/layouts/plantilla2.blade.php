@@ -30,7 +30,7 @@
 </head>
 <body style="height: 100vh;" class="d-flex flex-column justify-content-between">
 <div>
-    @section('titol','Cas Concos')
+
     @include('components.header')
     <main class="container-fluid d-flex justify-content-center" >
         <div id="container-principal" class="container-sm" >
@@ -75,9 +75,18 @@
 
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allImagesAjax/{{$PROPIETAT_ID}}`
+                url: `http://www.househostpromp.me/allImagesAjax/{{$PROPIETAT_ID}}`
             }).done(function (imagenes) {
                 printImagenes(imagenes)
+
+            });
+
+            $.ajax({
+                method: 'GET',
+                url: `http://www.househostpromp.me/findNomTraduit/{{ $PROPIETAT_ID }}`
+            }).done(function (nom) {
+                let svg = $('#headerNom').find("svg");
+                svg.after(nom);
             });
 
             function printImagenes(imagenes){

@@ -28,7 +28,6 @@
         @endif
     @endforeach
 
-    @section('titol','Cas Concos')
     @include('components.header')
 
     <main class="container-fluid h-100">
@@ -167,6 +166,7 @@
             let lat = $('#ubi').val().split(',')[0];
             let lng = $('#ubi').val().split(',')[1];
 
+
             const map = L.map('map').setView([lat, lng], 13);
             L.marker([lat, lng]).addTo(map);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -188,6 +188,15 @@
             });
 
             let windowWidth = $(window).width();
+
+            $.ajax({
+                method: 'GET',
+                url: `http://www.househostpromp.me/findNomTraduit/{{ $PROPIETAT_ID }}`
+            }).done(function (nom) {
+                let svg = $('#headerNom').find("svg");
+                svg.after(nom);
+            });
+
             function resizeProperty() {
 
 

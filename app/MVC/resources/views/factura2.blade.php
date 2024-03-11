@@ -83,7 +83,7 @@
                 {{Session::get('factura') -> preu_neteja}}€
             </td>
             <td>
-                {{Session::get('factura') -> preu_total}}
+                {{Session::get('factura') -> preu_total}}€
             </td>
         </tr>
     </table>

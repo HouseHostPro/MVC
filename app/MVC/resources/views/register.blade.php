@@ -100,6 +100,7 @@
                     <button type="submit" class="btn btn-primary">{{__('Enviar')}}</button>
                 </div>
             </div>
+            <input type="hidden" name="casaId" value="{{ $PROPIETAT_ID }}">
         </form>
 @auth
     <script>

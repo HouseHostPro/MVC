@@ -7,6 +7,7 @@ use App\Models\Ciutat;
 use App\Models\Comentari;
 use App\Models\Configuracio_Servei;
 use App\Models\Pais;
+use App\Models\Rol_User;
 use App\Models\Tiquet_Comentari;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,8 +18,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller{
 
-    public function register()
-    {
+    public function loadFormUser() {
+        return view('login');
+    }
+
+    public function register() {
         $paises = Pais::all();
         $ciutats = Ciutat::all();
         if(Auth::check()){
@@ -51,8 +55,15 @@ class UserController extends Controller{
             return redirect() -> back() -> with('success', 'Actualizado');
         }else{
             User::create($request->all());
+            $newUserId = User::where('email', $request -> email) -> first() -> id;
+
+            $rolUser = new Rol_User();
+            $rolUser -> rol_id = 3;
+            $rolUser -> usuari_id = $newUserId;
+
+            $rolUser -> save();
         }
-        return view('fichaCasa');
+        return redirect() -> route('principal', ['id' => $request -> casaId]);
     }
 
     public function userId($id)
@@ -87,9 +98,9 @@ class UserController extends Controller{
 
         /* || !Hash::check($password,$user->contrasenya)*/
         if ($user != null) {
-            /*if(Hash::check($password, $user -> contrasenya))*/
+            if(Hash::check($password, $user -> contrasenya))
 
-            if($password == $user->contrasenya){
+            /*if($password == $user->contrasenya)*/{
                 Auth::login($user);
                 $request->session()->put('idPropiedad',$idPropiedad);
                 $request->session()->put('user',$user);
@@ -118,10 +129,9 @@ class UserController extends Controller{
                 array_push($comentarios,$comentario);
             }
         }
-        $servicios = Configuracio_Servei::where('configuracio_id',1)->get();
         Auth::logout();
 
-        return redirect()->route('principal', ['id' => $request -> id, 'comentarios' => $comentarios, 'servicios' => $servicios]);
+        return redirect()->route('principal', ['id' => $request -> id]);
     }
     public function cuenta(Request $request){
 

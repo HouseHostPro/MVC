@@ -80,9 +80,10 @@
             const url = window.location.href;
             const match = url.match(/\/property\/(\d+)\/property\/\d+\/normas/);
 
+            const host = location.host;
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allNormasByPropertyAjax/${match[1]}`
+                url: `http://${host}/allNormasByPropertyAjax/${match[1]}`
             }).done(function (normas) {
                 console.log(normas);
                 printNormas(normas);

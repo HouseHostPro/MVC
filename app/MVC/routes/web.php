@@ -116,7 +116,8 @@ Route::get('/property/{id}',[CasaController::class,'datosFichaCasa'])->name('pri
 Route::get('/findTraduccions', [PropietatController::class, 'findTraduccionsById']) -> name('findTraduccions');
 
 //Login
-Route::view('/property/{id}/login','login')->name('login');
+Route::get('/property/{id}/login', [UserController::class, 'loadFormUser'])->name('login');
+
 Route::post('/property/{id}/login/check',[UserController::class,'checkLogin'])->name('login.check');
 
 
@@ -146,7 +147,7 @@ Route::controller(PropertyFormController::class) -> prefix('property/edit/{id}')
         Route::get('/reserves/dates', 'findAllDatesReservades') -> name('findAllDatesReservades');
     });
 
-
+Route::get('findNomTraduit/{id}', [PropietatController::class, 'findNomTraduit']);
 
 
 //Servei

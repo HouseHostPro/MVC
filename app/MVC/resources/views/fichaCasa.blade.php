@@ -39,10 +39,10 @@
     <!-- Modals -->
     <!-- Ver Comentarios -->
     <div class="modal fade" id="comenarios" tabindex="-1" aria-labelledby="comment" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered ">
+        <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="comment">Comentarios</h5>
+                    <h5 class="modal-title" id="comment">{{__('Comentarios')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 @php
@@ -52,7 +52,7 @@
                     @if($comentario->fa_contesta === 'F')
                         <div class="modal-body row col-12">
                             <div class="col-12  row mt-4">
-                                <div class="col-sm-1 col-3 text-center">
+                                <div class="col-3 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
@@ -85,19 +85,19 @@
                         @if($count === 0)
                             <div class="row col-12 justify-content-end">
                                 <div class="col-11">
-                                    <p class="fw-bold">Respuestas</p>
+                                    <p class="fw-bold">{{__('Respuestas')}}</p>
                                 </div>
                             </div>
                         @endif
                         <div class="modal-body row col-12 justify-content-end">
                             <div class="col-11 row mt-1">
-                                <div class="col-sm-1 col-3 text-center">
+                                <div class="col-4 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                                     </svg>
                                 </div>
-                                <div class="col-9 ps-0">
+                                <div class="col-8 ps-0">
                                     <h5>{{$comentario->user->nom}}</h5>
                                     <p style="font-size: 12px">{{$comentario->user->ciutat->nom}}, {{$comentario->user->ciutat->pais->nom}}</p>
                                 </div>
@@ -123,7 +123,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="cComenatrio">Añadir cometario</h5>
+                    <h5 class="modal-title" id="cComenatrio">{{__('Añadir comentario')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -139,12 +139,12 @@
                            </div>
                        </div>
                        <div class="form-group">
-                           <label for="descripcion">Descripción:</label>
+                           <label for="descripcion">{{__('Descripción')}}:</label>
                            <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
                        </div>
                        <input type="text" id="rating" name="rating" hidden>
                        <div class="col-12 row justify-content-end">
-                           <button type="submit" class="col-2 btn bg-primary bg-opacity-25 border border-dark">Añadir</button>
+                           <button type="submit" class="col-2 btn bg-primary bg-opacity-25 border border-dark">{{__('Añadir')}}</button>
                        </div>
                    </form>
                 </div>
@@ -157,7 +157,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tServicios">Servicios</h5>
+                    <h5 class="modal-title" id="tServicios">{{__('Servicios')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -176,7 +176,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tNormas">Normas de la casa</h5>
+                    <h5 class="modal-title" id="tNormas">{{__('Normas de la casa')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -223,7 +223,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="vFotos">Fotos</h5>
+                    <h5 class="modal-title" id="vFotos">{{__('Fotos')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  d-flex justify-content-center">
@@ -264,17 +264,18 @@
                 $('#titolCasa').val(traduccions[0].filter((traduccio) => traduccio.lang === applocale)[0].value);
             });
 
+            const host = location.host;
             //Petición Ajax para poner todas las imagenes de la casa en el modal
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allImagesAjax/{{$PROPIETAT_ID}}`
+                url: `http://${host}/allImagesAjax/{{$PROPIETAT_ID}}`
             }).done(function (imagenes) {
                 printImagenes(imagenes)
             });
 
             $.ajax({
                 method: 'GET',
-                url: `http://localhost:8100/allDatesReservades/{{$PROPIETAT_ID}}`
+                url: `http://www.househostpromp.me/allDatesReservades/{{$PROPIETAT_ID}}`
             }).done(function (reservas) {
                 allReservas = reservas;
                 pintalCalendario(reservas);

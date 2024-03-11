@@ -35,8 +35,8 @@
             <p>{{ $personas }}</p>
         </div>
         <div class="input_text mt-8 relative">
-            <span class="absolute left-0 text-sm -top-4 text-blue-600">{{__('Precio limpieza')}}€</span>
-            <p>{{ $limpieza }}</p>
+            <span class="absolute left-0 text-sm -top-4 text-blue-600">{{__('Precio limpieza')}}</span>
+            <p>{{ $limpieza }}€</p>
         </div>
 
 

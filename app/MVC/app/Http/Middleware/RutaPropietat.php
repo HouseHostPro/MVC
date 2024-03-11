@@ -3,9 +3,11 @@
 namespace App\Http\Middleware;
 
 use App\Models\Propietat;
+use App\Models\Traduccio;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 class RutaPropietat
@@ -19,29 +21,29 @@ class RutaPropietat
     {
         $url = url() -> current();
 
-        if ($url === "http://localhost:8100/allProperties" ||
-            $url === "http://localhost:8100/findTraduccions" ||
-            $url === "http://localhost:8100/allTraduccions" ||
-            $url === "http://localhost:8100/serviciosAjax" ||
-            $url === "http://localhost:8100/serviciosByProperty/{id}" ||
-            $url === "http://localhost:8100/es" ||
-            $url === "http://localhost:8100/en" ||
-            $url === "http://localhost:8100/allImagesAjax/{id}" ||
-            $url === "http://localhost:8100/allEspaciosAjax" ||
-            $url === "http://localhost:8100/allEspaciosByPropertyAjax/{id}"||
-            $url === "http://localhost:8100/comentariosUserAjax"||
-            $url === "http://localhost:8100/comentariosPropertiesAjax"||
-            $url === "http://localhost:8100/reservasAjax"||
-            $url === "http://localhost:8100/reservasPropertiesAjax"||
-            $url === "http://localhost:8100/imagenesPortadaAjax")
+        if (Str::contains($url, "househostpromp.me/allProperties") ||
+                Str::contains($url,"househostpromp.me/findTraduccions") ||
+                Str::contains($url,"househostpromp.me/allTraduccions") ||
+                Str::contains($url,"househostpromp.me/serviciosAjax") ||
+                Str::contains($url,"househostpromp.me/serviciosByProperty/{id}") ||
+                Str::contains($url,"househostpromp.me/es") ||
+                Str::contains($url,"househostpromp.me/en") ||
+                Str::contains($url,"househostpromp.me/allImagesAjax/{id}") ||
+                Str::contains($url,"househostpromp.me/allEspaciosAjax") ||
+                Str::contains($url,"househostpromp.me/allEspaciosByPropertyAjax/{id}")||
+                Str::contains($url,"househostpromp.me/comentariosUserAjax")||
+                Str::contains($url,"househostpromp.me/comentariosPropertiesAjax")||
+                Str::contains($url,"househostpromp.me/reservasAjax")||
+                Str::contains($url,"househostpromp.me/reservasPropertiesAjax")||
+                Str::contains($url,"househostpromp.me/imagenesPortadaAjax") ||
+                Str::contains($url,"househostpromp.me/findNomTraduit/{id}"))
             return $next($request);
-
 
 
         $id = explode("/", $url)[4];
         View::share('PROPIETAT_ID', $id);
 
-        $id_plantilla = Propietat::where('id',$id)->value('plantilla_id');
+        $id_plantilla = Propietat::where('id',explode("/", $url)[4])->value('plantilla_id');
         View::share('PLANTILLA', $id_plantilla);
 
         return $next($request);

@@ -29,7 +29,8 @@ class CasaController extends Controller{
         $tiquet_comentari = Tiquet_Comentari::where('propietat_id',$request -> id)->get();
         $preuBase = Configuracio::where(['propietat_id' => $request -> id, 'clau' => 'preu_base']) -> first() -> valor;
         //Que me busque todos los dormitorios
-        $dormitorios = Espai::join('espais_defecte', 'espai.espaid_id', '=', 'espais_defecte.id')
+        $dormitorios = Espai::where('propietat_id',$request -> id)
+            ->join('espais_defecte', 'espai.espaid_id', '=', 'espais_defecte.id')
             ->where('espais_defecte.tipus', 'Dormitorio')
             ->get(['espai.*']);
         $urlsCamas = $this->allUrlsImage();

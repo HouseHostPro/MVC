@@ -24,7 +24,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script>
 </head>
 <body style="height: 98vh;">
-@section('titol','Cas Concos')
+
 @include('components.header')
     <main class="container-fluid d-flex justify-content-center">
         <div id="container-form" class="container-sm">
@@ -44,5 +44,16 @@
         </div>
     </main>
 </body>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            method: 'GET',
+            url: `http://www.househostpromp.me/findNomTraduit/{{ $PROPIETAT_ID }}`
+        }).done(function (nom) {
+            let svg = $('#headerNom').find("svg");
+            svg.after(nom);
+        });
+    });
+</script>
 </html>
 

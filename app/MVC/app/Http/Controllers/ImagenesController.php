@@ -22,7 +22,7 @@ class ImagenesController extends Controller{
     private function allUrlsImage($id){
 
         $allUrls = [];
-        $imagenes = Imatge::where('propietat_id', $id)->get();
+        $imagenes = Imatge::where('propietat_id', $id) -> get();
 
         foreach ($imagenes as $imagen){
             $url = Storage::disk('propiedades')->temporaryUrl(
@@ -52,10 +52,7 @@ class ImagenesController extends Controller{
     }
     public function allImagesAjax(Request $request){
 
-        $id = $request->id;
-
-        $allUrls = $this->allUrlsImage($id);
-
+        $allUrls = $this->allUrlsImage($request -> id);
         return $allUrls;
     }
     public function store(Request $request){
