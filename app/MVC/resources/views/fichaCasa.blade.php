@@ -530,21 +530,21 @@
             //Para que se dehabiliten los dias de delante de la primer comando, y los dias de atras del segundo comando
             $("#from").datepicker("option", "maxDate", endDate);
 
-            if(arrayFechas !==null){
+            if(arrayFechas !==null) {
 
                 startDate = new Date(arrayFechas.shift());
                 $("#from").datepicker("option", "minDate", startDate);
                 arrayFechas.push(fechaFormateada);
 
                 //Llamo al datepicker para pasarle la fecha que he puesto y me deshabilite todas las fechas desde el primer dia de la reserva más cercana
-                $("#to").datepicker("option","beforeShowDay", function (date){
+                $("#to").datepicker("option", "beforeShowDay", function (date) {
 
                     const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
                     return jQuery.inArray(string, arrayFechas) == -1
                         ? [false, '', '']
                         : [true, '', '{{ $preuBase }}€'];
                 })
-
+            }
 
             if ($('#from').val() !== "") {
 
