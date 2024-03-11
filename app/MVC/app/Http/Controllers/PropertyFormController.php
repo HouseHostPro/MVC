@@ -128,7 +128,7 @@ class PropertyFormController extends Controller {
     }
 
     public function findAllCiutats() {
-        $ciutats = Ciutat::all();
+        $ciutats = Ciutat::orderBy('nom','asc')->get();
         return $ciutats;
     }
 
