@@ -523,9 +523,8 @@ class PropertyFormController extends Controller {
     public function loadFactura(Request $request){
 
         $factura = Factura::where('reserva_id',$request->idFactura)->first();
-        $nomPropietat = Traduccio::where('code', $factura -> nom_propietat) -> where('lang', app() -> getLocale()) -> first() -> value;
 
-        return view('factura',compact('factura','nomPropietat'));
+        return view('factura',compact('factura'));
     }
 
 
