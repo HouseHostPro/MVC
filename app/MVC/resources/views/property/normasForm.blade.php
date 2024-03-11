@@ -89,6 +89,7 @@
                 printNormas(normas);
             });
 
+            let count = 0;
             function printNormas(normas){
 
                 normas.forEach( function (value){
@@ -107,11 +108,12 @@
                         $('#salida').val(value.valor);
                     }else if(value.clau.includes('norma')){
                         crearNorma(value.valor);
+                        count++;
                     }
                 })
             }
 
-            let count = 0;
+
             $("#agregarNorma").click(function(){
                 let nuevaNorma = $("#nuevaNorma").val().trim();
                 if (nuevaNorma !== "") {
