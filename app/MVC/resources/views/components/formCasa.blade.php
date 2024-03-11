@@ -20,7 +20,7 @@
             </svg>
         </button>
         <div class="col-2">
-            <input id="personas" name="personas" class="form-control bg-white border-0 fs-5 text-center m-0 p-0" readonly required>
+            <input id="personas" name="personas" value="1" class="form-control bg-white border-0 fs-5 text-center m-0 p-0" readonly required>
         </div>
         <button id="mas" type="button" class="col-2 col-xl-1 p-0 border-0 bg-white">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle " viewBox="0 0 16 16">
