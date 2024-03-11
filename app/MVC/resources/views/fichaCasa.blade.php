@@ -520,31 +520,31 @@
 
             //Aqui quita la primera fecha del array(no tiene que estar), y después le añado la que he clicado(tiene que estar)
             let arrayFechas = encontrarFechaMasCercanaEnPasado($('#to').val(),allReservas);
-            console.log("All rserves ->" + allReservas)
-            if(arrayFechas !== null){
 
-                startDate = new Date(arrayFechas.shift());
-                $("#from").datepicker("option", "minDate", startDate);
-            }
             //Aqui Fomateo la fecha que he cogido con el input de dd/mm/yyyy a mm/dd/yyy
             let fechaSplit = $('#to').val().split('/');
             let fechaFormateada = fechaSplit[1] + '/' + fechaSplit[0] + '/' + fechaSplit[2];
-            arrayFechas.push(fechaFormateada);
 
             //Llamo al datepicker para pasarle la fecha que he puesto, y dehabilite todo lo de después
             endDate = $(this).datepicker('getDate');
             //Para que se dehabiliten los dias de delante de la primer comando, y los dias de atras del segundo comando
             $("#from").datepicker("option", "maxDate", endDate);
 
-            //Llamo al datepicker para pasarle la fecha que he puesto y me deshabilite todas las fechas desde el primer dia de la reserva más cercana
+            if(arrayFechas !==null){
 
-            $("#to").datepicker("option","beforeShowDay", function (date){
+                startDate = new Date(arrayFechas.shift());
+                $("#from").datepicker("option", "minDate", startDate);
+                arrayFechas.push(fechaFormateada);
 
-                const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
-                return jQuery.inArray(string, arrayFechas) == -1
-                    ? [false, '', '']
-                    : [true, '', '{{ $preuBase }}€'];
-            })
+                //Llamo al datepicker para pasarle la fecha que he puesto y me deshabilite todas las fechas desde el primer dia de la reserva más cercana
+                $("#to").datepicker("option","beforeShowDay", function (date){
+
+                    const string = jQuery.datepicker.formatDate('mm/dd/yy', date);
+                    return jQuery.inArray(string, arrayFechas) == -1
+                        ? [false, '', '']
+                        : [true, '', '{{ $preuBase }}€'];
+                })
+            }
 
             console.log("To ->" + $('#to').val());
 
