@@ -520,8 +520,11 @@
 
             //Aqui quita la primera fecha del array(no tiene que estar), y después le añado la que he clicado(tiene que estar)
             let arrayFechas = encontrarFechaMasCercanaEnPasado($('#to').val(),allReservas);
-            console.log("Array -> " + arrayFechas);
-            startDate = new Date(arrayFechas.shift());
+            if(arrayFechas !== null){
+
+                startDate = new Date(arrayFechas.shift());
+                $("#from").datepicker("option", "minDate", startDate);
+            }
             //Aqui Fomateo la fecha que he cogido con el input de dd/mm/yyyy a mm/dd/yyy
             let fechaSplit = $('#to').val().split('/');
             let fechaFormateada = fechaSplit[1] + '/' + fechaSplit[0] + '/' + fechaSplit[2];
@@ -531,7 +534,6 @@
             endDate = $(this).datepicker('getDate');
             //Para que se dehabiliten los dias de delante de la primer comando, y los dias de atras del segundo comando
             $("#from").datepicker("option", "maxDate", endDate);
-            $("#from").datepicker("option", "minDate", startDate);
 
             //Llamo al datepicker para pasarle la fecha que he puesto y me deshabilite todas las fechas desde el primer dia de la reserva más cercana
 
