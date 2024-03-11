@@ -130,10 +130,9 @@ class UserController extends Controller{
                 array_push($comentarios,$comentario);
             }
         }
-        $servicios = Configuracio_Servei::where('configuracio_id',1)->get();
         Auth::logout();
 
-        return redirect()->route('principal', ['id' => $request -> id, 'comentarios' => $comentarios, 'servicios' => $servicios]);
+        return redirect()->route('principal', ['id' => $request -> id]);
     }
     public function cuenta(Request $request){
 
