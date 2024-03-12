@@ -164,7 +164,7 @@
                 <div class="modal-body">
                     <ul class="list-group list-group-flush">
                         @foreach($servicios as $servicio)
-                             <li class="list-group-item">{{__($servicio->servicios->nom)}} @if($servicio->quantitat !== 1) x {{$servicio->quantitat}} @endif</li>
+                             <li class="list-group-item">{{ __($servicio->nom)}} @if($servicio->quantitat !== 1) x {{$servicio->quantitat}} @endif</li>
                         @endforeach
                     </ul>
                 </div>
