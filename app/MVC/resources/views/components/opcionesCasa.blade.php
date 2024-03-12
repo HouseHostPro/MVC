@@ -65,7 +65,7 @@
                             </div>
                             <div class="d-none d-md-block col-12">
                                 <h5 >{{__('Dormitorio')}} @php echo $count; @endphp </h5>
-                                <p >{{$dormitorio->imagenes->nom}}</p>
+                                <p >{{__($dormitorio->imagenes->nom)}}</p>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                     @if($count >= 5)
                         @break
                     @endif
-                    <li class="list-group-item">{{$servicio->servicios->nom}} @if($servicio->quantitat !== 1) x {{$servicio->quantitat}} @endif</li>
+                    <li class="list-group-item">{{__($servicio->servicios->nom)}} @if($servicio->quantitat !== 1) x {{$servicio->quantitat}} @endif</li>
                     @php
                         $count++;
                     @endphp
